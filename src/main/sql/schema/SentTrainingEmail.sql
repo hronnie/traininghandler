@@ -1,0 +1,8 @@
+SentTrainingEmail
+sentTrainingEmailId
+emailTemplateId
+trainingId
+userId
+traineeEmailToken
+isConfirmed
+isAttend

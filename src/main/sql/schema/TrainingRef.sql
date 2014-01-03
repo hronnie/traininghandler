@@ -1,0 +1,5 @@
+TrainingRef
+trainingRefId
+name
+levelNo
+description

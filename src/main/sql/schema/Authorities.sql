@@ -1,0 +1,4 @@
+Authorities
+userRoleId
+userId
+authority

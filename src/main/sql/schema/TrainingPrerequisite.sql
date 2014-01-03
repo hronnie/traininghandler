@@ -1,0 +1,5 @@
+TrainingPrerequisite
+trainingPrerequisiteId
+trainingId
+trainingRefId
+completedDate

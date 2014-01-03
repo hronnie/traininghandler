@@ -1,0 +1,16 @@
+User
+userId
+displayName
+password
+isMaster
+isPatient
+isHealer
+isTrainee
+firstName
+lastName
+userName
+dob
+email
+mobileNo
+addressId
+enabled

@@ -1,0 +1,5 @@
+UserLevel
+userLevelId
+userId
+trainingRefId
+completedDate

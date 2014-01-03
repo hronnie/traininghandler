@@ -1,0 +1,3 @@
+UserTraining
+userId
+trainingId

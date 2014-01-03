@@ -1,0 +1,8 @@
+Training
+trainingId
+trainingRefId
+nameOfMaster
+dateTime
+addressId
+description
+autoInvite
