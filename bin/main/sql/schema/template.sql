@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS ;
+
+CREATE TABLE  (
+     BIGINT(20) NOT NULL,
+     VARCHAR() NULL,
+     BIT(1) NOT NULL DEFAULT b'0',
+     DATETIME NULL,
+
+    PRIMARY KEY (addressId),
+    FOREIGN KEY FK_User_Address (addressId) REFERENCES Address(addressId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
