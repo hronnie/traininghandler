@@ -6,7 +6,8 @@ CREATE TABLE Appointment (
     toDateTime DATETIME NOT NULL,
     description VARCHAR(300) NULL,
     isEmailConfirmation BIT(1) NOT NULL DEFAULT b'0',
-    userId BIGINT(20) NOT NULL,
+    healerId BIGINT(20) NOT NULL,
+    patientId BIGINT(20) NOT NULL,
     addressId BIGINT(20) NOT NULL,
 
     PRIMARY KEY (appointmentId),

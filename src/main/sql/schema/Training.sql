@@ -10,6 +10,6 @@ CREATE TABLE Training (
     trainingRefId BIGINT(20) NOT NULL,
 
     PRIMARY KEY (trainingId),
-    FOREIGN KEY FK_Training_Address (trainingRefId) REFERENCES TrainingRef(trainingRefId),
+    FOREIGN KEY FK_Training_TrainingRef (trainingRefId) REFERENCES TrainingRef(trainingRefId),
     FOREIGN KEY FK_Training_Address (addressId) REFERENCES Address(addressId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

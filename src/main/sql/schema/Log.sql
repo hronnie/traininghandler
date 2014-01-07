@@ -5,7 +5,7 @@ CREATE TABLE Log (
     action VARCHAR(50) NOT NULL,
     message VARCHAR(255) NULL,
     dateTime DATETIME NOT NULL,
-    userId BIGINT(20) NOT NULL,
+    who BIGINT(20) NOT NULL,
 
     PRIMARY KEY (logId),
     FOREIGN KEY FK_Log_User (who) REFERENCES User(userId)
