@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+     <class name="com.codeproj.traininghandler.model.Address" table="Address" catalog="traininghandler">
+        <id name="addressId" type="long">
+            <column name="addressId" />
+            <generator class="assigned" />
+        </id>
+        <property name="addressLine1" type="string">
+            <column name="addressLine1" />
+        </property>
+        <property name="addressLine2" type="string">
+            <column name="addressLine2" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="100" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="100" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="200" />
+        </property>
+        <property name="postalCode" type="string">
+            <column name="postalCode" length="15" />
+        </property>
+        <property name="isTrainingPlace" type="boolean">
+            <column name="isTrainingPlace" not-null="true" />
+        </property>
+        <property name="isAppointmentPlace" type="boolean">
+            <column name="isAppointmentPlace" not-null="true" />
+        </property>
+        <set name="trainingRefs" table="TrainingRef" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="addressId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.TrainingRef" />
+        </set>
+        <set name="users" table="User" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="addressId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.User" />
+        </set>
+        <set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="addressId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Training" />
+        </set>
+        <set name="appointments" table="Appointment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="addressId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Appointment" />
+        </set>
+    </class>
+ 
+     <class name="com.codeproj.traininghandler.model.Appointment" table="Appointment" catalog="traininghandler">
+        <id name="appointmentId" type="long">
+            <column name="appointmentId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="userByHealerId" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="healerId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userByPatientId" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="patientId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
+            <column name="addressId" not-null="true" />
+        </many-to-one>
+        <property name="fromDateTime" type="timestamp">
+            <column name="fromDateTime" length="19" not-null="true" />
+        </property>
+        <property name="toDateTime" type="timestamp">
+            <column name="toDateTime" length="19" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="300" />
+        </property>
+        <property name="isEmailConfirmation" type="boolean">
+            <column name="isEmailConfirmation" not-null="true" />
+        </property>
+    </class>
+ 
+ 
+     <class name="com.codeproj.traininghandler.model.Authorities" table="Authorities" catalog="traininghandler">
+        <id name="userRoleId" type="long">
+            <column name="userRoleId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <property name="authority" type="string">
+            <column name="authority" length="50" not-null="true" />
+        </property>
+    </class>
+ 
+ 
+    <class name="com.codeproj.traininghandler.model.EmailTemplate" table="EmailTemplate" catalog="traininghandler">
+        <id name="emailTemplateId" type="long">
+            <column name="emailTemplateId" />
+            <generator class="assigned" />
+        </id>
+        <property name="subject" type="string">
+            <column name="subject" not-null="true" />
+        </property>
+        <property name="body" type="string">
+            <column name="body" length="65535" not-null="true" />
+        </property>
+        <set name="sentTrainingEmails" table="SentTrainingEmail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="emailTemplateId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.SentTrainingEmail" />
+        </set>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.GeneralSettings" table="GeneralSettings" catalog="traininghandler">
+        <id name="generalSettingsId" type="long">
+            <column name="generalSettingsId" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <property name="value" type="string">
+            <column name="value" not-null="true" />
+        </property>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.Log" table="Log" catalog="traininghandler">
+        <id name="logId" type="long">
+            <column name="logId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="who" not-null="true" />
+        </many-to-one>
+        <property name="action" type="string">
+            <column name="action" length="50" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="message" />
+        </property>
+        <property name="dateTime" type="timestamp">
+            <column name="dateTime" length="19" not-null="true" />
+        </property>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.SentTrainingEmail" table="SentTrainingEmail" catalog="traininghandler">
+        <id name="sentTrainingEmailId" type="long">
+            <column name="sentTrainingEmailId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="training" class="com.codeproj.traininghandler.model.Training" fetch="select">
+            <column name="trainingId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="emailTemplate" class="com.codeproj.traininghandler.model.EmailTemplate" fetch="select">
+            <column name="emailTemplateId" not-null="true" />
+        </many-to-one>
+        <property name="traineeEmailToken" type="string">
+            <column name="traineeEmailToken" length="30" not-null="true" />
+        </property>
+        <property name="isConfirmed" type="boolean">
+            <column name="isConfirmed" not-null="true" />
+        </property>
+        <property name="isAttend" type="boolean">
+            <column name="isAttend" not-null="true" />
+        </property>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.Training" table="Training" catalog="traininghandler">
+        <id name="trainingId" type="long">
+            <column name="trainingId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
+            <column name="trainingRefId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
+            <column name="addressId" not-null="true" />
+        </many-to-one>
+        <property name="nameOfMaster" type="string">
+            <column name="nameOfMaster" length="100" not-null="true" />
+        </property>
+        <property name="dateTime" type="timestamp">
+            <column name="dateTime" length="19" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="200" />
+        </property>
+        <property name="autoInvite" type="boolean">
+            <column name="autoInvite" not-null="true" />
+        </property>
+        <set name="trainingPrerequisites" table="TrainingPrerequisite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trainingId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.TrainingPrerequisite" />
+        </set>
+        <set name="sentTrainingEmails" table="SentTrainingEmail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trainingId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.SentTrainingEmail" />
+        </set>
+        <set name="users" table="User" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="trainingId" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.codeproj.traininghandler.model.User">
+                <column name="userId" not-null="true" />
+            </many-to-many>
+        </set>	
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.TrainingPrerequisite" table="TrainingPrerequisite" catalog="traininghandler">
+        <id name="trainingPrerequisiteId" type="long">
+            <column name="trainingPrerequisiteId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
+            <column name="trainingRefId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="training" class="com.codeproj.traininghandler.model.Training" fetch="select">
+            <column name="trainingId" not-null="true" />
+        </many-to-one>
+        <property name="completedDate" type="timestamp">
+            <column name="completedDate" length="19" not-null="true" />
+        </property>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.TrainingRef" table="TrainingRef" catalog="traininghandler">
+        <id name="trainingRefId" type="long">
+            <column name="trainingRefId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
+            <column name="addressId" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="levelNo" type="java.lang.Byte">
+            <column name="levelNo" precision="2" scale="0" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="300" />
+        </property>
+        <set name="userLevels" table="UserLevel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trainingRefId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.UserLevel" />
+        </set>
+        <set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trainingRefId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Training" />
+        </set>
+        <set name="trainingPrerequisites" table="TrainingPrerequisite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trainingRefId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.TrainingPrerequisite" />
+        </set>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.User" table="User" catalog="traininghandler">
+        <id name="userId" type="long">
+            <column name="userId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
+            <column name="addressId" not-null="true" />
+        </many-to-one>
+        <property name="displayName" type="string">
+            <column name="displayName" length="50" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" />
+        </property>
+        <property name="isMaster" type="boolean">
+            <column name="isMaster" not-null="true" />
+        </property>
+        <property name="isPatient" type="boolean">
+            <column name="isPatient" not-null="true" />
+        </property>
+        <property name="isHealer" type="boolean">
+            <column name="isHealer" not-null="true" />
+        </property>
+        <property name="isTrainee" type="boolean">
+            <column name="isTrainee" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="50" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="50" not-null="true" />
+        </property>
+        <property name="userName" type="string">
+            <column name="userName" length="30" />
+        </property>
+        <property name="dob" type="timestamp">
+            <column name="dob" length="19" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="80" not-null="true" unique="true" />
+        </property>
+        <property name="mobileNo" type="string">
+            <column name="mobileNo" length="50" />
+        </property>
+        <property name="isEnabled" type="boolean">
+            <column name="isEnabled" not-null="true" />
+        </property>
+        <set name="authoritieses" table="Authorities" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Authorities" />
+        </set>
+        <set name="userLevels" table="UserLevel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.UserLevel" />
+        </set>
+        <set name="appointmentsForPatientId" table="Appointment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="patientId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Appointment" />
+        </set>
+        <set name="appointmentsForHealerId" table="Appointment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="healerId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Appointment" />
+        </set>
+        <set name="sentTrainingEmails" table="SentTrainingEmail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.SentTrainingEmail" />
+        </set>
+        <set name="logs" table="Log" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="who" not-null="true" />
+            </key>
+            <one-to-many class="com.codeproj.traininghandler.model.Log" />
+        </set>
+	<set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.codeproj.traininghandler.model.Training">
+                <column name="trainingId" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+
+
+    <class name="com.codeproj.traininghandler.model.UserLevel" table="UserLevel" catalog="traininghandler">
+        <id name="userLevelId" type="long">
+            <column name="userLevelId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
+            <column name="trainingRefId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <property name="completedDate" type="timestamp">
+            <column name="completedDate" length="19" />
+        </property>
+    </class>
+
+ </hibernate-mapping>
