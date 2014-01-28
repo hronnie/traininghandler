@@ -1,8 +1,9 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Log implements java.io.Serializable {
+public class Log implements HibernatePersistable, Serializable {
 
 	private long logId;
 	private User user;
@@ -29,6 +30,16 @@ public class Log implements java.io.Serializable {
 		this.dateTime = dateTime;
 	}
 
+	@Override
+	public Long getId() {
+		return this.logId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.logId = id;
+	}
+	
 	public long getLogId() {
 		return this.logId;
 	}

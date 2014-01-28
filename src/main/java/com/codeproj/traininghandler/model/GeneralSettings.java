@@ -1,6 +1,8 @@
 package com.codeproj.traininghandler.model;
 
-public class GeneralSettings implements java.io.Serializable {
+import java.io.Serializable;
+
+public class GeneralSettings implements HibernatePersistable, Serializable {
 
 	private long generalSettingsId;
 	private String name;
@@ -15,6 +17,16 @@ public class GeneralSettings implements java.io.Serializable {
 		this.value = value;
 	}
 
+	@Override
+	public Long getId() {
+		return this.generalSettingsId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.generalSettingsId = id;
+	}
+	
 	public long getGeneralSettingsId() {
 		return this.generalSettingsId;
 	}

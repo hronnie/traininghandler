@@ -1,8 +1,9 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TrainingPrerequisite implements java.io.Serializable {
+public class TrainingPrerequisite implements HibernatePersistable, Serializable {
 
 	private long trainingPrerequisiteId;
 	private TrainingRef trainingRef;
@@ -20,6 +21,16 @@ public class TrainingPrerequisite implements java.io.Serializable {
 		this.completedDate = completedDate;
 	}
 
+	@Override
+	public Long getId() {
+		return this.trainingPrerequisiteId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.trainingPrerequisiteId = id;
+	}
+	
 	public long getTrainingPrerequisiteId() {
 		return this.trainingPrerequisiteId;
 	}

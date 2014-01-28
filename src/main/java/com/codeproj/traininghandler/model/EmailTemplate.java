@@ -1,9 +1,10 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EmailTemplate implements java.io.Serializable {
+public class EmailTemplate implements HibernatePersistable, Serializable {
 
 	private long emailTemplateId;
 	private String subject;
@@ -27,6 +28,16 @@ public class EmailTemplate implements java.io.Serializable {
 		this.sentTrainingEmails = sentTrainingEmails;
 	}
 
+	@Override
+	public Long getId() {
+		return this.emailTemplateId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.emailTemplateId = id;
+	}
+	
 	public long getEmailTemplateId() {
 		return this.emailTemplateId;
 	}

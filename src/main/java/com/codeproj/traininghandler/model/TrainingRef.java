@@ -1,9 +1,10 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TrainingRef implements java.io.Serializable {
+public class TrainingRef implements HibernatePersistable, Serializable {
 
 	private long trainingRefId;
 	private Address address;
@@ -36,6 +37,16 @@ public class TrainingRef implements java.io.Serializable {
 		this.trainingPrerequisites = trainingPrerequisites;
 	}
 
+	@Override
+	public Long getId() {
+		return this.trainingRefId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.trainingRefId = id;
+	}
+	
 	public long getTrainingRefId() {
 		return this.trainingRefId;
 	}

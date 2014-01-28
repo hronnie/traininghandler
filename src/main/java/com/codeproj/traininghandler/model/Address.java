@@ -1,9 +1,10 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Address implements java.io.Serializable {
+public class Address implements HibernatePersistable, Serializable {
 
 	private long addressId;
 	private String addressLine1;
@@ -47,6 +48,16 @@ public class Address implements java.io.Serializable {
 		this.users = users;
 		this.trainings = trainings;
 		this.appointments = appointments;
+	}
+
+	@Override
+	public Long getId() {
+		return this.addressId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.addressId = id;
 	}
 
 	public long getAddressId() {
@@ -152,4 +163,5 @@ public class Address implements java.io.Serializable {
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
 	}
+
 }

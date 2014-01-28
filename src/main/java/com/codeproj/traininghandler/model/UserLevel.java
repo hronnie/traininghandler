@@ -1,8 +1,9 @@
 package com.codeproj.traininghandler.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserLevel implements java.io.Serializable {
+public class UserLevel implements HibernatePersistable, Serializable {
 
 	private long userLevelId;
 	private TrainingRef trainingRef;
@@ -18,6 +19,16 @@ public class UserLevel implements java.io.Serializable {
 		this.user = user;
 	}
 
+	@Override
+	public Long getId() {
+		return this.userLevelId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.userLevelId = id;
+	}
+	
 	public UserLevel(long userLevelId, TrainingRef trainingRef, User user,
 			Date completedDate) {
 		this.userLevelId = userLevelId;

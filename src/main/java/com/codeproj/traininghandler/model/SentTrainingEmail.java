@@ -1,6 +1,8 @@
 package com.codeproj.traininghandler.model;
 
-public class SentTrainingEmail implements java.io.Serializable {
+import java.io.Serializable;
+
+public class SentTrainingEmail implements HibernatePersistable, Serializable {
 
 	private long sentTrainingEmailId;
 	private Training training;
@@ -25,6 +27,16 @@ public class SentTrainingEmail implements java.io.Serializable {
 		this.isAttend = isAttend;
 	}
 
+	@Override
+	public Long getId() {
+		return this.sentTrainingEmailId;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.sentTrainingEmailId = id;
+	}
+	
 	public long getSentTrainingEmailId() {
 		return this.sentTrainingEmailId;
 	}
