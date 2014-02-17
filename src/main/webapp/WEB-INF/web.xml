@@ -1,7 +1,7 @@
-<web-app id="WebApp_ID" version="2.4"
+<web-app id="WebApp_ID" version="2.5"
 	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
-	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd">
 
 	<display-name>Spring Web MVC Application</display-name>
 
@@ -13,7 +13,7 @@
 
 	<servlet-mapping>
 		<servlet-name>traininghandler</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
@@ -28,11 +28,15 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/traininghandler-servlet.xml</param-value>
+		<param-value>
+			/WEB-INF/traininghandler-service.xml
+		</param-value>
 	</context-param>
 
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
 	</listener>
 
 </web-app>
