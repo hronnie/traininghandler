@@ -211,9 +211,9 @@
 						<!-- common configuration shared by all executions -->
 						<configuration>
 							<driver>org.gjt.mm.mysql.Driver</driver>
-							<url>jdbc:mysql://${db.mysql.server.name}:${db.mysql.server.port}/${db.mysql.dbname}</url>
-							<username>${db.mysql.username}</username>
-							<password>${db.mysql.password}</password>
+							<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
+							<username>${th.db.mysql.username}</username>
+							<password>${th.db.mysql.password}</password>
 						</configuration>
 
 						<executions>
@@ -227,9 +227,9 @@
 
 								<configuration>
 									<!-- need another database to drop the targeted one -->
-									<url>jdbc:mysql://${db.mysql.server.name}:${db.mysql.server.port}/${db.mysql.dummydb.name}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dummydb.name}</url>
 									<autocommit>true</autocommit>
-									<sqlCommand>drop database ${db.mysql.dbname}</sqlCommand>
+									<sqlCommand>drop database ${th.db.mysql.dbname}</sqlCommand>
 									<!-- ignore error when database is not avaiable -->
 									<onError>continue</onError>
 								</configuration>
@@ -242,10 +242,10 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<url>jdbc:mysql://${db.mysql.server.name}:${db.mysql.server.port}/${db.mysql.dummydb.name}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dummydb.name}</url>
 									<!-- no transaction -->
 									<autocommit>true</autocommit>
-									<sqlCommand>create database ${db.mysql.dbname}</sqlCommand>
+									<sqlCommand>create database ${th.db.mysql.dbname}</sqlCommand>
 								</configuration>
 							</execution>
 
@@ -256,7 +256,7 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<url>jdbc:mysql://${db.mysql.server.name}:${db.mysql.server.port}/${db.mysql.dbname}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- TABLES -->
@@ -284,7 +284,7 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<url>jdbc:mysql://${db.mysql.server.name}:${db.mysql.server.port}/${db.mysql.dbname}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- DATA -->
