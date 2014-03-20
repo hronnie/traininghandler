@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 public class SentTrainingEmail implements HibernatePersistable, Serializable {
 
-	private long sentTrainingEmailId;
+	private Long sentTrainingEmailId;
 	private Training training;
 	private User user;
 	private EmailTemplate emailTemplate;
 	private String traineeEmailToken;
-	private boolean isConfirmed;
-	private boolean isAttend;
+	private Boolean isConfirmed;
+	private Boolean isAttend;
 
 	public SentTrainingEmail() {
 	}
 
-	public SentTrainingEmail(long sentTrainingEmailId, Training training,
+	public SentTrainingEmail(Long sentTrainingEmailId, Training training,
 			User user, EmailTemplate emailTemplate, String traineeEmailToken,
-			boolean isConfirmed, boolean isAttend) {
+			Boolean isConfirmed, Boolean isAttend) {
 		this.sentTrainingEmailId = sentTrainingEmailId;
 		this.training = training;
 		this.user = user;
@@ -37,11 +37,11 @@ public class SentTrainingEmail implements HibernatePersistable, Serializable {
 		this.sentTrainingEmailId = id;
 	}
 	
-	public long getSentTrainingEmailId() {
+	public Long getSentTrainingEmailId() {
 		return this.sentTrainingEmailId;
 	}
 
-	public void setSentTrainingEmailId(long sentTrainingEmailId) {
+	public void setSentTrainingEmailId(Long sentTrainingEmailId) {
 		this.sentTrainingEmailId = sentTrainingEmailId;
 	}
 
@@ -77,19 +77,19 @@ public class SentTrainingEmail implements HibernatePersistable, Serializable {
 		this.traineeEmailToken = traineeEmailToken;
 	}
 
-	public boolean isIsConfirmed() {
+	public Boolean isIsConfirmed() {
 		return this.isConfirmed;
 	}
 
-	public void setIsConfirmed(boolean isConfirmed) {
+	public void setIsConfirmed(Boolean isConfirmed) {
 		this.isConfirmed = isConfirmed;
 	}
 
-	public boolean isIsAttend() {
+	public Boolean isIsAttend() {
 		return this.isAttend;
 	}
 
-	public void setIsAttend(boolean isAttend) {
+	public void setIsAttend(Boolean isAttend) {
 		this.isAttend = isAttend;
 	}
 }

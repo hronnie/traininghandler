@@ -6,15 +6,15 @@ import java.util.Set;
 
 public class Address implements HibernatePersistable, Serializable {
 
-	private long addressId;
+	private Long addressId;
 	private String addressLine1;
 	private String addressLine2;
 	private String city;
 	private String state;
 	private String country;
 	private String postalCode;
-	private boolean isTrainingPlace;
-	private boolean isAppointmentPlace;
+	private Boolean isTrainingPlace;
+	private Boolean isAppointmentPlace;
 	private Set<TrainingRef> trainingRefs = new HashSet<>(0);
 	private Set<User> users = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
@@ -23,7 +23,7 @@ public class Address implements HibernatePersistable, Serializable {
 	public Address() {
 	}
 
-	public Address(long addressId, boolean isTrainingPlace,
+	public Address(Long addressId, boolean isTrainingPlace,
 			boolean isAppointmentPlace) {
 		this.addressId = addressId;
 		this.isTrainingPlace = isTrainingPlace;
@@ -32,7 +32,7 @@ public class Address implements HibernatePersistable, Serializable {
 
 	public Address(long addressId, String addressLine1, String addressLine2,
 			String city, String state, String country, String postalCode,
-			boolean isTrainingPlace, boolean isAppointmentPlace,
+			Boolean isTrainingPlace, Boolean isAppointmentPlace,
 			Set<TrainingRef> trainingRefs, Set<User> users,
 			Set<Training> trainings, Set<Appointment> appointments) {
 		this.addressId = addressId;
@@ -116,19 +116,19 @@ public class Address implements HibernatePersistable, Serializable {
 		this.postalCode = postalCode;
 	}
 
-	public boolean isIsTrainingPlace() {
+	public Boolean isIsTrainingPlace() {
 		return this.isTrainingPlace;
 	}
 
-	public void setIsTrainingPlace(boolean isTrainingPlace) {
+	public void setIsTrainingPlace(Boolean isTrainingPlace) {
 		this.isTrainingPlace = isTrainingPlace;
 	}
 
-	public boolean isIsAppointmentPlace() {
+	public Boolean isIsAppointmentPlace() {
 		return this.isAppointmentPlace;
 	}
 
-	public void setIsAppointmentPlace(boolean isAppointmentPlace) {
+	public void setIsAppointmentPlace(Boolean isAppointmentPlace) {
 		this.isAppointmentPlace = isAppointmentPlace;
 	}
 

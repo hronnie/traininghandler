@@ -7,22 +7,22 @@ import java.util.Set;
 
 public class User implements HibernatePersistable, Serializable {
 
-	private long userId;
+	private Long userId;
 	private Address address;
 	private String displayName;
 	private String password;
-	private boolean isMaster;
-	private boolean isPatient;
-	private boolean isHealer;
-	private boolean isTrainee;
+	private Boolean isMaster;
+	private Boolean isPatient;
+	private Boolean isHealer;
+	private Boolean isTrainee;
 	private String firstName;
 	private String lastName;
 	private String userName;
 	private Date dob;
 	private String email;
 	private String mobileNo;
-	private boolean isEnabled;
-	private Set<Authorities> authoritieses = new HashSet<>(0);
+	private Boolean isEnabled;
+	private Set<UserRole> authoritieses = new HashSet<>(0);
 	private Set<UserLevel> userLevels = new HashSet<>(0);
 	private Set<Appointment> appointmentsForPatientId = new HashSet<>(0);
 	private Set<Appointment> appointmentsForHealerId = new HashSet<>(0);
@@ -33,9 +33,9 @@ public class User implements HibernatePersistable, Serializable {
 	public User() {
 	}
 
-	public User(long userId, Address address, boolean isMaster,
-			boolean isPatient, boolean isHealer, boolean isTrainee,
-			String firstName, String lastName, String email, boolean isEnabled) {
+	public User(Long userId, Address address, Boolean isMaster,
+			Boolean isPatient, Boolean isHealer, Boolean isTrainee,
+			String firstName, String lastName, String email, Boolean isEnabled) {
 		this.userId = userId;
 		this.address = address;
 		this.isMaster = isMaster;
@@ -48,11 +48,11 @@ public class User implements HibernatePersistable, Serializable {
 		this.isEnabled = isEnabled;
 	}
 
-	public User(long userId, Address address, String displayName,
-			String password, boolean isMaster, boolean isPatient,
-			boolean isHealer, boolean isTrainee, String firstName,
+	public User(Long userId, Address address, String displayName,
+			String password, Boolean isMaster, Boolean isPatient,
+			Boolean isHealer, Boolean isTrainee, String firstName,
 			String lastName, String userName, Date dob, String email,
-			String mobileNo, boolean isEnabled, Set<Authorities> authoritieses,
+			String mobileNo, Boolean isEnabled, Set<UserRole> authoritieses,
 			Set<UserLevel> userLevels,
 			Set<Appointment> appointmentsForPatientId,
 			Set<Appointment> appointmentsForHealerId,
@@ -92,11 +92,11 @@ public class User implements HibernatePersistable, Serializable {
 		this.userId = id;
 	}
 	
-	public long getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -124,35 +124,35 @@ public class User implements HibernatePersistable, Serializable {
 		this.password = password;
 	}
 
-	public boolean isIsMaster() {
+	public Boolean isIsMaster() {
 		return this.isMaster;
 	}
 
-	public void setIsMaster(boolean isMaster) {
+	public void setIsMaster(Boolean isMaster) {
 		this.isMaster = isMaster;
 	}
 
-	public boolean isIsPatient() {
+	public Boolean isIsPatient() {
 		return this.isPatient;
 	}
 
-	public void setIsPatient(boolean isPatient) {
+	public void setIsPatient(Boolean isPatient) {
 		this.isPatient = isPatient;
 	}
 
-	public boolean isIsHealer() {
+	public Boolean isIsHealer() {
 		return this.isHealer;
 	}
 
-	public void setIsHealer(boolean isHealer) {
+	public void setIsHealer(Boolean isHealer) {
 		this.isHealer = isHealer;
 	}
 
-	public boolean isIsTrainee() {
+	public Boolean isIsTrainee() {
 		return this.isTrainee;
 	}
 
-	public void setIsTrainee(boolean isTrainee) {
+	public void setIsTrainee(Boolean isTrainee) {
 		this.isTrainee = isTrainee;
 	}
 
@@ -204,19 +204,19 @@ public class User implements HibernatePersistable, Serializable {
 		this.mobileNo = mobileNo;
 	}
 
-	public boolean isIsEnabled() {
+	public Boolean isIsEnabled() {
 		return this.isEnabled;
 	}
 
-	public void setIsEnabled(boolean isEnabled) {
+	public void setIsEnabled(Boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
 
-	public Set<Authorities> getAuthoritieses() {
+	public Set<UserRole> getAuthoritieses() {
 		return this.authoritieses;
 	}
 
-	public void setAuthoritieses(Set<Authorities> authoritieses) {
+	public void setAuthoritieses(Set<UserRole> authoritieses) {
 		this.authoritieses = authoritieses;
 	}
 

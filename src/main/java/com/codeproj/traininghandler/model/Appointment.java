@@ -6,21 +6,21 @@ import java.util.Date;
 
 public class Appointment implements HibernatePersistable, Serializable {
 
-	private long appointmentId;
+	private Long appointmentId;
 	private User userByHealerId;
 	private User userByPatientId;
 	private Address address;
 	private Date fromDateTime;
 	private Date toDateTime;
 	private String description;
-	private boolean isEmailConfirmation;
+	private Boolean isEmailConfirmation;
 
 	public Appointment() {
 	}
 
-	public Appointment(long appointmentId, User userByHealerId,
+	public Appointment(Long appointmentId, User userByHealerId,
 			User userByPatientId, Address address, Date fromDateTime,
-			Date toDateTime, boolean isEmailConfirmation) {
+			Date toDateTime, Boolean isEmailConfirmation) {
 		this.appointmentId = appointmentId;
 		this.userByHealerId = userByHealerId;
 		this.userByPatientId = userByPatientId;
@@ -30,9 +30,9 @@ public class Appointment implements HibernatePersistable, Serializable {
 		this.isEmailConfirmation = isEmailConfirmation;
 	}
 
-	public Appointment(long appointmentId, User userByHealerId,
+	public Appointment(Long appointmentId, User userByHealerId,
 			User userByPatientId, Address address, Date fromDateTime,
-			Date toDateTime, String description, boolean isEmailConfirmation) {
+			Date toDateTime, String description, Boolean isEmailConfirmation) {
 		this.appointmentId = appointmentId;
 		this.userByHealerId = userByHealerId;
 		this.userByPatientId = userByPatientId;
@@ -53,11 +53,11 @@ public class Appointment implements HibernatePersistable, Serializable {
 		this.appointmentId = id;
 	}
 	
-	public long getAppointmentId() {
+	public Long getAppointmentId() {
 		return this.appointmentId;
 	}
 
-	public void setAppointmentId(long appointmentId) {
+	public void setAppointmentId(Long appointmentId) {
 		this.appointmentId = appointmentId;
 	}
 
@@ -109,11 +109,11 @@ public class Appointment implements HibernatePersistable, Serializable {
 		this.description = description;
 	}
 
-	public boolean isIsEmailConfirmation() {
+	public Boolean isIsEmailConfirmation() {
 		return this.isEmailConfirmation;
 	}
 
-	public void setIsEmailConfirmation(boolean isEmailConfirmation) {
+	public void setIsEmailConfirmation(Boolean isEmailConfirmation) {
 		this.isEmailConfirmation = isEmailConfirmation;
 	}
 }

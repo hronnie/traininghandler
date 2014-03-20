@@ -2,16 +2,16 @@ package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
 
-public class Authorities implements HibernatePersistable, Serializable {
+public class UserRole implements HibernatePersistable, Serializable {
 
-	private long userRoleId;
+	private Long userRoleId;
 	private User user;
 	private String authority;
 
-	public Authorities() {
+	public UserRole() {
 	}
 
-	public Authorities(long userRoleId, User user, String authority) {
+	public UserRole(Long userRoleId, User user, String authority) {
 		this.userRoleId = userRoleId;
 		this.user = user;
 		this.authority = authority;
@@ -27,11 +27,11 @@ public class Authorities implements HibernatePersistable, Serializable {
 		this.userRoleId = id;
 	}
 	
-	public long getUserRoleId() {
+	public Long getUserRoleId() {
 		return this.userRoleId;
 	}
 
-	public void setUserRoleId(long userRoleId) {
+	public void setUserRoleId(Long userRoleId) {
 		this.userRoleId = userRoleId;
 	}
 

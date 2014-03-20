@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class TrainingPrerequisite implements HibernatePersistable, Serializable {
 
-	private long trainingPrerequisiteId;
+	private Long trainingPrerequisiteId;
 	private TrainingRef trainingRef;
 	private Training training;
 	private Date completedDate;
@@ -13,7 +13,7 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	public TrainingPrerequisite() {
 	}
 
-	public TrainingPrerequisite(long trainingPrerequisiteId,
+	public TrainingPrerequisite(Long trainingPrerequisiteId,
 			TrainingRef trainingRef, Training training, Date completedDate) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 		this.trainingRef = trainingRef;
@@ -31,11 +31,11 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.trainingPrerequisiteId = id;
 	}
 	
-	public long getTrainingPrerequisiteId() {
+	public Long getTrainingPrerequisiteId() {
 		return this.trainingPrerequisiteId;
 	}
 
-	public void setTrainingPrerequisiteId(long trainingPrerequisiteId) {
+	public void setTrainingPrerequisiteId(Long trainingPrerequisiteId) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 	}
 

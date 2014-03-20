@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Log implements HibernatePersistable, Serializable {
 
-	private long logId;
+	private Long logId;
 	private User user;
 	private String action;
 	private String message;
@@ -14,14 +14,14 @@ public class Log implements HibernatePersistable, Serializable {
 	public Log() {
 	}
 
-	public Log(long logId, User user, String action, Date dateTime) {
+	public Log(Long logId, User user, String action, Date dateTime) {
 		this.logId = logId;
 		this.user = user;
 		this.action = action;
 		this.dateTime = dateTime;
 	}
 
-	public Log(long logId, User user, String action, String message,
+	public Log(Long logId, User user, String action, String message,
 			Date dateTime) {
 		this.logId = logId;
 		this.user = user;
@@ -40,11 +40,11 @@ public class Log implements HibernatePersistable, Serializable {
 		this.logId = id;
 	}
 	
-	public long getLogId() {
+	public Long getLogId() {
 		return this.logId;
 	}
 
-	public void setLogId(long logId) {
+	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 

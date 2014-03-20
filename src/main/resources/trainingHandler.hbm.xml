@@ -85,8 +85,7 @@
         </property>
     </class>
  
- 
-     <class name="com.codeproj.traininghandler.model.Authorities" table="Authorities" catalog="traininghandler">
+     <class name="com.codeproj.traininghandler.model.UserRole" table="UserRole" catalog="traininghandler">
         <id name="userRoleId" type="long">
             <column name="userRoleId" />
             <generator class="assigned" />
@@ -94,8 +93,18 @@
         <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="userId" not-null="true" />
         </many-to-one>
-        <property name="authority" type="string">
-            <column name="authority" length="50" not-null="true" />
+        <many-to-one name="role" class="com.codeproj.traininghandler.model.Role" fetch="select">
+            <column name="roleId" not-null="true" />
+        </many-to-one>
+    </class>
+ 
+     <class name="com.codeproj.traininghandler.model.Role" table="Role" catalog="traininghandler">
+        <id name="roleId" type="long">
+            <column name="roleId" />
+            <generator class="assigned" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="roleName" length="50" />
         </property>
     </class>
  

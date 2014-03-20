@@ -10,7 +10,7 @@ CREATE TABLE User (
     isTrainee BIT(1) NOT NULL DEFAULT b'0',
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
-    userName VARCHAR(30) NULL,
+    userName VARCHAR(30) NULL UNIQUE,
     dob DATETIME NULL,
     email VARCHAR(80) NOT NULL UNIQUE,
     mobileNo VARCHAR(50) NULL,

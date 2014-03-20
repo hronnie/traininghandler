@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class TrainingRef implements HibernatePersistable, Serializable {
 
-	private long trainingRefId;
+	private Long trainingRefId;
 	private Address address;
 	private String name;
 	private Byte levelNo;
@@ -18,12 +18,12 @@ public class TrainingRef implements HibernatePersistable, Serializable {
 	public TrainingRef() {
 	}
 
-	public TrainingRef(long trainingRefId, Address address) {
+	public TrainingRef(Long trainingRefId, Address address) {
 		this.trainingRefId = trainingRefId;
 		this.address = address;
 	}
 
-	public TrainingRef(long trainingRefId, Address address, String name,
+	public TrainingRef(Long trainingRefId, Address address, String name,
 			Byte levelNo, String description, Set<UserLevel> userLevels,
 			Set<Training> trainings,
 			Set<TrainingPrerequisite> trainingPrerequisites) {
@@ -47,11 +47,11 @@ public class TrainingRef implements HibernatePersistable, Serializable {
 		this.trainingRefId = id;
 	}
 	
-	public long getTrainingRefId() {
+	public Long getTrainingRefId() {
 		return this.trainingRefId;
 	}
 
-	public void setTrainingRefId(long trainingRefId) {
+	public void setTrainingRefId(Long trainingRefId) {
 		this.trainingRefId = trainingRefId;
 	}
 

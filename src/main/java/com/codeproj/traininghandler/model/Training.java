@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class Training implements HibernatePersistable, Serializable {
 
-	private long trainingId;
+	private Long trainingId;
 	private TrainingRef trainingRef;
 	private Address address;
 	private String nameOfMaster;
 	private Date dateTime;
 	private String description;
-	private boolean autoInvite;
+	private Boolean autoInvite;
 	private Set<TrainingPrerequisite> trainingPrerequisites = new HashSet<>(0);
 	private Set<SentTrainingEmail> sentTrainingEmails = new HashSet<>(0);
 	private Set<User> users = new HashSet<>(0); 
@@ -21,8 +21,8 @@ public class Training implements HibernatePersistable, Serializable {
 	public Training() {
 	}
 
-	public Training(long trainingId, TrainingRef trainingRef, Address address,
-			String nameOfMaster, Date dateTime, boolean autoInvite) {
+	public Training(Long trainingId, TrainingRef trainingRef, Address address,
+			String nameOfMaster, Date dateTime, Boolean autoInvite) {
 		this.trainingId = trainingId;
 		this.trainingRef = trainingRef;
 		this.address = address;
@@ -31,9 +31,9 @@ public class Training implements HibernatePersistable, Serializable {
 		this.autoInvite = autoInvite;
 	}
 
-	public Training(long trainingId, TrainingRef trainingRef, Address address,
+	public Training(Long trainingId, TrainingRef trainingRef, Address address,
 			String nameOfMaster, Date dateTime, String description,
-			boolean autoInvite,
+			Boolean autoInvite,
 			Set<TrainingPrerequisite> trainingPrerequisites,
 			Set<SentTrainingEmail> sentTrainingEmails) {
 		this.trainingId = trainingId;
@@ -57,11 +57,11 @@ public class Training implements HibernatePersistable, Serializable {
 		this.trainingId = id;
 	}
 	
-	public long getTrainingId() {
+	public Long getTrainingId() {
 		return this.trainingId;
 	}
 
-	public void setTrainingId(long trainingId) {
+	public void setTrainingId(Long trainingId) {
 		this.trainingId = trainingId;
 	}
 
@@ -105,11 +105,11 @@ public class Training implements HibernatePersistable, Serializable {
 		this.description = description;
 	}
 
-	public boolean isAutoInvite() {
+	public Boolean isAutoInvite() {
 		return this.autoInvite;
 	}
 
-	public void setAutoInvite(boolean autoInvite) {
+	public void setAutoInvite(Boolean autoInvite) {
 		this.autoInvite = autoInvite;
 	}
 

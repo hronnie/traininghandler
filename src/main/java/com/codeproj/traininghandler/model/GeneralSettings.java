@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class GeneralSettings implements HibernatePersistable, Serializable {
 
-	private long generalSettingsId;
+	private Long generalSettingsId;
 	private String name;
 	private String value;
 
 	public GeneralSettings() {
 	}
 
-	public GeneralSettings(long generalSettingsId, String name, String value) {
+	public GeneralSettings(Long generalSettingsId, String name, String value) {
 		this.generalSettingsId = generalSettingsId;
 		this.name = name;
 		this.value = value;
@@ -27,11 +27,11 @@ public class GeneralSettings implements HibernatePersistable, Serializable {
 		this.generalSettingsId = id;
 	}
 	
-	public long getGeneralSettingsId() {
+	public Long getGeneralSettingsId() {
 		return this.generalSettingsId;
 	}
 
-	public void setGeneralSettingsId(long generalSettingsId) {
+	public void setGeneralSettingsId(Long generalSettingsId) {
 		this.generalSettingsId = generalSettingsId;
 	}
 

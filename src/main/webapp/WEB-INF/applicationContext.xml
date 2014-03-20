@@ -8,4 +8,23 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="dataSource"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost/traininghandler" />
+
+        <property name="properties">
+            <props>
+                <prop key="com.mchange.v2.c3p0.management.ManagementCoordinator">com.mchange.v2.c3p0.management.NullManagementCoordinator</prop>
+                <prop key="user">training</prop>
+                <prop key="password">rootpass</prop>
+                <prop key="autoReconnect">true</prop>
+                <prop key="autoReconnectForPools">true</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

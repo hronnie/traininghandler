@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class EmailTemplate implements HibernatePersistable, Serializable {
 
-	private long emailTemplateId;
+	private Long emailTemplateId;
 	private String subject;
 	private String body;
 	private Set<SentTrainingEmail> sentTrainingEmails = new HashSet<>(0);
@@ -14,13 +14,13 @@ public class EmailTemplate implements HibernatePersistable, Serializable {
 	public EmailTemplate() {
 	}
 
-	public EmailTemplate(long emailTemplateId, String subject, String body) {
+	public EmailTemplate(Long emailTemplateId, String subject, String body) {
 		this.emailTemplateId = emailTemplateId;
 		this.subject = subject;
 		this.body = body;
 	}
 
-	public EmailTemplate(long emailTemplateId, String subject, String body,
+	public EmailTemplate(Long emailTemplateId, String subject, String body,
 			Set<SentTrainingEmail> sentTrainingEmails) {
 		this.emailTemplateId = emailTemplateId;
 		this.subject = subject;
@@ -38,11 +38,11 @@ public class EmailTemplate implements HibernatePersistable, Serializable {
 		this.emailTemplateId = id;
 	}
 	
-	public long getEmailTemplateId() {
+	public Long getEmailTemplateId() {
 		return this.emailTemplateId;
 	}
 
-	public void setEmailTemplateId(long emailTemplateId) {
+	public void setEmailTemplateId(Long emailTemplateId) {
 		this.emailTemplateId = emailTemplateId;
 	}
 

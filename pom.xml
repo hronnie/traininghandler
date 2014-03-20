@@ -57,6 +57,24 @@
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
@@ -164,7 +182,7 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.0</version>
+				<version>2.1</version>
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<username>tomcat</username>
@@ -263,7 +281,8 @@
 										<srcFile>src/main/sql/schema/Address.sql</srcFile>
 										<srcFile>src/main/sql/schema/User.sql</srcFile>
 										<srcFile>src/main/sql/schema/Appointment.sql</srcFile>
-										<srcFile>src/main/sql/schema/Authorities.sql</srcFile>
+										<srcFile>src/main/sql/schema/Role.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserRole.sql</srcFile>
 										<srcFile>src/main/sql/schema/EmailTemplate.sql</srcFile>
 										<srcFile>src/main/sql/schema/GeneralSettings.sql</srcFile>
 										<srcFile>src/main/sql/schema/Log.sql</srcFile>
@@ -291,7 +310,8 @@
 										<srcFile>src/main/sql/data/AddressData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserData.sql</srcFile>
 										<srcFile>src/main/sql/data/AppointmentData.sql</srcFile>
-										<srcFile>src/main/sql/data/AuthoritiesData.sql</srcFile>
+										<srcFile>src/main/sql/data/RoleData.sql</srcFile>
+										<srcFile>src/main/sql/data/UserRoleData.sql</srcFile>
 										<srcFile>src/main/sql/data/EmailTemplateData.sql</srcFile>
 										<srcFile>src/main/sql/data/GeneralSettingsData.sql</srcFile>
 										<srcFile>src/main/sql/data/LogData.sql</srcFile>
