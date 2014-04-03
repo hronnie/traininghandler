@@ -1,11 +1,13 @@
 package com.codeproj.traininghandler.dao;
 
-import com.codeproj.traininghandler.model.HibernatePersistable;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.codeproj.traininghandler.model.HibernatePersistable;
 
 public abstract class ReadOnlyDAO<T extends HibernatePersistable> extends HibernateDaoSupport {
 

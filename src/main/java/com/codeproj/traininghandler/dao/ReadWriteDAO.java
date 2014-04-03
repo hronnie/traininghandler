@@ -1,16 +1,18 @@
 package com.codeproj.traininghandler.dao;
 
-import com.codeproj.traininghandler.model.HibernatePersistable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.codeproj.traininghandler.model.HibernatePersistable;
 
 public abstract class ReadWriteDAO<T extends HibernatePersistable> extends HibernateDaoSupport {
 
