@@ -29,13 +29,15 @@ public class User implements HibernatePersistable, Serializable {
 	private Set<SentTrainingEmail> sentTrainingEmails = new HashSet<>(0);
 	private Set<Log> logs = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
+	private String locale;
 
 	public User() {
 	}
 
 	public User(Long userId, Address address, Boolean isMaster,
 			Boolean isPatient, Boolean isHealer, Boolean isTrainee,
-			String firstName, String lastName, String email, Boolean isEnabled) {
+			String firstName, String lastName, String email, 
+			Boolean isEnabled, String locale) {
 		this.userId = userId;
 		this.address = address;
 		this.isMaster = isMaster;
@@ -46,6 +48,7 @@ public class User implements HibernatePersistable, Serializable {
 		this.lastName = lastName;
 		this.email = email;
 		this.isEnabled = isEnabled;
+		this.setLocale(locale);
 	}
 
 	public User(Long userId, Address address, String displayName,
@@ -57,7 +60,7 @@ public class User implements HibernatePersistable, Serializable {
 			Set<Appointment> appointmentsForPatientId,
 			Set<Appointment> appointmentsForHealerId,
 			Set<SentTrainingEmail> sentTrainingEmails, Set<Log> logs,
-			Set<Training> trainings) {
+			Set<Training> trainings, String locale) {
 		this.userId = userId;
 		this.address = address;
 		this.displayName = displayName;
@@ -80,6 +83,7 @@ public class User implements HibernatePersistable, Serializable {
 		this.sentTrainingEmails = sentTrainingEmails;
 		this.logs = logs;
 		this.trainings = trainings;
+		this.setLocale(locale);
 	}
 
 	@Override
@@ -268,5 +272,13 @@ public class User implements HibernatePersistable, Serializable {
 
 	public void setTrainings(Set<Training> trainings) {
 		this.trainings = trainings;
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+
+	public void setLocale(String locale) {
+		this.locale = locale;
 	}
 }

@@ -338,6 +338,7 @@
         <property name="isEnabled" type="boolean">
             <column name="isEnabled" not-null="true" />
         </property>
+        <property access="field" column="locale" name="locale"/>
         <set name="authoritieses" table="Authorities" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="userId" not-null="true" />
@@ -374,7 +375,7 @@
             </key>
             <one-to-many class="com.codeproj.traininghandler.model.Log" />
         </set>
-	<set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
+		<set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="userId" not-null="true" />
             </key>
