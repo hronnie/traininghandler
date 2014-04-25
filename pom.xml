@@ -285,6 +285,7 @@
 									<srcFiles>
 										<!-- TABLES -->
 										<srcFile>src/main/sql/schema/Address.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserType.sql</srcFile>
 										<srcFile>src/main/sql/schema/User.sql</srcFile>
 										<srcFile>src/main/sql/schema/Appointment.sql</srcFile>
 										<srcFile>src/main/sql/schema/Role.sql</srcFile>
@@ -314,6 +315,7 @@
 									<srcFiles>
 										<!-- DATA -->
 										<srcFile>src/main/sql/data/AddressData.sql</srcFile>
+										<srcFile>src/main/sql/data/UserTypeData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserData.sql</srcFile>
 										<srcFile>src/main/sql/data/AppointmentData.sql</srcFile>
 										<srcFile>src/main/sql/data/RoleData.sql</srcFile>

@@ -11,10 +11,7 @@ public class User implements HibernatePersistable, Serializable {
 	private Address address;
 	private String displayName;
 	private String password;
-	private Boolean isMaster;
-	private Boolean isPatient;
-	private Boolean isHealer;
-	private Boolean isTrainee;
+	private UserType userType;
 	private String firstName;
 	private String lastName;
 	private String userName;
@@ -32,18 +29,14 @@ public class User implements HibernatePersistable, Serializable {
 	private String locale;
 
 	public User() {
+		//empty constructor
 	}
 
-	public User(Long userId, Address address, Boolean isMaster,
-			Boolean isPatient, Boolean isHealer, Boolean isTrainee,
+	public User(Long userId, Address address, 
 			String firstName, String lastName, String email, 
 			Boolean isEnabled, String locale) {
 		this.userId = userId;
 		this.address = address;
-		this.isMaster = isMaster;
-		this.isPatient = isPatient;
-		this.isHealer = isHealer;
-		this.isTrainee = isTrainee;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -52,8 +45,7 @@ public class User implements HibernatePersistable, Serializable {
 	}
 
 	public User(Long userId, Address address, String displayName,
-			String password, Boolean isMaster, Boolean isPatient,
-			Boolean isHealer, Boolean isTrainee, String firstName,
+			String password, String firstName,
 			String lastName, String userName, Date dob, String email,
 			String mobileNo, Boolean isEnabled, Set<UserRole> authoritieses,
 			Set<UserLevel> userLevels,
@@ -65,10 +57,6 @@ public class User implements HibernatePersistable, Serializable {
 		this.address = address;
 		this.displayName = displayName;
 		this.password = password;
-		this.isMaster = isMaster;
-		this.isPatient = isPatient;
-		this.isHealer = isHealer;
-		this.isTrainee = isTrainee;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
@@ -112,6 +100,14 @@ public class User implements HibernatePersistable, Serializable {
 		this.address = address;
 	}
 
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
 	public String getDisplayName() {
 		return this.displayName;
 	}
@@ -126,38 +122,6 @@ public class User implements HibernatePersistable, Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Boolean isIsMaster() {
-		return this.isMaster;
-	}
-
-	public void setIsMaster(Boolean isMaster) {
-		this.isMaster = isMaster;
-	}
-
-	public Boolean isIsPatient() {
-		return this.isPatient;
-	}
-
-	public void setIsPatient(Boolean isPatient) {
-		this.isPatient = isPatient;
-	}
-
-	public Boolean isIsHealer() {
-		return this.isHealer;
-	}
-
-	public void setIsHealer(Boolean isHealer) {
-		this.isHealer = isHealer;
-	}
-
-	public Boolean isIsTrainee() {
-		return this.isTrainee;
-	}
-
-	public void setIsTrainee(Boolean isTrainee) {
-		this.isTrainee = isTrainee;
 	}
 
 	public String getFirstName() {

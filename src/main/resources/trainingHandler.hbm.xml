@@ -299,6 +299,9 @@
         <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
             <column name="addressId" not-null="true" />
         </many-to-one>
+        <many-to-one name="userType" class="com.codeproj.traininghandler.model.UserType" fetch="select">
+            <column name="userTypeId" not-null="true" />
+        </many-to-one>
         <property name="displayName" type="string">
             <column name="displayName" length="50" />
         </property>
@@ -385,7 +388,6 @@
         </set>
     </class>
 
-
     <class name="com.codeproj.traininghandler.model.UserLevel" table="UserLevel" catalog="traininghandler">
         <id name="userLevelId" type="long">
             <column name="userLevelId" />
@@ -399,6 +401,16 @@
         </many-to-one>
         <property name="completedDate" type="timestamp">
             <column name="completedDate" length="19" />
+        </property>
+    </class>
+
+    <class name="com.codeproj.traininghandler.model.UserType" table="UserType" catalog="traininghandler">
+        <id name="userTypeId" type="long">
+            <column name="userTypeId" />
+            <generator class="assigned" />
+        </id>
+        <property name="userTypeName" type="string">
+            <column name="userTypeName" length="50" />
         </property>
     </class>
 
