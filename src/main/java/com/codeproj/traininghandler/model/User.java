@@ -27,6 +27,7 @@ public class User implements HibernatePersistable, Serializable {
 	private Set<Log> logs = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
 	private String locale;
+	private Date created;
 
 	public User() {
 		//empty constructor
@@ -34,7 +35,7 @@ public class User implements HibernatePersistable, Serializable {
 
 	public User(Long userId, Address address, 
 			String firstName, String lastName, String email, 
-			Boolean isEnabled, String locale) {
+			Boolean isEnabled, String locale, UserType userType, Date created) {
 		this.userId = userId;
 		this.address = address;
 		this.firstName = firstName;
@@ -42,6 +43,8 @@ public class User implements HibernatePersistable, Serializable {
 		this.email = email;
 		this.isEnabled = isEnabled;
 		this.setLocale(locale);
+		this.created = created;
+		this.userType = userType;
 	}
 
 	public User(Long userId, Address address, String displayName,
@@ -52,7 +55,8 @@ public class User implements HibernatePersistable, Serializable {
 			Set<Appointment> appointmentsForPatientId,
 			Set<Appointment> appointmentsForHealerId,
 			Set<SentTrainingEmail> sentTrainingEmails, Set<Log> logs,
-			Set<Training> trainings, String locale) {
+			Set<Training> trainings, String locale, Date created,
+			UserType userType) {
 		this.userId = userId;
 		this.address = address;
 		this.displayName = displayName;
@@ -72,6 +76,8 @@ public class User implements HibernatePersistable, Serializable {
 		this.logs = logs;
 		this.trainings = trainings;
 		this.setLocale(locale);
+		this.userType = userType;
+		this.created = created;
 	}
 
 	@Override
@@ -244,5 +250,13 @@ public class User implements HibernatePersistable, Serializable {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 }

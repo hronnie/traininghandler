@@ -14,6 +14,7 @@ CREATE TABLE User (
     isEnabled BIT(1) NOT NULL DEFAULT b'1',
     addressId BIGINT(20) NOT NULL,
     locale VARCHAR(5) NOT NULL DEFAULT 'hu_HU',
+    created DATETIME NOT NULL,
 
     PRIMARY KEY (userId),
     FOREIGN KEY FK_User_Address (addressId) REFERENCES Address(addressId),

@@ -341,6 +341,9 @@
         <property name="isEnabled" type="boolean">
             <column name="isEnabled" not-null="true" />
         </property>
+        <property name="created" type="timestamp">
+            <column name="created" length="19" />
+        </property>
         <property access="field" column="locale" name="locale"/>
         <set name="authoritieses" table="Authorities" inverse="true" lazy="true" fetch="select">
             <key>
