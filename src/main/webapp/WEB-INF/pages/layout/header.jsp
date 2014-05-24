@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<link href="<c:url value="/resources/style/main.css" />" rel="stylesheet">
+<jsp:include page="/WEB-INF/pages/layout/includes.jsp" />
 </head>
 <body>
 	<div id="wrapper">
