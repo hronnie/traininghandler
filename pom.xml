@@ -22,7 +22,6 @@
 		<spring.version>4.0.5.RELEASE</spring.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<powermock.version>1.5.3</powermock.version>
-		<apache.tiles.version>3.0.4</apache.tiles.version>
 	</properties>
 
 

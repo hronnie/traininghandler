@@ -1,0 +1,262 @@
+body {
+	background: #c93312 url(../images/texture.png) repeat;
+}
+
+td,th {
+	padding: 0
+}
+
+body,html {
+	margin: 0;
+	height: 100%;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#header {
+	background: #ededed;
+	padding: 10px;
+}
+
+#content {
+	padding-bottom: 100px; /* Height of the footer element */
+}
+
+#footer {
+	background: #ffab62;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+html {
+	color: #3b453d;
+	font-size: 1em;
+	line-height: 1.4rem;
+}
+
+.hidden {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+a {
+	background: 0 0;
+}
+
+a:active,a:hover {
+	outline: 0;
+}
+
+b,strong {
+	font-weight: 700;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+small {
+	font-size: 80%;
+}
+
+sub {
+	bottom: -.25em;
+}
+
+img {
+	border: 0;
+}
+
+button,input,optgroup,select,textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0
+}
+
+button {
+	overflow: visible;
+}
+
+button,select {
+	text-transform: none;
+}
+
+button,html input[type=button],input[type=reset],input[type=submit] {
+	-webkit-appearance: button;
+	cursor: pointer
+}
+
+button::-moz-focus-inner,input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+input {
+	line-height: normal;
+}
+
+input[type=checkbox],input[type=radio] {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button
+	{
+	height: auto;
+}
+
+input[type=search] {
+	-webkit-appearance: textfield;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration
+	{
+	-webkit-appearance: none;
+}
+
+fieldset {
+	border: 1px solid silver;
+	margin: 0 2px;
+	padding: .35em .625em .75em;
+}
+
+legend {
+	border: 0;
+	padding: 0;
+}
+
+textarea {
+	overflow: auto;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td,th {
+	padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0 0 1.4rem;
+}
+
+@font-face {
+	font-family: "Futura W01 Bold";
+	src: url(../fonts/3b3d00eb-6d89-47ec-83ee-48276a47ad94.eot?#iefix);
+	src: url(../fonts/3b3d00eb-6d89-47ec-83ee-48276a47ad94.eot?#iefix)
+		format("eot"), url(../fonts/2a65cbfc-5071-4b4d-bfc2-e052bb091ee2.woff)
+		format("woff"), url(../fonts/812f781d-aa66-47a1-b6a2-7941effc1527.ttf)
+		format("truetype"),
+		url(../fonts/2a371030-ff67-40ac-8307-082c1fccf151.svg#2a371030-ff67-40ac-8307-082c1fccf151)
+		format("svg")
+}
+
+@font-face {
+	font-family: "Museo Slab W01 700";
+	src: url(../fonts/59736019-b384-44ba-b36e-3b03dcdc8e6c.eot?#iefix);
+	src: url(../fonts/59736019-b384-44ba-b36e-3b03dcdc8e6c.eot?#iefix)
+		format("eot"), url(../fonts/2ac411c9-defd-4f5a-90b0-7179cafd27f4.woff)
+		format("woff"), url(../fonts/0c52b397-59d0-4df4-aa7c-06ac915a9f66.ttf)
+		format("truetype"),
+		url(../fonts/dcaa3c19-252a-407d-945c-4b770dd32417.svg#dcaa3c19-252a-407d-945c-4b770dd32417)
+		format("svg")
+}
+
+@font-face {
+	font-family: "Museo Slab W01 300";
+	src: url(../fonts/39a8c847-6d65-44ec-92e6-46e2aa8db834.eot?#iefix);
+	src: url(../fonts/39a8c847-6d65-44ec-92e6-46e2aa8db834.eot?#iefix)
+		format("eot"), url(../fonts/4548ac88-af2c-4b63-ac2b-94e9ef6cd1b9.woff)
+		format("woff"), url(../fonts/380327b2-8e54-40b1-a569-eb17e46f7e17.ttf)
+		format("truetype"),
+		url(../fonts/dedfb9ca-341f-404d-b76e-d781f9ee375f.svg#dedfb9ca-341f-404d-b76e-d781f9ee375f)
+		format("svg")
+}
+
+@font-face {
+	font-family: "Museo Slab W01 100";
+	src: url(../fonts/01ab709f-22cf-4831-b24a-8cf4eb852687.eot?#iefix);
+	src: url(../fonts/01ab709f-22cf-4831-b24a-8cf4eb852687.eot?#iefix)
+		format("eot"), url(../fonts/cacc0862-f146-4746-92b1-60e6114a66c4.woff)
+		format("woff"), url(../fonts/54006f54-b61e-4103-abf8-b1d0294a2a9c.ttf)
+		format("truetype"),
+		url(../fonts/e5841f2e-b306-4583-bfc3-a0e06742fedd.svg#e5841f2e-b306-4583-bfc3-a0e06742fedd)
+		format("svg")
+}
+
+.header--page {
+	line-height: 50px;
+	background: #c93312 url(../images/texture.png) repeat;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.type--lrg {
+	font-size: 2em;
+	color: #FCF5E3;
+	font-family: "Futura W01 Bold";
+	font-style: normal;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	line-height: 50px;
+}
+
+.footer__meta {
+	padding: 11.2px 22.4px;
+	padding: .7rem 1.4rem;
+	margin: 0;
+	background: #232a25;
+}
+
+.footer--page {
+	background: #3b453d;
+	color: #9fada2;
+	box-shadow: inset 0 5px 10px rgba(0, 0, 0, .1);
+	font-family: "Museo Slab W01 300";
+	font-size: 0.8em;
+	line-height: 1.2em;
+}
+
+.wysiwyg_viewer_skins_button_ButtonThreeDb3-link {
+	background-color: #333333;
+	border: 6px solid #333333;
+	border-radius: 10px;
+	bottom: 0;
+	box-shadow: 1px 1px #1A1A1A, 3px 3px #1A1A1A, 5px 5px #1A1A1A, 7px 7px
+		#1A1A1A, 9px 9px #1A1A1A;
+	cursor: pointer !important;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: all 0.12s ease 0s;
+	cursor: pointer;
+	text-align: center;
+}
+
+.buttons {
+	visibility: visible;
+	left: 247px;
+	top: 571px;
+	width: 480px;
+	min-height: 130px;
+	position: absolute;
+	
+}
