@@ -8,7 +8,7 @@
 
 			<footer class="footer--page text-align-center">
 			          <p class="footer__meta">
-					    Design &amp; Development by Aron Harsfalvi</a>
+					    Design &amp; Development by Aron Harsfalvi
 					    <br>
 					    <small>Copyright ©Aron Harsfalvi 2014 | All Rights Reserved</small>
 					  </p>

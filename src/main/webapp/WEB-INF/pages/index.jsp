@@ -3,16 +3,20 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
-<html>
-<head>
-<title>Main page</title>
+<div class="container" id="containerId">
+	<section>
+		<p>
+			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.trainings" /></button>
+			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.training.types" /></button>
+			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.users" /></button>
+		</p>
+		<p>
+			<button class="btn btn-1 btn-1e"><spring:message code="index.button.imports" /></button>
+			<button class="btn btn-1 btn-1e" style="display: none;"><spring:message code="index.button.imports" /></button>
+			<button class="btn btn-1 btn-1e" style="display: none;"><spring:message code="index.button.imports" /></button> 
+		</p>
+	</section>
+	</div><!-- /container -->
 
-</head>
-<HTML>
-<body>
-	<h1 class="type--lrg">Welcome to the training handler</h1>
-	
+<jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
 
-	<jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
-</body>
-</HTML>
