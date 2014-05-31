@@ -50,13 +50,6 @@ html {
 	text-align: center;
 }
 
-a {
-	background: 0 0;
-}
-
-a:active,a:hover {
-	outline: 0;
-}
 
 b,strong {
 	font-weight: 700;
@@ -133,6 +126,7 @@ h1,h2,h3,h4,h5,h6 {
 	line-height: 50px;
 	background: #c93312 url(../images/texture.png) repeat;
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	width: 100%;
 }
 
 .type--lrg {
@@ -161,13 +155,46 @@ h1,h2,h3,h4,h5,h6 {
 	line-height: 1.2em;
 }
 
-.headerLink a {
+a.headerLink {
 	color: #FCF5E3;
 	font-size: 0.844rem;
 	font-family: "Futura W01 Bold";
 	font-weight: 400;
 	letter-spacing: 0.04em;
+	text-decoration:none;
 }
 
+a:hover.headerLink {
+	color: #000066;
+	background: #FCF5E3;
+	font-size: 0.844rem;
+	font-family: "Futura W01 Bold";
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	text-decoration: none;
+}
+
+.splitter {
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #FCF5E3;
+	font-size: 0.844rem;
+	font-family: "Futura W01 Bold";
+}
+
+a {
+	
+}
+
+a:active,a:hover {
+	
+}
+
+
+#homeIcon {
+	height: 35px;
+	width: 42px;
+	vertical-align: middle;
+}
 
 

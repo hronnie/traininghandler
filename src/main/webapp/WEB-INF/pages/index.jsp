@@ -7,7 +7,7 @@
 	<section>
 		<p>
 			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.trainings" /></button>
-			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.training.types" /></button>
+			<button class="btn btn-1 btn-1e" id="trainingTypeId"><spring:message code="index.button.manage.training.types" /></button>
 			<button class="btn btn-1 btn-1e"><spring:message code="index.button.manage.users" /></button>
 		</p>
 		<p>
