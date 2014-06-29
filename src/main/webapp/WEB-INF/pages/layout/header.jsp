@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="<c:url value="/resources/js/jquery/jquery-2.1.1.js" />"></script>
+<!-- <script src="<c:url value="/resources/js/jquery/jquery-2.1.1.min.js" />"></script>-->
+<script src="<c:url value="/resources/js/header.js" />"></script>
+
 <link href="<c:url value="/resources/style/main.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/buttons/component.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/buttons/default.css" />" rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery/jquery-2.1.1.js" />"></script>
-<script src="<c:url value="/resources/js/header.js" />"></script>
-<!-- <script src="<c:url value="/resources/js/jquery/jquery-2.1.1.min.js" />"></script>-->
+
 <script>
 $(document).ready(function() {
 	$('#homeLinkId').hover(function () {
