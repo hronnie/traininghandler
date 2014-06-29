@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-		
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>	
 		
 		</div><!-- #content -->
 		
@@ -8,9 +8,7 @@
 
 			<footer class="footer--page text-align-center">
 			          <p class="footer__meta">
-					    Design &amp; Development by Aron Harsfalvi
-					    <br>
-					    <small>Copyright ©Aron Harsfalvi 2014 | All Rights Reserved</small>
+					  	<spring:message code="footer.copyright" />
 					  </p>
 			</footer>
 
