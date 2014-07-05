@@ -11,6 +11,9 @@
 <link href="<c:url value="/resources/style/buttons/component.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/buttons/default.css" />" rel="stylesheet">
 
+<link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
+<script src="<c:url value="/resources/js/help/modernizr.custom.js" />"></script>
+
 <script>
 $(document).ready(function() {
 	$('#homeLinkId').hover(function () {
@@ -41,9 +44,11 @@ $(document).ready(function() {
 				<span class="splitter">|</span>
 				<a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId"><spring:message code="header.link.change.language" /></a>
 				<span class="splitter">|</span>
+				<a href="#" class="headerLink" id="trigger-overlay"><img id="homeIcon" src="<c:url value="/resources/images/help.jpg" />"></a>
+				<span class="splitter">|</span>
 			
 			</header>
 
 		</div><!-- #header -->
 		
-		<div id="content">
+		<div id="content" >

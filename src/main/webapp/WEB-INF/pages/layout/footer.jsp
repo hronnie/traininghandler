@@ -14,5 +14,8 @@
 
 		</div><!-- #footer -->
 	</div><!-- #wrapper -->
+	
+		<script src="<c:url value="/resources/js/help/classie.js" />"></script>
+		<script src="<c:url value="/resources/js/help/door_overlay.js" />"></script>
 </body>
 </html>
