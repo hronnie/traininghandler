@@ -8,7 +8,7 @@ public class TrainingType implements HibernatePersistable, Serializable {
 
 	private Long trainingTypeId;
 	private String name;
-	private Byte levelNo;
+	private String levelNo;
 	private String description;
 	private Set<UserLevel> userLevels = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
@@ -22,7 +22,7 @@ public class TrainingType implements HibernatePersistable, Serializable {
 	}
 
 	public TrainingType(Long trainingTypeId, String name,
-			Byte levelNo, String description, Set<UserLevel> userLevels,
+			String levelNo, String description, Set<UserLevel> userLevels,
 			Set<Training> trainings,
 			Set<TrainingPrerequisite> trainingPrerequisites) {
 		this.trainingTypeId = trainingTypeId;
@@ -60,11 +60,11 @@ public class TrainingType implements HibernatePersistable, Serializable {
 		this.name = name;
 	}
 
-	public Byte getLevelNo() {
+	public String getLevelNo() {
 		return this.levelNo;
 	}
 
-	public void setLevelNo(Byte levelNo) {
+	public void setLevelNo(String levelNo) {
 		this.levelNo = levelNo;
 	}
 

@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS TrainingType;
 CREATE TABLE TrainingType (
     trainingTypeId BIGINT(20) NOT NULL,
     name VARCHAR(100) NULL,
-    levelNo DECIMAL(2,0),
+    levelNo VARCHAR(10),
     description VARCHAR(300) NULL,
 
     PRIMARY KEY (trainingTypeId)
