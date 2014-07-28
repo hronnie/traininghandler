@@ -7,17 +7,15 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 
 	private Long trainingPrerequisiteId;
 	private TrainingType trainingType;
-	private Training training;
 	private Date completedDate;
 
 	public TrainingPrerequisite() {
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingType trainingType, Training training, Date completedDate) {
+			TrainingType trainingType, Date completedDate) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 		this.trainingType = trainingType;
-		this.training = training;
 		this.completedDate = completedDate;
 	}
 
@@ -45,14 +43,6 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 
 	public void rainingType(TrainingType trainingType) {
 		this.trainingType = trainingType;
-	}
-
-	public Training getTraining() {
-		return this.training;
-	}
-
-	public void setTraining(Training training) {
-		this.training = training;
 	}
 
 	public Date getCompletedDate() {

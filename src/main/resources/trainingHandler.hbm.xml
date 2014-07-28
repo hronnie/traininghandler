@@ -212,12 +212,6 @@
         <property name="autoInvite" type="boolean">
             <column name="autoInvite" not-null="true" />
         </property>
-        <set name="trainingPrerequisites" table="TrainingPrerequisite" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainingId" not-null="true" />
-            </key>
-            <one-to-many class="com.codeproj.traininghandler.model.TrainingPrerequisite" />
-        </set>
         <set name="sentTrainingEmails" table="SentTrainingEmail" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="trainingId" not-null="true" />
