@@ -6,7 +6,7 @@ import java.util.Date;
 public class TrainingPrerequisite implements HibernatePersistable, Serializable {
 
 	private Long trainingPrerequisiteId;
-	private TrainingRef trainingRef;
+	private TrainingType trainingType;
 	private Training training;
 	private Date completedDate;
 
@@ -14,9 +14,9 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingRef trainingRef, Training training, Date completedDate) {
+			TrainingType trainingType, Training training, Date completedDate) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-		this.trainingRef = trainingRef;
+		this.trainingType = trainingType;
 		this.training = training;
 		this.completedDate = completedDate;
 	}
@@ -39,12 +39,12 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 	}
 
-	public TrainingRef getTrainingRef() {
-		return this.trainingRef;
+	public TrainingType getTrainingType() {
+		return this.trainingType;
 	}
 
-	public void setTrainingRef(TrainingRef trainingRef) {
-		this.trainingRef = trainingRef;
+	public void rainingType(TrainingType trainingType) {
+		this.trainingType = trainingType;
 	}
 
 	public Training getTraining() {

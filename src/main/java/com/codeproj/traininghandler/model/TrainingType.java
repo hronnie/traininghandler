@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TrainingRef implements HibernatePersistable, Serializable {
+public class TrainingType implements HibernatePersistable, Serializable {
 
-	private Long trainingRefId;
+	private Long trainingTypeId;
 	private Address address;
 	private String name;
 	private Byte levelNo;
@@ -15,19 +15,19 @@ public class TrainingRef implements HibernatePersistable, Serializable {
 	private Set<Training> trainings = new HashSet<>(0);
 	private Set<TrainingPrerequisite> trainingPrerequisites = new HashSet<>(0);
 
-	public TrainingRef() {
+	public TrainingType() {
 	}
 
-	public TrainingRef(Long trainingRefId, Address address) {
-		this.trainingRefId = trainingRefId;
+	public TrainingType(Long trainingTypeId, Address address) {
+		this.trainingTypeId = trainingTypeId;
 		this.address = address;
 	}
 
-	public TrainingRef(Long trainingRefId, Address address, String name,
+	public TrainingType(Long trainingTypeId, Address address, String name,
 			Byte levelNo, String description, Set<UserLevel> userLevels,
 			Set<Training> trainings,
 			Set<TrainingPrerequisite> trainingPrerequisites) {
-		this.trainingRefId = trainingRefId;
+		this.trainingTypeId = trainingTypeId;
 		this.address = address;
 		this.name = name;
 		this.levelNo = levelNo;
@@ -39,20 +39,20 @@ public class TrainingRef implements HibernatePersistable, Serializable {
 
 	@Override
 	public Long getId() {
-		return this.trainingRefId;
+		return this.trainingTypeId;
 	}
 	
 	@Override
 	public void setId(Long id) {
-		this.trainingRefId = id;
+		this.trainingTypeId = id;
 	}
 	
-	public Long getTrainingRefId() {
-		return this.trainingRefId;
+	public Long getTrainingTypeId() {
+		return this.trainingTypeId;
 	}
 
-	public void setTrainingRefId(Long trainingRefId) {
-		this.trainingRefId = trainingRefId;
+	public void setTrainingTypeId(Long trainingTypeId) {
+		this.trainingTypeId = trainingTypeId;
 	}
 
 	public Address getAddress() {

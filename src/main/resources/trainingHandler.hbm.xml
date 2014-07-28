@@ -31,11 +31,11 @@
         <property name="isAppointmentPlace" type="boolean">
             <column name="isAppointmentPlace" not-null="true" />
         </property>
-        <set name="trainingRefs" table="TrainingRef" inverse="true" lazy="true" fetch="select">
+        <set name="trainingTypes" table="TrainingType" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="addressId" not-null="true" />
             </key>
-            <one-to-many class="com.codeproj.traininghandler.model.TrainingRef" />
+            <one-to-many class="com.codeproj.traininghandler.model.TrainingType" />
         </set>
         <set name="users" table="User" inverse="true" lazy="true" fetch="select">
             <key>
@@ -194,8 +194,8 @@
             <column name="trainingId" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
-            <column name="trainingRefId" not-null="true" />
+        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+            <column name="trainingTypeId" not-null="true" />
         </many-to-one>
         <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
             <column name="addressId" not-null="true" />
@@ -241,8 +241,8 @@
             <column name="trainingPrerequisiteId" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
-            <column name="trainingRefId" not-null="true" />
+        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+            <column name="trainingTypeId" not-null="true" />
         </many-to-one>
         <many-to-one name="training" class="com.codeproj.traininghandler.model.Training" fetch="select">
             <column name="trainingId" not-null="true" />
@@ -253,9 +253,9 @@
     </class>
 
 
-    <class name="com.codeproj.traininghandler.model.TrainingRef" table="TrainingRef" catalog="traininghandler">
-        <id name="trainingRefId" type="long">
-            <column name="trainingRefId" />
+    <class name="com.codeproj.traininghandler.model.TrainingType" table="TrainingType" catalog="traininghandler">
+        <id name="trainingTypeId" type="long">
+            <column name="trainingTypeId" />
             <generator class="assigned" />
         </id>
         <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
@@ -272,19 +272,19 @@
         </property>
         <set name="userLevels" table="UserLevel" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="trainingRefId" not-null="true" />
+                <column name="trainingTypeId" not-null="true" />
             </key>
             <one-to-many class="com.codeproj.traininghandler.model.UserLevel" />
         </set>
         <set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="trainingRefId" not-null="true" />
+                <column name="trainingTypeId" not-null="true" />
             </key>
             <one-to-many class="com.codeproj.traininghandler.model.Training" />
         </set>
         <set name="trainingPrerequisites" table="TrainingPrerequisite" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="trainingRefId" not-null="true" />
+                <column name="trainingTypeId" not-null="true" />
             </key>
             <one-to-many class="com.codeproj.traininghandler.model.TrainingPrerequisite" />
         </set>
@@ -396,8 +396,8 @@
             <column name="userLevelId" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="trainingRef" class="com.codeproj.traininghandler.model.TrainingRef" fetch="select">
-            <column name="trainingRefId" not-null="true" />
+        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+            <column name="trainingTypeId" not-null="true" />
         </many-to-one>
         <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="userId" not-null="true" />

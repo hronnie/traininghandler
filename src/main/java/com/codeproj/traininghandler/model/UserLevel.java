@@ -6,16 +6,16 @@ import java.util.Date;
 public class UserLevel implements HibernatePersistable, Serializable {
 
 	private Long userLevelId;
-	private TrainingRef trainingRef;
+	private TrainingType trainingType;
 	private User user;
 	private Date completedDate;
 
 	public UserLevel() {
 	}
 
-	public UserLevel(Long userLevelId, TrainingRef trainingRef, User user) {
+	public UserLevel(Long userLevelId, TrainingType trainingType, User user) {
 		this.userLevelId = userLevelId;
-		this.trainingRef = trainingRef;
+		this.trainingType = trainingType;
 		this.user = user;
 	}
 
@@ -29,10 +29,10 @@ public class UserLevel implements HibernatePersistable, Serializable {
 		this.userLevelId = id;
 	}
 	
-	public UserLevel(Long userLevelId, TrainingRef trainingRef, User user,
+	public UserLevel(Long userLevelId, TrainingType trainingType, User user,
 			Date completedDate) {
 		this.userLevelId = userLevelId;
-		this.trainingRef = trainingRef;
+		this.trainingType = trainingType;
 		this.user = user;
 		this.completedDate = completedDate;
 	}
@@ -45,12 +45,12 @@ public class UserLevel implements HibernatePersistable, Serializable {
 		this.userLevelId = userLevelId;
 	}
 
-	public TrainingRef getTrainingRef() {
-		return this.trainingRef;
+	public TrainingType getTrainingType() {
+		return this.trainingType;
 	}
 
-	public void setTrainingRef(TrainingRef trainingRef) {
-		this.trainingRef = trainingRef;
+	public void setTrainingType(TrainingType trainingType) {
+		this.trainingType = trainingType;
 	}
 
 	public User getUser() {

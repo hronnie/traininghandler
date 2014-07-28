@@ -8,7 +8,7 @@ import java.util.Set;
 public class Training implements HibernatePersistable, Serializable {
 
 	private Long trainingId;
-	private TrainingRef trainingRef;
+	private TrainingType trainingType;
 	private Address address;
 	private String nameOfMaster;
 	private Date dateTime;
@@ -21,23 +21,23 @@ public class Training implements HibernatePersistable, Serializable {
 	public Training() {
 	}
 
-	public Training(Long trainingId, TrainingRef trainingRef, Address address,
+	public Training(Long trainingId, TrainingType trainingType, Address address,
 			String nameOfMaster, Date dateTime, Boolean autoInvite) {
 		this.trainingId = trainingId;
-		this.trainingRef = trainingRef;
+		this.trainingType = trainingType;
 		this.address = address;
 		this.nameOfMaster = nameOfMaster;
 		this.dateTime = dateTime;
 		this.autoInvite = autoInvite;
 	}
 
-	public Training(Long trainingId, TrainingRef trainingRef, Address address,
+	public Training(Long trainingId, TrainingType trainingType, Address address,
 			String nameOfMaster, Date dateTime, String description,
 			Boolean autoInvite,
 			Set<TrainingPrerequisite> trainingPrerequisites,
 			Set<SentTrainingEmail> sentTrainingEmails) {
 		this.trainingId = trainingId;
-		this.trainingRef = trainingRef;
+		this.trainingType = trainingType;
 		this.address = address;
 		this.nameOfMaster = nameOfMaster;
 		this.dateTime = dateTime;
@@ -65,12 +65,12 @@ public class Training implements HibernatePersistable, Serializable {
 		this.trainingId = trainingId;
 	}
 
-	public TrainingRef getTrainingRef() {
-		return this.trainingRef;
+	public TrainingType getTrainingType() {
+		return this.trainingType;
 	}
 
-	public void setTrainingRef(TrainingRef trainingRef) {
-		this.trainingRef = trainingRef;
+	public void setTrainingType(TrainingType trainingType) {
+		this.trainingType = trainingType;
 	}
 
 	public Address getAddress() {

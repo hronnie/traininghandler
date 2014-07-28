@@ -15,7 +15,7 @@ public class Address implements HibernatePersistable, Serializable {
 	private String postalCode;
 	private Boolean isTrainingPlace;
 	private Boolean isAppointmentPlace;
-	private Set<TrainingRef> trainingRefs = new HashSet<>(0);
+	private Set<TrainingType> trainingTypes = new HashSet<>(0);
 	private Set<User> users = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
 	private Set<Appointment> appointments = new HashSet<>(0);
@@ -33,7 +33,7 @@ public class Address implements HibernatePersistable, Serializable {
 	public Address(long addressId, String addressLine1, String addressLine2,
 			String city, String state, String country, String postalCode,
 			Boolean isTrainingPlace, Boolean isAppointmentPlace,
-			Set<TrainingRef> trainingRefs, Set<User> users,
+			Set<TrainingType> trainingTypes, Set<User> users,
 			Set<Training> trainings, Set<Appointment> appointments) {
 		this.addressId = addressId;
 		this.addressLine1 = addressLine1;
@@ -44,7 +44,7 @@ public class Address implements HibernatePersistable, Serializable {
 		this.postalCode = postalCode;
 		this.isTrainingPlace = isTrainingPlace;
 		this.isAppointmentPlace = isAppointmentPlace;
-		this.trainingRefs = trainingRefs;
+		this.trainingTypes = trainingTypes;
 		this.users = users;
 		this.trainings = trainings;
 		this.appointments = appointments;
@@ -132,12 +132,12 @@ public class Address implements HibernatePersistable, Serializable {
 		this.isAppointmentPlace = isAppointmentPlace;
 	}
 
-	public Set<TrainingRef> getTrainingRefs() {
-		return this.trainingRefs;
+	public Set<TrainingType> getTrainingTypes() {
+		return this.trainingTypes;
 	}
 
-	public void setTrainingRefs(Set<TrainingRef> trainingRefs) {
-		this.trainingRefs = trainingRefs;
+	public void setTrainingTypes(Set<TrainingType> trainingTypes) {
+		this.trainingTypes = trainingTypes;
 	}
 
 	public Set<User> getUsers() {
