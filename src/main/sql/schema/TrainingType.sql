@@ -5,9 +5,7 @@ CREATE TABLE TrainingType (
     name VARCHAR(100) NULL,
     levelNo DECIMAL(2,0),
     description VARCHAR(300) NULL,
-    addressId BIGINT(20) NOT NULL,
 
-    PRIMARY KEY (trainingTypeId),
-    FOREIGN KEY FK_User_Address (addressId) REFERENCES Address(addressId)
+    PRIMARY KEY (trainingTypeId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

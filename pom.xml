@@ -181,6 +181,50 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.2</version>
 		</dependency>
+		
+				       <!-- APACHE CXF WEBSERVICE FRAMEWORK -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-extension-providers</artifactId>
+            <version>2.7.3</version>            
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-bundle-jaxrs</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.12</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+            <version>1.9.12</version>
+        </dependency>
+		
 	</dependencies>
 
 	<build>
@@ -294,7 +338,7 @@
 										<srcFile>src/main/sql/schema/EmailTemplate.sql</srcFile>
 										<srcFile>src/main/sql/schema/GeneralSettings.sql</srcFile>
 										<srcFile>src/main/sql/schema/Log.sql</srcFile>
-										<srcFile>src/main/sql/schema/TrainingRef.sql</srcFile>
+										<srcFile>src/main/sql/schema/TrainingType.sql</srcFile>
 										<srcFile>src/main/sql/schema/Training.sql</srcFile>
 										<srcFile>src/main/sql/schema/SentTrainingEmail.sql</srcFile>
 										<srcFile>src/main/sql/schema/TrainingPrerequisite.sql</srcFile>
@@ -324,7 +368,7 @@
 										<srcFile>src/main/sql/data/EmailTemplateData.sql</srcFile>
 										<srcFile>src/main/sql/data/GeneralSettingsData.sql</srcFile>
 										<srcFile>src/main/sql/data/LogData.sql</srcFile>
-										<srcFile>src/main/sql/data/TrainingRefData.sql</srcFile>
+										<srcFile>src/main/sql/data/TrainingTypeData.sql</srcFile>
 										<srcFile>src/main/sql/data/TrainingData.sql</srcFile>
 										<srcFile>src/main/sql/data/SentTrainingEmailData.sql</srcFile>
 										<srcFile>src/main/sql/data/TrainingPrerequisiteData.sql</srcFile>

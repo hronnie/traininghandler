@@ -258,9 +258,6 @@
             <column name="trainingTypeId" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
-            <column name="addressId" not-null="true" />
-        </many-to-one>
         <property name="name" type="string">
             <column name="name" length="100" />
         </property>

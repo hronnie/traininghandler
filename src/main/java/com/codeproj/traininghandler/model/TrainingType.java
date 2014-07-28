@@ -7,7 +7,6 @@ import java.util.Set;
 public class TrainingType implements HibernatePersistable, Serializable {
 
 	private Long trainingTypeId;
-	private Address address;
 	private String name;
 	private Byte levelNo;
 	private String description;
@@ -18,17 +17,15 @@ public class TrainingType implements HibernatePersistable, Serializable {
 	public TrainingType() {
 	}
 
-	public TrainingType(Long trainingTypeId, Address address) {
+	public TrainingType(Long trainingTypeId) {
 		this.trainingTypeId = trainingTypeId;
-		this.address = address;
 	}
 
-	public TrainingType(Long trainingTypeId, Address address, String name,
+	public TrainingType(Long trainingTypeId, String name,
 			Byte levelNo, String description, Set<UserLevel> userLevels,
 			Set<Training> trainings,
 			Set<TrainingPrerequisite> trainingPrerequisites) {
 		this.trainingTypeId = trainingTypeId;
-		this.address = address;
 		this.name = name;
 		this.levelNo = levelNo;
 		this.description = description;
@@ -53,14 +50,6 @@ public class TrainingType implements HibernatePersistable, Serializable {
 
 	public void setTrainingTypeId(Long trainingTypeId) {
 		this.trainingTypeId = trainingTypeId;
-	}
-
-	public Address getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
 	}
 
 	public String getName() {
