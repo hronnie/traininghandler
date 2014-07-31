@@ -4,7 +4,7 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
-	<bean id="importTraineesWithCSVService"
-		class="com.codeproj.traininghandler.service.ImportTraineesWithCSVServiceImpl" />
+	<bean id="importTraineesWithCSVManager"
+		class="com.codeproj.traininghandler.manager.ImportTraineesWithCSVManager" />
 	
 </beans>
