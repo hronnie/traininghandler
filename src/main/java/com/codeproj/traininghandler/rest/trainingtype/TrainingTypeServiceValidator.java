@@ -14,8 +14,6 @@ public class TrainingTypeServiceValidator extends ValidatorBaseUtility {
 		validateStringLength("name", name, 100);
 		validateStringLength("levelNo", levelNo, 10);
 		validateStringLength("description", description, 300);
-		
-		
 	}
 
 }

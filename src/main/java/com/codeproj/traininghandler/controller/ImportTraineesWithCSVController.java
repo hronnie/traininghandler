@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codeproj.traininghandler.manager.ImportTraineesWithCSVManager;
+import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 
 @Controller
 @RequestMapping("/importTrainees.htm")
@@ -19,6 +20,9 @@ public class ImportTraineesWithCSVController {
 	private static final Logger logger = Logger.getLogger(ImportTraineesWithCSVController.class);
 	
 	private ImportTraineesWithCSVManager importTraineesWithCSVManager;
+	
+	@Autowired
+	private TrainingTypeManager trainingTypeManager;
 	
 	
     @Autowired
@@ -48,5 +52,9 @@ public class ImportTraineesWithCSVController {
 
 	public void setMessageSource(MessageSource messageSource) {
 		this.messageSource = messageSource;
+	}
+
+	public void setTrainingTypeManager(TrainingTypeManager trainingTypeManager) {
+		this.trainingTypeManager = trainingTypeManager;
 	}
 }

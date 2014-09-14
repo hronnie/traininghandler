@@ -261,24 +261,6 @@
         <property name="description" type="string">
             <column name="description" length="300" />
         </property>
-        <set name="userLevels" table="UserLevel" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainingTypeId" not-null="true" />
-            </key>
-            <one-to-many class="com.codeproj.traininghandler.model.UserLevel" />
-        </set>
-        <set name="trainings" table="Training" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainingTypeId" not-null="true" />
-            </key>
-            <one-to-many class="com.codeproj.traininghandler.model.Training" />
-        </set>
-        <set name="trainingPrerequisites" table="TrainingPrerequisite" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainingTypeId" not-null="true" />
-            </key>
-            <one-to-many class="com.codeproj.traininghandler.model.TrainingPrerequisite" />
-        </set>
     </class>
 
 
@@ -336,12 +318,6 @@
             <column name="created" length="19" />
         </property>
         <property access="field" column="locale" name="locale"/>
-        <set name="authoritieses" table="Authorities" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="userId" not-null="true" />
-            </key>
-            <one-to-many class="com.codeproj.traininghandler.model.Authorities" />
-        </set>
         <set name="userLevels" table="UserLevel" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="userId" not-null="true" />

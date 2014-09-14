@@ -1,13 +1,20 @@
 package com.codeproj.traininghandler.rest.trainingtype;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TrainingTypeServiceTest {
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";
@@ -17,12 +24,16 @@ public class TrainingTypeServiceTest {
 							+ "adipiscing elit. Aliquam nec blandit dolor. Aenean at volutpat ipsum, quis dignissim nisi. Ut "
 							+ "sed arcu elementum, dignissim nisl a, adipiscing tortor. Nullam sit amet risus faucibus, luctus turpis ut, rhoncus massa. Sed mollis justo dapibus faucibus turpis duis. ";
 	
+	public TrainingTypeService service;
 	
-	public TrainingTypeService service = null;
+	@Mock
+	public TrainingTypeManager trainingTypeManager;
+	
 
 	@Before
 	public void setUp() throws Exception {
 		service = new TrainingTypeService();
+		service.setTrainingTypeManager(trainingTypeManager);
 	}
 
 	@Test(expected = ValidationException.class)
@@ -73,13 +84,11 @@ public class TrainingTypeServiceTest {
 		service.create("name", "8/a", PARAMETER_STRING_SIZE_MORE_THEN_300);
 	}
 	
-	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-		service.create("name", "8/a", "dsfdsf");
+//		Response trainingTypesResponse = service.create("name", "8/a", "dsfdsf");
+//		Boolean result = (Boolean)trainingTypesResponse.getEntity();
+//		assertTrue("Create failed.", result);
+		
 	}
-	
-	
-
-
 }

@@ -49,7 +49,7 @@
 		</authentication-provider>
 	</authentication-manager>
 	
-		<beans:bean id="dataSource"
+	<beans:bean id="dataSource"
           class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
 

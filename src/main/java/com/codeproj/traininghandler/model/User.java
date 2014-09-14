@@ -19,7 +19,6 @@ public class User implements HibernatePersistable, Serializable {
 	private String email;
 	private String mobileNo;
 	private Boolean isEnabled;
-	private Set<UserRole> authoritieses = new HashSet<>(0);
 	private Set<UserLevel> userLevels = new HashSet<>(0);
 	private Set<Appointment> appointmentsForPatientId = new HashSet<>(0);
 	private Set<Appointment> appointmentsForHealerId = new HashSet<>(0);
@@ -50,7 +49,7 @@ public class User implements HibernatePersistable, Serializable {
 	public User(Long userId, Address address, String displayName,
 			String password, String firstName,
 			String lastName, String userName, Date dob, String email,
-			String mobileNo, Boolean isEnabled, Set<UserRole> authoritieses,
+			String mobileNo, Boolean isEnabled, 
 			Set<UserLevel> userLevels,
 			Set<Appointment> appointmentsForPatientId,
 			Set<Appointment> appointmentsForHealerId,
@@ -68,7 +67,6 @@ public class User implements HibernatePersistable, Serializable {
 		this.email = email;
 		this.mobileNo = mobileNo;
 		this.isEnabled = isEnabled;
-		this.authoritieses = authoritieses;
 		this.userLevels = userLevels;
 		this.appointmentsForPatientId = appointmentsForPatientId;
 		this.appointmentsForHealerId = appointmentsForHealerId;
@@ -184,14 +182,6 @@ public class User implements HibernatePersistable, Serializable {
 
 	public void setIsEnabled(Boolean isEnabled) {
 		this.isEnabled = isEnabled;
-	}
-
-	public Set<UserRole> getAuthoritieses() {
-		return this.authoritieses;
-	}
-
-	public void setAuthoritieses(Set<UserRole> authoritieses) {
-		this.authoritieses = authoritieses;
 	}
 
 	public Set<UserLevel> getUserLevels() {

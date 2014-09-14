@@ -6,13 +6,13 @@ import java.util.Set;
 
 public class TrainingType implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
+	
 	private Long trainingTypeId;
 	private String name;
 	private String levelNo;
 	private String description;
-	private Set<UserLevel> userLevels = new HashSet<>(0);
-	private Set<Training> trainings = new HashSet<>(0);
-	private Set<TrainingPrerequisite> trainingPrerequisites = new HashSet<>(0);
 
 	public TrainingType() {
 	}
@@ -21,17 +21,11 @@ public class TrainingType implements HibernatePersistable, Serializable {
 		this.trainingTypeId = trainingTypeId;
 	}
 
-	public TrainingType(Long trainingTypeId, String name,
-			String levelNo, String description, Set<UserLevel> userLevels,
-			Set<Training> trainings,
-			Set<TrainingPrerequisite> trainingPrerequisites) {
-		this.trainingTypeId = trainingTypeId;
+	public TrainingType(String name,
+			String levelNo, String description) {
 		this.name = name;
 		this.levelNo = levelNo;
 		this.description = description;
-		this.userLevels = userLevels;
-		this.trainings = trainings;
-		this.trainingPrerequisites = trainingPrerequisites;
 	}
 
 	@Override
@@ -74,30 +68,5 @@ public class TrainingType implements HibernatePersistable, Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Set<UserLevel> getUserLevels() {
-		return this.userLevels;
-	}
-
-	public void setUserLevels(Set<UserLevel> userLevels) {
-		this.userLevels = userLevels;
-	}
-
-	public Set<Training> getTrainings() {
-		return this.trainings;
-	}
-
-	public void setTrainings(Set<Training> trainings) {
-		this.trainings = trainings;
-	}
-
-	public Set<TrainingPrerequisite> getTrainingPrerequisites() {
-		return this.trainingPrerequisites;
-	}
-
-	public void setTrainingPrerequisites(
-			Set<TrainingPrerequisite> trainingPrerequisites) {
-		this.trainingPrerequisites = trainingPrerequisites;
 	}
 }
