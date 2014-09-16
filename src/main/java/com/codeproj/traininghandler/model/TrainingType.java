@@ -1,10 +1,8 @@
 package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-public class TrainingType implements HibernatePersistable, Serializable {
+public class TrainingType implements  Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -28,16 +26,7 @@ public class TrainingType implements HibernatePersistable, Serializable {
 		this.description = description;
 	}
 
-	@Override
-	public Long getId() {
-		return this.trainingTypeId;
-	}
-	
-	@Override
-	public void setId(Long id) {
-		this.trainingTypeId = id;
-	}
-	
+
 	public Long getTrainingTypeId() {
 		return this.trainingTypeId;
 	}

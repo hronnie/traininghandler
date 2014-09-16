@@ -2,6 +2,8 @@ package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainingPrerequisite implements HibernatePersistable, Serializable {
 
@@ -41,7 +43,7 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		return this.trainingType;
 	}
 
-	public void rainingType(TrainingType trainingType) {
+	public void setTrainingType(TrainingType trainingType) {
 		this.trainingType = trainingType;
 	}
 

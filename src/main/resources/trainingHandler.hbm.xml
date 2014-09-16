@@ -238,9 +238,6 @@
         <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="trainingTypeId" not-null="true" />
         </many-to-one>
-        <many-to-one name="training" class="com.codeproj.traininghandler.model.Training" fetch="select">
-            <column name="trainingId" not-null="true" />
-        </many-to-one>
         <property name="completedDate" type="timestamp">
             <column name="completedDate" length="19" not-null="true" />
         </property>
@@ -248,19 +245,21 @@
 
 
     <class name="com.codeproj.traininghandler.model.TrainingType" table="TrainingType" catalog="traininghandler">
-        <id name="trainingTypeId" type="long">
-            <column name="trainingTypeId" />
-            <generator class="assigned" />
+        <id access="field" column="trainingTypeId" name="trainingTypeId" unsaved-value="0">
+            <generator class="increment"/>
         </id>
-        <property name="name" type="string">
-            <column name="name" length="100" />
-        </property>
-        <property name="levelNo" type="java.lang.Byte">
-            <column name="levelNo" precision="2" scale="0" />
-        </property>
-        <property name="description" type="string">
-            <column name="description" length="300" />
-        </property>
+        <property access="field" column="name" name="name"/>
+        <property access="field" column="levelNo" name="levelNo"/>
+        <property access="field" column="description" name="description"/>
+<!--         <property name="name" type="string"> -->
+<!--             <column name="name" length="100" /> -->
+<!--         </property> -->
+<!--         <property name="levelNo" type="string"> -->
+<!--             <column name="levelNo" precision="2" scale="0" /> -->
+<!--         </property> -->
+<!--         <property name="description" type="string"> -->
+<!--             <column name="description" length="300" /> -->
+<!--         </property> -->
     </class>
 
 
@@ -280,18 +279,6 @@
         </property>
         <property name="password" type="string">
             <column name="password" />
-        </property>
-        <property name="isMaster" type="boolean">
-            <column name="isMaster" not-null="true" />
-        </property>
-        <property name="isPatient" type="boolean">
-            <column name="isPatient" not-null="true" />
-        </property>
-        <property name="isHealer" type="boolean">
-            <column name="isHealer" not-null="true" />
-        </property>
-        <property name="isTrainee" type="boolean">
-            <column name="isTrainee" not-null="true" />
         </property>
         <property name="firstName" type="string">
             <column name="firstName" length="50" not-null="true" />

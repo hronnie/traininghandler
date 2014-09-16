@@ -6,6 +6,7 @@ public class UserRole implements HibernatePersistable, Serializable {
 
 	private Long userRoleId;
 	private User user;
+	private Role role;
 	private String authority;
 
 	public UserRole() {
@@ -49,6 +50,14 @@ public class UserRole implements HibernatePersistable, Serializable {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
