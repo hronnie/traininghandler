@@ -29,6 +29,13 @@
 			<param name="ConversionPattern" value="[%d{ISO8601}] %-5p %m%n" />
 		</layout>
 	</appender>
+	
+		<appender name="SQLROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/var/log/traininghandler/sql.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}] %-5p %m%n" />
+		</layout>
+	</appender>
 
 
 	<logger name="com.mchange.v2.c3p0">
@@ -86,6 +93,18 @@
 		<appender-ref ref="TRAININGHANDLER_ROLLING_FILE" />
 		<appender-ref ref="STDOUT" />
 	</logger>
+
+
+
+	<logger name="org.hibernate.SQL" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="SQLROLLINGFILE" />
+	</logger>
+	<logger name="org.hibernate.type" additivity="false">
+		<level value="TRACE" />
+		<appender-ref ref="SQLROLLINGFILE" />
+	</logger>
+
 
 	<root>
 		<level value="trace" />
