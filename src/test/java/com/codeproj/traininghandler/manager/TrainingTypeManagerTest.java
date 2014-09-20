@@ -18,6 +18,7 @@ import com.codeproj.traininghandler.model.TrainingType;
 public class TrainingTypeManagerTest {
 
 	public TrainingTypeManager manager = null;
+	
 	@Mock
 	public TrainingTypeDAO trainingTypeDAO;
 
@@ -29,10 +30,8 @@ public class TrainingTypeManagerTest {
 
 	@Test
 	public void testCreateManageType() {
-		String name = "name";
-		String levelNo = "levelNo";
-		String desc = "description";
-		TrainingType trainingType = new TrainingType(name, levelNo, desc);
+		boolean result = manager.create("Valid name", "8/a", "Test description");
+		assertTrue("Failed to call DAO method", result);
 	}
 
 }

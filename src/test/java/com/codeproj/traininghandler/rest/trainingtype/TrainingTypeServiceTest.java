@@ -29,66 +29,67 @@ public class TrainingTypeServiceTest {
 	@Mock
 	public TrainingTypeManager trainingTypeManager;
 	
-
+	public static final String validName = "Aron";
+	public static final String validLevelNo = "8/a";
+	public static final String validDescription = "test description";
+	
 	@Before
 	public void setUp() throws Exception {
 		service = new TrainingTypeService();
 		service.setTrainingTypeManager(trainingTypeManager);
+		when(trainingTypeManager.create(validName, validLevelNo, validDescription)).thenReturn(true);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullName() throws ValidationException {
-		service.create(null, "8/a", "test description");
+		service.create(null, validLevelNo, validDescription);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyName() throws ValidationException {
-		service.create("", "8/a", "test description");
+		service.create("", validLevelNo, validDescription);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullLevelNo() throws ValidationException {
-		service.create("name", null, "test description");
+		service.create(validName, null, validDescription);
 	}
 	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyLevelNo() throws ValidationException {
-		service.create("name", "", "test description");
+		service.create(validName, "", validDescription);
 	}
 	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullDesc() throws ValidationException {
-		service.create("name", "8/a", null);
+		service.create(validName, validLevelNo, null);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyDesc() throws ValidationException {
-		service.create("name", "8/a", "");
+		service.create(validName, validLevelNo, "");
 	}
-	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNameTooLong() throws ValidationException {
-		service.create(PARAMETER_STRING_SIZE_MORE_THEN_100, "8/a", "description");
+		service.create(PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithlevelNoTooLong() throws ValidationException {
-		service.create("name", PARAMETER_STRING_SIZE_MORE_THEN_10, "description");
+		service.create(validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithDescTooLong() throws ValidationException {
-		service.create("name", "8/a", PARAMETER_STRING_SIZE_MORE_THEN_300);
+		service.create(validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300);
 	}
 	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-//		Response trainingTypesResponse = service.create("name", "8/a", "dsfdsf");
-//		Boolean result = (Boolean)trainingTypesResponse.getEntity();
-//		assertTrue("Create failed.", result);
-		
+		boolean trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
+		assertTrue("Create failed.", trainingTypesResponse);
 	}
 }

@@ -9,9 +9,10 @@ import com.codeproj.traininghandler.model.TrainingType;
 public class TrainingTypeManager {
 	TrainingTypeDAO trainingTypeDAO;
 
-	public void create(String name, String levelNo, String description) {
+	public boolean create(String name, String levelNo, String description) {
 		TrainingType newTrainingType = new TrainingType(name, levelNo, description);
 		trainingTypeDAO.create(newTrainingType);
+		return true;
 	}
 
 	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
