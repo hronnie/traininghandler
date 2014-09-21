@@ -14,6 +14,10 @@ public class TrainingTypeManager {
 		trainingTypeDAO.create(newTrainingType);
 		return true;
 	}
+	
+	public TrainingType getTrainingTypeById(Long id) {
+		return trainingTypeDAO.getTrainingTypeById(id);
+	}
 
 	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
 		this.trainingTypeDAO = trainingTypeDAO;

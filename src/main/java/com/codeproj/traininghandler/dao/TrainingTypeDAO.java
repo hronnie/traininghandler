@@ -11,5 +11,7 @@ import com.codeproj.traininghandler.model.TrainingType;
 @Transactional
 public interface TrainingTypeDAO extends IOperations<TrainingType> {
 
+	TrainingType getTrainingTypeById(Long id);
+
 
 }

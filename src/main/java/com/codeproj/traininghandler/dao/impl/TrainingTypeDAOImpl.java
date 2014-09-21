@@ -30,4 +30,9 @@ public class TrainingTypeDAOImpl extends AbstractHibernateDao<TrainingType> impl
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
+	@Override
+	public TrainingType getTrainingTypeById(Long id) {
+		return findOne(id);
+	}
 }

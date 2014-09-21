@@ -15,17 +15,20 @@ public class TrainingType implements  Serializable {
 	public TrainingType() {
 	}
 
-	public TrainingType(Long trainingTypeId) {
-		this.trainingTypeId = trainingTypeId;
-	}
-
 	public TrainingType(String name,
 			String levelNo, String description) {
 		this.name = name;
 		this.levelNo = levelNo;
 		this.description = description;
 	}
-
+	
+	public TrainingType(Long trainingTypeId, String name,
+			String levelNo, String description) {
+		this.trainingTypeId = trainingTypeId;
+		this.name = name;
+		this.levelNo = levelNo;
+		this.description = description;
+	}
 
 	public Long getTrainingTypeId() {
 		return this.trainingTypeId;

@@ -1,9 +1,8 @@
 package com.codeproj.traininghandler.rest.trainingtype;
 
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
-
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +10,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.codeproj.traininghandler.dto.TrainingTypeDto;
+import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
+import com.codeproj.traininghandler.model.TrainingType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrainingTypeServiceTest {
@@ -38,6 +40,8 @@ public class TrainingTypeServiceTest {
 		service = new TrainingTypeService();
 		service.setTrainingTypeManager(trainingTypeManager);
 		when(trainingTypeManager.create(validName, validLevelNo, validDescription)).thenReturn(true);
+		when(trainingTypeManager.getTrainingTypeById(99l)).thenReturn(null);
+		when(trainingTypeManager.getTrainingTypeById(1l)).thenReturn(new TrainingType(1l, "name", "levelNo", "description"));
 	}
 
 	@Test(expected = ValidationException.class)
@@ -91,5 +95,22 @@ public class TrainingTypeServiceTest {
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
 		boolean trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
 		assertTrue("Create failed.", trainingTypesResponse);
+	}
+	
+	@Test(expected = DatabaseEntityNotFoundException.class)
+	public void testGetTrainingTypeByIdWithValidButNotExistId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.getTrainingTypeById(99l);
+	}
+
+	@Test(expected = ValidationException.class)
+	public void testGetTrainingTypeByIdWithMinusId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.getTrainingTypeById(-5l);
+	}
+	
+	@Test
+	public void testGetTrainingTypeByIdWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {
+		TrainingTypeDto trainingType = service.getTrainingTypeById(1l);
+		TrainingTypeDto expected = new TrainingTypeDto(1l, "name", "levelNo", "description");
+		assertEquals("The result training type is not as expected", expected, trainingType);
 	}
 }
