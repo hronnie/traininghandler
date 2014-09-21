@@ -1,0 +1,15 @@
+<!DOCTYPE dataset>
+<dataset>
+	<table name="TrainingType">
+		<column>trainingTypeId</column>
+		<column>name</column>
+		<column>levelNo</column>
+		<column>description</column>
+		<row>
+			<value>1</value>
+			<value>Name</value>
+			<value>levelNo</value>
+			<value>description</value>
+		</row>
+	</table>
+</dataset>		

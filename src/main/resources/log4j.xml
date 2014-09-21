@@ -37,7 +37,6 @@
 		</layout>
 	</appender>
 
-
 	<logger name="com.mchange.v2.c3p0">
 		<level value="error" />
 		<appender-ref ref="TRAININGHANDLER_ROLLING_FILE" />
@@ -86,25 +85,25 @@
 		<appender-ref ref="TRAININGHANDLER_ROLLING_FILE" />
 	</logger>
 
-
-
 	<logger name="com.codeproj.traininghandler" additivity="false">
 		<level value="trace" />
 		<appender-ref ref="TRAININGHANDLER_ROLLING_FILE" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-
-
 	<logger name="org.hibernate.SQL" additivity="false">
-		<level value="DEBUG" />
+		<level value="error" />
 		<appender-ref ref="SQLROLLINGFILE" />
 	</logger>
+	
 	<logger name="org.hibernate.type" additivity="false">
-		<level value="TRACE" />
+		<level value="error" />
 		<appender-ref ref="SQLROLLINGFILE" />
 	</logger>
-
+	
+	<logger name="org.dbunit">
+		<level value="error" />
+	</logger>
 
 	<root>
 		<level value="trace" />
