@@ -8,12 +8,11 @@
 
 
 	<http>
-		<intercept-url pattern="/importTrainees.htm*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/index.htm*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/*" access="ROLE_GUEST" />
 		<form-login 
 			login-page="/login.jsp" 
-			default-target-url="/importTrainees.htm"
+			default-target-url="/index.htm"
 			authentication-failure-url="/login.jsp?error=true" />
 		
 		<logout logout-success-url="/login.jsp" />

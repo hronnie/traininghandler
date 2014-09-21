@@ -16,9 +16,4 @@
 		class="com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager">
 		<property name="trainingTypeDAO" ref="trainingTypeDAO" />
 	</bean>
-
-
-	<bean id="importTraineesWithCSVManager"
-		class="com.codeproj.traininghandler.manager.ImportTraineesWithCSVManager" >
-	</bean>
 </beans>
