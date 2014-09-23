@@ -1,38 +1,58 @@
 package com.codeproj.traininghandler.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.TrainingTypeDAO;
-import com.codeproj.traininghandler.dao.common.AbstractHibernateDao;
 import com.codeproj.traininghandler.model.TrainingType;
 
-public class TrainingTypeDAOImpl extends AbstractHibernateDao<TrainingType> implements  TrainingTypeDAO {
+public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	private SessionFactory sessionFactory;
 
 	public TrainingTypeDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-	}	
-
-    public TrainingTypeDAOImpl() {
-        super();
-
-        setClazz(TrainingType.class);
-    }
-
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
 	}
-
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	
+	@Override
+	@Transactional
+	public TrainingType getTrainingTypeById(Long id) {
+		//sessionFactory.getCurrentSession().
+		return null;
+//		return findOne(id);
 	}
+	
+	@Override
+	@Transactional
+	public List<TrainingType> getAll() {
+		@SuppressWarnings("unchecked")
+		List<TrainingType> trainingTypes = (List<TrainingType>) sessionFactory.getCurrentSession()
+				.createCriteria(TrainingType.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return trainingTypes;
+				
+	}
+	
+//	
+//	 *     @Override
+//    @Transactional
+//    public List<User> list() {
+//        @SuppressWarnings("unchecked")
+//        List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
+//                .createCriteria(User.class)
+//                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+// 
+//        return listUser;
+//    }(non-Javadoc) 
+//	 * @see com.codeproj.traininghandler.dao.TrainingTypeDAO#create(com.codeproj.traininghandler.model.TrainingType)
+//	 */
 
 	@Override
-	public TrainingType getTrainingTypeById(Long id) {
-		return findOne(id);
+	@Transactional
+	public void create(TrainingType trainingType) {
+        sessionFactory.getCurrentSession().save(trainingType);
 	}
+
 }
