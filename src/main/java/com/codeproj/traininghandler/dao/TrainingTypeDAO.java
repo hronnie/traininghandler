@@ -11,9 +11,13 @@ import com.codeproj.traininghandler.model.TrainingType;
 @Service
 @Transactional
 public interface TrainingTypeDAO {
-	public TrainingType getTrainingTypeById(Long id);
-	
 	public void create(TrainingType trainingType);
 	
+	public TrainingType getTrainingTypeById(Long id);
+	
 	public List<TrainingType> getAll();
+	
+	public void update(TrainingType trainingType);
+	
+	public void delete(TrainingType trainingType);
 }
