@@ -22,8 +22,7 @@ public class TrainingTypeManager {
 	}
 	
 	public List<TrainingType> getAllTrainingType() {
-		// TODO Auto-generated method stub
-		return null;
+		return trainingTypeDAO.getAll();
 	}
 
 	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
