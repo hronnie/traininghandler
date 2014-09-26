@@ -27,7 +27,7 @@ public class TrainingTypeService {
 	TrainingTypeManager trainingTypeManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public boolean create(@RequestParam String name,
+	public Boolean create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
 			throws ValidationException {
@@ -72,5 +72,19 @@ public class TrainingTypeService {
 
 	public void setTrainingTypeManager(TrainingTypeManager trainingTypeManager) {
 		this.trainingTypeManager = trainingTypeManager;
+	}
+	
+	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
+	public Boolean update(@RequestParam Long trainingTypeId,
+			@RequestParam String name,
+			@RequestParam String levelNo,
+			@RequestParam String description) throws ValidationException {
+		
+		name = ValidatorBaseUtility.stripXSS(name);
+		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
+		description = ValidatorBaseUtility.stripXSS(description);
+		TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
+		trainingTypeManager.update(trainingTypeId, name, levelNo, description);
+		return true;
 	}
 }

@@ -16,4 +16,14 @@ public class TrainingTypeServiceValidator extends ValidatorBaseUtility {
 		validateStringLength("description", description, 300);
 	}
 
+	public static void update(Long trainingTypeId, String name, String levelNo, String description) throws ValidationException {
+		entityIdValidator(trainingTypeId);
+		mandatoryParameter("name", name);
+		mandatoryParameter("levelNo", levelNo);
+		mandatoryParameter("description", description);
+		
+		validateStringLength("name", name, 100);
+		validateStringLength("levelNo", levelNo, 10);
+		validateStringLength("description", description, 300);
+	}
 }

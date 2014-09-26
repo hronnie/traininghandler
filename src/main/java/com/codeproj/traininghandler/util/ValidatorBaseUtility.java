@@ -89,4 +89,10 @@ public class ValidatorBaseUtility {
 		}
 		return value;
 	}
+	
+	public static void entityIdValidator(Long id) throws ValidationException {
+		if (id == null || id < 0) {
+			throw new ValidationException("Id parameter: " + id + " is not valid. Cannot be null or less then 0");
+		}
+	}
 }

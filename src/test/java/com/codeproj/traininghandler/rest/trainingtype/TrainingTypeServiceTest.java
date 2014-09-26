@@ -35,6 +35,7 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	@Mock
 	public TrainingTypeManager trainingTypeManager;
 	
+	public static final Long validId = 1L;
 	public static final String validName = "Aron";
 	public static final String validLevelNo = "8/a";
 	public static final String validDescription = "test description";
@@ -45,8 +46,10 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 		service = new TrainingTypeService();
 		service.setTrainingTypeManager(trainingTypeManager);
 		when(trainingTypeManager.create(validName, validLevelNo, validDescription)).thenReturn(true);
-		when(trainingTypeManager.getTrainingTypeById(99l)).thenReturn(null);
-		when(trainingTypeManager.getTrainingTypeById(1l)).thenReturn(new TrainingType(1l, "name", "levelNo", "description"));
+		when(trainingTypeManager.getTrainingTypeById(99L)).thenReturn(null);
+		when(trainingTypeManager.update(100L, validName, validLevelNo, validDescription)).thenThrow(DatabaseEntityNotFoundException.class);
+		
+		when(trainingTypeManager.getTrainingTypeById(1L)).thenReturn(new TrainingType(1L, "name", "levelNo", "description"));
 
 	}
 
@@ -167,5 +170,87 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 				&& description.equals(trainingTypeDto.getDescription()));
 	}
 	
+	// update
 	
+	/*
+	 * invalid id (null and lt 0 )
+	 * there is no id stored
+	 * null or empty or too long name 
+	 * null or empty or too long levelNo
+	 * null or empty or too long description
+	 * success
+	 */
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(null, validName, validLevelNo, validDescription);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(-2L, validName, validLevelNo, validDescription);
+	}
+	
+	@Test(expected = DatabaseEntityNotFoundException.class)
+	public void updateTrainingTypeWithValidIdNotFoundObject() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(100L, validName, validLevelNo, validDescription);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithNullName() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, null, validLevelNo, validDescription);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithEmptyName() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, "", validLevelNo, validDescription);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithNullLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, null, validDescription);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithEmptyLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, "", validDescription);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithNullDescription() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, validLevelNo, null);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithEmptyDescription() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, validLevelNo, "");
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithTooLongName() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithTooLongLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription);
+		
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithTooLongDescription() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(validId, validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300);
+		
+	}
+	
+	@Test
+	public void updateTrainingTypeWithValidValues() throws DatabaseEntityNotFoundException, ValidationException {
+		assertTrue("Update wasn't successful", service.update(validId, validName, validLevelNo, validDescription));
+	}
 }

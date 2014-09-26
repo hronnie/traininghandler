@@ -28,4 +28,8 @@ public class TrainingTypeManager {
 	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
 		this.trainingTypeDAO = trainingTypeDAO;
 	}
+
+	public Object update(Long trainingTypeId, String name, String levelNo, String description) {
+		return null;
+	}
 }
