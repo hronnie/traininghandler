@@ -1,5 +1,7 @@
 package com.codeproj.traininghandler.manager.trainingtype;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.codeproj.traininghandler.dao.TrainingTypeDAO;
@@ -17,6 +19,11 @@ public class TrainingTypeManager {
 	
 	public TrainingType getTrainingTypeById(Long id) {
 		return trainingTypeDAO.getTrainingTypeById(id);
+	}
+	
+	public List<TrainingType> getAllTrainingType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
