@@ -26,7 +26,7 @@ public class TrainingTypeService {
 	@Autowired
 	TrainingTypeManager trainingTypeManager;
 
-	@RequestMapping(value="/create", method = RequestMethod.PUT,headers="Accept=application/json")
+	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public Boolean create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
@@ -74,7 +74,7 @@ public class TrainingTypeService {
 		this.trainingTypeManager = trainingTypeManager;
 	}
 	
-	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
+	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
 	public Boolean update(@RequestParam Long trainingTypeId,
 			@RequestParam String name,
 			@RequestParam String levelNo,
