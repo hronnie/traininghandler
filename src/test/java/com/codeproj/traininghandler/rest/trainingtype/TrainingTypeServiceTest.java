@@ -19,6 +19,7 @@ import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrainingTypeServiceTest extends TrainingTypeTestBase {
@@ -104,8 +105,8 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-		boolean trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
-		assertTrue("Create failed.", trainingTypesResponse);
+		BooleanResponse trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
+		assertTrue("Create failed.", new Boolean(trainingTypesResponse.getBooleanValue()));
 	}
 	
 	// getById

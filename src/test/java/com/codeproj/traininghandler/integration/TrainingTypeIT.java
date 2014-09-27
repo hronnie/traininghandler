@@ -31,9 +31,8 @@ public class TrainingTypeIT extends GenericAPITest {
         nameValuePairs.add(new BasicNameValuePair("description", getResource("trainingtype.create.description")));
 
         JSONObject responseObj = postRequest("trainingType.create.url", nameValuePairs, true);
-//        JSONObject token = (JSONObject) getFieldValue(responseObj, "token");
-//        assertNotNull(getFieldValue(token, "key"));
-
+        assertEquals("Create wasn't successful", TRUE_RESPONSE, responseObj.toString());
+        System.out.println(responseObj);
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testRegisterMinimal" + responseObj.toString());
 	}
 

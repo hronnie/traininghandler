@@ -17,6 +17,7 @@ import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -27,7 +28,7 @@ public class TrainingTypeService {
 	TrainingTypeManager trainingTypeManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public Boolean create(@RequestParam String name,
+	public BooleanResponse create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
 			throws ValidationException {
@@ -38,7 +39,7 @@ public class TrainingTypeService {
 		TrainingTypeServiceValidator.create(name, levelNo, description);
 		trainingTypeManager.create(name, levelNo, description);
 
-		return true;
+		return new BooleanResponse(true);
 	}
 
 	@RequestMapping(value="/get", method = RequestMethod.GET,headers="Accept=application/json")
