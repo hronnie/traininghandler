@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.common.TrainingTypeTestBase;
 import com.codeproj.traininghandler.dao.TrainingTypeDAO;
+import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
 
@@ -35,14 +36,18 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 		when(trainingTypeDAO.getTrainingTypeById(1l)).thenReturn(refTrainingType);
 	}
 
+	// create
+	
 	@Test
-	public void testCreateTrainingType() {
+	public void createTrainingType() {
 		boolean result = manager.create("Valid name", "8/a", "Test description");
 		assertTrue("Failed to call DAO method", result);
 	}
 
+	// getById
+	
 	@Test 
-	public void testGetTrainingTypeById() {
+	public void getTrainingTypeById() {
 		TrainingType result = manager.getTrainingTypeById(1l);
 		assertNotNull("TrainingType result is null", result);
 		assertEquals("TrainingType doesn't match", refTrainingType, result);
@@ -76,6 +81,38 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 		assertTrainingType(resultFromManager.get(0), 1l, "name1", "levelNo1", "description1");
 		assertTrainingType(resultFromManager.get(1), 2l, "name2", "levelNo2", "description2");
 		assertTrainingType(resultFromManager.get(2), 3l, "name3", "levelNo3", "description3");
+	}
+	
+	// update
+	
+	@SuppressWarnings("unchecked")
+	@Test(expected = DatabaseEntityNotFoundException.class)
+	public void updateNonExistingTrainingType() throws DatabaseEntityNotFoundException {
+		TrainingType notExist = new TrainingType(5L, "name", "levelNo", "description");
+		when(trainingTypeDAO.update(notExist)).thenThrow(DatabaseEntityNotFoundException.class);
+		manager.update(5L, "name", "levelNo", "description");
+	}
+
+	@Test
+	public void updateExistingTrainingType() throws DatabaseEntityNotFoundException {
+		TrainingType exist = new TrainingType(6L, "name", "levelNo", "description");
+		when(trainingTypeDAO.update(exist)).thenReturn(true);
+		assertTrue("Update wasn't successful", manager.update(6L, "name", "levelNo", "description"));
+	}
+	
+	// delete
+
+	@SuppressWarnings("unchecked")
+	@Test(expected = DatabaseEntityNotFoundException.class)
+	public void deleteNonExistingTrainingType() throws DatabaseEntityNotFoundException {
+		when(trainingTypeDAO.delete(9L)).thenThrow(DatabaseEntityNotFoundException.class);
+		manager.delete(9L);
+	}
+	
+	@Test
+	public void deleteExistingTrainingType() throws DatabaseEntityNotFoundException {
+		when(trainingTypeDAO.delete(10L)).thenReturn(true);
+		assertTrue("Delete wasn't successful", manager.delete(10L));
 	}
 	
 	private void assertTrainingType(TrainingType trainingType, long id, String name, String levelNo, String description) {

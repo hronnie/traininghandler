@@ -26,7 +26,7 @@ public class TrainingTypeService {
 	@Autowired
 	TrainingTypeManager trainingTypeManager;
 
-	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
+	@RequestMapping(value="/create", method = RequestMethod.PUT,headers="Accept=application/json")
 	public Boolean create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
@@ -78,13 +78,20 @@ public class TrainingTypeService {
 	public Boolean update(@RequestParam Long trainingTypeId,
 			@RequestParam String name,
 			@RequestParam String levelNo,
-			@RequestParam String description) throws ValidationException {
+			@RequestParam String description) throws ValidationException, DatabaseEntityNotFoundException {
 		
 		name = ValidatorBaseUtility.stripXSS(name);
 		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
 		description = ValidatorBaseUtility.stripXSS(description);
 		TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
 		trainingTypeManager.update(trainingTypeId, name, levelNo, description);
+		return true;
+	}
+
+	@RequestMapping(value="/delete", method = RequestMethod.DELETE,headers="Accept=application/json")
+	public Boolean delete(@RequestParam Long trainingTypeId)  throws ValidationException, DatabaseEntityNotFoundException {
+		TrainingTypeServiceValidator.delete(trainingTypeId);
+		trainingTypeManager.delete(trainingTypeId);
 		return true;
 	}
 }

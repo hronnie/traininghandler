@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.model.TrainingType;
 
 @Service
@@ -17,7 +18,7 @@ public interface TrainingTypeDAO {
 	
 	public List<TrainingType> getAll();
 	
-	public void update(TrainingType trainingType);
+	public boolean update(TrainingType trainingType) throws DatabaseEntityNotFoundException;
 	
-	public void delete(TrainingType trainingType);
+	public boolean delete(Long trainingTypeId);
 }

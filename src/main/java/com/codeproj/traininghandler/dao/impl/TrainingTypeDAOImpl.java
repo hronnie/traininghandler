@@ -3,12 +3,14 @@ package com.codeproj.traininghandler.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.TrainingTypeDAO;
+import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.model.TrainingType;
 
 public class TrainingTypeDAOImpl implements TrainingTypeDAO {
@@ -30,8 +32,13 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	
 	@Override
 	@Transactional
-	public void update(TrainingType trainingType) {
-		sessionFactory.getCurrentSession().update(trainingType);
+	public boolean update(TrainingType trainingType) throws DatabaseEntityNotFoundException {
+		try {
+			sessionFactory.getCurrentSession().update(trainingType);
+		} catch (HibernateException e) {
+			throw new DatabaseEntityNotFoundException("The requested object cannot be found");
+		}
+		return true;
 	}
 
 	@Override
@@ -56,7 +63,8 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 
 	@Override
 	@Transactional
-	public void delete(TrainingType trainingType) {
-		sessionFactory.getCurrentSession().delete(trainingType);
+	public boolean delete(Long trainingTypeId) {
+		sessionFactory.getCurrentSession().delete(trainingTypeId);
+		return true;
 	}
 }

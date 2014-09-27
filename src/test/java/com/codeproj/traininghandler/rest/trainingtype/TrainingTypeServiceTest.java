@@ -41,6 +41,7 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	public static final String validDescription = "test description";
 
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
 		service = new TrainingTypeService();
@@ -150,7 +151,6 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test
 	public void getAllTrainingTypeWithThreeResult() throws DatabaseEntityNotFoundException, ValidationException {
-
 		when(trainingTypeManager.getAllTrainingType()).thenReturn(threeTraingType);
 		
 		List<TrainingTypeDto> resultFromService = service.getAllTrainingType();
@@ -171,15 +171,7 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	}
 	
 	// update
-	
-	/*
-	 * invalid id (null and lt 0 )
-	 * there is no id stored
-	 * null or empty or too long name 
-	 * null or empty or too long levelNo
-	 * null or empty or too long description
-	 * success
-	 */
+
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
@@ -204,53 +196,71 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyName() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, "", validLevelNo, validDescription);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, null, validDescription);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, "", validDescription);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullDescription() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, validLevelNo, null);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyDescription() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, validLevelNo, "");
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongName() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription);
-		
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongDescription() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(validId, validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300);
-		
 	}
 	
 	@Test
 	public void updateTrainingTypeWithValidValues() throws DatabaseEntityNotFoundException, ValidationException {
 		assertTrue("Update wasn't successful", service.update(validId, validName, validLevelNo, validDescription));
 	}
+	
+	// delete
+	
+	@Test(expected = ValidationException.class)
+	public void deleteTrainingTypeWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.delete(-1L);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void deleteTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
+		service.delete(null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test(expected = DatabaseEntityNotFoundException.class)
+	public void deleteTrainingTypeWithValidIdButNotExistingObject() throws DatabaseEntityNotFoundException, ValidationException {
+		when(trainingTypeManager.delete(5L)).thenThrow(DatabaseEntityNotFoundException.class);
+		service.delete(5L);
+	}
+	
+	@Test
+	public void deleteTrainingTypeWithValidId() throws DatabaseEntityNotFoundException, ValidationException {
+		when(trainingTypeManager.delete(3L)).thenReturn(true);
+		assertTrue("Delete wasn't successful", service.delete(3L));
+	}
+	
 }

@@ -26,4 +26,8 @@ public class TrainingTypeServiceValidator extends ValidatorBaseUtility {
 		validateStringLength("levelNo", levelNo, 10);
 		validateStringLength("description", description, 300);
 	}
+
+	public static void delete(Long trainingTypeId) throws ValidationException {
+		entityIdValidator(trainingTypeId);
+	}
 }
