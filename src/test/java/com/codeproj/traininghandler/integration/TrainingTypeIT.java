@@ -35,5 +35,32 @@ public class TrainingTypeIT extends GenericAPITest {
         System.out.println(responseObj);
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testRegisterMinimal" + responseObj.toString());
 	}
+	
+	@Test
+	public void testGetTrainingType() {
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started testRegisterMinimal");
+
+        List<NameValuePair> nameValuePairs = new ArrayList<>();
+        nameValuePairs.add(new BasicNameValuePair("name", getResource("trainingtype.create.name")));
+        nameValuePairs.add(new BasicNameValuePair("levelNo", getResource("trainingtype.create.levelNo")));
+        nameValuePairs.add(new BasicNameValuePair("description", getResource("trainingtype.create.description")));
+
+        JSONObject responseObj = postRequest("trainingType.create.url", nameValuePairs, true);
+        assertEquals("Create wasn't successful", TRUE_RESPONSE, responseObj.toString());
+        System.out.println(responseObj);
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testRegisterMinimal" + responseObj.toString());
+	}
+	
+	@Test
+	public void testGetAllTrainingType() {
+	}
+	
+	@Test
+	public void testUpdateTrainingType() {
+	}
+	
+	@Test
+	public void testDeleteTrainingType() {
+	}
 
 }

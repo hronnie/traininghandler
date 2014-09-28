@@ -42,7 +42,7 @@ public class TrainingTypeService {
 		return new BooleanResponse(true);
 	}
 
-	@RequestMapping(value="/get", method = RequestMethod.GET,headers="Accept=application/json")
+	@RequestMapping(value="/get/{id}", method = RequestMethod.GET,headers="Accept=application/json")
 	public TrainingTypeDto getTrainingTypeById(@RequestParam(value = "id",required = false, defaultValue = "0")
 				Long id) throws DatabaseEntityNotFoundException, ValidationException {
 		
