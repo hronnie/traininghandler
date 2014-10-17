@@ -23,7 +23,7 @@ import org.codehaus.jettison.json.JSONObject;
 public abstract class GenericAPITest extends TestCase {
     protected String testRequestId;
     protected static final String RESOURCES="testresources";
-    protected Long createdId;
+    protected static Long createdId;
     private ResourceBundle rb;
     
     public static final String TRUE_RESPONSE = "{\"booleanValue\":\"true\"}";
