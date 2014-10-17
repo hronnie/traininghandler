@@ -34,14 +34,15 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 		manager = new TrainingTypeManager();
 		manager.setTrainingTypeDAO(trainingTypeDAO);
 		when(trainingTypeDAO.getTrainingTypeById(1l)).thenReturn(refTrainingType);
+		when(trainingTypeDAO.create(new TrainingType("Valid name", "8/a", "Test description"))).thenReturn(1L);
 	}
 
 	// create
 	
 	@Test
 	public void createTrainingType() {
-		boolean result = manager.create("Valid name", "8/a", "Test description");
-		assertTrue("Failed to call DAO method", result);
+		Long result = manager.create("Valid name", "8/a", "Test description");
+		assertEquals("Failed to call DAO method", new Long(1), result);
 	}
 
 	// getById

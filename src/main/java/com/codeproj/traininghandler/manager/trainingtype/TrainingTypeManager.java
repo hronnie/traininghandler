@@ -12,10 +12,9 @@ import com.codeproj.traininghandler.model.TrainingType;
 public class TrainingTypeManager {
 	TrainingTypeDAO trainingTypeDAO;
 
-	public boolean create(String name, String levelNo, String description) {
+	public Long create(String name, String levelNo, String description) {
 		TrainingType newTrainingType = new TrainingType(name, levelNo, description);
-		trainingTypeDAO.create(newTrainingType);
-		return true;
+		return trainingTypeDAO.create(newTrainingType);
 	}
 	
 	public TrainingType getTrainingTypeById(Long id) {

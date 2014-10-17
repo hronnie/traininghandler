@@ -47,7 +47,7 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	public void setUp() throws Exception {
 		service = new TrainingTypeService();
 		service.setTrainingTypeManager(trainingTypeManager);
-		when(trainingTypeManager.create(validName, validLevelNo, validDescription)).thenReturn(true);
+		when(trainingTypeManager.create(validName, validLevelNo, validDescription)).thenReturn(1L);
 		when(trainingTypeManager.getTrainingTypeById(99L)).thenReturn(null);
 		when(trainingTypeManager.update(100L, validName, validLevelNo, validDescription)).thenThrow(DatabaseEntityNotFoundException.class);
 		
@@ -105,8 +105,8 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-		BooleanResponse trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
-		assertTrue("Create failed.", new Boolean(trainingTypesResponse.getBooleanValue()));
+		Long trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
+		assertEquals("Create failed", new Long(1L), trainingTypesResponse); 
 	}
 	
 	// getById

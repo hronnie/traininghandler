@@ -26,8 +26,9 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 
 	@Override
 	@Transactional
-	public void create(TrainingType trainingType) {
+	public Long create(TrainingType trainingType) {
         sessionFactory.getCurrentSession().save(trainingType);
+        return trainingType.getTrainingTypeId();
 	}
 	
 	@Override

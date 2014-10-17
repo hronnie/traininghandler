@@ -23,7 +23,7 @@ public class TrainingTypeIT extends GenericAPITest {
 
 	@Test
 	public void testCreateTrainingType() {
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started testRegisterMinimal");
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started creating Training type");
 
         List<NameValuePair> nameValuePairs = new ArrayList<>();
         nameValuePairs.add(new BasicNameValuePair("name", getResource("trainingtype.create.name")));

@@ -28,7 +28,7 @@ public class TrainingTypeService {
 	TrainingTypeManager trainingTypeManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse create(@RequestParam String name,
+	public Long create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
 			throws ValidationException {
@@ -37,9 +37,7 @@ public class TrainingTypeService {
 		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
 		description = ValidatorBaseUtility.stripXSS(description);
 		TrainingTypeServiceValidator.create(name, levelNo, description);
-		trainingTypeManager.create(name, levelNo, description);
-
-		return new BooleanResponse(true);
+		return trainingTypeManager.create(name, levelNo, description);
 	}
 
 	@RequestMapping(value="/get/{id}", method = RequestMethod.GET,headers="Accept=application/json")
