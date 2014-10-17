@@ -18,6 +18,7 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -28,7 +29,7 @@ public class TrainingTypeService {
 	TrainingTypeManager trainingTypeManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public Long create(@RequestParam String name,
+	public GeneralIdResponse create(@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description)
 			throws ValidationException {
@@ -37,7 +38,8 @@ public class TrainingTypeService {
 		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
 		description = ValidatorBaseUtility.stripXSS(description);
 		TrainingTypeServiceValidator.create(name, levelNo, description);
-		return trainingTypeManager.create(name, levelNo, description);
+		Long result = trainingTypeManager.create(name, levelNo, description);
+		return new GeneralIdResponse(result);
 	}
 
 	@RequestMapping(value="/get/{id}", method = RequestMethod.GET,headers="Accept=application/json")

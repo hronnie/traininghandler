@@ -23,6 +23,7 @@ import org.codehaus.jettison.json.JSONObject;
 public abstract class GenericAPITest extends TestCase {
     protected String testRequestId;
     protected static final String RESOURCES="testresources";
+    protected Long createdId;
     private ResourceBundle rb;
     
     public static final String TRUE_RESPONSE = "{\"booleanValue\":\"true\"}";
@@ -100,5 +101,18 @@ public abstract class GenericAPITest extends TestCase {
         String value = rb.getString(key);
         assertNotNull(value);
         return value;
+    }
+    
+    protected boolean validateGenerateIdResponse(JSONObject responseObj) {
+    	try {
+    		Integer id = (Integer)responseObj.get("value");
+			if (id > 0) {
+				createdId = new Long(id);
+				return true;
+			}
+			return false;
+		} catch (JSONException e) {
+			return false;
+		}
     }
 }

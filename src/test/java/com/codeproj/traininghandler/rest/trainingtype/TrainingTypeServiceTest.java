@@ -20,6 +20,7 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrainingTypeServiceTest extends TrainingTypeTestBase {
@@ -105,8 +106,8 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-		Long trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
-		assertEquals("Create failed", new Long(1L), trainingTypesResponse); 
+		GeneralIdResponse trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
+		assertEquals("Create failed", new Long(1L), trainingTypesResponse.getValue()); 
 	}
 	
 	// getById
