@@ -1,5 +1,9 @@
 package com.codeproj.traininghandler.dto;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="TrainingType")
 public class TrainingTypeDto {
 	
 	private Long trainingTypeId;
@@ -11,45 +15,49 @@ public class TrainingTypeDto {
 		//empty constructor
 	}
 	
-	public TrainingTypeDto(Long trainingTypeId, String name, String levelNo, String description) {
-		this.trainingTypeId = trainingTypeId;
-		this.name = name;
-		this.levelNo = levelNo;
-		this.description = description;
-	}
-	
-	public Long getTrainingTypeId() {
-		return trainingTypeId;
-	}
-
 	public void setTrainingTypeId(Long trainingTypeId) {
 		this.trainingTypeId = trainingTypeId;
 	}
 
-	public String getName() {
-		return name;
-	}
-	
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getLevelNo() {
-		return levelNo;
-	}
-	
+
 	public void setLevelNo(String levelNo) {
 		this.levelNo = levelNo;
 	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	public TrainingTypeDto(Long trainingTypeId, String name, String levelNo, String description) {
+		this.trainingTypeId = trainingTypeId;
+		this.levelNo = levelNo;
+		this.name = name;
+		this.description = description;
+	}
+	
+	@XmlElement(name="trainingTypeId")
+	public Long getTrainingTypeId() {
+		return trainingTypeId;
+	}
+
+	@XmlElement(name="name")
+	public String getName() {
+		return name;
+	}
+
+	@XmlElement(name="levelNo")
+	public String getLevelNo() {
+		return levelNo;
+	}
+	
+	@XmlElement(name="description")
+	public String getDescription() {
+		return description;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

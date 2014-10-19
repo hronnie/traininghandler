@@ -11,10 +11,12 @@ import java.util.logging.Logger;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.codehaus.jettison.json.JSONException;
@@ -65,8 +67,8 @@ public abstract class GenericAPITest extends TestCase {
         
         return responseObj;
     }
-    
-    protected JSONObject postRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess) {        
+
+protected JSONObject postRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess) {        
         String url = getResource(resource);
         
         HttpResponse response = null;
@@ -84,6 +86,29 @@ public abstract class GenericAPITest extends TestCase {
         assertNotNull(response);
         
         return extractResponseObject(response);
+    }
+    
+    protected JSONObject getRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess, String getParams) {        
+    	String url = getResource(resource);
+    	
+    	if (!StringUtils.isEmpty(getParams)) {
+    		url += getParams;
+    	}
+    	
+    	HttpResponse response = null;
+    	try {
+    		HttpClient httpclient = HttpClientBuilder.create().build();
+    		HttpGet request = new HttpGet(url);
+    		request.addHeader("accept", "application/json");
+    		response = httpclient.execute(request);
+    	} catch (IOException ex) {
+    		Logger.getLogger(GenericAPITest.class.getName()).log(Level.SEVERE, null, ex);
+    		fail("Failed to post request to " + url);
+    	}
+    	
+    	assertNotNull(response);
+    	
+    	return extractResponseObject(response);
     }
 
     protected Object getFieldValue(JSONObject obj, String fieldname) {

@@ -8,8 +8,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -40,6 +40,22 @@ public class TrainingTypeIT extends GenericAPITest {
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetTrainingType() {
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting Training type");
+
+        List<NameValuePair> nameValuePairs = new ArrayList<>();
+        nameValuePairs.add(new BasicNameValuePair("id", createdId.toString()));
+
+        JSONObject responseObj = getRequest("trainingType.get.url", nameValuePairs, true, createdId.toString());
+        try {
+        	Integer trainingTypeId = (Integer)responseObj.get("trainingTypeId");
+			Assert.assertEquals(new Long(trainingTypeId), createdId);
+			Assert.assertEquals(responseObj.get("name"), getResource("trainingtype.create.name"));
+			Assert.assertEquals(responseObj.get("levelNo"), getResource("trainingtype.create.levelNo"));
+			Assert.assertEquals(responseObj.get("description"), getResource("trainingtype.create.description"));
+		} catch (JSONException e) {
+			Assert.fail("Invalid JSON during getting training type with id: " + createdId);
+		}
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + responseObj.toString());
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
