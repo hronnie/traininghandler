@@ -36,8 +36,23 @@ public abstract class GenericAPITest extends TestCase {
     }
 
     private JSONObject extractResponseObject(HttpResponse response) {
-        BufferedReader rd = null;
         String responseBody = null;
+        responseBody = extractResponseReturnText(response);
+        
+        JSONObject responseObj = null;        
+        try {
+            responseObj = new JSONObject(responseBody);
+        } catch (JSONException ex) {
+            Logger.getLogger(GenericAPITest.class.getName()).log(Level.SEVERE, null, ex);
+            fail("Failed to parse response body into JSON object");
+        }
+        
+        return responseObj;
+    }
+
+	private String extractResponseReturnText(HttpResponse response) {
+		String responseBody = "";
+		BufferedReader rd = null;
         try {
             rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line;
@@ -56,19 +71,10 @@ public abstract class GenericAPITest extends TestCase {
                 Logger.getLogger(GenericAPITest.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        JSONObject responseObj = null;        
-        try {
-            responseObj = new JSONObject(responseBody);
-        } catch (JSONException ex) {
-            Logger.getLogger(GenericAPITest.class.getName()).log(Level.SEVERE, null, ex);
-            fail("Failed to parse response body into JSON object");
-        }
-        
-        return responseObj;
-    }
+		return responseBody;
+	}
 
-protected JSONObject postRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess) {        
+    protected JSONObject postRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess) {        
         String url = getResource(resource);
         
         HttpResponse response = null;
@@ -88,8 +94,14 @@ protected JSONObject postRequest(String resource, List<NameValuePair> parameters
         return extractResponseObject(response);
     }
     
-    protected JSONObject getRequest(String resource, List<NameValuePair> parameters, boolean expectedSuccess, String getParams) {        
-    	String url = getResource(resource);
+    protected JSONObject getRequest(String resource, boolean expectedSuccess, String getParams) {        
+    	HttpResponse response = doGetRequest(resource, getParams);
+    	
+    	return extractResponseObject(response);
+    }
+
+	private HttpResponse doGetRequest(String resource, String getParams) {
+		String url = getResource(resource);
     	
     	if (!StringUtils.isEmpty(getParams)) {
     		url += getParams;
@@ -107,8 +119,12 @@ protected JSONObject postRequest(String resource, List<NameValuePair> parameters
     	}
     	
     	assertNotNull(response);
-    	
-    	return extractResponseObject(response);
+		return response;
+	}
+    
+    protected String getRequestReturnTextResponse(String resource, boolean expectedSuccess, String getParams) {
+    	HttpResponse response = doGetRequest(resource, getParams);
+    	return extractResponseReturnText(response);
     }
 
     protected Object getFieldValue(JSONObject obj, String fieldname) {

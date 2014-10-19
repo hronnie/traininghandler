@@ -42,10 +42,7 @@ public class TrainingTypeIT extends GenericAPITest {
 	public void testGetTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting Training type");
 
-        List<NameValuePair> nameValuePairs = new ArrayList<>();
-        nameValuePairs.add(new BasicNameValuePair("id", createdId.toString()));
-
-        JSONObject responseObj = getRequest("trainingType.get.url", nameValuePairs, true, createdId.toString());
+        JSONObject responseObj = getRequest("trainingType.get.url", true, createdId.toString());
         try {
         	Integer trainingTypeId = (Integer)responseObj.get("trainingTypeId");
 			Assert.assertEquals(new Long(trainingTypeId), createdId);
@@ -60,6 +57,13 @@ public class TrainingTypeIT extends GenericAPITest {
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetAllTrainingType() {
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
+
+        String responseText = getRequestReturnTextResponse("trainingType.get.all.url", true, null);
+        Assert.assertNotNull(responseText);
+        Assert.assertTrue(responseText.startsWith("[{"), "Response is not an array at get all training type");;
+        
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + responseText);
 	}
 	
 	@Test(dependsOnMethods = { "testGetAllTrainingType" })
