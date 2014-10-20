@@ -55,6 +55,7 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	@Override
 	@Transactional
 	public List<TrainingType> getAll() {
+		@SuppressWarnings("unchecked")
 		List<TrainingType> trainingTypes = (List<TrainingType>) sessionFactory.getCurrentSession()
 		.createCriteria(TrainingType.class)
 		.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
@@ -65,7 +66,8 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	@Override
 	@Transactional
 	public boolean delete(Long trainingTypeId) {
-		sessionFactory.getCurrentSession().delete(trainingTypeId);
+		String hql = "delete from TrainingType where trainingTypeId= :trainingTypeId";
+		sessionFactory.getCurrentSession().createQuery(hql).setLong("trainingTypeId", trainingTypeId).executeUpdate();
 		return true;
 	}
 }

@@ -23,4 +23,8 @@ public class BooleanResponse {
     public String getBooleanValue() {
         return booleanValue.toString();
     }
+    
+    public boolean getPrimitiveBooleanValue() {
+    	return booleanValue;
+    }
 }

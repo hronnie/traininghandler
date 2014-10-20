@@ -237,7 +237,8 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test
 	public void updateTrainingTypeWithValidValues() throws DatabaseEntityNotFoundException, ValidationException {
-		assertTrue("Update wasn't successful", service.update(validId, validName, validLevelNo, validDescription));
+		BooleanResponse boolResp = service.update(validId, validName, validLevelNo, validDescription);
+		assertTrue("Update wasn't successful", boolResp.getPrimitiveBooleanValue());
 	}
 	
 	// delete
@@ -262,7 +263,7 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	@Test
 	public void deleteTrainingTypeWithValidId() throws DatabaseEntityNotFoundException, ValidationException {
 		when(trainingTypeManager.delete(3L)).thenReturn(true);
-		assertTrue("Delete wasn't successful", service.delete(3L));
+		assertTrue("Delete wasn't successful", service.delete(3L).getPrimitiveBooleanValue());
 	}
 	
 }

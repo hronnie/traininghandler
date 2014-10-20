@@ -78,7 +78,7 @@ public class TrainingTypeService {
 	}
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
-	public Boolean update(@RequestParam Long trainingTypeId,
+	public BooleanResponse update(@RequestParam Long trainingTypeId,
 			@RequestParam String name,
 			@RequestParam String levelNo,
 			@RequestParam String description) throws ValidationException, DatabaseEntityNotFoundException {
@@ -88,13 +88,13 @@ public class TrainingTypeService {
 		description = ValidatorBaseUtility.stripXSS(description);
 		TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
 		trainingTypeManager.update(trainingTypeId, name, levelNo, description);
-		return true;
+		return new BooleanResponse(true);
 	}
 
-	@RequestMapping(value="/delete", method = RequestMethod.DELETE,headers="Accept=application/json")
-	public Boolean delete(@RequestParam Long trainingTypeId)  throws ValidationException, DatabaseEntityNotFoundException {
+	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
+	public BooleanResponse delete(@RequestParam Long trainingTypeId)  throws ValidationException, DatabaseEntityNotFoundException {
 		TrainingTypeServiceValidator.delete(trainingTypeId);
 		trainingTypeManager.delete(trainingTypeId);
-		return true;
+		return new BooleanResponse(true);
 	}
 }

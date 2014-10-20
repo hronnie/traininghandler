@@ -82,7 +82,7 @@ public abstract class GenericAPITest extends TestCase {
             HttpClient httpclient = HttpClientBuilder.create().build();
     		HttpPost request = new HttpPost(url);
     		request.addHeader("accept", "application/json");
-    		request.setEntity(new UrlEncodedFormEntity(parameters));
+    		request.setEntity(new UrlEncodedFormEntity(parameters, "utf-8"));
     		response = httpclient.execute(request);
         } catch (IOException ex) {
             Logger.getLogger(GenericAPITest.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,5 +155,24 @@ public abstract class GenericAPITest extends TestCase {
 		} catch (JSONException e) {
 			return false;
 		}
+    }
+    
+    protected boolean validateBooleanResponse(JSONObject responseObj) {
+    	try {
+    		String booleanValue = (String)responseObj.get("booleanValue");
+    		if ("true".equals(booleanValue)) {
+    			return true;
+    		}
+    		return false;
+    	} catch (JSONException e) {
+    		return false;
+    	}
+    }
+    
+    protected boolean confirmObjectNotFound(String response) {
+    	if (response.contains("General error page")) {
+    		return true;
+    	}
+    	return false;
     }
 }
