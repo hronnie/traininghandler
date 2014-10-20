@@ -21,7 +21,6 @@ public class TrainingTypeIT extends GenericAPITest {
 	
 	public TrainingTypeIT(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Test()
