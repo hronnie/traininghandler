@@ -5,17 +5,17 @@
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
 <div class="container" id="containerId">
 	<section>
-		<p>
+		<p><nobr>
 			<button class="btn btn-1 btn-1e">
 				<spring:message code="index.button.manage.trainings" />
 			</button>
-			<button class="btn btn-1 btn-1e" id="trainingTypeId">
+			<button class="btn btn-1 btn-1e" id="trainingTypeId" onclick="window.location.href='<c:url value="/trainingType" />'">
 				<spring:message code="index.button.manage.training.types" />
 			</button>
 			<button class="btn btn-1 btn-1e">
 				<spring:message code="index.button.manage.users" />
 			</button>
-		</p>
+		</nobr></p>
 		<p>
 			<button class="btn btn-1 btn-1e">
 				<spring:message code="index.button.imports" />
