@@ -191,10 +191,20 @@ a:active,a:hover {
 }
 
 
-#homeIcon {
+.headerIcon {
 	height: 35px;
 	width: 42px;
 	vertical-align: middle;
 }
 
+div[ng-app] { 
+	margin: 10px; 
+}
 
+.table {
+	width: 100% 
+}
+
+form[editable-form] > div {
+	margin: 10px 0;
+}
