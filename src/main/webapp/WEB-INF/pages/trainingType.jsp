@@ -19,10 +19,10 @@
 				<div class="outerDIV">
 					<div class="innerDIV">
 
-						<table class="table table-bordered table-hover table-">
+						<table class="table table-bordered table-hover">
 							<thead>
 								<tr style="font-weight: bold">
-									<th class="gridTitle"><spring:message code="trainingtype.grid.header.name" /></th>
+									<th class="gridTitle" ><spring:message code="trainingtype.grid.header.name" /></th>
 									<th class="gridTitle"><spring:message code="trainingtype.grid.header.levelNo" /></th>
 									<th class="gridTitle"><spring:message code="trainingtype.grid.header.description" /></th>
 									<th class="gridTitle"><spring:message code="grid.general.header.edit" /></th>
@@ -55,15 +55,15 @@
 											ng-show="rowform.$visible" class="form-buttons form-inline"
 											shown="inserted == trainingType">
 											<button type="submit" ng-disabled="rowform.$waiting"
-												class="btn btn-primary rowButton"><spring:message code="grid.general.button.save" /></button>
+												class="btn btn-primary rowButton rowButtonSave"><spring:message code="grid.general.button.save" /></button>
 											<button type="button" ng-disabled="rowform.$waiting"
 												ng-click="rowform.$cancel()"
-												class="btn btn-default rowButton"><spring:message code="grid.general.button.cancel" /></button>
+												class="btn btn-default rowButton rowButtonCancel"><spring:message code="grid.general.button.cancel" /></button>
 										</form>
 										<div class="buttons" ng-show="!rowform.$visible">
-											<button class="btn btn-primary rowButton"
+											<button class="btn btn-primary rowButton rowButtonEdit"
 												ng-click="rowform.$show()"><spring:message code="grid.general.button.edit" /></button>
-											<button class="btn btn-danger rowButton"
+											<button class="btn btn-danger rowButton rowButtonDelete"
 												ng-click="removetrainingType($index, trainingType.id)"><spring:message code="grid.general.button.delete" /></button>
 											<!-- $index -->
 										</div>

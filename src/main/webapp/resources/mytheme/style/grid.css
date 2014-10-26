@@ -1,6 +1,28 @@
+.init {
+    border:2px solid #EEEEEE;
+    font:14px/1.3 Verdana,"Lucida Grande",Arial,Helvetica,Sans-Serif;
+    margin:0px;
+    padding:5px;
+    min-width:120px;
+}
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
+.taken span {background:none repeat scroll 0 0 #F08F78; }
+.taken:hover{background:none repeat scroll 0 0 #FFC5B7;}
+
+p {
+    margin: 0;
+}
+
 .gridMainTitle {
-	font-family: Museo;
-	display: inline-block;
+	font-family: icomoon;
+/* 	display: inline-block; */
     /*font: 42px/60px 'OswaldLight';*/
     margin: -20px 0 0;
     padding: 20px 0;
@@ -9,35 +31,64 @@
     font-weight: bold;
     font-size: 28px;
     letter-spacing: 0.04em;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .gridTitle {
-	font-family: Museo;
-	display: inline-block;
-    padding: 20px 0;
+	font-family: icomoon;
+/* 	display: inline-block; */
+    padding: 22px 0;
     text-indent: 0;
     color: #FFFFF0;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 0.04em;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .gridCell {
-	font-family: Museo;
-	display: inline-block;
+	font-family: icomoon;
+/* 	display: inline-block; */
     padding: 20px 0;
     text-indent: 0;
     color: #FFFFF0;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .rowButton {
 	
 }
 
-.addRowButton {
+.addRowButton .rowButtonSave {
+	background: #F2E42C;	
+	background-color: #F2E42C;
+    border-color: #F2E42C;
+    color: #fff;
 	
+}
+
+.rowButtonSave {
+}
+
+.rowButtonEdit {
+	background: #428bca;	
+	background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+}
+
+.rowButtonDelete {
+	background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+}
+
+.btn {
 }
 
 .sticky-wrap {
