@@ -6,7 +6,7 @@
 <div class="container" id="containerId">
 
 
-	<title>Training Types</title>
+	<title><spring:message code="trainingtype.grid.main.title" /></title>
 	<script
 		src="<c:url value="/resources/js/module/trainingType/thTrainingTypeGridController.js" />"></script>
 
@@ -29,7 +29,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainingType in trainingTypes">
+								<tr ng-repeat="trainingType in trainingTypes" class="gridRow">
 									<td>
 										<!-- editable trainingTypename (text with validation) --> <span
 										class="gridCell" editable-text="trainingType.name"

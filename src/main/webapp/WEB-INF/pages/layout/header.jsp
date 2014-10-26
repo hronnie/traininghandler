@@ -18,6 +18,7 @@
 <link href="<c:url value="/resources/style/lib/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/lib/bootstrap-theme.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/lib/xeditable.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/style/lib/font-awesome.min.css" />" rel="stylesheet">
 
 <link href="<c:url value="/resources/style/buttons/default.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/buttons/component.css" />" rel="stylesheet">
