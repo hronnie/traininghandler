@@ -10,16 +10,19 @@
 <script src="<c:url value="/resources/js/lib/restangular.min.js" />"></script>
 <script src="<c:url value="/resources/js/lib/lodash.min.js" />"></script>
 <script src="<c:url value="/resources/js/lib/modernizr.custom.js" />"></script>
+<script src="<c:url value="/resources/js/lib/bootstrap.min.js" />"></script>
 
 <script src="<c:url value="/resources/js/header.js" />"></script>
 
 <link href="<c:url value="/resources/style/lib/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/style/lib/bootstrap-theme.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/lib/xeditable.css" />" rel="stylesheet">
 
 <link href="<c:url value="/resources/style/buttons/default.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/buttons/component.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/main.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
+<link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
 
 
 
