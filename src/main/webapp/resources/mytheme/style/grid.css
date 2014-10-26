@@ -12,11 +12,24 @@
 }
 
 .gridTitle {
-	
+	font-family: Museo;
+	display: inline-block;
+    padding: 20px 0;
+    text-indent: 0;
+    color: #FFFFF0;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.04em;
 }
 
 .gridCell {
-	
+	font-family: Museo;
+	display: inline-block;
+    padding: 20px 0;
+    text-indent: 0;
+    color: #FFFFF0;
+    font-weight: normal;
+    font-size: 15px;
 }
 
 .rowButton {

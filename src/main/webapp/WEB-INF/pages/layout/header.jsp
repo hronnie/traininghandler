@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- <link rel="icon" href="../../favicon.ico"> -->
 <script src="<c:url value="/resources/js/lib/jquery-2.1.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/lib/angular.min.js" />"></script>
 <script src="<c:url value="/resources/js/lib/angular-mocks.js" />"></script>
