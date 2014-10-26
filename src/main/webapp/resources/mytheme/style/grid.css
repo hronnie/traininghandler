@@ -38,9 +38,10 @@ p {
 .gridTitle {
 	font-family: icomoon;
 /* 	display: inline-block; */
+	background: white;
     padding: 22px 0;
     text-indent: 0;
-    color: #FFFFF0;
+    color: #691825;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 0.04em;
@@ -72,8 +73,6 @@ p {
 	
 }
 
-.rowButtonSave {
-}
 
 .rowButtonEdit {
 	background: #428bca;	
@@ -83,7 +82,7 @@ p {
 }
 
 .rowButtonDelete {
-	background-color: #d9534f;
+	background-color: #d43f3a;
     border-color: #d43f3a;
     color: #fff;
 }
