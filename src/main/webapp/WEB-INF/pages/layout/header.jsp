@@ -50,15 +50,15 @@ $(document).ready(function() {
 		<div id="header" align="right">
 			<header data-scroll-header="" role="banner" class="header header--page" id="js-header">
 				<span class="splitter">|</span>
-				<a href="${homeUrl}" class="headerLink" id="homeLinkId"><img id="homeIconId" class="headerIcon" src="<c:url value="/resources/images/home.jpg" />"></a>
-				<span class="splitter">|</span>
-				<a href="#" class="headerLink" id="loginHeadLinkId"><spring:message code="header.link.login" /></a>
-				<span class="splitter">|</span>
-				<a href="#" class="headerLink" id="registerHeadLinkId"><spring:message code="header.link.register" /></a>
+				<a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a>
+<!-- 				<span class="splitter">|</span> -->
+<!-- 				<a href="#" class="headerLink" id="loginHeadLinkId"><spring:message code="header.link.login" /></a> -->
+<!-- 				<span class="splitter">|</span> -->
+<!-- 				<a href="#" class="headerLink" id="registerHeadLinkId"><spring:message code="header.link.register" /></a> -->
 				<span class="splitter">|</span>
 				<a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId"><spring:message code="header.link.change.language" /></a>
 				<span class="splitter">|</span>
-				<a href="#" class="headerLink" id="trigger-overlay"><img id="helpIconId" class="headerIcon" src="<c:url value="/resources/images/help.jpg" />"></a>
+				<a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a>
 				<span class="splitter">|</span>
 			
 			</header>
