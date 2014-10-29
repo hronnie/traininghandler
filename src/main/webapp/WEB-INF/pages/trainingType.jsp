@@ -34,6 +34,7 @@
 										<!-- editable trainingTypename (text with validation) --> <span
 										class="gridCell" editable-text="trainingType.name"
 										e-name="name" e-form="rowform" onbeforesave="checkName($data)"
+										onaftersave="saveTrainingType(trainingType)"
 										e-ng-minlength="3"> {{ trainingType.name }} </span>
 									</td>
 									<td>
