@@ -60,53 +60,53 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullName() throws ValidationException {
-		service.create(null, validLevelNo, validDescription);
+		service.create(new TrainingTypeDto(0L, null, validLevelNo, validDescription));
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyName() throws ValidationException {
-		service.create("", validLevelNo, validDescription);
+		service.create(new TrainingTypeDto(0L, "", validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullLevelNo() throws ValidationException {
-		service.create(validName, null, validDescription);
+		service.create(new TrainingTypeDto(0L, validName, null, validDescription));
 	}
 	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyLevelNo() throws ValidationException {
-		service.create(validName, "", validDescription);
+		service.create(new TrainingTypeDto(0L, validName, "", validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullDesc() throws ValidationException {
-		service.create(validName, validLevelNo, null);
+		service.create(new TrainingTypeDto(0L, validName, validLevelNo, null));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyDesc() throws ValidationException {
-		service.create(validName, validLevelNo, "");
+		service.create(new TrainingTypeDto(0L, validName, validLevelNo, ""));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNameTooLong() throws ValidationException {
-		service.create(PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription);
+		service.create(new TrainingTypeDto(0L, PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithlevelNoTooLong() throws ValidationException {
-		service.create(validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription);
+		service.create(new TrainingTypeDto(0L, validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithDescTooLong() throws ValidationException {
-		service.create(validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300);
+		service.create(new TrainingTypeDto(0L, validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300));
 	}
 	
 	@Test
 	public void testCreateTrainingTypeWithValidValues() throws ValidationException {
-		GeneralIdResponse trainingTypesResponse = service.create(validName, validLevelNo, validDescription);
+		GeneralIdResponse trainingTypesResponse = service.create(new TrainingTypeDto(0L, validName, validLevelNo, validDescription));
 		assertEquals("Create failed", new Long(1L), trainingTypesResponse.getValue()); 
 	}
 	

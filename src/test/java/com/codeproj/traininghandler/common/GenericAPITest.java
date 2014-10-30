@@ -19,6 +19,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.protocol.HTTP;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -81,7 +82,8 @@ public abstract class GenericAPITest extends TestCase {
         try {
             HttpClient httpclient = HttpClientBuilder.create().build();
     		HttpPost request = new HttpPost(url);
-    		request.addHeader("accept", "application/json");
+    		request.setHeader(HTTP.CONTENT_TYPE,"application/json" );
+    		//request.addHeader("accept", "application/json");
     		request.setEntity(new UrlEncodedFormEntity(parameters, "utf-8"));
     		response = httpclient.execute(request);
         } catch (IOException ex) {

@@ -78,7 +78,7 @@
 			</div>
 
 			<button class="btn btn-default addRowButton"
-				ng-click="addtrainingType()"><spring:message code="grid.general.button.add.row" /></button>
+				ng-click="addTrainingType()"><spring:message code="grid.general.button.add.row" /></button>
 		</div>
 
 		<script

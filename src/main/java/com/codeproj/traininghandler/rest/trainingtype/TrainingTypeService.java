@@ -32,14 +32,13 @@ public class TrainingTypeService {
 	TrainingTypeManager trainingTypeManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse create(@RequestParam String name,
-			@RequestParam String levelNo,
-			@RequestParam String description)
+	public GeneralIdResponse create(@RequestBody TrainingTypeDto trainingType)
 			throws ValidationException {
 
-		name = ValidatorBaseUtility.stripXSS(name);
-		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
-		description = ValidatorBaseUtility.stripXSS(description);
+		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
+		String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
+		String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
+
 		TrainingTypeServiceValidator.create(name, levelNo, description);
 		Long result = trainingTypeManager.create(name, levelNo, description);
 		return new GeneralIdResponse(result);
