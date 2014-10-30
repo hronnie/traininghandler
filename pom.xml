@@ -25,6 +25,7 @@
 		<jersey-version>2.6</jersey-version>
 		<hibernate.core.version>4.3.6.Final</hibernate.core.version>
 		<surefire.version>2.17</surefire.version>
+		<jackson.databind-version>2.2.3</jackson.databind-version>
 	</properties>
 
 	<repositories>
@@ -37,6 +38,12 @@
 	</repositories>
 
 	<dependencies>
+	        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind-version}</version>
+        </dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>

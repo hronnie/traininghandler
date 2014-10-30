@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,10 +79,12 @@ public class TrainingTypeService {
 	}
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse update(@RequestParam Long trainingTypeId,
-			@RequestParam String name,
-			@RequestParam String levelNo,
-			@RequestParam String description) throws ValidationException, DatabaseEntityNotFoundException {
+	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
+		String name = trainingType.getName();
+		String levelNo = trainingType.getLevelNo();
+		String description = trainingType.getDescription();
+		Long trainingTypeId = trainingType.getTrainingTypeId();
+		
 		
 		name = ValidatorBaseUtility.stripXSS(name);
 		levelNo = ValidatorBaseUtility.stripXSS(levelNo);

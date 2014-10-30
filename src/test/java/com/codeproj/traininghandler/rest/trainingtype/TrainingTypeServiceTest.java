@@ -177,67 +177,67 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(null, validName, validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(null, validName, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(-2L, validName, validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(-2L, validName, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = DatabaseEntityNotFoundException.class)
 	public void updateTrainingTypeWithValidIdNotFoundObject() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(100L, validName, validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(100L, validName, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullName() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, null, validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(validId, null, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyName() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, "", validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(validId, "", validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, null, validDescription);
+		service.update(new TrainingTypeDto(validId, validName, null, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, "", validDescription);
+		service.update(new TrainingTypeDto(validId, validName, "", validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullDescription() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, validLevelNo, null);
+		service.update(new TrainingTypeDto(validId, validName, validLevelNo, null));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithEmptyDescription() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, validLevelNo, "");
+		service.update(new TrainingTypeDto(validId, validName, validLevelNo, ""));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongName() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription);
+		service.update(new TrainingTypeDto(validId, PARAMETER_STRING_SIZE_MORE_THEN_100, validLevelNo, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongLevelNo() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription);
+		service.update(new TrainingTypeDto(validId, validName, PARAMETER_STRING_SIZE_MORE_THEN_10, validDescription));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithTooLongDescription() throws DatabaseEntityNotFoundException, ValidationException {
-		service.update(validId, validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300);
+		service.update(new TrainingTypeDto(validId, validName, validLevelNo, PARAMETER_STRING_SIZE_MORE_THEN_300));
 	}
 	
 	@Test
 	public void updateTrainingTypeWithValidValues() throws DatabaseEntityNotFoundException, ValidationException {
-		BooleanResponse boolResp = service.update(validId, validName, validLevelNo, validDescription);
+		BooleanResponse boolResp = service.update(new TrainingTypeDto(validId, validName, validLevelNo, validDescription));
 		assertTrue("Update wasn't successful", boolResp.getPrimitiveBooleanValue());
 	}
 	

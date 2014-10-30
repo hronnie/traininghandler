@@ -1,4 +1,8 @@
 var app = angular.module("app", ["xeditable", "restangular"]);
+
+app.config(function(RestangularProvider){
+	RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
+})
 /*
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3';
@@ -18,9 +22,8 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
   };
 
   $scope.saveTrainingType = function(trainingType) {
-	  debugger;
 	  var traningTypePostObj = {
-			  trainingTypeId: trainingType.trainingTypeId, 
+			  trainingTypeId: trainingType.trainingTypeId.toString(), 
 			  name: trainingType.name,
 			  levelNo: trainingType.levelNo,
 			  description: trainingType.description
@@ -29,7 +32,7 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 	  console.log(trainingType);
 	  console.log(trainingType.name);
 	  var saveResource = Restangular.one('traininghandler/rest/trainingtype/update');
-	  saveResource.post(traningTypePostObj);
+	  saveResource.customPOST(traningTypePostObj);
 		//$scope.vegetables.push(newResource);
     //$scope.user not updated yet
 //    angular.extend(data, {id: id});
