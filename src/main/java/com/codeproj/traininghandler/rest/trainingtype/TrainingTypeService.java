@@ -80,15 +80,11 @@ public class TrainingTypeService {
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
-		String name = trainingType.getName();
-		String levelNo = trainingType.getLevelNo();
-		String description = trainingType.getDescription();
+		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
+		String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
+		String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
 		Long trainingTypeId = trainingType.getTrainingTypeId();
 		
-		
-		name = ValidatorBaseUtility.stripXSS(name);
-		levelNo = ValidatorBaseUtility.stripXSS(levelNo);
-		description = ValidatorBaseUtility.stripXSS(description);
 		TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
 		trainingTypeManager.update(trainingTypeId, name, levelNo, description);
 		return new BooleanResponse(true);
