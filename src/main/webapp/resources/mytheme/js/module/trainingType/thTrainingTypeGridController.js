@@ -24,7 +24,7 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
   $scope.saveTrainingType = function(trainingType) {
 	  var trainingTypeIdString = '0';
 	  if (!angular.isUndefined(trainingType.trainingTypeId)) {
-		  trainingTypeId = trainingType.trainingTypeId.toString();
+		  trainingTypeIdString = trainingType.trainingTypeId.toString();
 	  }
 	  var traningTypePostObj = {
 			  trainingTypeId: trainingTypeIdString, 
@@ -42,7 +42,15 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 
   // remove TrainingType
   $scope.removeTrainingType = function(index, id) {
-//    $scope.trainingTypes.splice(index, 1);
+	  $scope.trainingTypes.splice(index, 1);
+	  var deleteResource = Restangular.one('traininghandler/rest/trainingtype/delete');
+	  var traningTypePostObj = {
+			  trainingTypeId: id, 
+			  name: '',
+			  levelNo: '',
+			  description: ''
+	  }
+	  deleteResource.customPOST(traningTypePostObj);
   };
 
   // add TrainingType

@@ -65,7 +65,7 @@
 											<button class="btn btn-primary rowButton rowButtonEdit"
 												ng-click="rowform.$show()"><spring:message code="grid.general.button.edit" /></button>
 											<button class="btn btn-danger rowButton rowButtonDelete"
-												ng-click="removetrainingType($index, trainingType.id)"><spring:message code="grid.general.button.delete" /></button>
+												ng-click="removeTrainingType($index, trainingType.trainingTypeId)"><spring:message code="grid.general.button.delete" /></button>
 											<!-- $index -->
 										</div>
 									</td>

@@ -90,9 +90,9 @@ public class TrainingTypeService {
 	}
 
 	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse delete(@RequestParam Long trainingTypeId)  throws ValidationException, DatabaseEntityNotFoundException {
-		TrainingTypeServiceValidator.delete(trainingTypeId);
-		trainingTypeManager.delete(trainingTypeId);
+	public BooleanResponse delete(@RequestBody TrainingTypeDto trainingType)  throws ValidationException, DatabaseEntityNotFoundException {
+		TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());
+		trainingTypeManager.delete(trainingType.getTrainingTypeId());
 		return new BooleanResponse(true);
 	}
 }

@@ -245,25 +245,25 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	
 	@Test(expected = ValidationException.class)
 	public void deleteTrainingTypeWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {
-		service.delete(-1L);
+		service.delete(new TrainingTypeDto(-1L, null, null, null));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void deleteTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
-		service.delete(null);
+		service.delete(new TrainingTypeDto(null, null, null, null));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Test(expected = DatabaseEntityNotFoundException.class)
 	public void deleteTrainingTypeWithValidIdButNotExistingObject() throws DatabaseEntityNotFoundException, ValidationException {
 		when(trainingTypeManager.delete(5L)).thenThrow(DatabaseEntityNotFoundException.class);
-		service.delete(5L);
+		service.delete(new TrainingTypeDto(5L, null, null, null));
 	}
 	
 	@Test
 	public void deleteTrainingTypeWithValidId() throws DatabaseEntityNotFoundException, ValidationException {
 		when(trainingTypeManager.delete(3L)).thenReturn(true);
-		assertTrue("Delete wasn't successful", service.delete(3L).getPrimitiveBooleanValue());
+		assertTrue("Delete wasn't successful", service.delete(new TrainingTypeDto(3L, null, null, null)).getPrimitiveBooleanValue());
 	}
 	
 }
