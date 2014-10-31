@@ -2,6 +2,7 @@ package com.codeproj.traininghandler.integration;
 
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -10,105 +11,107 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.codeproj.traininghandler.common.GenericAPITest;
+import com.codeproj.traininghandler.dto.TrainingTypeDto;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 public class TrainingTypeIT extends GenericAPITest {
 	
 	public static Long var;
+	RestTemplate restTemplate = null;
 	
 	public TrainingTypeIT(String name) {
 		super(name);
+		restTemplate = new RestTemplate();
 	}
 
 	@Test()
 	public void testCreateTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started creating Training type");
+        restTemplate = new RestTemplate();
+        TrainingTypeDto trainingType = new TrainingTypeDto(0L, 
+        			getResource("trainingtype.create.name"), 
+        			getResource("trainingtype.create.levelNo"), 
+        			getResource("trainingtype.create.description"));
+        
+        GeneralIdResponse response = restTemplate.postForObject(getResource("trainingType.create.url"), trainingType, GeneralIdResponse.class);
 
-        List<NameValuePair> nameValuePairs = new ArrayList<>();
-        nameValuePairs.add(new BasicNameValuePair("name", getResource("trainingtype.create.name")));
-        nameValuePairs.add(new BasicNameValuePair("levelNo", getResource("trainingtype.create.levelNo")));
-        nameValuePairs.add(new BasicNameValuePair("description", getResource("trainingtype.create.description")));
-
-        JSONObject responseObj = postRequest("trainingType.create.url", nameValuePairs, true);
-        Assert.assertTrue(validateGenerateIdResponse(responseObj), "Create wasn't successful");
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testRegisterMinimal" + responseObj.toString());
+        Assert.assertTrue(validateGenerateIdResponse(response), "Create wasn't successful");
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testRegisterMinimal" + response.toString());
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting Training type");
+        
+        TrainingTypeDto trainingType = restTemplate.getForObject(getResource("trainingType.get.url") + createdId, TrainingTypeDto.class);
 
-        JSONObject responseObj = getRequest("trainingType.get.url", true, createdId.toString());
-        try {
-        	Integer trainingTypeId = (Integer)responseObj.get("trainingTypeId");
-			Assert.assertEquals(new Long(trainingTypeId), createdId);
-			Assert.assertEquals(responseObj.get("name"), getResource("trainingtype.create.name"));
-			Assert.assertEquals(responseObj.get("levelNo"), getResource("trainingtype.create.levelNo"));
-			Assert.assertEquals(responseObj.get("description"), getResource("trainingtype.create.description"));
-		} catch (JSONException e) {
-			Assert.fail("Invalid JSON during getting training type with id: " + createdId);
-		}
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + responseObj.toString());
+		Assert.assertEquals(trainingType.getTrainingTypeId(), createdId);
+		Assert.assertEquals(trainingType.getName(), getResource("trainingtype.create.name"));
+		Assert.assertEquals(trainingType.getLevelNo(), getResource("trainingtype.create.levelNo"));
+		Assert.assertEquals(trainingType.getDescription(), getResource("trainingtype.create.description"));
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + trainingType.toString());
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
 
-        String responseText = getRequestReturnTextResponse("trainingType.get.all.url", true, null);
-        Assert.assertNotNull(responseText);
-        Assert.assertTrue(responseText.startsWith("[{"), "Response is not an array at get all training type");;
-        
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetAllTrainingType" + responseText);
+        @SuppressWarnings("rawtypes")
+		List<LinkedHashMap> trainingTypeList = restTemplate.getForObject(getResource("trainingType.get.all.url"), List.class);
+        assertNotNull("The result is null", trainingTypeList);
+        assertTrue("The size of the list should be greater then 0", trainingTypeList.size() > 0);
+//        for(@SuppressWarnings("rawtypes") LinkedHashMap map : trainingTypeList) { //example of iterating over
+//            System.out.println("ID="+map.get("id")+",Name="+map.get("name")+",CreatedDate="+map.get("createdDate"));;
+//        }
+ 
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetAllTrainingType");
 	}
 	
 	@Test(dependsOnMethods = { "testGetAllTrainingType" })
 	public void testUpdateTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started updating Training type");
+        
+        restTemplate = new RestTemplate();
+        TrainingTypeDto trainingType = new TrainingTypeDto(createdId, 
+        			getResource("trainingtype.update.name"), 
+        			getResource("trainingtype.update.levelNo"), 
+        			getResource("trainingtype.update.description"));
+        
+        BooleanResponse response = restTemplate.postForObject(getResource("trainingType.update.url"), trainingType, BooleanResponse.class);
 
-        List<NameValuePair> nameValuePairs = new ArrayList<>();
-        nameValuePairs.add(new BasicNameValuePair("trainingTypeId", createdId.toString()));
-        nameValuePairs.add(new BasicNameValuePair("name", getResource("trainingtype.update.name")));
-        nameValuePairs.add(new BasicNameValuePair("levelNo", getResource("trainingtype.update.levelNo")));
-        nameValuePairs.add(new BasicNameValuePair("description", getResource("trainingtype.update.description")));
-
-        JSONObject responseObj = postRequest("trainingType.update.url", nameValuePairs, true);
-        Assert.assertTrue(validateBooleanResponse(responseObj), "Update wasn't successful");
+        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Update wasn't successful");
 
         // get updated training type and assert
         
-        JSONObject getResponseObj = getRequest("trainingType.get.url", true, createdId.toString());
-        try {
-        	Integer trainingTypeId = (Integer)getResponseObj.get("trainingTypeId");
-			Assert.assertEquals(new Long(trainingTypeId), createdId);
-			Assert.assertEquals(getResponseObj.get("name"), getResource("trainingtype.update.name"));
-			Assert.assertEquals(getResponseObj.get("levelNo"), getResource("trainingtype.update.levelNo"));
-			Assert.assertEquals(getResponseObj.get("description"), getResource("trainingtype.update.description"));
-		} catch (JSONException e) {
-			Assert.fail("Invalid JSON during getting training type with id: " + createdId);
-		}
+        TrainingTypeDto getTrainingTypeResp = restTemplate.getForObject(getResource("trainingType.get.url") + createdId, TrainingTypeDto.class);
         
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testUpdateTrainingType" + responseObj.toString());
+		Assert.assertEquals(getTrainingTypeResp.getTrainingTypeId(), createdId);
+		Assert.assertEquals(getTrainingTypeResp.getName(), getResource("trainingtype.update.name"));
+		Assert.assertEquals(getTrainingTypeResp.getLevelNo(), getResource("trainingtype.update.levelNo"));
+		Assert.assertEquals(getTrainingTypeResp.getDescription(), getResource("trainingtype.update.description"));
+        
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testUpdateTrainingType" + getTrainingTypeResp.toString());
     }
 	
 	@Test(dependsOnMethods = { "testUpdateTrainingType" })
 	public void testDeleteTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started deleting Training type");
-
-        List<NameValuePair> nameValuePairs = new ArrayList<>();
-        nameValuePairs.add(new BasicNameValuePair("trainingTypeId", createdId.toString()));
-
-        JSONObject responseObj = postRequest("trainingType.delete.url", nameValuePairs, true);
-        Assert.assertTrue(validateBooleanResponse(responseObj), "Delete wasn't successful");
+        
+        TrainingTypeDto trainingType = new TrainingTypeDto(createdId, null, null, null);
+        BooleanResponse response = restTemplate.postForObject(getResource("trainingType.delete.url"), trainingType, BooleanResponse.class);
+        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Delete wasn't successful");
 
         // get updated training type and assert
         
         Assert.assertTrue(confirmObjectNotFound(getRequestReturnTextResponse("trainingType.get.url", true, createdId.toString())), "Object still found after delete");
         
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testDeleteTrainingType" + responseObj.toString());
+        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testDeleteTrainingType");
 
 	}
 

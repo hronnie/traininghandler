@@ -23,6 +23,9 @@ import org.apache.http.protocol.HTTP;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+
 public abstract class GenericAPITest extends TestCase {
     protected String testRequestId;
     protected static final String RESOURCES="testresources";
@@ -146,29 +149,13 @@ public abstract class GenericAPITest extends TestCase {
         return value;
     }
     
-    protected boolean validateGenerateIdResponse(JSONObject responseObj) {
-    	try {
-    		Integer id = (Integer)responseObj.get("value");
-			if (id > 0) {
-				createdId = new Long(id);
-				return true;
-			}
-			return false;
-		} catch (JSONException e) {
-			return false;
+    protected boolean validateGenerateIdResponse(GeneralIdResponse responseObj) {
+		Long id = responseObj.getValue();
+		if (id > 0) {
+			createdId = new Long(id);
+			return true;
 		}
-    }
-    
-    protected boolean validateBooleanResponse(JSONObject responseObj) {
-    	try {
-    		String booleanValue = (String)responseObj.get("booleanValue");
-    		if ("true".equals(booleanValue)) {
-    			return true;
-    		}
-    		return false;
-    	} catch (JSONException e) {
-    		return false;
-    	}
+		return false;
     }
     
     protected boolean confirmObjectNotFound(String response) {

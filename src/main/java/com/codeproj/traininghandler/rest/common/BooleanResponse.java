@@ -7,12 +7,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class BooleanResponse {
 
     protected Boolean booleanValue;
+    protected boolean primitiveBooleanValue;
 
     public BooleanResponse() {
     }
 
     public BooleanResponse(Boolean booleanValue) {
         this.booleanValue = booleanValue;
+        this.primitiveBooleanValue = booleanValue;
     }
     
     public BooleanResponse(String boolStr) {
@@ -24,7 +26,8 @@ public class BooleanResponse {
         return booleanValue.toString();
     }
     
+    @XmlElement(name="primitiveBooleanValue")
     public boolean getPrimitiveBooleanValue() {
-    	return booleanValue;
+    	return primitiveBooleanValue;
     }
 }
