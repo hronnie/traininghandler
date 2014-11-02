@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
+<title><spring:message code="index.main.page.title" /></title>
 <div class="container" id="containerId">
 	<section>
 		<p><nobr>
