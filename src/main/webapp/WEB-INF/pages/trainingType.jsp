@@ -33,20 +33,22 @@
 									<td>
 										<!-- editable trainingTypename (text with validation) --> <span
 										class="gridCell" editable-text="trainingType.name"
-										e-name="name" e-form="rowform" onbeforesave="checkName($data)"
+										e-name="name" e-form="rowform" onbeforesave="validateName($data)"
 										onaftersave="saveTrainingType(trainingType)"
-										e-ng-minlength="2" e-ng-maxlength="20"> {{ trainingType.name }} </span>
+										> {{ trainingType.name }} </span>
 									</td>
 									<td>
 										<!-- editable levelNo (select-local) --> <span
 										class="gridCell" editable-text="trainingType.levelNo"
-										e-name="levelNo" e-form="rowform" required e-ng-minlength="1" e-ng-maxlength="10"> {{
-											trainingType.levelNo }} </span>
+										e-name="levelNo" e-form="rowform" onbeforesave="validateLevelNo($data)" 
+										maxlength="10">
+										 {{trainingType.levelNo }} </span>
 									</td>
 									<td>
 										<!-- editable description (select-remote) --> <span
-										class="gridCell" editable-text="trainingType.description"
-										e-name="description" e-form="rowform" required e-ng-minlength="2" e-ng-maxlength="100"> {{
+										class="gridCell" editable-textarea="trainingType.description"
+										e-name="description" e-form="rowform" onbeforesave="validateDescription($data)"
+										e-rows="7" e-cols="40"> {{
 											trainingType.description }} </span>
 									</td>
 									<td style="white-space: nowrap">

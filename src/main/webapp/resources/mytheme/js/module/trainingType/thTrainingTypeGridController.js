@@ -15,10 +15,26 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 		$scope.trainingTypes = trainingTypes;
 	});
 
-  $scope.checkName = function(data) {
-
+  $scope.validateName = function(data) {
+	  if($.trim(data) == '') {
+		  return 'This field is required';
+	  }
+  };
+  
+  $scope.validateLevelNo = function(data) {
+	  debugger;
+	  if($.trim(data) == '') {
+		  return 'This field is required';
+	  }
+  };
+  
+  $scope.validateDescription = function(data) {
+	  if($.trim(data) == '') {
+		  return 'This field is required';
+	  }
   };
 
+  // TODO: create a common validation service for the fields
   $scope.saveTrainingType = function(trainingType) {
 	  var trainingTypeIdString = '0';
 	  if (!angular.isUndefined(trainingType.trainingTypeId)) {
