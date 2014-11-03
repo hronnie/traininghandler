@@ -16,9 +16,7 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 	});
 
   $scope.checkName = function(data) {
-	  if (data == 'Aron') {
-		  return "This is not a valid name I'm afraid";
-	  }
+
   };
 
   $scope.saveTrainingType = function(trainingType) {
