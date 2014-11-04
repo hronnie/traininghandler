@@ -3,13 +3,10 @@ var app = angular.module("app", ["xeditable", "restangular"]);
 app.config(function(RestangularProvider){
 	RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
 })
-/*
-app.run(function(editableOptions) {
-  editableOptions.theme = 'bs3';
-});
-*/
 
 app.controller('thTrainingTypeController', function($scope, $filter, Restangular) {
+	
+	$scope.locale = document.getElementById("localeValue").value;
 	var resource = Restangular.one('traininghandler/rest/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
 		$scope.trainingTypes = trainingTypes;
@@ -30,10 +27,9 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
   
   // TODO: create a common validation service for the fields
   function validateText(value, fieldNameEn, fieldNameHu, maxLength) {
-	  var locale = document.getElementById("localeValue").value;
 	  var inputValue = $.trim(value);
 	  if(!inputValue || inputValue.length > maxLength) {
-		  if (locale.indexOf('en') == 0) {
+		  if ($scope.locale.indexOf('en') == 0) {
 			  return fieldNameEn + " can't be empty or its size more than " + maxLength + ".";
 		  } 
 		  return "A(z) " + fieldNameHu + " mező nem lehet üres, vagy hosszabb, mint " + maxLength + " karakter.";
@@ -61,6 +57,16 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 
   // remove TrainingType
   $scope.removeTrainingType = function(index, id) {
+	  var removeMsg = '';
+	  if ($scope.locale.indexOf('en') == 0) {
+		  removeMsg = 'Are you absolutely sure you want to delete?';
+	  } else {
+		  removeMsg = 'Teljesen biztos vagy benne, hogy törölni szeretnéd ezt az elemet?';
+	  }
+	  var deleteTrainingType = window.confirm(removeMsg);
+	  if (!deleteTrainingType) {
+		  return;
+	  }
 	  $scope.trainingTypes.splice(index, 1);
 	  var deleteResource = Restangular.one('traininghandler/rest/trainingtype/delete');
 	  var traningTypePostObj = {
