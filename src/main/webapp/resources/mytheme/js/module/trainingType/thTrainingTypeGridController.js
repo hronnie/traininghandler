@@ -16,25 +16,30 @@ app.controller('thTrainingTypeController', function($scope, $filter, Restangular
 	});
 
   $scope.validateName = function(data) {
-	  if($.trim(data) == '') {
-		  return 'This field is required';
-	  }
+	  return validateText(data, 'Name', 'Név', 20);
   };
   
   $scope.validateLevelNo = function(data) {
-	  debugger;
-	  if($.trim(data) == '') {
-		  return 'This field is required';
-	  }
+	  return validateText(data, 'Level Number', 'Fokozat', 10);
   };
   
+  
   $scope.validateDescription = function(data) {
-	  if($.trim(data) == '') {
-		  return 'This field is required';
-	  }
+	  return validateText(data, 'Description', 'Leírás', 100);
   };
-
+  
   // TODO: create a common validation service for the fields
+  function validateText(value, fieldNameEn, fieldNameHu, maxLength) {
+	  var locale = document.getElementById("localeValue").value;
+	  var inputValue = $.trim(value);
+	  if(!inputValue || inputValue.length > maxLength) {
+		  if (locale.indexOf('en') == 0) {
+			  return fieldNameEn + " can't be empty or its size more than " + maxLength + ".";
+		  } 
+		  return "A(z) " + fieldNameHu + " mező nem lehet üres, vagy hosszabb, mint " + maxLength + " karakter.";
+	  }
+  }
+
   $scope.saveTrainingType = function(trainingType) {
 	  var trainingTypeIdString = '0';
 	  if (!angular.isUndefined(trainingType.trainingTypeId)) {
