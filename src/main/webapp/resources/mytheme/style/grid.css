@@ -25,10 +25,11 @@ p {
 }
 
 .gridMainTitle {
-	font-family: icomoon;
+	/*font-family: icomoon;*/
+	font-family: 'Raleway',Arial,sans-serif;
     padding: 20px 0;
     text-indent: 0;
-    color: #FFFFFF;
+    color: #404d5b;
     font-weight: bold;
     font-size: 28px;
     letter-spacing: 0.04em;
@@ -53,7 +54,7 @@ p {
 	font-family: icomoon;
     padding: 20px 0;
     text-indent: 0;
-    color: #FFFFF0;
+    color: #404d5b;
     font-weight: normal;
     font-size: 20px;
     text-align: center;
