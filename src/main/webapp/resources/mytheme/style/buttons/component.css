@@ -135,8 +135,8 @@
 
 /* Button 1 */
 .btn-1 {
-	border: 3px solid #fff;
-	color: #fff;
+	border: 3px solid #404d5b;
+	color: #404d5b;
 }
 
 /* Button 1a */
@@ -229,7 +229,7 @@
 	height: 0;
 	top: 50%;
 	left: 50%;
-	background: #fff;
+	background: #404d5b;
 	opacity: 0;
 	-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
 	-moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -239,7 +239,7 @@
 
 .btn-1e:hover,
 .btn-1e:active {
-	color: #0e83cd;
+	color: #fff;
 }
 
 .btn-1e:hover:after {
