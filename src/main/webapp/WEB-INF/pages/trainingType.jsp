@@ -8,7 +8,7 @@
 
 	<title><spring:message code="trainingtype.grid.main.title" /></title>
 	<script
-		src="<c:url value="/resources/js/module/trainingType/thTrainingTypeGridController.js" />"></script>
+		src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
 
 
 	</head>
@@ -84,7 +84,7 @@
 		</div>
 
 		<script
-			src="<c:url value="/resources/js/module/common/stickyHeader.js" />"></script>
+			src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
 		<script
 			src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
 	</body>
