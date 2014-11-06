@@ -53,21 +53,37 @@
 									</td>
 									<td style="white-space: nowrap">
 										<!-- form -->
-										<form editable-form name="rowform"
-											onbeforesave="savetrainingType($data, trainingType.id)"
-											ng-show="rowform.$visible" class="form-buttons form-inline"
-											shown="inserted == trainingType">
-											<button type="submit" ng-disabled="rowform.$waiting"
-												class="btn btn-primary rowButton rowButtonSave"><spring:message code="grid.general.button.save" /></button>
-											<button type="button" ng-disabled="rowform.$waiting"
-												ng-click="rowform.$cancel()"
-												class="btn btn-default rowButton rowButtonCancel"><spring:message code="grid.general.button.cancel" /></button>
+										<form editable-form 
+												name="rowform"
+												onbeforesave="savetrainingType($data, trainingType.id)"
+												ng-show="rowform.$visible" 
+												class="form-buttons form-inline"
+												shown="inserted == trainingType">
+											<button type="submit" 
+													ng-disabled="rowform.$waiting"
+													class="btn btn-primary rowButton rowButtonSave"
+													title="<spring:message code="grid.general.button.save" />">
+													<i class="fa fa-floppy-o fa-2x"></i>
+											</button>
+											<button type="button" 
+													ng-disabled="rowform.$waiting"
+													ng-click="rowform.$cancel()"
+													class="btn btn-default rowButton rowButtonCancel"
+													title="<spring:message code="grid.general.button.cancel" />">
+													<i class="fa fa-angle-double-left fa-2x"></i>
+											</button>
 										</form>
 										<div class="buttons" ng-show="!rowform.$visible">
 											<button class="btn btn-primary rowButton rowButtonEdit"
-												ng-click="rowform.$show()"><spring:message code="grid.general.button.edit" /></button>
+													ng-click="rowform.$show()"
+													title="<spring:message code="grid.general.button.edit" />">
+													<i class="fa fa-pencil-square-o fa-2x"></i>
+											</button>
 											<button class="btn btn-danger rowButton rowButtonDelete"
-												ng-click="removeTrainingType($index, trainingType.trainingTypeId)"><spring:message code="grid.general.button.delete" /></button>
+													ng-click="removeTrainingType($index, trainingType.trainingTypeId)" 
+													title="<spring:message code="grid.general.button.delete" />">
+													<i class="fa fa-times fa-2x"></i>
+											</button>
 											<!-- $index -->
 										</div>
 									</td>
