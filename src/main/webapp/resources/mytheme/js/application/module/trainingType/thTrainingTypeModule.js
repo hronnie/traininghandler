@@ -1,0 +1,1 @@
+var trainingTypeApp = angular.module('trainingTypeModule');
