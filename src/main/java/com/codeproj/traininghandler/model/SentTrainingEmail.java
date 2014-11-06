@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class SentTrainingEmail implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long sentTrainingEmailId;
 	private Training training;
 	private User user;

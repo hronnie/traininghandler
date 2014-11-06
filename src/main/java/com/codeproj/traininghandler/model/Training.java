@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Training implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long trainingId;
 	private TrainingType trainingType;
 	private Address address;

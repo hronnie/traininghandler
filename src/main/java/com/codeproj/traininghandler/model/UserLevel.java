@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class UserLevel implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long userLevelId;
 	private TrainingType trainingType;
 	private User user;

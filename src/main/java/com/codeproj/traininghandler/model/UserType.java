@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class UserType implements HibernatePersistable, Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private Long userTypeId;
 	private String userTypeName;
 	

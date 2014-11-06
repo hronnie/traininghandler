@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Log implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long logId;
 	private User user;
 	private String action;

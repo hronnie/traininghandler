@@ -2,11 +2,11 @@ package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TrainingPrerequisite implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long trainingPrerequisiteId;
 	private TrainingType trainingType;
 	private Date completedDate;

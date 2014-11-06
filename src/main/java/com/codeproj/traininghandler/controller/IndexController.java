@@ -17,10 +17,8 @@ public class IndexController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
-//		Locale currentLocale = LocaleContextHolder.getLocale();
-//		String message = messageSource.getMessage("welcome.springmvc", null, currentLocale);
-//		messageSource.getMessage(arg0, arg1)
-//		logger.debug(message);
+		
+		logger.debug("Going to index page...");
 		return new ModelAndView("index");
 	}
 

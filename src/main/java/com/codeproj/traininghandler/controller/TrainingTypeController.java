@@ -17,7 +17,8 @@ public class TrainingTypeController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
-
+		
+		logger.debug("Going to trainingType page..");
 		return new ModelAndView("trainingType");
 	}
 }

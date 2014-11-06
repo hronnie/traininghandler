@@ -1,16 +1,11 @@
 package com.codeproj.traininghandler.integration;
 
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -59,16 +54,13 @@ public class TrainingTypeIT extends GenericAPITest {
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
+	@SuppressWarnings("rawtypes")
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
 
-        @SuppressWarnings("rawtypes")
 		List<LinkedHashMap> trainingTypeList = restTemplate.getForObject(getResource("trainingType.get.all.url"), List.class);
         assertNotNull("The result is null", trainingTypeList);
         assertTrue("The size of the list should be greater then 0", trainingTypeList.size() > 0);
-//        for(@SuppressWarnings("rawtypes") LinkedHashMap map : trainingTypeList) { //example of iterating over
-//            System.out.println("ID="+map.get("id")+",Name="+map.get("name")+",CreatedDate="+map.get("createdDate"));;
-//        }
  
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetAllTrainingType");
 	}

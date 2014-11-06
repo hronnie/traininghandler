@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class GeneralSettings implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long generalSettingsId;
 	private String name;
 	private String value;

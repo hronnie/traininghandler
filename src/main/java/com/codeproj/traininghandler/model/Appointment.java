@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class Appointment implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long appointmentId;
 	private User userByHealerId;
 	private User userByPatientId;

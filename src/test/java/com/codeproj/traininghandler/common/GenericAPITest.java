@@ -23,7 +23,6 @@ import org.apache.http.protocol.HTTP;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 public abstract class GenericAPITest extends TestCase {

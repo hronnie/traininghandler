@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class Address implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long addressId;
 	private String addressLine1;
 	private String addressLine2;

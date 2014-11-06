@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class UserRole implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long userRoleId;
 	private User user;
 	private Role role;

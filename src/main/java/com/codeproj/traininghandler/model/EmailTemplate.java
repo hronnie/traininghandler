@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class EmailTemplate implements HibernatePersistable, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long emailTemplateId;
 	private String subject;
 	private String body;
