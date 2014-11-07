@@ -30,6 +30,12 @@ public class TrainingTypeService {
 	@Autowired
 	TrainingTypeManager trainingTypeManager;
 
+	/**
+	 * Creates a Training Type object
+	 * @param trainingType - builds from unique trainingTypeId, name, levelNo and description 
+	 * @return
+	 * @throws ValidationException
+	 */
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody TrainingTypeDto trainingType)
 			throws ValidationException {
@@ -43,6 +49,13 @@ public class TrainingTypeService {
 		return new GeneralIdResponse(result);
 	}
 
+	/**
+	 * Gets a Training Type object with the given id
+	 * @param id - Training type id
+	 * @return
+	 * @throws DatabaseEntityNotFoundException
+	 * @throws ValidationException
+	 */
 	@RequestMapping(value="/get/{id}", method = RequestMethod.GET,headers="Accept=application/json")
 	public @ResponseBody TrainingTypeDto getTrainingTypeById(@PathVariable("id")
 				Long id) throws DatabaseEntityNotFoundException, ValidationException {
@@ -59,6 +72,10 @@ public class TrainingTypeService {
 		return result;
 	}
 	
+	/**
+	 * Gets all Training Type objects
+	 * @return
+	 */
 	@RequestMapping(value="/getAll", method = RequestMethod.GET,headers="Accept=application/json")
 	public @ResponseBody List<TrainingTypeDto> getAllTrainingType() {
 		List<TrainingType> dbResult = trainingTypeManager.getAllTrainingType();
@@ -71,11 +88,14 @@ public class TrainingTypeService {
 	    List<TrainingTypeDto> result = modelMapper.map(dbResult, targetListType);
 		return result;
 	}
-
-	public void setTrainingTypeManager(TrainingTypeManager trainingTypeManager) {
-		this.trainingTypeManager = trainingTypeManager;
-	}
 	
+	/**
+	 * Updates a Training Type object
+	 * @param trainingType - builds from unique trainingTypeId, name, levelNo and description
+	 * @return
+	 * @throws ValidationException
+	 * @throws DatabaseEntityNotFoundException
+	 */
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
@@ -88,10 +108,21 @@ public class TrainingTypeService {
 		return new BooleanResponse(true);
 	}
 
+	/**
+	 * Deletes a Training Type object
+	 * @param trainingType - builds from unique trainingTypeId, name, levelNo and description
+	 * @return
+	 * @throws ValidationException
+	 * @throws DatabaseEntityNotFoundException
+	 */
 	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse delete(@RequestBody TrainingTypeDto trainingType)  throws ValidationException, DatabaseEntityNotFoundException {
 		TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());
 		trainingTypeManager.delete(trainingType.getTrainingTypeId());
 		return new BooleanResponse(true);
+	}
+	
+	public void setTrainingTypeManager(TrainingTypeManager trainingTypeManager) {
+		this.trainingTypeManager = trainingTypeManager;
 	}
 }
