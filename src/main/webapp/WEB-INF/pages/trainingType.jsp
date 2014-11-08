@@ -35,20 +35,23 @@
 										class="gridCell" editable-text="trainingType.name"
 										e-name="name" e-form="rowform" onbeforesave="validateName($data)"
 										onaftersave="saveTrainingType(trainingType)"
-										> {{ trainingType.name }} </span>
+										e-placeholder="<spring:message code="trainingtype.grid.header.name" />"
+										 > {{ trainingType.name }} </span>
 									</td>
 									<td>
 										<!-- editable levelNo (select-local) --> <span
 										class="gridCell" editable-text="trainingType.levelNo"
 										e-name="levelNo" e-form="rowform" onbeforesave="validateLevelNo($data)" 
-										maxlength="10">
+										e-placeholder="<spring:message code="trainingtype.grid.header.levelNo" />"
+										>
 										 {{trainingType.levelNo }} </span>
 									</td>
 									<td>
 										<!-- editable description (select-remote) --> <span
 										class="gridCell" editable-textarea="trainingType.description"
-										e-name="description" e-form="rowform" onbeforesave="validateDescription($data)"
-										e-rows="7" e-cols="40"> {{
+										e-name="description" e-form="rowform" onbeforesave="validateDescription($data)" 
+										e-cols="40" e-rows="3" e-placeholder="<spring:message code="trainingtype.grid.header.description" />"
+										> {{
 											trainingType.description }} </span>
 									</td>
 									<td style="white-space: nowrap">
@@ -95,7 +98,7 @@
 				</div>
 			</div>
 
-			<button class="btn btn-default addRowButton"
+			<button class="btn btn-primary addRowButton"
 				ng-click="addTrainingType()"><spring:message code="grid.general.button.add.row" /></button>
 		</div>
 
