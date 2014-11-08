@@ -5,7 +5,8 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: rgba(153,204,51,0.9);
+/* 	background: rgba(153,204,51,0.9); */
+	background: none repeat scroll 0 0 #404d5b;
 }
 
 /* Overlay closing cross */
@@ -56,7 +57,7 @@
 	font-size: 54px;
 	font-weight: 300;
 	display: block;
-	color: #fff;
+	color: #fcf5e3;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
 }
@@ -126,21 +127,21 @@
 
 .helpStyle {
     background: none repeat scroll 0 0;
-    color: #ffffff;
+    color: #fcf5e3;
     font-family: 'Raleway',Arial,sans-serif;
     font-weight: 300;
-    font-size: 1em;
+    font-size: 1.5em;
  	text-align: left; 
 }
 
 h1.helpStyle {
-  font-size: 2.2em;
+  font-size: 3em;
   letter-spacing:3px;
   padding-bottom: 20px;
 }
 
 h2.helpStyle {
-   font-size: 1.5em;
+   font-size: 2.2em;
   letter-spacing:1px; 
   margin-bottom: 7px;
   margin-top: 20px;
