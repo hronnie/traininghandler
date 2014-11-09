@@ -18,7 +18,7 @@
 			<div class="table-responsive">
 				<div class="outerDIV">
 					<div class="innerDIV">
-
+						Any: <input ng-model="search.$"> <br>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr style="font-weight: bold">
@@ -29,7 +29,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainingType in trainingTypes" class="gridRow">
+								<tr ng-repeat="trainingType in trainingTypes | filter:search:strict" class="gridRow">
 									<td>
 										<!-- editable trainingTypename (text with validation) --> <span
 										class="gridCell" editable-text="trainingType.name"
