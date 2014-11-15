@@ -188,3 +188,7 @@ p {
 .sticky-wrap th {
     box-sizing: border-box;
 }
+
+.searchInput {
+	margin-bottom: 15px;
+}

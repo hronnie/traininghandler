@@ -18,7 +18,7 @@
 			<div class="table-responsive">
 				<div class="outerDIV">
 					<div class="innerDIV">
-						Any: <input ng-model="search.$"> <br>
+						<input class="searchInput" ng-model="search.$" placeholder='<spring:message code="grid.general.search.input.placeholder" />'> <br>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr style="font-weight: bold">
