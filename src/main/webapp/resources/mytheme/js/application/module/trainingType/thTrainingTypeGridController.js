@@ -1,7 +1,7 @@
-trainingTypeModule.controller('thTrainingTypeController', function($scope, $filter, Restangular, thValidationService) {
+trainingTypeModule.controller('thTrainingTypeController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
-	var resource = Restangular.one('traininghandler/rest/trainingtype/getAll');
+	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
 		$scope.trainingTypes = trainingTypes;
 	});
@@ -34,7 +34,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 			$scope.saveNewTrainingType(traningTypePostObj);
 			return;
 		}
-		var saveResource = Restangular.one('traininghandler/rest/trainingtype/update');
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/update');
 		saveResource.customPOST(traningTypePostObj);
 	};
 
@@ -51,7 +51,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 			return;
 		}
 		$scope.trainingTypes.splice(index, 1);
-		var deleteResource = Restangular.one('traininghandler/rest/trainingtype/delete');
+		var deleteResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/delete');
 		var traningTypePostObj = {
 				trainingTypeId: id, 
 				name: '',
@@ -72,7 +72,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	};
 	
 	$scope.saveNewTrainingType = function(traningTypePostObj) {
-		var saveResource = Restangular.one('traininghandler/rest/trainingtype/create');
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/create');
 		saveResource.customPOST(traningTypePostObj);
 	};
 });

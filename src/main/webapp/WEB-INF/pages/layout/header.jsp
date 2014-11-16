@@ -16,6 +16,7 @@
 <script src="<c:url value="/resources/js/application/common/header.js" />"></script>
 
 <script	src="<c:url value="/resources/js/application/util/service/thValidationService.js" />"></script>
+<script	src="<c:url value="/resources/js/application/util/service/thGlobalConstants.js" />"></script>
 
 <link href="<c:url value="/resources/style/lib/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/lib/bootstrap-theme.min.css" />" rel="stylesheet">
