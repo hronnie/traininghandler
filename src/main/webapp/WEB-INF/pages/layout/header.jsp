@@ -5,7 +5,7 @@
 <head>
 <!-- <link rel="icon" href="../../favicon.ico"> -->
 <script src="<c:url value="/resources/js/application/lib/jquery-2.1.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/application/lib/angular.min.js" />"></script>
+<script src="<c:url value="/resources/js/application/lib/angular.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/angular-mocks.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/xeditable.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/restangular.min.js" />"></script>
@@ -14,6 +14,8 @@
 <script src="<c:url value="/resources/js/application/lib/bootstrap.min.js" />"></script>
 
 <script src="<c:url value="/resources/js/application/common/header.js" />"></script>
+
+<script	src="<c:url value="/resources/js/application/util/service/thValidationService.js" />"></script>
 
 <link href="<c:url value="/resources/style/lib/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/lib/bootstrap-theme.min.css" />" rel="stylesheet">
@@ -25,6 +27,7 @@
 <link href="<c:url value="/resources/style/main.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
+
 
 
 

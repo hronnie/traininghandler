@@ -7,14 +7,14 @@
 
 
 	<title><spring:message code="trainingtype.grid.main.title" /></title>
-	<script
-		src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
+	<script	src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeModule.js" />"></script>
+	<script	src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
 
 
 	</head>
-	<body>
+	<body ng-app="trainingTypeModule">
 		<h4 class="gridMainTitle"><spring:message code="trainingtype.grid.main.title" /></h4>
-		<div ng-app="app" ng-controller="thTrainingTypeController as ttCtrl">
+		<div ng-controller="thTrainingTypeController as ttCtrl">
 			<div class="table-responsive">
 				<div class="outerDIV">
 					<div class="innerDIV">
