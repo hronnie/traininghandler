@@ -3,3 +3,7 @@ var trainingTypeModule = angular.module("trainingTypeModule", ["xeditable", "res
 trainingTypeModule.config(function(RestangularProvider){
 	RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
 })
+
+trainingTypeModule.run(function(editableOptions) {
+	editableOptions.theme = 'bs3';
+});

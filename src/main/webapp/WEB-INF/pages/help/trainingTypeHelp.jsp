@@ -8,6 +8,8 @@
 			<nav>
 			  <h1 class="helpStyle"><spring:message code="trainingType.help.main.title" /></h1>
 			  <p class="helpStyle"><spring:message code="trainingType.help.summary" /></p>
+			  <h2 class="helpStyle"><spring:message code="trainingType.help.search.title" /></h2>
+			  <p class="helpStyle"><spring:message code="trainingType.help.search.paragraph" /></p>
 			  <h2 class="helpStyle"><spring:message code="trainingType.help.create.title" /></h2>
 			  <p class="helpStyle"><spring:message code="trainingType.help.create.paragraph" /></p>
 			  <h2 class="helpStyle"><spring:message code="trainingType.help.modify.title" /></h2>

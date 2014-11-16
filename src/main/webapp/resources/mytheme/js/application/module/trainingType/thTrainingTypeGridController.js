@@ -7,16 +7,16 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	});
 
 	$scope.validateName = function(data) {
-		return thValidationService.validateText(data, 'Name', 'Név', 20);
+		return thValidationService.validateText(data, 'Name', 'Név', 20, $scope.locale);
 	};
 	
 	$scope.validateLevelNo = function(data) {
-		return thValidationService.validateText(data, 'Level Number', 'Fokozat', 10);
+		return thValidationService.validateText(data, 'Level Number', 'Fokozat', 10, $scope.locale);
 	};
 	
 	
 	$scope.validateDescription = function(data) {
-		return thValidationService.validateText(data, 'Description', 'Leírás', 100);
+		return thValidationService.validateText(data, 'Description', 'Leírás', 100, $scope.locale);
 	};
 	
 	$scope.saveTrainingType = function(trainingType) {
