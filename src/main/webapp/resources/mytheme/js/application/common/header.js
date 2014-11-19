@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function toogleLanguage() {
-	setLanguage(true);
+	setLanguage(false);
 }
 
 function setLanguage(toogle) {

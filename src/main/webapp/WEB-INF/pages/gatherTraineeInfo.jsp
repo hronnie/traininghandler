@@ -9,11 +9,25 @@
     <title><spring:message code="gatherTraineeInfo.main.title" /></title>
     <script src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeModule.js" />"></script>
     <script src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
-
-
+	
+	
     </head>
     <body ng-app="gatherTraineeInfoModule">
-    <h1>adatgyujtes oldal:)</h1>
+    <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
+    <form>
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.first" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />'><br />
+    	<input type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.street" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />'><br />
+    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />'><br />
+    	<input type="tel" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />'><br />
+    	<input type="date" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />'><br />
+    	
+    	list of levelNo, description, date
+    </form>
     </body>
     </html>
 </div>
