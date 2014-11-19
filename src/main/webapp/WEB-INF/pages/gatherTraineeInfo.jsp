@@ -12,9 +12,8 @@
 
 
     </head>
-    <body ng-app="trainingTypeModule">
+    <body ng-app="gatherTraineeInfoModule">
     <h1>adatgyujtes oldal:)</h1>
-<!--     <body ng-app="trainingTypeModule"> -->
     </body>
     </html>
 </div>

@@ -53,8 +53,10 @@ $(document).ready(function() {
 		
 		<div id="header" align="right">
 			<header data-scroll-header="" role="banner" class="header header--page" id="js-header">
+			<c:if test="${!isPublicPage}">
 				<span class="splitter">|</span>
 				<a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a>
+			</c:if>
 <!-- 				<span class="splitter">|</span> -->
 <!-- 				<a href="#" class="headerLink" id="loginHeadLinkId"><spring:message code="header.link.login" /></a> -->
 <!-- 				<span class="splitter">|</span> -->

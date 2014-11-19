@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,8 @@ public class GatherTraineeHistoryAndDetailsController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception {
+			HttpServletResponse arg1, ModelMap model) throws Exception {
+		model.addAttribute("isPublicPage", new Boolean(true));
 		
 		logger.debug("Going to gatherTraineeInfo page..");
 		return new ModelAndView("gatherTraineeInfo");
