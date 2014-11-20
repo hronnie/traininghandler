@@ -1,9 +1,9 @@
-var gatherTraineeInfoModule = angular.module("gatherTraineeInfo", ["restangular", "thValidationService", "thGlobalConstants"]);
+var thGatherTraineeInfoModule = angular.module("thGatherTraineeInfoModule", ["restangular", "thValidationService", "thGlobalConstants"]);
 
-gatherTraineeInfoModule.config(function(RestangularProvider){
+thGatherTraineeInfoModule.config(function(RestangularProvider){
 	RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
 })
 
-gatherTraineeInfoModule.run(function(editableOptions) {
-	editableOptions.theme = 'bs3';
-});
+//thGatherTraineeInfoModule.run(function(editableOptions) {
+//	editableOptions.theme = 'bs3';
+//});

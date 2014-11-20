@@ -7,12 +7,12 @@
 
 
     <title><spring:message code="gatherTraineeInfo.main.title" /></title>
-    <script src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeModule.js" />"></script>
-    <script src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
+    <script src="<c:url value="/resources/js/application/module/gatherTraineeInfo/thGatherTraineeInfoModule.js" />"></script>
+    <script src="<c:url value="/resources/js/application/module/gatherTraineeInfo/thGatherTraineeInfoController.js" />"></script>
 	
 	
     </head>
-    <body ng-app="gatherTraineeInfoModule">
+    <body ng-app="thGatherTraineeInfoModule" ng-controller="thGatherTraineeInfoController as infoCtrl">
     <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
     <form>
     	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />'><br />
