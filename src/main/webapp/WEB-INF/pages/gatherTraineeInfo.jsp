@@ -25,8 +25,15 @@
     	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />'><br />
     	<input type="tel" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />'><br />
     	<input type="date" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />'><br />
-    	
-    	list of levelNo, description, date
+    	<table>
+    	   <tr ng-repeat="trainingTypeWrapper in trainingTypeWrapperArray">
+    	       <td>{{trainingTypeWrapper.id}}</td>
+    	       <td>{{trainingTypeWrapper.name}}</td>
+    	       <td>{{trainingTypeWrapper.levelNo}}</td>
+    	       <td>{{trainingTypeWrapper.description}}</td>
+    	       <td>{{trainingTypeWrapper.completedDate}}</td>
+    	   </tr>
+    	</table>
     </form>
     </body>
     </html>
