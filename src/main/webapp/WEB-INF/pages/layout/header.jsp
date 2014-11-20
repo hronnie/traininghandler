@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,10 @@
 <script src="<c:url value="/resources/js/application/lib/lodash.min.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/modernizr.custom.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/bootstrap.min.js" />"></script>
-
+<script src="<c:url value="/resources/js/application/lib/moment-with-locales.min.js" />"></script>
+<c:if test="${fn:startsWith(pageContext.response.locale, 'hu')}">
+<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_hu-hu.js"></script>
+</c:if>
 <script src="<c:url value="/resources/js/application/common/header.js" />"></script>
 
 <script	src="<c:url value="/resources/js/application/util/service/thValidationService.js" />"></script>
