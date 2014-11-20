@@ -27,13 +27,25 @@
     	<input type="date" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />'><br />
     	<table>
     	   <tr ng-repeat="trainingTypeWrapper in trainingTypeWrapperArray">
-    	       <td>{{trainingTypeWrapper.id}}</td>
-    	       <td>{{trainingTypeWrapper.name}}</td>
-    	       <td>{{trainingTypeWrapper.levelNo}}</td>
-    	       <td>{{trainingTypeWrapper.description}}</td>
-    	       <td>{{trainingTypeWrapper.completedDate}}</td>
+    	       <td>{{trainingTypeWrapper.id}} - </td>
+    	       <td>{{trainingTypeWrapper.name}} - </td>
+    	       <td>{{trainingTypeWrapper.levelNo}} - </td>
+    	       <td>
+			        <div class="col-md-6">
+			            <p class="input-group">
+			              <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="trainingTypeWrapper.completedDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+			        </div>
+    	       
+    	       
+    	       
+    	       {{trainingTypeWrapper.completedDate}}</td>
     	   </tr>
     	</table>
+    	
     </form>
     </body>
     </html>
