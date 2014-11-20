@@ -14,6 +14,8 @@
 <script src="<c:url value="/resources/js/application/lib/modernizr.custom.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/bootstrap.min.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/moment-with-locales.min.js" />"></script>
+<script src="<c:url value="/resources/js/application/lib/ui-utils-ieshiv.min.js" />"></script>
+<script src="<c:url value="/resources/js/application/lib/ui-utils.min.js" />"></script>
 <c:if test="${fn:startsWith(pageContext.response.locale, 'hu')}">
 <script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_hu-hu.js"></script>
 </c:if>
