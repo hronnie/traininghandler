@@ -1,4 +1,4 @@
-var thGatherTraineeInfoModule = angular.module("thGatherTraineeInfoModule", ["restangular", "thValidationService", "thGlobalConstants"]);
+var thGatherTraineeInfoModule = angular.module("thGatherTraineeInfoModule", ["restangular", "thValidationService", "thGlobalConstants", "ui.bootstrap"]);
 
 thGatherTraineeInfoModule.config(function(RestangularProvider){
 	RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
