@@ -7,7 +7,8 @@
 <div class="container" id="containerId">
 	<section>
 		<p><nobr>
-			<button class="btn btn-1 btn-1e">
+<!-- 		TODO: REMOVE THIS LINK. This link is only for dev test for convience  -->
+			<button class="btn btn-1 btn-1e" id="gatherInfoTempId" onclick="window.location.href='<c:url value="/gatherTraineeInfo" />'">
 				<spring:message code="index.button.manage.trainings" />
 			</button>
 			<button class="btn btn-1 btn-1e" id="trainingTypeId" onclick="window.location.href='<c:url value="/trainingType" />'">

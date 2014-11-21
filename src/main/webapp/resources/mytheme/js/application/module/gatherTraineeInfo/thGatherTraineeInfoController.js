@@ -10,53 +10,31 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 			trainingTypeWrapper.name = $scope.trainingTypes[i].name;
 			trainingTypeWrapper.levelNo = $scope.trainingTypes[i].levelNo;
 			trainingTypeWrapper.description = $scope.trainingTypes[i].description;
-			trainingTypeWrapper.completedDate = new Date();
+			trainingTypeWrapper.completedDate = null;
+			trainingTypeWrapper.isOpen = false;
 			
 			$scope.trainingTypeWrapperArray.push(trainingTypeWrapper);
 		}
 	});
 	
+	// date picker
+	$scope.toggleMin = function() {
+		$scope.minDate = $scope.minDate ? null : new Date();
+	};
+	$scope.toggleMin();
 	
+	$scope.open = function($event, trainingTypeWrapper) {
+		$event.preventDefault();
+		$event.stopPropagation();
 	
+		trainingTypeWrapper.isOpen = true;
+	};
 	
+	$scope.dateOptions = {
+			formatYear: 'yy',
+			startingDay: 1
+	};
 	
-	
-	//************************* date picker
-	
-	  $scope.today = function() {
-		    $scope.dt = new Date();
-		  };
-		  $scope.today();
-
-		  $scope.clear = function () {
-		    $scope.dt = null;
-		  };
-
-		  // Disable weekend selection
-		  $scope.disabled = function(date, mode) {
-		    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-		  };
-
-		  $scope.toggleMin = function() {
-		    $scope.minDate = $scope.minDate ? null : new Date();
-		  };
-		  $scope.toggleMin();
-
-		  $scope.open = function($event) {
-			  debugger;
-		    $event.preventDefault();
-		    $event.stopPropagation();
-
-		    $scope.opened = true;
-		  };
-
-		  $scope.dateOptions = {
-		    formatYear: 'yy',
-		    startingDay: 1
-		  };
-
-		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		  $scope.format = $scope.formats[0];
-	// *****************************************************
-
+	$scope.format = 'yyyy-mm-dd';
+	// ****
 });

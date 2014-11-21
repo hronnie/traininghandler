@@ -10,7 +10,7 @@
     <script src="<c:url value="/resources/js/application/module/gatherTraineeInfo/thGatherTraineeInfoModule.js" />"></script>
     <script src="<c:url value="/resources/js/application/module/gatherTraineeInfo/thGatherTraineeInfoController.js" />"></script>
 	
-	
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body ng-app="thGatherTraineeInfoModule" ng-controller="thGatherTraineeInfoController as infoCtrl">
     <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
@@ -33,16 +33,17 @@
     	       <td>
 			        <div class="col-md-6">
 			            <p class="input-group">
-			              <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="trainingTypeWrapper.completedDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			              <input class="form-control" type="text" datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" is-open="trainingTypeWrapper.isOpen" />
+<!-- 			              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="trainingTypeWrapper.completedDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> -->
 			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
 			              </span>
 			            </p>
 			        </div>
     	       
     	       
     	       
-    	       {{trainingTypeWrapper.completedDate}}</td>
+    	       </td>
     	   </tr>
     	</table>
     	
