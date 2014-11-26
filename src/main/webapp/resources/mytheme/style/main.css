@@ -1,6 +1,6 @@
 body {
-	/*background: #c93312 url(../images/texture.png) repeat;*/
-	background: none repeat scroll 0 0 rgba(149, 165, 166, 0.2);
+	background: #c93312 url(../images/bg.jpg) repeat;
+/* 	background: none repeat scroll 0 0 rgba(149, 165, 166, 0.2); */
 }
 
 td,th {
@@ -209,4 +209,56 @@ div[ng-app] {
 
 form[editable-form] > div {
 	margin: 10px 0;
+}
+
+#wrapper input:not([type="checkbox"]) {
+    border: 1px solid rgb(178, 178, 178);
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
+    box-sizing: content-box;
+    margin-top: 4px;
+    padding: 10px 5px 10px 32px;
+    transition: all 0.2s linear 0s;
+    width: 92%;
+}
+
+#wrapper {
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+input {
+    outline: medium none;
+}
+
+[data-icon]:after {
+    color: rgb(106, 159, 171);
+    content: attr(data-icon);
+    font-family: 'FontomasCustomRegular';
+    left: 10px;
+    position: absolute;
+    top: 35px;
+    width: 30px;
+}
+
+#wrapper label {
+    color: rgb(64, 92, 96);
+    position: relative;
+}
+
+#wrapper input:not([type="checkbox"]) {
+    border: 1px solid rgb(178, 178, 178);
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
+    box-sizing: content-box;
+    margin-top: 4px;
+    padding: 10px 5px 10px 32px;
+    transition: all 0.2s linear 0s;
+    width: 92%;
+}
+
+input {
+    outline: medium none;
 }
