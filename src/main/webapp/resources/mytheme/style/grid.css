@@ -214,4 +214,9 @@ p {
 
 .searchInput {
 	margin-bottom: 15px;
+	padding: 5px;
+}
+
+.editableInputText {
+	width: 50%;	
 }

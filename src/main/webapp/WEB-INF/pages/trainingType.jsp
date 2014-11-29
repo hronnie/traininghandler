@@ -22,10 +22,10 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr style="font-weight: bold">
-									<th class="gridTitle" ><spring:message code="trainingtype.grid.header.name" /></th>
-									<th class="gridTitle"><spring:message code="trainingtype.grid.header.levelNo" /></th>
-									<th class="gridTitle"><spring:message code="trainingtype.grid.header.description" /></th>
-									<th class="gridTitle"><spring:message code="grid.general.header.edit" /></th>
+									<th class="gridTitle" style="width: 30%"><spring:message code="trainingtype.grid.header.name" /></th>
+									<th class="gridTitle" style="width: 10%"><spring:message code="trainingtype.grid.header.levelNo" /></th>
+									<th class="gridTitle" style="width: 40%"><spring:message code="trainingtype.grid.header.description" /></th>
+									<th class="gridTitle" style="width: 20%"><spring:message code="grid.general.header.edit" /></th>
 								</tr>
 							</thead>
 							<tbody>
