@@ -8,24 +8,24 @@
 	<section>
 		<p><nobr>
 <!-- 		TODO: REMOVE THIS LINK. This link is only for dev test for convience  -->
-			<button class="btn btn-1 btn-1e" id="gatherInfoTempId" onclick="window.location.href='<c:url value="/gatherTraineeInfo" />'">
+			<button class="btn btn-1 btn-1e mainButton" id="gatherInfoTempId" onclick="window.location.href='<c:url value="/gatherTraineeInfo" />'">
 				<spring:message code="index.button.manage.trainings" />
 			</button>
-			<button class="btn btn-1 btn-1e" id="trainingTypeId" onclick="window.location.href='<c:url value="/trainingType" />'">
+			<button class="btn btn-1 btn-1e mainButton" id="trainingTypeId" onclick="window.location.href='<c:url value="/trainingType" />'">
 				<spring:message code="index.button.manage.training.types" />
 			</button>
-			<button class="btn btn-1 btn-1e">
+			<button class="btn btn-1 btn-1e mainButton">
 				<spring:message code="index.button.manage.users" />
 			</button>
 		</nobr></p>
 		<p>
-			<button class="btn btn-1 btn-1e">
+			<button class="btn btn-1 btn-1e mainButton">
 				<spring:message code="index.button.imports" />
 			</button>
-			<button class="btn btn-1 btn-1e" style="display: none;">
+			<button class="btn btn-1 btn-1e mainButton" style="display: none;">
 				<spring:message code="index.button.imports" />
 			</button>
-			<button class="btn btn-1 btn-1e" style="display: none;">
+			<button class="btn btn-1 btn-1e mainButton" style="display: none;">
 				<spring:message code="index.button.imports" />
 			</button>
 		</p>

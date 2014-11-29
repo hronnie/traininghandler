@@ -13,74 +13,88 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body ng-app="thGatherTraineeInfoModule" ng-controller="thGatherTraineeInfoController as infoCtrl">
-     <div id="wrapper">
-
-
           <div id="register" class="animate form">
-              <form  action="mysuperscript.php" autocomplete="on"> 
-                  <h1> Sign up </h1> 
+              <form action="/trainingType" method="post" class="me-select"> 
+              <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
+              <h4 class="gridSubTitle"><spring:message code="gatherTraineeInfo.sub.personal.data.title" /></h4>
+              <section class="ss-style-dots">
                   <p> 
-                      <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                      <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                      <label for="lastName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.name.last" /></label><br>
+                      <input id="lastName" class="gridInputPersonalData" name="lastName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />' />
                   </p>
                   <p> 
-                      <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                      <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                      <label for="firstName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.name.first" /></label><br>
+                      <input id="firstName" class="gridInputPersonalData" name="firstName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.first" />' />
                   </p>
                   <p> 
-                      <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                      <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                      <label for="displayName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.displayName" /></label><br>
+                      <input id="displayName" class="gridInputPersonalData" name="displayName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />' />
                   </p>
                   <p> 
-                      <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                      <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                      <label for="email" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.email" /></label><br>
+                      <input id="email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
                   </p>
-                  <p class="signin button"> 
-					<input type="submit" value="Sign up"/> 
-					</p>
-					                  <p class="change_link">  
-					Already a member ?
-					<a href="#tologin" class="to_register"> Go and log in </a>
-					</p>
-				</form>
+                  <p> 
+                      <label for="street" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.street" /></label><br>
+                      <input id="street" class="gridInputPersonalData" name="street" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.street" />' />
+                  </p>
+                  <p> 
+                      <label for="houseNo" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.houseNo" /></label><br>
+                      <input id="houseNo" class="gridInputPersonalData" name="houseNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />' />
+                  </p>
+                  <p> 
+                      <label for="city" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.city" /></label><br>
+                      <input id="city" class="gridInputPersonalData" name="city" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />' />
+                  </p>
+                  <p> 
+                      <label for="zipCode" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.zipCode" /></label><br>
+                      <input id="zipCode" class="gridInputPersonalData" name="zipCode" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />' />
+                  </p>
+                  <p> 
+                      <label for="mobileNo" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.mobileNo" /></label><br>
+                      <input id="mobileNo" class="gridInputPersonalData" name="mobileNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />' />
+                  </p>
+                  <p> 
+                      <label for="dob" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.dob" /></label><br>
+						     <input type="text" class="gridInputPersonalData" readonly
+						      id="dob" name="dob" required="required" ng-model="dob" style="width: 150px" 
+						      datepicker-popup="yyyy/MM/dd" is-open="isDobOpen" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />' />
+						        <button type="button" class="btn btn-default" ng-click="openDob($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                  </p><br>
+                  </section>
+                  <h4 class="gridSubTitle"><spring:message code="gatherTraineeInfo.sub.training.data.title" /></h4>
+                  <h4 class="gridExplanation"><spring:message code="gatherTraineeInfo.sub.training.data.explanation" /></h4>
+
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr style="font-weight: bold">
+								<th class="gridTitle"  style="width: 40%" ><spring:message code="gatherTraineeInfo.grid.header.name" /></th>
+								<th class="gridTitle"  style="width: 20%" ><spring:message code="gatherTraineeInfo.grid.header.levelNo" /></th>
+								<th class="gridTitle"  style="width: 40%" ><spring:message code="gatherTraineeInfo.grid.header.date" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="trainingTypeWrapper in trainingTypeWrapperArray" class="gridRow" align="center">
+								<td>
+									<span class="gridCell"> {{trainingTypeWrapper.name}} </span>
+								</td>
+								<td>
+									<span class="gridCell"> {{trainingTypeWrapper.levelNo}} </span>
+								</td>
+								<td>
+							    <input class="gridInputTrainingData" type="text" readonly
+							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" 
+							              is-open="trainingTypeWrapper.isOpen" placeholder='<spring:message code="gatherTraineeInfo.grid.header.date" />' />
+							                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</td>
+							</tr>
+						<tbody>
+					</table>
+					<button class="btn btn-primary" style="padding: 25px 80px"><spring:message code="gatherTraineeInfo.grid.submit.button.title" /></button>
+ 				</form>
           </div>
 						
-    </div>
-    <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
-    <form>
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.first" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />'><br />
-    	<input type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.street" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />'><br />
-    	<input type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />'><br />
-    	<input type="tel" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />'><br />
-    	<input type="date" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />'><br />
-    	<table>
-    	   <tr ng-repeat="trainingTypeWrapper in trainingTypeWrapperArray">
-    	       <td>{{trainingTypeWrapper.id}} - </td>
-    	       <td>{{trainingTypeWrapper.name}} - </td>
-    	       <td>{{trainingTypeWrapper.levelNo}} - </td>
-    	       <td>
-			        <div class="col-md-6">
-			            <p class="input-group">
-			              <input class="form-control" type="text" datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" is-open="trainingTypeWrapper.isOpen" />
-<!-- 			              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="trainingTypeWrapper.completedDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> -->
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
-			        </div>
-    	       
-    	       
-    	       
-    	       </td>
-    	   </tr>
-    	</table>
-    	
-    </form>
     </body>
     </html>
 </div>

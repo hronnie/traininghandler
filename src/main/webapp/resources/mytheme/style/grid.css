@@ -31,7 +31,6 @@ p {
 }
 
 .gridMainTitle {
-	/*font-family: icomoon;*/
 	font-family: 'Raleway',Arial,sans-serif;
     padding: 20px 0;
     text-indent: 0;
@@ -41,6 +40,30 @@ p {
     letter-spacing: 0.04em;
     text-align: left;
     vertical-align: middle;
+}
+
+.gridSubTitle {
+	font-family: 'Raleway',Arial,sans-serif;
+    padding: 20px 0;
+    text-indent: 0;
+    color: #404d5b;
+    font-weight: bold;
+    font-size: 25px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.gridExplanation {
+	font-family: 'Raleway',Arial,sans-serif;
+    text-indent: 0;
+    color: #404d5b;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    vertical-align: middle;
+    margin-bottom: 30px;
 }
 
 .gridTitle {

@@ -30,11 +30,21 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 		trainingTypeWrapper.isOpen = true;
 	};
 	
+	$scope.openDob = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		
+		$scope.isDobOpen = true;
+	};
+	
 	$scope.dateOptions = {
 			formatYear: 'yy',
 			startingDay: 1
 	};
 	
 	$scope.format = 'yyyy-mm-dd';
+	$scope.dob=null;
+	
+	$scope.isDobOpen = false;
 	// ****
 });
