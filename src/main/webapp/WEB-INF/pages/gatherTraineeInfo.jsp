@@ -31,8 +31,20 @@
                       <input id="displayName" class="gridInputPersonalData" name="displayName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />' />
                   </p>
                   <p> 
-                      <label for="email" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.email" /></label><br>
-                      <input id="email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
+                      <label for="dob" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.dob" /></label><br>
+						     <input type="text" class="gridInputPersonalData" readonly
+						      id="dob" name="dob" required="required" ng-model="dob" style="width: 150px" 
+						      datepicker-popup="yyyy/MM/dd" is-open="isDobOpen" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />' />
+						        <button type="button" class="btn btn-default" ng-click="openDob($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                  </p><br>
+                  <p> 
+                      <label for="zipCode" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.zipCode" /></label><br>
+                      <input id="zipCode" class="gridInputPersonalData" name="zipCode" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />' />
+                  </p>
+                  <p> 
+                      <label for="city" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.city" /></label><br>
+                      <input id="city" class="gridInputPersonalData" name="city" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />' />
                   </p>
                   <p> 
                       <label for="street" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.street" /></label><br>
@@ -43,25 +55,13 @@
                       <input id="houseNo" class="gridInputPersonalData" name="houseNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />' />
                   </p>
                   <p> 
-                      <label for="city" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.city" /></label><br>
-                      <input id="city" class="gridInputPersonalData" name="city" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />' />
-                  </p>
-                  <p> 
-                      <label for="zipCode" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.zipCode" /></label><br>
-                      <input id="zipCode" class="gridInputPersonalData" name="zipCode" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />' />
-                  </p>
-                  <p> 
                       <label for="mobileNo" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.mobileNo" /></label><br>
                       <input id="mobileNo" class="gridInputPersonalData" name="mobileNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />' />
                   </p>
                   <p> 
-                      <label for="dob" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.dob" /></label><br>
-						     <input type="text" class="gridInputPersonalData" readonly
-						      id="dob" name="dob" required="required" ng-model="dob" style="width: 150px" 
-						      datepicker-popup="yyyy/MM/dd" is-open="isDobOpen" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />' />
-						        <button type="button" class="btn btn-default" ng-click="openDob($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-
-                  </p><br>
+                      <label for="email" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.email" /></label><br>
+                      <input id="email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
+                  </p>
                   </section>
                   <h4 class="gridSubTitle"><spring:message code="gatherTraineeInfo.sub.training.data.title" /></h4>
                   <h4 class="gridExplanation"><spring:message code="gatherTraineeInfo.sub.training.data.explanation" /></h4>
