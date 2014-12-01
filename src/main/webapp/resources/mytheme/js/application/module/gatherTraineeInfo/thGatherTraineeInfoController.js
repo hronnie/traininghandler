@@ -47,4 +47,9 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 	
 	$scope.isDobOpen = false;
 	// ****
+	
+	 // TRANSLATION
+	datepickerPopupConfig.currentText = 'Ma';
+	datepickerPopupConfig.clearText = 'Törles';
+	datepickerPopupConfig.closeText = 'Kész';
 });
