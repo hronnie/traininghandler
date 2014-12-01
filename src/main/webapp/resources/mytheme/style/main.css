@@ -289,6 +289,10 @@ input {
     width: 14px;
 }
 
+.ss-style-dots {
+    padding-bottom: 80px;
+}
+
 section:before, section:after {
     content: "";
     pointer-events: none;

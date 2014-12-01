@@ -62,6 +62,7 @@
                       <label for="email" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.email" /></label><br>
                       <input id="email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
                   </p>
+                  <h4 class="gridExplanation"><spring:message code="gatherTraineeInfo.sub.personal.data.next" /></h4>
                   </section>
                   <h4 class="gridSubTitle"><spring:message code="gatherTraineeInfo.sub.training.data.title" /></h4>
                   <h4 class="gridExplanation"><spring:message code="gatherTraineeInfo.sub.training.data.explanation" /></h4>
@@ -84,7 +85,7 @@
 								</td>
 								<td>
 							    <input class="gridInputTrainingData" type="text" readonly
-							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" 
+							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" onclick="open($event, trainingTypeWrapper)
 							              is-open="trainingTypeWrapper.isOpen" placeholder='<spring:message code="gatherTraineeInfo.grid.header.date" />' />
 							                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
 								</td>
