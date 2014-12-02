@@ -33,6 +33,7 @@
                   <p> 
                       <label for="dob" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.dob" /></label><br>
 						     <input type="text" class="gridInputPersonalData" readonly
+						     title='<spring:message code="gatherTraineeInfo.grid.date.hint" />'
 						      id="dob" name="dob" required="required" ng-model="dob" style="width: 150px" 
 						      datepicker-popup="yyyy/MM/dd" is-open="isDobOpen" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />' />
 						        <button type="button" class="btn btn-default" ng-click="openDob($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -85,7 +86,8 @@
 								</td>
 								<td>
 							    <input class="gridInputTrainingData" type="text" readonly
-							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate"
+							    		  title='<spring:message code="gatherTraineeInfo.grid.date.hint" />'
+							    		  datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate"
 							              is-open="trainingTypeWrapper.isOpen" placeholder='<spring:message code="gatherTraineeInfo.grid.header.date" />' />
 							                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
 								</td>
@@ -102,7 +104,7 @@
 <!-- /container -->
 
 <!-- help -->
-<jsp:include page="/WEB-INF/pages/help/trainingTypeHelp.jsp" />
+<jsp:include page="/WEB-INF/pages/help/gatherTraineeInfoHelp.jsp" />
 
 <jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
 
