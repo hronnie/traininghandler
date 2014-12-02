@@ -85,7 +85,7 @@
 								</td>
 								<td>
 							    <input class="gridInputTrainingData" type="text" readonly
-							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate" onclick="open($event, trainingTypeWrapper)
+							              datepicker-popup="yyyy/MM/dd" ng-model="trainingTypeWrapper.completedDate"
 							              is-open="trainingTypeWrapper.isOpen" placeholder='<spring:message code="gatherTraineeInfo.grid.header.date" />' />
 							                <button type="button" class="btn btn-default" ng-click="open($event, trainingTypeWrapper)"><i class="glyphicon glyphicon-calendar"></i></button>
 								</td>
