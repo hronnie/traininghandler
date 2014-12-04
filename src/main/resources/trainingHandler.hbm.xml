@@ -85,6 +85,19 @@
         </property>
     </class>
  
+     <class name="com.codeproj.traininghandler.model.CompletedUserTraining" table="CompletedUserTraining" catalog="traininghandler">
+        <id name="completedUserTrainingId" type="long">
+            <column name="completedUserTrainingId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+            <column name="trainingTypeId" not-null="true" />
+        </many-to-one>
+        <property name="completedDate" type="timestamp">
+            <column name="completedDate" length="19" not-null="true" />
+        </property>
+    </class>
+ 
      <class name="com.codeproj.traininghandler.model.UserRole" table="UserRole" catalog="traininghandler">
         <id name="userRoleId" type="long">
             <column name="userRoleId" />
@@ -254,15 +267,6 @@
         <property access="field" column="name" name="name"/>
         <property access="field" column="levelNo" name="levelNo"/>
         <property access="field" column="description" name="description"/>
-<!--         <property name="name" type="string"> -->
-<!--             <column name="name" length="100" /> -->
-<!--         </property> -->
-<!--         <property name="levelNo" type="string"> -->
-<!--             <column name="levelNo" precision="2" scale="0" /> -->
-<!--         </property> -->
-<!--         <property name="description" type="string"> -->
-<!--             <column name="description" length="300" /> -->
-<!--         </property> -->
     </class>
 
 
