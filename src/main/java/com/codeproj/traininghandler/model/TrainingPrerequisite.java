@@ -8,16 +8,18 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	private static final long serialVersionUID = 1L;
 	
 	private Long trainingPrerequisiteId;
-	private TrainingType trainingType;
+	private TrainingType dependentTrainingTypeId;
+	private TrainingType prerequisiteTrainingTypeId;
 	private Date completedDate;
 
 	public TrainingPrerequisite() {
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingType trainingType, Date completedDate) {
+			TrainingType dependentTrainingTypeId, TrainingType prerequisiteTrainingTypeId, Date completedDate) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-		this.trainingType = trainingType;
+		this.dependentTrainingTypeId = dependentTrainingTypeId;
+		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
 		this.completedDate = completedDate;
 	}
 
@@ -31,20 +33,29 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.trainingPrerequisiteId = id;
 	}
 	
+	public TrainingType getDependentTrainingTypeId() {
+		return dependentTrainingTypeId;
+	}
+
+	public void setDependentTrainingTypeId(TrainingType dependentTrainingTypeId) {
+		this.dependentTrainingTypeId = dependentTrainingTypeId;
+	}
+
+	public TrainingType getPrerequisiteTrainingTypeId() {
+		return prerequisiteTrainingTypeId;
+	}
+
+	public void setPrerequisiteTrainingTypeId(
+			TrainingType prerequisiteTrainingTypeId) {
+		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
+	}
+
 	public Long getTrainingPrerequisiteId() {
 		return this.trainingPrerequisiteId;
 	}
 
 	public void setTrainingPrerequisiteId(Long trainingPrerequisiteId) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-	}
-
-	public TrainingType getTrainingType() {
-		return this.trainingType;
-	}
-
-	public void setTrainingType(TrainingType trainingType) {
-		this.trainingType = trainingType;
 	}
 
 	public Date getCompletedDate() {

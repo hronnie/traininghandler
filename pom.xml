@@ -442,6 +442,7 @@
 										<srcFile>src/main/sql/schema/TrainingPrerequisite.sql</srcFile>
 										<srcFile>src/main/sql/schema/UserLevel.sql</srcFile>
 										<srcFile>src/main/sql/schema/UserTraining.sql</srcFile>
+										<srcFile>src/main/sql/schema/CompletedUserTraining.sql</srcFile>
 									</srcFiles>
 								</configuration>
 							</execution>
@@ -472,6 +473,7 @@
 										<srcFile>src/main/sql/data/TrainingPrerequisiteData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserLevelData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserTrainingData.sql</srcFile>
+										<srcFile>src/main/sql/data/CompletedUserTrainingData.sql</srcFile>
 									</srcFiles>
 								</configuration>
 							</execution>
