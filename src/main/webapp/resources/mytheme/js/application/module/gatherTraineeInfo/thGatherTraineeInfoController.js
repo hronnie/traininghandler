@@ -1,5 +1,8 @@
 thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, datepickerPopupConfig) {
+	
 	$scope.locale = document.getElementById("localeValue").value;
+	$scope.defaultCountry = thGlobalConstants.DEFAULT_COUNTRY;
+	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
 		$scope.trainingTypeWrapperArray = [];

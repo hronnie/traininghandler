@@ -56,6 +56,10 @@
                       <input id="houseNo" class="gridInputPersonalData" name="houseNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />' />
                   </p>
                   <p> 
+                      <label for="country" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.country" /></label><br>
+                      <input id="country" class="gridInputPersonalData" name="country" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.country"/>'  ng-model="defaultCountry"/>
+                  </p>
+                  <p> 
                       <label for="mobileNo" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.mobileNo" /></label><br>
                       <input id="mobileNo" class="gridInputPersonalData" name="mobileNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />' />
                   </p>
