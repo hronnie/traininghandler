@@ -9,7 +9,7 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 		$scope.trainingTypes = trainingTypes;
 		for (i = 0; i < $scope.trainingTypes.length; i++) {
 			var trainingTypeWrapper = {};
-			trainingTypeWrapper.id = $scope.trainingTypes[i].id;
+			trainingTypeWrapper.id = $scope.trainingTypes[i].trainingTypeId;
 			trainingTypeWrapper.name = $scope.trainingTypes[i].name;
 			trainingTypeWrapper.levelNo = $scope.trainingTypes[i].levelNo;
 			trainingTypeWrapper.description = $scope.trainingTypes[i].description;
