@@ -2,12 +2,11 @@ DROP TABLE IF EXISTS Address;
 
 CREATE TABLE Address (
     addressId BIGINT(20) NOT NULL,
-    addressLine1 VARCHAR(255) NULL,
-    addressLine2 VARCHAR(255) NULL,
-    city VARCHAR(100) NULL,
-    state VARCHAR(100) NULL,
-    country VARCHAR(200) NULL,
-    postalCode VARCHAR(15) NULL,
+    postalCode VARCHAR(15) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    street VARCHAR(70) NOT NULL,
+    houseNo VARCHAR(10) NOT NULL,    
+    country VARCHAR(50) NOT NULL,
     isTrainingPlace BIT(1) NOT NULL DEFAULT b'0',
     isAppointmentPlace BIT(1) NOT NULL DEFAULT b'0',
 
