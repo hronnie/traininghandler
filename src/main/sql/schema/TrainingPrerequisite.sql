@@ -4,7 +4,7 @@ CREATE TABLE TrainingPrerequisite (
     trainingPrerequisiteId BIGINT(20) NOT NULL,
     dependentTrainingTypeId BIGINT(20) NOT NULL,
     prerequisiteTrainingTypeId BIGINT(20) NOT NULL,
-    completedDate SMALLINT NOT NULL,
+    betweenMonth SMALLINT NOT NULL,
 
     PRIMARY KEY (trainingPrerequisiteId),
     FOREIGN KEY FK_TrainingPrerequisite_TrainingType_Dep (dependentTrainingTypeId) REFERENCES TrainingType(trainingTypeId),

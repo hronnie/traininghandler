@@ -251,8 +251,8 @@
         <many-to-one name="prerequisiteTrainingTypeId" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="prerequisiteTrainingTypeId" not-null="true" />
         </many-to-one>
-        <property name="completedDate" type="timestamp">
-            <column name="completedDate" length="19" not-null="true" />
+        <property name="betweenMonth" type="short">
+            <column name="betweenMonth" not-null="true" />
         </property>
     </class>
 

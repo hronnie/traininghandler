@@ -10,17 +10,17 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	private Long trainingPrerequisiteId;
 	private TrainingType dependentTrainingTypeId;
 	private TrainingType prerequisiteTrainingTypeId;
-	private Date completedDate;
+	private Integer betweenMonth;
 
 	public TrainingPrerequisite() {
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingType dependentTrainingTypeId, TrainingType prerequisiteTrainingTypeId, Date completedDate) {
+			TrainingType dependentTrainingTypeId, TrainingType prerequisiteTrainingTypeId, Integer betweenMonth) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 		this.dependentTrainingTypeId = dependentTrainingTypeId;
 		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
-		this.completedDate = completedDate;
+		this.betweenMonth = betweenMonth;
 	}
 
 	@Override
@@ -58,11 +58,11 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 	}
 
-	public Date getCompletedDate() {
-		return this.completedDate;
+	public Integer getBetweenMonth() {
+		return this.betweenMonth;
 	}
 
-	public void setCompletedDate(Date completedDate) {
-		this.completedDate = completedDate;
+	public void setBetweenMonth(Integer betweenMonth) {
+		this.betweenMonth = betweenMonth;
 	}
 }
