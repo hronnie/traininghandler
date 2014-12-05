@@ -248,10 +248,10 @@
             <column name="trainingPrerequisiteId" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+        <many-to-one name="dependentTrainingTypeId" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="dependentTrainingTypeId" not-null="true" />
         </many-to-one>
-        <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+        <many-to-one name="prerequisiteTrainingTypeId" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="prerequisiteTrainingTypeId" not-null="true" />
         </many-to-one>
         <property name="completedDate" type="timestamp">

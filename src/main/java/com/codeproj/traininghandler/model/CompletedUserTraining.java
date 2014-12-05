@@ -8,7 +8,7 @@ public class CompletedUserTraining implements HibernatePersistable, Serializable
 	private static final long serialVersionUID = 1L;
 
 	private Long completedUserTrainingId;
-	private Long trainingTypeId;
+	private TrainingType trainingType;
 	private Date completedDate;
 	
 	public CompletedUserTraining() {
@@ -16,9 +16,9 @@ public class CompletedUserTraining implements HibernatePersistable, Serializable
 	}
 
 	public CompletedUserTraining(Long completedUserTrainingId,
-			Long trainingTypeId, Date completedDate) {
-		this.completedUserTrainingId = completedUserTrainingId;
-		this.trainingTypeId = trainingTypeId;
+			TrainingType trainingType, Date completedDate) {
+		this.setCompletedUserTrainingId(completedUserTrainingId);
+		this.trainingType = trainingType;
 		this.completedDate = completedDate;
 	}
 
@@ -32,12 +32,20 @@ public class CompletedUserTraining implements HibernatePersistable, Serializable
 		this.completedUserTrainingId = id;
 	}
 
-	public Long getTrainingTypeId() {
-		return trainingTypeId;
+	public Long getCompletedUserTrainingId() {
+		return completedUserTrainingId;
 	}
 
-	public void setTrainingTypeId(Long trainingTypeId) {
-		this.trainingTypeId = trainingTypeId;
+	public void setCompletedUserTrainingId(Long completedUserTrainingId) {
+		this.completedUserTrainingId = completedUserTrainingId;
+	}
+
+	public TrainingType getTrainingType() {
+		return trainingType;
+	}
+
+	public void setTrainingType(TrainingType trainingType) {
+		this.trainingType = trainingType;
 	}
 
 	public Date getCompletedDate() {
