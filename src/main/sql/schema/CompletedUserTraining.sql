@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS CompletedUserTraining;
 
 CREATE TABLE CompletedUserTraining (
     completedUserTrainingId BIGINT(20) NOT NULL,
+    userId BIGINT(20) NOT NULL,
     trainingTypeId BIGINT(20) NOT NULL,
     completedDate DATETIME NOT NULL,
     

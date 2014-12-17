@@ -87,6 +87,9 @@
             <column name="completedUserTrainingId" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
         <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="trainingTypeId" not-null="true" />
         </many-to-one>
