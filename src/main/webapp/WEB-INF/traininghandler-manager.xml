@@ -16,4 +16,17 @@
 		class="com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager">
 		<property name="trainingTypeDAO" ref="trainingTypeDAO" />
 	</bean>
+
+	<bean id="gatherTraineeInfoService"
+		class="com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoService">
+	</bean>
+
+	<bean id="addressTypeService"
+		class="com.codeproj.traininghandler.rest.address.AddressService">
+		<property name="addressManager" ref="addressManager" />
+	</bean>
+
+	<bean id="addressManager"
+		class="com.codeproj.traininghandler.manager.address.AddressManager">
+	</bean>
 </beans>
