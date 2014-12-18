@@ -15,6 +15,13 @@ public class TraineePersonalAndTrainingInfoDto {
 	
 	public TraineePersonalAndTrainingInfoDto() {/* empty constructor */ }
 
+	public TraineePersonalAndTrainingInfoDto(AddressDto address, UserDto user,
+			List<CompletedUserTrainingDto> completedUserTrainingList) {
+		this.address = address;
+		this.user = user;
+		this.completedUserTrainingList = completedUserTrainingList;
+	}
+
 	@XmlElement(name="address")
 	public AddressDto getAddress() {
 		return address;

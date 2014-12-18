@@ -38,12 +38,19 @@
 	</repositories>
 
 	<dependencies>
-	        <!-- Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.databind-version}</version>
-        </dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.databind-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -268,9 +275,9 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.33</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.33</version>
 		</dependency>
 
 
@@ -368,9 +375,9 @@
 						<dependencies>
 							<!-- specify the dependent JDBC driver here -->
 							<dependency>
-							    <groupId>mysql</groupId>
-							    <artifactId>mysql-connector-java</artifactId>
-							    <version>5.1.33</version>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
+								<version>5.1.33</version>
 							</dependency>
 
 						</dependencies>

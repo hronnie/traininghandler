@@ -15,6 +15,17 @@ public class AddressDto {
 	
 	public AddressDto() { /* empty constructor */ }
 	
+	public AddressDto(String postCode, String city, String street,
+			String houseNo, String country) {
+		this.postCode = postCode;
+		this.city = city;
+		this.street = street;
+		this.houseNo = houseNo;
+		this.country = country;
+	}
+
+
+
 	@XmlElement(name="postCode")
 	public String getPostCode() {
 		return postCode;

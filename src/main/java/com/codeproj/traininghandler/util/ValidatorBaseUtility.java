@@ -2,7 +2,10 @@ package com.codeproj.traininghandler.util;
 
 import com.codeproj.traininghandler.exceptions.ValidationException;
 
+import java.util.Date;
 import java.util.regex.Pattern;
+
+import org.joda.time.DateTime;
 
 public class ValidatorBaseUtility {
 	public static void mandatoryParameter(String name, Object object)
@@ -94,5 +97,26 @@ public class ValidatorBaseUtility {
 		if (id == null || id < 1) {
 			throw new ValidationException("Id parameter: " + id + " is not valid. Cannot be null or less then 1");
 		}
+	}
+	
+	public static void emailValidator(String email) throws ValidationException {
+		if (!isValidEmailAddress(email)) {
+			throw new ValidationException("Email parameter: " + email + " is not valid.");
+		}
+	}
+	
+	public static void isDateLater(Date date, int year) throws ValidationException {
+		DateTime curDate = new DateTime();
+		curDate = curDate.minusYears(year);
+		if (curDate.isBefore(date.getTime())) {
+			throw new ValidationException("The given date: " + date + " must be older then " + year + " years");
+		}
+	}
+	
+	private static boolean isValidEmailAddress(String email) {
+         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+         java.util.regex.Matcher m = p.matcher(email);
+         return m.matches();
 	}
 }

@@ -12,6 +12,13 @@ public class CompletedUserTrainingDto {
 	private Date completedDate;
 	
 	public CompletedUserTrainingDto() { /* empty constructor */}
+	
+	public CompletedUserTrainingDto(Long userId, long trainingTypeId,
+			Date completedDate) {
+		this.userId = userId;
+		this.trainingTypeId = trainingTypeId;
+		this.completedDate = completedDate;
+	}
 
 	@XmlElement(name="userId")
 	public Long getUserId() {

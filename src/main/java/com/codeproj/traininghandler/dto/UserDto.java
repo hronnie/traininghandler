@@ -16,6 +16,16 @@ public class UserDto {
 	
 	public UserDto() { /* empty constructor */}
 
+	public UserDto(String lastName, String firstName, String displayName,
+			Date dob, String phoneNo, String email) {
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.displayName = displayName;
+		this.dob = dob;
+		this.phoneNo = phoneNo;
+		this.email = email;
+	}
+
 	@XmlElement(name="lastName")
 	public String getLastName() {
 		return lastName;

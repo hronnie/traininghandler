@@ -24,6 +24,10 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 			throw new ValidationException("You need to have at least one completed training");
 		}
 		
+		if (traineeInfoDto.getUser() == null) {
+			throw new ValidationException("User information is missing");
+		}
+		
 		mandatoryParameter("postCode", traineeInfoDto.getAddress().getPostCode());
 		mandatoryParameter("city", traineeInfoDto.getAddress().getCity());
 		mandatoryParameter("street", traineeInfoDto.getAddress().getStreet());
@@ -46,6 +50,9 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 		validateStringLength("displayName", traineeInfoDto.getUser().getDisplayName(), 50);
 		validateStringLength("phoneNo", traineeInfoDto.getUser().getPhoneNo(), 50);
 		validateStringLength("email", traineeInfoDto.getUser().getEmail(), 80);
+		
+		emailValidator(traineeInfoDto.getUser().getEmail());
+		isDateLater(traineeInfoDto.getUser().getDob(), 6);
 	}
 
 }
