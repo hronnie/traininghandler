@@ -1,8 +1,10 @@
 package com.codeproj.traininghandler.util;
 
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
@@ -110,6 +112,14 @@ public class ValidatorBaseUtility {
 		curDate = curDate.minusYears(year);
 		if (curDate.isBefore(date.getTime())) {
 			throw new ValidationException("The given date: " + date + " must be older then " + year + " years");
+		}
+	}
+	
+	public static void completedUserTrainingValidator(
+			List<CompletedUserTrainingDto> completedUserTrainingList) throws ValidationException {
+		for (CompletedUserTrainingDto compTr : completedUserTrainingList) {
+			entityIdValidator(compTr.getTrainingTypeId());
+			mandatoryParameter("Completed user training date", compTr.getCompletedDate());
 		}
 	}
 	

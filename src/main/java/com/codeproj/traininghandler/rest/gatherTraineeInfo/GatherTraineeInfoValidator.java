@@ -1,5 +1,8 @@
 package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 
+import java.util.List;
+
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
@@ -53,6 +56,7 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 		
 		emailValidator(traineeInfoDto.getUser().getEmail());
 		isDateLater(traineeInfoDto.getUser().getDob(), 6);
+		
+		completedUserTrainingValidator(traineeInfoDto.getCompletedUserTrainingList());
 	}
-
 }

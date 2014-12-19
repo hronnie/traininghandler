@@ -44,17 +44,29 @@ public class GatherTraineeInfoServiceTest {
 	
 	static {
 		VALID_ADDRESS = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
-		VALID_USER = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, new Date(), VALID_TELEPHONE_NUMBER, VALID_EMAIL);
-		VALID_COMPLETED_USER_TRAINING_LIST = new ArrayList<>();
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
-		VALID_COMPLETED_USER_TRAINING_LIST.add(new CompletedUserTrainingDto(1L, 1L, dt.toDate()));
 		VALID_DOB = dt.toDate();
+		VALID_USER = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		VALID_COMPLETED_USER_TRAINING_LIST = new ArrayList<>();
+		VALID_COMPLETED_USER_TRAINING_LIST.add(new CompletedUserTrainingDto(1L, 1L, dt.toDate()));
 	}
 	
 	@Before
 	public void setUp() throws Exception {
 		service = new GatherTraineeInfoService();
 	}
+	
+	// ***************** Tests VALID input object **************
+	
+	@Test
+	public void testGatherTraineeInfoWithValidObject() throws ValidationException {
+		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
+		traineeInfoDto.setUser(VALID_USER);
+		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
+		traineeInfoDto.setAddress(VALID_ADDRESS);
+		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
+	}
+	
 
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithEmptyInputObject() throws ValidationException {
@@ -182,7 +194,7 @@ public class GatherTraineeInfoServiceTest {
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
-	// too long check
+	// Too long check
 	
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithTooLongPostCode() throws ValidationException {
@@ -333,6 +345,7 @@ public class GatherTraineeInfoServiceTest {
 		traineeInfoDto.setUser(new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, ""));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
+	
 	// Too long check
 	
 	@Test(expected = ValidationException.class)
@@ -403,12 +416,11 @@ public class GatherTraineeInfoServiceTest {
 
 	// ***************** Tests for user info **************
 	
-	
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithInvalidTrainingTypeId() throws ValidationException {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		changableCompletedUserTrList.clear();
-		changableCompletedUserTrList.add(new CompletedUserTrainingDto(null, 1L, new Date()));
+		changableCompletedUserTrList.add(new CompletedUserTrainingDto(null, -1L, new Date()));
 		traineeInfoDto.setCompletedUserTrainingList(changableCompletedUserTrList);
 		traineeInfoDto.setAddress(VALID_ADDRESS);
 		traineeInfoDto.setUser(VALID_USER);
@@ -425,18 +437,5 @@ public class GatherTraineeInfoServiceTest {
 		traineeInfoDto.setUser(VALID_USER);
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
-	
-	// ***************** Tests VALID input object **************
-	
-	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithValidObject() throws ValidationException {
-		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
-		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
-		traineeInfoDto.setAddress(VALID_ADDRESS);
-		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
-	}
-	
-
 }
 
