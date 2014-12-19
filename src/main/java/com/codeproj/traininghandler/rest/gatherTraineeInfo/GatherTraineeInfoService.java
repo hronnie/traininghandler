@@ -28,6 +28,11 @@ public class GatherTraineeInfoService {
 	@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse saveTraineePersonalAndTrainingInfo(
 			@RequestBody TraineePersonalAndTrainingInfoDto traineeInfoDto) throws ValidationException {
+		
+		if (traineeInfoDto == null) {
+			throw new ValidationException("trainee info dto is null");
+		}
+		
 		GatherTraineeInfoValidator.saveTraineePersonalAndTrainingInfo(traineeInfoDto);
 		
 		String city = ValidatorBaseUtility.stripXSS(traineeInfoDto.getAddress().getCity());

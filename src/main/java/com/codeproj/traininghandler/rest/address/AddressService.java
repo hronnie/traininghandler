@@ -21,6 +21,9 @@ public class AddressService {
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody AddressDto addressDto) throws ValidationException {
+		if (addressDto == null) {
+			throw new ValidationException("Address dto object is null");
+		}
 		AddressServiceValidator.create(addressDto);
 		String city = ValidatorBaseUtility.stripXSS(addressDto.getCity());
 		String country = ValidatorBaseUtility.stripXSS(addressDto.getCountry());

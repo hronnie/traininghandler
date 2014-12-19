@@ -1,6 +1,7 @@
 package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dto.AddressDto;
@@ -17,6 +19,8 @@ import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GatherTraineeInfoServiceTest {
@@ -39,6 +43,9 @@ public class GatherTraineeInfoServiceTest {
 	public static final String INVALID_EMAIL = "simpletext";
 	public static final Date VALID_DOB;
 	
+	@Mock
+	public AddressService addressService;
+	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
 			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 	
@@ -54,6 +61,8 @@ public class GatherTraineeInfoServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		service = new GatherTraineeInfoService();
+		service.setAddressService(addressService);
+		when(addressService.create(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY))).thenReturn(new GeneralIdResponse(1L));
 	}
 	
 	// ***************** Tests VALID input object **************
@@ -67,6 +76,11 @@ public class GatherTraineeInfoServiceTest {
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
+	
+	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithNullObject() throws ValidationException {
+		service.saveTraineePersonalAndTrainingInfo(null);  
+	}
 
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithEmptyInputObject() throws ValidationException {

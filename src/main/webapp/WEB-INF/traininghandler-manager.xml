@@ -30,4 +30,13 @@
 	<bean id="addressManager"
 		class="com.codeproj.traininghandler.manager.address.AddressManager">
 	</bean>
+	
+	<bean id="userService"
+		class="com.codeproj.traininghandler.rest.user.UserService">
+		<property name="userManager" ref="userManager" />
+	</bean>
+
+	<bean id="userManager"
+		class="com.codeproj.traininghandler.manager.user.UserManager">
+	</bean>
 </beans>

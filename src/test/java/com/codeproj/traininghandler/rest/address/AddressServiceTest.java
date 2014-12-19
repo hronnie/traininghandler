@@ -48,7 +48,7 @@ public class AddressServiceTest {
 	
 	// valid inputs
 	
-	@Test()
+	
 	public void testGatherTraineeInfoWithValidData() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		
@@ -57,6 +57,11 @@ public class AddressServiceTest {
 	}
 	
 	// null check 
+	
+	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithNullObject() throws ValidationException {
+		service.create(null);  
+	}
 
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithNullPostCode() throws ValidationException {
