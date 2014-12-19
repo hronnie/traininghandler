@@ -31,10 +31,6 @@ public class AddressService {
 		return new GeneralIdResponse(result);
 	}
 
-	public AddressManager getAddressManager() {
-		return addressManager;
-	}
-
 	public void setAddressManager(AddressManager addressManager) {
 		this.addressManager = addressManager;
 	}

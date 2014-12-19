@@ -3,21 +3,28 @@ package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
 @RequestMapping("/gatherTraineeInfo")
 public class GatherTraineeInfoService {
 
+	@Autowired
+	AddressService addressService;
+	
 	@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse saveTraineePersonalAndTrainingInfo(
 			@RequestBody TraineePersonalAndTrainingInfoDto traineeInfoDto) throws ValidationException {
@@ -39,8 +46,12 @@ public class GatherTraineeInfoService {
 		
 		List<CompletedUserTrainingDto> completedTrainingList = traineeInfoDto.getCompletedUserTrainingList();
 		
-		//		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
+		GeneralIdResponse addressResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));
 
 		return new BooleanResponse(true);
+	}
+
+	public void setAddressService(AddressService addressService) {
+		this.addressService = addressService;
 	}
 }

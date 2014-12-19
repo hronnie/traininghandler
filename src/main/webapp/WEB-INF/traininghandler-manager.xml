@@ -19,9 +19,10 @@
 
 	<bean id="gatherTraineeInfoService"
 		class="com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoService">
+		<property name="addressService" ref="addressService" />
 	</bean>
 
-	<bean id="addressTypeService"
+	<bean id="addressService"
 		class="com.codeproj.traininghandler.rest.address.AddressService">
 		<property name="addressManager" ref="addressManager" />
 	</bean>
