@@ -27,8 +27,7 @@ public class AddressService {
 		String houseNo = ValidatorBaseUtility.stripXSS(addressDto.getHouseNo());
 		String postCode = ValidatorBaseUtility.stripXSS(addressDto.getPostCode());
 		String street = ValidatorBaseUtility.stripXSS(addressDto.getStreet());
-
-		Long result = addressManager.create(city, country, houseNo, postCode, street);
+		Long result = addressManager.create(postCode, city, street, houseNo, country);
 		return new GeneralIdResponse(result);
 	}
 

@@ -48,13 +48,13 @@ public class AddressServiceTest {
 	
 	// valid inputs
 	
-	@Ignore("the mock doesn't work yet")
+	//@Ignore("the mock doesn't work yet")
 	@Test()
 	public void testGatherTraineeInfoWithValidData() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		
 		GeneralIdResponse result = service.create(addressDto);
-		assertEquals("Wrong id when creating address", new Long(1L), result);
+		assertEquals("Wrong id when creating address", new Long(1L), result.getValue());
 	}
 	
 	// null check 

@@ -140,21 +140,7 @@ public class AddressDto {
 			}
 		} else if (!houseNo.equals(other.houseNo)) {
 			return false;
-		}
-		if (isAppointmentPlace == null) {
-			if (other.isAppointmentPlace != null) {
-				return false;
-			}
-		} else if (!isAppointmentPlace.equals(other.isAppointmentPlace)) {
-			return false;
-		}
-		if (isTrainingPlace == null) {
-			if (other.isTrainingPlace != null) {
-				return false;
-			}
-		} else if (!isTrainingPlace.equals(other.isTrainingPlace)) {
-			return false;
-		}
+		} 
 		if (postCode == null) {
 			if (other.postCode != null) {
 				return false;
