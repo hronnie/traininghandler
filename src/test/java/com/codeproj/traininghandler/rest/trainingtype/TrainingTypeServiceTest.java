@@ -61,10 +61,15 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	// create
 	
 	@Test(expected = ValidationException.class)
+	public void testCreateTrainingTypeWithNullObject() throws ValidationException {
+		service.create(null);
+	}
+
+	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithNullName() throws ValidationException {
 		service.create(new TrainingTypeDto(0L, null, validLevelNo, validDescription));
 	}
-
+	
 	@Test(expected = ValidationException.class)
 	public void testCreateTrainingTypeWithEmptyName() throws ValidationException {
 		service.create(new TrainingTypeDto(0L, "", validLevelNo, validDescription));
@@ -178,6 +183,11 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 
 	
 	@Test(expected = ValidationException.class)
+	public void updateTrainingTypeWithNullObject() throws DatabaseEntityNotFoundException, ValidationException {
+		service.update(new TrainingTypeDto(null, validName, validLevelNo, validDescription));
+	}
+	
+	@Test(expected = ValidationException.class)
 	public void updateTrainingTypeWithNullId() throws DatabaseEntityNotFoundException, ValidationException {
 		service.update(new TrainingTypeDto(null, validName, validLevelNo, validDescription));
 	}
@@ -244,6 +254,11 @@ public class TrainingTypeServiceTest extends TrainingTypeTestBase {
 	}
 	
 	// delete
+	
+	@Test(expected = ValidationException.class)
+	public void deleteTrainingTypeWithNullObject() throws DatabaseEntityNotFoundException, ValidationException {
+		service.delete(null);
+	}
 	
 	@Test(expected = ValidationException.class)
 	public void deleteTrainingTypeWithInvalidId() throws DatabaseEntityNotFoundException, ValidationException {

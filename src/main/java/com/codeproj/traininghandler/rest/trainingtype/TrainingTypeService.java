@@ -39,6 +39,10 @@ public class TrainingTypeService {
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody TrainingTypeDto trainingType)
 			throws ValidationException {
+		
+		if (trainingType == null) {
+			throw new ValidationException("Training type dto is null");
+		}
 
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
 		String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
@@ -98,6 +102,11 @@ public class TrainingTypeService {
 	 */
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
+		
+		if (trainingType == null) {
+			throw new ValidationException("training type dto is null");
+		}
+		
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
 		String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
 		String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
@@ -117,6 +126,10 @@ public class TrainingTypeService {
 	 */
 	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse delete(@RequestBody TrainingTypeDto trainingType)  throws ValidationException, DatabaseEntityNotFoundException {
+		if (trainingType == null) {
+			throw new ValidationException("training type dto is null");
+		}
+		
 		TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());
 		trainingTypeManager.delete(trainingType.getTrainingTypeId());
 		return new BooleanResponse(true);
