@@ -1,6 +1,7 @@
 package com.codeproj.traininghandler.rest.user;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,13 +10,20 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
+import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.manager.user.UserManager;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
 	public UserService service;
@@ -26,6 +34,9 @@ public class UserServiceTest {
 	public static final String VALID_EMAIL = "asdf@asf.com";
 	public static final String INVALID_EMAIL = "simpletext";
 	public static final Date VALID_DOB;
+	
+	@Mock
+	public UserManager userManager;
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
 			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
@@ -38,12 +49,139 @@ public class UserServiceTest {
 	@Before
 	public void setUp() {
 		service = new UserService();
+		service.setUserManager(userManager);
+		when(userManager.create(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL)).thenReturn(1L);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyDto() throws ValidationException {
-		//UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
 		service.create(null);
+	}
+	
+	@Test
+	public void testCreateUserWithValidData() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	// null check
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullLastName() throws ValidationException {
+		UserDto user = new UserDto(null, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullFirstName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, null, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullDisplayName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, null, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullDob() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, null, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullPhoneNumber() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, null, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullEmail() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, null);
+		service.create(user);
+	}
+	
+	// empty check
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithEmptyLastName() throws ValidationException {
+		UserDto user = new UserDto("", VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithEmptyFirstName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, "", VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithEmptyDisplayName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, "", VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithEmptyPhoneNumber() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, "", VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithEmptyEmail() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, "");
+		service.create(user);
+	}
+	
+	// too long check
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithTooLongLastName() throws ValidationException {
+		UserDto user = new UserDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithTooLongFirstName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithTooLongDisplayName() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithTooLongPhoneNumber() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithTooLongEmail() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100);
+		service.create(user);
+	}
+	
+	// dob and email additional checks
+	
+	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithDobYoungerThen6Years() throws ValidationException {
+		DateTime dobDt = new DateTime(2014, 3, 26, 12, 0, 0, 0);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, dobDt.toDate(), VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithInvalidEmail() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, INVALID_EMAIL);
+		service.create(user);
 	}
 
 }
