@@ -16,6 +16,7 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -24,6 +25,9 @@ public class GatherTraineeInfoService {
 
 	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse saveTraineePersonalAndTrainingInfo(
@@ -51,12 +55,17 @@ public class GatherTraineeInfoService {
 		
 		List<CompletedUserTrainingDto> completedTrainingList = traineeInfoDto.getCompletedUserTrainingList();
 		
-		GeneralIdResponse addressResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));
+//		GeneralIdResponse addressResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));
+		//userService.create(user)
 
 		return new BooleanResponse(true);
 	}
 
 	public void setAddressService(AddressService addressService) {
 		this.addressService = addressService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 }

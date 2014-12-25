@@ -33,6 +33,7 @@ public class GatherTraineeInfoServiceTest {
 	public static final String VALID_LAST_NAME = "Lastname";
 	public static final String VALID_FIRST_NAME = "Firstname";
 	public static final String VALID_DISPLAY_NAME = "mycustomDisplay name";
+	public static final Long VALID_USER_ID = 1L;
 	public static final String VALID_POST_CODE = "SDF33";
 	public static final String VALID_CITY = "London";
 	public static final String VALID_STREET = "Test Street name 1";
@@ -50,7 +51,7 @@ public class GatherTraineeInfoServiceTest {
 			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 	
 	static {
-		VALID_ADDRESS = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
+		VALID_ADDRESS = new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
 		VALID_DOB = dt.toDate();
 		VALID_USER = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
@@ -62,7 +63,7 @@ public class GatherTraineeInfoServiceTest {
 	public void setUp() throws Exception {
 		service = new GatherTraineeInfoService();
 		service.setAddressService(addressService);
-		when(addressService.create(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY))).thenReturn(new GeneralIdResponse(1L));
+		when(addressService.create(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY))).thenReturn(new GeneralIdResponse(1L));
 	}
 	
 	// ***************** Tests VALID input object **************
@@ -117,11 +118,20 @@ public class GatherTraineeInfoServiceTest {
 	// Null check
 	
 	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithNullUserId() throws ValidationException {
+		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
+		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
+		traineeInfoDto.setUser(VALID_USER);
+		traineeInfoDto.setAddress(new AddressDto(null, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
+	}
+	
+	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithNullPostCode() throws ValidationException {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(null, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, null, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -130,7 +140,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, null, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, null, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -139,7 +149,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, null, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, null, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -148,7 +158,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, null, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, null, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -156,7 +166,7 @@ public class GatherTraineeInfoServiceTest {
 	public void testGatherTraineeInfoWithNullCountry() throws ValidationException {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, null));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, null));
 		traineeInfoDto.setUser(VALID_USER);
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
@@ -168,7 +178,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto("", VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, "", VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -177,7 +187,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, "", VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, "", VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -186,7 +196,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, "", VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, "", VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -195,7 +205,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, "", VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, "", VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -203,7 +213,7 @@ public class GatherTraineeInfoServiceTest {
 	public void testGatherTraineeInfoWithEmptyCountry() throws ValidationException {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, ""));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, ""));
 		traineeInfoDto.setUser(VALID_USER);
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
@@ -215,7 +225,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -224,7 +234,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -233,7 +243,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_HOUSE_NUMBER, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -242,7 +252,7 @@ public class GatherTraineeInfoServiceTest {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
 		traineeInfoDto.setUser(VALID_USER);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_COUNTRY));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_COUNTRY));
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
 	
@@ -250,10 +260,21 @@ public class GatherTraineeInfoServiceTest {
 	public void testGatherTraineeInfoWithTooLongCountry() throws ValidationException {
 		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
 		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
-		traineeInfoDto.setAddress(new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100));
+		traineeInfoDto.setAddress(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100));
 		traineeInfoDto.setUser(VALID_USER);
 		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
 	}
+	
+	
+	@Test(expected = ValidationException.class)
+	public void testGatherTraineeInfoWithInvalidUserId() throws ValidationException {
+		TraineePersonalAndTrainingInfoDto traineeInfoDto = new TraineePersonalAndTrainingInfoDto();
+		traineeInfoDto.setCompletedUserTrainingList(VALID_COMPLETED_USER_TRAINING_LIST);
+		traineeInfoDto.setUser(VALID_USER);
+		traineeInfoDto.setAddress(new AddressDto(-5L, "", VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY));
+		service.saveTraineePersonalAndTrainingInfo(traineeInfoDto);  
+	}
+
 	
 	// ***************** Tests for user info **************
 	

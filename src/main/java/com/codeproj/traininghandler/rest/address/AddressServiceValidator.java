@@ -8,6 +8,9 @@ public class AddressServiceValidator extends ValidatorBaseUtility {
 	public static void create(
 			AddressDto addressDto) throws ValidationException {
 
+		entityIdValidator(addressDto.getUserId());
+		
+		mandatoryParameter("userId", addressDto.getUserId());
 		mandatoryParameter("postCode", addressDto.getPostCode());
 		mandatoryParameter("city", addressDto.getCity());
 		mandatoryParameter("street", addressDto.getStreet());

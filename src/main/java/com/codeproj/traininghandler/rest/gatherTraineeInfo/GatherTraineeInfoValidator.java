@@ -28,6 +28,7 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 			throw new ValidationException("User information is missing");
 		}
 		
+		mandatoryParameter("userId", traineeInfoDto.getAddress().getUserId());
 		mandatoryParameter("postCode", traineeInfoDto.getAddress().getPostCode());
 		mandatoryParameter("city", traineeInfoDto.getAddress().getCity());
 		mandatoryParameter("street", traineeInfoDto.getAddress().getStreet());
