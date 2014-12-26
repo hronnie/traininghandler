@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
+import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
@@ -53,6 +54,8 @@ public class GatherTraineeInfoService {
 		
 		Date dob = traineeInfoDto.getUser().getDob();
 		
+		GeneralIdResponse userCreateResult = userService.create(new UserDto(lastName, firstName, displayName, dob, phoneNo, email));
+		GeneralIdResponse addressCreateResult = addressService.create(new AddressDto(userCreateResult.getValue(), postCode, city, street, houseNo, country));
 		List<CompletedUserTrainingDto> completedTrainingList = traineeInfoDto.getCompletedUserTrainingList();
 		
 //		GeneralIdResponse addressResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));

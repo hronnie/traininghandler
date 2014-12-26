@@ -39,4 +39,13 @@
 	<bean id="userManager"
 		class="com.codeproj.traininghandler.manager.user.UserManager">
 	</bean>
+	
+	<bean id="completedTrainingService"
+		class="com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService">
+		<property name="completedTrainingManager" ref="completedTrainingManager" />
+	</bean>
+
+	<bean id="completedTrainingManager"
+		class="com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager">
+	</bean>
 </beans>

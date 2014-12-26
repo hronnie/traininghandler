@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="CompletedUserTraining")
 public class CompletedUserTrainingDto {
 	private Long userId;
-	private long trainingTypeId;
+	private Long trainingTypeId;
 	private Date completedDate;
 	
 	public CompletedUserTrainingDto() { /* empty constructor */}
 	
-	public CompletedUserTrainingDto(Long userId, long trainingTypeId,
+	public CompletedUserTrainingDto(Long userId, Long trainingTypeId,
 			Date completedDate) {
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
@@ -26,7 +26,7 @@ public class CompletedUserTrainingDto {
 	}
 
 	@XmlElement(name="trainingTypeId")
-	public long getTrainingTypeId() {
+	public Long getTrainingTypeId() {
 		return trainingTypeId;
 	}
 
@@ -39,7 +39,7 @@ public class CompletedUserTrainingDto {
 		this.userId = userId;
 	}
 
-	public void setTrainingTypeId(long trainingTypeId) {
+	public void setTrainingTypeId(Long trainingTypeId) {
 		this.trainingTypeId = trainingTypeId;
 	}
 

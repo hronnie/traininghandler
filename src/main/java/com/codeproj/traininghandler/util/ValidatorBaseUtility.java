@@ -115,6 +115,13 @@ public class ValidatorBaseUtility {
 		}
 	}
 	
+	public static void isDateInTheFuture(Date date) throws ValidationException {
+		DateTime curDate = new DateTime();
+		if (curDate.isBefore(date.getTime())) {
+			throw new ValidationException("The given date: " + date + " must be in the past.");
+		}
+	}
+	
 	public static void completedUserTrainingValidator(
 			List<CompletedUserTrainingDto> completedUserTrainingList) throws ValidationException {
 		for (CompletedUserTrainingDto compTr : completedUserTrainingList) {
