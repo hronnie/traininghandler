@@ -21,6 +21,8 @@ import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
+import com.codeproj.traininghandler.rest.user.UserService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GatherTraineeInfoServiceTest {
@@ -47,6 +49,12 @@ public class GatherTraineeInfoServiceTest {
 	@Mock
 	public AddressService addressService;
 	
+	@Mock
+	public UserService userService;
+	
+	@Mock 
+	public CompletedTrainingService completedTrainingService;
+	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
 			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 	
@@ -63,7 +71,11 @@ public class GatherTraineeInfoServiceTest {
 	public void setUp() throws Exception {
 		service = new GatherTraineeInfoService();
 		service.setAddressService(addressService);
-		when(addressService.create(new AddressDto(VALID_USER_ID, VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY))).thenReturn(new GeneralIdResponse(1L));
+		service.setUserService(userService);
+		service.setCompletedTrainingService(completedTrainingService);
+		when(addressService.create(VALID_ADDRESS)).thenReturn(new GeneralIdResponse(1L));
+		when(userService.create(VALID_USER)).thenReturn(new GeneralIdResponse(1L));
+		when(completedTrainingService.create(VALID_COMPLETED_USER_TRAINING_LIST)).thenReturn(new GeneralIdResponse(1L));
 	}
 	
 	// ***************** Tests VALID input object **************

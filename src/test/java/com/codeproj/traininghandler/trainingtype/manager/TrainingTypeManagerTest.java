@@ -1,4 +1,4 @@
-package com.codeproj.traininghandler.manager;
+package com.codeproj.traininghandler.trainingtype.manager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

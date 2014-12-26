@@ -20,6 +20,8 @@
 	<bean id="gatherTraineeInfoService"
 		class="com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoService">
 		<property name="addressService" ref="addressService" />
+		<property name="completedTrainingService" ref="completedTrainingService" />
+		<property name="userService" ref="userService" />
 	</bean>
 
 	<bean id="addressService"

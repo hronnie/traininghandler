@@ -46,7 +46,7 @@ public class CompletedTrainingServiceTest {
 	@Before
 	public void setUp() {
 		service = new CompletedTrainingService();
-		service.setComplatedTrainingManager(manager);
+		service.setCompletedTrainingManager(manager);
 		when(manager.create(VALID_COMPLETED_TRAINING_LIST)).thenReturn(3L);
 	}
 

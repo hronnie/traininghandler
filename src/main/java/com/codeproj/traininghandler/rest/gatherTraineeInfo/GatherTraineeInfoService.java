@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
@@ -29,6 +31,9 @@ public class GatherTraineeInfoService {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CompletedTrainingService completedTrainingService;
 	
 	@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse saveTraineePersonalAndTrainingInfo(
@@ -55,13 +60,21 @@ public class GatherTraineeInfoService {
 		Date dob = traineeInfoDto.getUser().getDob();
 		
 		GeneralIdResponse userCreateResult = userService.create(new UserDto(lastName, firstName, displayName, dob, phoneNo, email));
-		GeneralIdResponse addressCreateResult = addressService.create(new AddressDto(userCreateResult.getValue(), postCode, city, street, houseNo, country));
-		List<CompletedUserTrainingDto> completedTrainingList = traineeInfoDto.getCompletedUserTrainingList();
+		addressService.create(new AddressDto(userCreateResult.getValue(), postCode, city, street, houseNo, country));
+		List<CompletedUserTrainingDto> enrichedComplUsrTrList = enrichCompletedUserTrainingListWithUserId(traineeInfoDto.getCompletedUserTrainingList(), userCreateResult.getValue());
+		completedTrainingService.create(enrichedComplUsrTrList);
 		
-//		GeneralIdResponse addressResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));
-		//userService.create(user)
-
 		return new BooleanResponse(true);
+	}
+
+	private List<CompletedUserTrainingDto> enrichCompletedUserTrainingListWithUserId(
+			List<CompletedUserTrainingDto> completedUserTrainingList, Long userId) {
+		List<CompletedUserTrainingDto> result = new ArrayList<>();
+		for (CompletedUserTrainingDto item : completedUserTrainingList) {
+			item.setUserId(userId);
+			result.add(item);
+		}
+		return result;
 	}
 
 	public void setAddressService(AddressService addressService) {
@@ -70,5 +83,10 @@ public class GatherTraineeInfoService {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public void setCompletedTrainingService(
+			CompletedTrainingService completedTrainingService) {
+		this.completedTrainingService = completedTrainingService;
 	}
 }

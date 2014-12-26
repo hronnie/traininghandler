@@ -18,18 +18,18 @@ import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 public class CompletedTrainingService {
 	
 	@Autowired
-	public CompletedTrainingManager complatedTrainingManager;
+	public CompletedTrainingManager completedTrainingManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
 		CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
-		Long result = complatedTrainingManager.create(complatedUserTrainingDtoList);
+		Long result = completedTrainingManager.create(complatedUserTrainingDtoList);
 		return new GeneralIdResponse(result);
 	}
 
-	public void setComplatedTrainingManager(
-			CompletedTrainingManager complatedTrainingManager) {
-		this.complatedTrainingManager = complatedTrainingManager;
+	public void setCompletedTrainingManager(
+			CompletedTrainingManager completedTrainingManager) {
+		this.completedTrainingManager = completedTrainingManager;
 	}
 
 }
