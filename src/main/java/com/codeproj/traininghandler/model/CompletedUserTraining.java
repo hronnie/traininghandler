@@ -3,7 +3,7 @@ package com.codeproj.traininghandler.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CompletedUserTraining implements HibernatePersistable, Serializable {
+public class CompletedUserTraining implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,15 +24,6 @@ public class CompletedUserTraining implements HibernatePersistable, Serializable
 		this.user = user;
 	}
 
-	@Override
-	public Long getId() {
-		return this.completedUserTrainingId;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.completedUserTrainingId = id;
-	}
 
 	public User getUser() {
 		return user;

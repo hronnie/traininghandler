@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.codeproj.traininghandler.util.Constants;
 
-public class User implements HibernatePersistable, Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -96,16 +96,6 @@ public class User implements HibernatePersistable, Serializable {
 		this.mobileNo = mobileNo;
 		this.userType = new UserType(Constants.USER_TYPE_DATA_TRAINEE_ID, Constants.USER_TYPE_DATA_TRAINEE);
 		this.address = new Address(addressId);
-	}
-
-	@Override
-	public Long getId() {
-		return this.userId;
-	}
-	
-	@Override
-	public void setId(Long id) {
-		this.userId = id;
 	}
 	
 	public Long getUserId() {

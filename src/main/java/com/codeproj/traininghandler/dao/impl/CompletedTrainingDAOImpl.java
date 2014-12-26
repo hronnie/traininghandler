@@ -25,7 +25,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		List<Long> result = new ArrayList<>();
 		for (CompletedUserTraining item : complatedUserTrainingList) {
 			sessionFactory.getCurrentSession().save(item);
-			result.add(item.getId());
+			result.add(item.getCompletedUserTrainingId());
 		}
         return result;
 	}

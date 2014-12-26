@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Address implements HibernatePersistable, Serializable {
+public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -57,21 +57,11 @@ public class Address implements HibernatePersistable, Serializable {
 		this.street = street;
 	}
 
-	@Override
-	public Long getId() {
-		return this.addressId;
-	}
-	
-	@Override
-	public void setId(Long id) {
-		this.addressId = id;
-	}
-
-	public long getAddressId() {
+	public Long getAddressId() {
 		return this.addressId;
 	}
 
-	public void setAddressId(long addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
