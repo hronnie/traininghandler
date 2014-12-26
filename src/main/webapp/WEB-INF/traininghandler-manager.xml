@@ -48,7 +48,7 @@
 
 	<bean id="userManager"
 		class="com.codeproj.traininghandler.manager.user.UserManager">
-		<property name="trainingTypeDAO" ref="trainingTypeDAO" />
+		<property name="userDAO" ref="userDAO" />
 	</bean>
 
 	<bean id="completedTrainingManager"
