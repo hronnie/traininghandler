@@ -20,6 +20,7 @@ import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
@@ -75,7 +76,9 @@ public class GatherTraineeInfoServiceTest {
 		service.setCompletedTrainingService(completedTrainingService);
 		when(addressService.create(VALID_ADDRESS)).thenReturn(new GeneralIdResponse(1L));
 		when(userService.create(VALID_USER)).thenReturn(new GeneralIdResponse(1L));
-		when(completedTrainingService.create(VALID_COMPLETED_USER_TRAINING_LIST)).thenReturn(new GeneralIdResponse(1L));
+		List<Long> complServResult = new ArrayList<>();
+		complServResult.add(1L);
+		when(completedTrainingService.create(VALID_COMPLETED_USER_TRAINING_LIST)).thenReturn(new GeneralIdListResponse(complServResult));
 	}
 	
 	// ***************** Tests VALID input object **************

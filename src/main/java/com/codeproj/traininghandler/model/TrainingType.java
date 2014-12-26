@@ -13,6 +13,10 @@ public class TrainingType implements  Serializable {
 	private String description;
 
 	public TrainingType() {
+		// empty constructor
+	}
+	public TrainingType(Long trainingTypeId) {
+		this.trainingTypeId = trainingTypeId;
 	}
 
 	public TrainingType(String name,
@@ -87,6 +91,9 @@ public class TrainingType implements  Serializable {
 			return false;
 		}
 		TrainingType other = (TrainingType) obj;
+		if (trainingTypeId != null && other.trainingTypeId != null && trainingTypeId == other.trainingTypeId) {
+			return true;
+		}
 		if (description == null) {
 			if (other.description != null) {
 				return false;

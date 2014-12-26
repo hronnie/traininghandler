@@ -17,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingServiceTest {
@@ -47,7 +48,9 @@ public class CompletedTrainingServiceTest {
 	public void setUp() {
 		service = new CompletedTrainingService();
 		service.setCompletedTrainingManager(manager);
-		when(manager.create(VALID_COMPLETED_TRAINING_LIST)).thenReturn(3L);
+		List<Long> complServResult = new ArrayList<>();
+		complServResult.add(1L);
+		when(manager.create(VALID_COMPLETED_TRAINING_LIST)).thenReturn(complServResult);
 	}
 
 	@Test

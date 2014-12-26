@@ -76,4 +76,10 @@
 	    </constructor-arg>
 	</bean>
     
+    <bean id="completedTrainingDAO" class="com.codeproj.traininghandler.dao.impl.CompletedTrainingDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    
 </beans>

@@ -36,6 +36,10 @@ public class User implements HibernatePersistable, Serializable {
 		//empty constructor
 	}
 
+	public User(Long userId) {
+		this.userId = userId;
+	}
+
 	public User(Long userId, Address address, 
 			String firstName, String lastName, String email, 
 			Boolean isEnabled, String locale, UserType userType, Date created) {
@@ -324,6 +328,9 @@ public class User implements HibernatePersistable, Serializable {
 			return false;
 		}
 		User other = (User) obj;
+		if (userId != null && other.userId != null && userId == other.userId) {
+			return true;
+		}
 		if (address == null) {
 			if (other.address != null) {
 				return false;

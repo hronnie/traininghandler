@@ -65,5 +65,65 @@ public class CompletedUserTraining implements HibernatePersistable, Serializable
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((completedDate == null) ? 0 : completedDate.hashCode());
+		result = prime
+				* result
+				+ ((completedUserTrainingId == null) ? 0
+						: completedUserTrainingId.hashCode());
+		result = prime * result
+				+ ((trainingType == null) ? 0 : trainingType.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof CompletedUserTraining)) {
+			return false;
+		}
+		CompletedUserTraining other = (CompletedUserTraining) obj;
+		if (completedDate == null) {
+			if (other.completedDate != null) {
+				return false;
+			}
+		} else if (!completedDate.equals(other.completedDate)) {
+			return false;
+		}
+		if (completedUserTrainingId == null) {
+			if (other.completedUserTrainingId != null) {
+				return false;
+			}
+		} else if (!completedUserTrainingId
+				.equals(other.completedUserTrainingId)) {
+			return false;
+		}
+		if (trainingType == null) {
+			if (other.trainingType != null) {
+				return false;
+			}
+		} else if (!trainingType.equals(other.trainingType)) {
+			return false;
+		}
+		if (user == null) {
+			if (other.user != null) {
+				return false;
+			}
+		} else if (!user.equals(other.user)) {
+			return false;
+		}
+		return true;
+	}
 	
 }

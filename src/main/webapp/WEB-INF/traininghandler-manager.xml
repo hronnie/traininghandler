@@ -54,5 +54,6 @@
 
 	<bean id="completedTrainingManager"
 		class="com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager">
+		<property name="completedTrainingDAO" ref="completedTrainingDAO" />
 	</bean>
 </beans>

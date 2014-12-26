@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RestController
@@ -21,10 +22,10 @@ public class CompletedTrainingService {
 	public CompletedTrainingManager completedTrainingManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
+	public GeneralIdListResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
 		CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
-		Long result = completedTrainingManager.create(complatedUserTrainingDtoList);
-		return new GeneralIdResponse(result);
+		List<Long> result = completedTrainingManager.create(complatedUserTrainingDtoList);
+		return new GeneralIdListResponse(result);
 	}
 
 	public void setCompletedTrainingManager(
