@@ -24,7 +24,7 @@ public class UserManagerTest {
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
-		VALID_DATE = new Date(11111100L);
+		VALID_DATE = dt.toDate();
 	}
 	
 	@Mock
