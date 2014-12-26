@@ -94,4 +94,92 @@ public class SentTrainingEmail implements HibernatePersistable, Serializable {
 	public void setIsAttend(Boolean isAttend) {
 		this.isAttend = isAttend;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((emailTemplate == null) ? 0 : emailTemplate.hashCode());
+		result = prime * result
+				+ ((isAttend == null) ? 0 : isAttend.hashCode());
+		result = prime * result
+				+ ((isConfirmed == null) ? 0 : isConfirmed.hashCode());
+		result = prime
+				* result
+				+ ((sentTrainingEmailId == null) ? 0 : sentTrainingEmailId
+						.hashCode());
+		result = prime
+				* result
+				+ ((traineeEmailToken == null) ? 0 : traineeEmailToken
+						.hashCode());
+		result = prime * result
+				+ ((training == null) ? 0 : training.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof SentTrainingEmail)) {
+			return false;
+		}
+		SentTrainingEmail other = (SentTrainingEmail) obj;
+		if (emailTemplate == null) {
+			if (other.emailTemplate != null) {
+				return false;
+			}
+		} else if (!emailTemplate.equals(other.emailTemplate)) {
+			return false;
+		}
+		if (isAttend == null) {
+			if (other.isAttend != null) {
+				return false;
+			}
+		} else if (!isAttend.equals(other.isAttend)) {
+			return false;
+		}
+		if (isConfirmed == null) {
+			if (other.isConfirmed != null) {
+				return false;
+			}
+		} else if (!isConfirmed.equals(other.isConfirmed)) {
+			return false;
+		}
+		if (sentTrainingEmailId == null) {
+			if (other.sentTrainingEmailId != null) {
+				return false;
+			}
+		} else if (!sentTrainingEmailId.equals(other.sentTrainingEmailId)) {
+			return false;
+		}
+		if (traineeEmailToken == null) {
+			if (other.traineeEmailToken != null) {
+				return false;
+			}
+		} else if (!traineeEmailToken.equals(other.traineeEmailToken)) {
+			return false;
+		}
+		if (training == null) {
+			if (other.training != null) {
+				return false;
+			}
+		} else if (!training.equals(other.training)) {
+			return false;
+		}
+		if (user == null) {
+			if (other.user != null) {
+				return false;
+			}
+		} else if (!user.equals(other.user)) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -70,4 +70,62 @@ public class UserLevel implements HibernatePersistable, Serializable {
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((completedDate == null) ? 0 : completedDate.hashCode());
+		result = prime * result
+				+ ((trainingType == null) ? 0 : trainingType.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result
+				+ ((userLevelId == null) ? 0 : userLevelId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof UserLevel)) {
+			return false;
+		}
+		UserLevel other = (UserLevel) obj;
+		if (completedDate == null) {
+			if (other.completedDate != null) {
+				return false;
+			}
+		} else if (!completedDate.equals(other.completedDate)) {
+			return false;
+		}
+		if (trainingType == null) {
+			if (other.trainingType != null) {
+				return false;
+			}
+		} else if (!trainingType.equals(other.trainingType)) {
+			return false;
+		}
+		if (user == null) {
+			if (other.user != null) {
+				return false;
+			}
+		} else if (!user.equals(other.user)) {
+			return false;
+		}
+		if (userLevelId == null) {
+			if (other.userLevelId != null) {
+				return false;
+			}
+		} else if (!userLevelId.equals(other.userLevelId)) {
+			return false;
+		}
+		return true;
+	}
+	
 }

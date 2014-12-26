@@ -265,4 +265,207 @@ public class User implements HibernatePersistable, Serializable {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime
+				* result
+				+ ((appointmentsForHealerId == null) ? 0
+						: appointmentsForHealerId.hashCode());
+		result = prime
+				* result
+				+ ((appointmentsForPatientId == null) ? 0
+						: appointmentsForPatientId.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result
+				+ ((displayName == null) ? 0 : displayName.hashCode());
+		result = prime * result + ((dob == null) ? 0 : dob.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result
+				+ ((isEnabled == null) ? 0 : isEnabled.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((logs == null) ? 0 : logs.hashCode());
+		result = prime * result
+				+ ((mobileNo == null) ? 0 : mobileNo.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime
+				* result
+				+ ((sentTrainingEmails == null) ? 0 : sentTrainingEmails
+						.hashCode());
+		result = prime * result
+				+ ((trainings == null) ? 0 : trainings.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result
+				+ ((userLevels == null) ? 0 : userLevels.hashCode());
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result
+				+ ((userType == null) ? 0 : userType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		if (address == null) {
+			if (other.address != null) {
+				return false;
+			}
+		} else if (!address.equals(other.address)) {
+			return false;
+		}
+		if (appointmentsForHealerId == null) {
+			if (other.appointmentsForHealerId != null) {
+				return false;
+			}
+		} else if (!appointmentsForHealerId
+				.equals(other.appointmentsForHealerId)) {
+			return false;
+		}
+		if (appointmentsForPatientId == null) {
+			if (other.appointmentsForPatientId != null) {
+				return false;
+			}
+		} else if (!appointmentsForPatientId
+				.equals(other.appointmentsForPatientId)) {
+			return false;
+		}
+		if (created == null) {
+			if (other.created != null) {
+				return false;
+			}
+		} else if (!created.equals(other.created)) {
+			return false;
+		}
+		if (displayName == null) {
+			if (other.displayName != null) {
+				return false;
+			}
+		} else if (!displayName.equals(other.displayName)) {
+			return false;
+		}
+		if (dob == null) {
+			if (other.dob != null) {
+				return false;
+			}
+		} else if (!dob.equals(other.dob)) {
+			return false;
+		}
+		if (email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!email.equals(other.email)) {
+			return false;
+		}
+		if (firstName == null) {
+			if (other.firstName != null) {
+				return false;
+			}
+		} else if (!firstName.equals(other.firstName)) {
+			return false;
+		}
+		if (isEnabled == null) {
+			if (other.isEnabled != null) {
+				return false;
+			}
+		} else if (!isEnabled.equals(other.isEnabled)) {
+			return false;
+		}
+		if (lastName == null) {
+			if (other.lastName != null) {
+				return false;
+			}
+		} else if (!lastName.equals(other.lastName)) {
+			return false;
+		}
+		if (locale == null) {
+			if (other.locale != null) {
+				return false;
+			}
+		} else if (!locale.equals(other.locale)) {
+			return false;
+		}
+		if (logs == null) {
+			if (other.logs != null) {
+				return false;
+			}
+		} else if (!logs.equals(other.logs)) {
+			return false;
+		}
+		if (mobileNo == null) {
+			if (other.mobileNo != null) {
+				return false;
+			}
+		} else if (!mobileNo.equals(other.mobileNo)) {
+			return false;
+		}
+		if (password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!password.equals(other.password)) {
+			return false;
+		}
+		if (sentTrainingEmails == null) {
+			if (other.sentTrainingEmails != null) {
+				return false;
+			}
+		} else if (!sentTrainingEmails.equals(other.sentTrainingEmails)) {
+			return false;
+		}
+		if (trainings == null) {
+			if (other.trainings != null) {
+				return false;
+			}
+		} else if (!trainings.equals(other.trainings)) {
+			return false;
+		}
+		if (userId == null) {
+			if (other.userId != null) {
+				return false;
+			}
+		} else if (!userId.equals(other.userId)) {
+			return false;
+		}
+		if (userLevels == null) {
+			if (other.userLevels != null) {
+				return false;
+			}
+		} else if (!userLevels.equals(other.userLevels)) {
+			return false;
+		}
+		if (userName == null) {
+			if (other.userName != null) {
+				return false;
+			}
+		} else if (!userName.equals(other.userName)) {
+			return false;
+		}
+		if (userType == null) {
+			if (other.userType != null) {
+				return false;
+			}
+		} else if (!userType.equals(other.userType)) {
+			return false;
+		}
+		return true;
+	}
 }

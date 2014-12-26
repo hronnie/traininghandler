@@ -24,7 +24,7 @@ public class UserManagerTest {
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
-		VALID_DATE = dt.toDate();
+		VALID_DATE = new Date(11111100L);
 	}
 	
 	@Mock
@@ -34,13 +34,13 @@ public class UserManagerTest {
 	public void setUp() throws Exception {
 		manager = new UserManager();
 		manager.setUserDAO(userDAO);
-		when(userDAO.create(new User("lastname", "firstName", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(8L);
+		when(userDAO.create(new User("lastname", "firstName", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
 	}
 
 	@Test
 	public void testCreateUser() {
 		Long result = manager.create("lastname", "firstName", "displayName", VALID_DATE, "324234315", "a@b.com", 1L);
-		assertEquals("Failed to call DAO method", new Long(8), result);
+		assertEquals("Failed to call DAO method", new Long(1L), result);
 	}
 
 }

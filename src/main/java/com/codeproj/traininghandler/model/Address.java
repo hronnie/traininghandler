@@ -153,4 +153,131 @@ public class Address implements HibernatePersistable, Serializable {
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((addressId == null) ? 0 : addressId.hashCode());
+		result = prime * result
+				+ ((appointments == null) ? 0 : appointments.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((houseNo == null) ? 0 : houseNo.hashCode());
+		result = prime
+				* result
+				+ ((isAppointmentPlace == null) ? 0 : isAppointmentPlace
+						.hashCode());
+		result = prime * result
+				+ ((isTrainingPlace == null) ? 0 : isTrainingPlace.hashCode());
+		result = prime * result
+				+ ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result
+				+ ((trainingTypes == null) ? 0 : trainingTypes.hashCode());
+		result = prime * result
+				+ ((trainings == null) ? 0 : trainings.hashCode());
+		result = prime * result + ((users == null) ? 0 : users.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Address)) {
+			return false;
+		}
+		Address other = (Address) obj;
+		if (addressId == null) {
+			if (other.addressId != null) {
+				return false;
+			}
+		} else if (!addressId.equals(other.addressId)) {
+			return false;
+		}
+		if (appointments == null) {
+			if (other.appointments != null) {
+				return false;
+			}
+		} else if (!appointments.equals(other.appointments)) {
+			return false;
+		}
+		if (city == null) {
+			if (other.city != null) {
+				return false;
+			}
+		} else if (!city.equals(other.city)) {
+			return false;
+		}
+		if (country == null) {
+			if (other.country != null) {
+				return false;
+			}
+		} else if (!country.equals(other.country)) {
+			return false;
+		}
+		if (houseNo == null) {
+			if (other.houseNo != null) {
+				return false;
+			}
+		} else if (!houseNo.equals(other.houseNo)) {
+			return false;
+		}
+		if (isAppointmentPlace == null) {
+			if (other.isAppointmentPlace != null) {
+				return false;
+			}
+		} else if (!isAppointmentPlace.equals(other.isAppointmentPlace)) {
+			return false;
+		}
+		if (isTrainingPlace == null) {
+			if (other.isTrainingPlace != null) {
+				return false;
+			}
+		} else if (!isTrainingPlace.equals(other.isTrainingPlace)) {
+			return false;
+		}
+		if (postalCode == null) {
+			if (other.postalCode != null) {
+				return false;
+			}
+		} else if (!postalCode.equals(other.postalCode)) {
+			return false;
+		}
+		if (street == null) {
+			if (other.street != null) {
+				return false;
+			}
+		} else if (!street.equals(other.street)) {
+			return false;
+		}
+		if (trainingTypes == null) {
+			if (other.trainingTypes != null) {
+				return false;
+			}
+		} else if (!trainingTypes.equals(other.trainingTypes)) {
+			return false;
+		}
+		if (trainings == null) {
+			if (other.trainings != null) {
+				return false;
+			}
+		} else if (!trainings.equals(other.trainings)) {
+			return false;
+		}
+		if (users == null) {
+			if (other.users != null) {
+				return false;
+			}
+		} else if (!users.equals(other.users)) {
+			return false;
+		}
+		return true;
+	}
 }
