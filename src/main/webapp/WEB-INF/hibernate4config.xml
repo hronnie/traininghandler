@@ -70,4 +70,10 @@
 	    </constructor-arg>
 	</bean>
     
+    <bean id="addressDAO" class="com.codeproj.traininghandler.dao.impl.AddressDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    
 </beans>

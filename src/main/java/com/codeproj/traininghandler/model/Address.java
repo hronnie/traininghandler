@@ -47,6 +47,15 @@ public class Address implements HibernatePersistable, Serializable {
 		this.trainings = trainings;
 		this.appointments = appointments;
 	}
+	
+	public Address(String city, String country, String houseNo, String postalCode,
+			String street) {
+		this.city = city;
+		this.country = country;
+		this.houseNo = houseNo;
+		this.postalCode = postalCode;
+		this.street = street;
+	}
 
 	@Override
 	public Long getId() {
