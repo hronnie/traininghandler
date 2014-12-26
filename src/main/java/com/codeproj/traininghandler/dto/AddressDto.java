@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Address")
 public class AddressDto {
-	private Long userId;
 	private String postCode;
 	private String city;
 	private String street;
@@ -16,23 +15,13 @@ public class AddressDto {
 	
 	public AddressDto() { /* empty constructor */ }
 	
-	public AddressDto(Long userId, String postCode, String city, String street,
+	public AddressDto(String postCode, String city, String street,
 			String houseNo, String country) {
-		this.userId = userId;
 		this.postCode = postCode;
 		this.city = city;
 		this.street = street;
 		this.houseNo = houseNo;
 		this.country = country;
-	}
-
-	@XmlElement(name="userId")
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 
 	@XmlElement(name="postCode")
@@ -114,7 +103,6 @@ public class AddressDto {
 		result = prime * result
 				+ ((postCode == null) ? 0 : postCode.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -179,19 +167,12 @@ public class AddressDto {
 		} else if (!street.equals(other.street)) {
 			return false;
 		}
-		if (userId == null) {
-			if (other.userId != null) {
-				return false;
-			}
-		} else if (!userId.equals(other.userId)) {
-			return false;
-		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AddressDto [userId=" + userId + ", postCode=" + postCode
+		return "AddressDto [postCode=" + postCode
 				+ ", city=" + city + ", street=" + street + ", houseNo="
 				+ houseNo + ", country=" + country + ", isTrainingPlace="
 				+ isTrainingPlace + ", isAppointmentPlace="

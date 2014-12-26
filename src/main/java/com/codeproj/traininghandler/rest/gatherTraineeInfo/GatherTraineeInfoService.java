@@ -59,8 +59,8 @@ public class GatherTraineeInfoService {
 		
 		Date dob = traineeInfoDto.getUser().getDob();
 		
-		GeneralIdResponse userCreateResult = userService.create(new UserDto(lastName, firstName, displayName, dob, phoneNo, email));
-		addressService.create(new AddressDto(userCreateResult.getValue(), postCode, city, street, houseNo, country));
+		GeneralIdResponse addressCreateResult = addressService.create(new AddressDto(postCode, city, street, houseNo, country));
+		GeneralIdResponse userCreateResult = userService.create(new UserDto(lastName, firstName, displayName, dob, phoneNo, email, addressCreateResult.getValue()));
 		List<CompletedUserTrainingDto> enrichedComplUsrTrList = enrichCompletedUserTrainingListWithUserId(traineeInfoDto.getCompletedUserTrainingList(), userCreateResult.getValue());
 		completedTrainingService.create(enrichedComplUsrTrList);
 		

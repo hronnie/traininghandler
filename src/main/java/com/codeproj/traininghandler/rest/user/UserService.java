@@ -31,9 +31,9 @@ public class UserService {
 		String email = ValidatorBaseUtility.stripXSS(user.getEmail());
 		String phoneNumber = ValidatorBaseUtility.stripXSS(user.getPhoneNo());
 
-		UserServiceValidator.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email);
+		UserServiceValidator.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
 		
-		Long result = userManager.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email);
+		Long result = userManager.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
 		return new GeneralIdResponse(result);
 	}
 

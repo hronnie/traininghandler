@@ -64,4 +64,10 @@
 	    </constructor-arg>
 	</bean>
     
+    <bean id="userDAO" class="com.codeproj.traininghandler.dao.impl.UserDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    
 </beans>

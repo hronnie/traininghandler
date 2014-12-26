@@ -34,6 +34,7 @@ public class UserServiceTest {
 	public static final String VALID_EMAIL = "asdf@asf.com";
 	public static final String INVALID_EMAIL = "simpletext";
 	public static final Date VALID_DOB;
+	public static final Long VALID_ADDRESS_ID = 1L;
 	
 	@Mock
 	public UserManager userManager;
@@ -50,7 +51,7 @@ public class UserServiceTest {
 	public void setUp() {
 		service = new UserService();
 		service.setUserManager(userManager);
-		when(userManager.create(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL)).thenReturn(1L);
+		when(userManager.create(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
 	}
 
 	@Test(expected = ValidationException.class)
@@ -60,7 +61,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testCreateUserWithValidData() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
@@ -68,38 +69,44 @@ public class UserServiceTest {
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullLastName() throws ValidationException {
-		UserDto user = new UserDto(null, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(null, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullFirstName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, null, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, null, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullDisplayName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, null, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, null, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullDob() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, null, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, null, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullPhoneNumber() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, null, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, null, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, null);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, null, VALID_ADDRESS_ID);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithNullAddressId() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, null);
 		service.create(user);
 	}
 	
@@ -107,32 +114,32 @@ public class UserServiceTest {
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyLastName() throws ValidationException {
-		UserDto user = new UserDto("", VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto("", VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyFirstName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, "", VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, "", VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyDisplayName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, "", VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, "", VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyPhoneNumber() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, "", VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, "", VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, "");
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, "", VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
@@ -140,32 +147,32 @@ public class UserServiceTest {
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithTooLongLastName() throws ValidationException {
-		UserDto user = new UserDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithTooLongFirstName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithTooLongDisplayName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithTooLongPhoneNumber() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithTooLongEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
@@ -174,13 +181,19 @@ public class UserServiceTest {
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithDobYoungerThen6Years() throws ValidationException {
 		DateTime dobDt = new DateTime(2014, 3, 26, 12, 0, 0, 0);
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, dobDt.toDate(), VALID_TELEPHONE_NUMBER, VALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, dobDt.toDate(), VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testGatherTraineeInfoWithInvalidEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, INVALID_EMAIL);
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, INVALID_EMAIL, VALID_ADDRESS_ID);
+		service.create(user);
+	}
+	
+	@Test(expected = ValidationException.class)
+	public void testCreateUserWithInvalidAddressId() throws ValidationException {
+		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, -5L);
 		service.create(user);
 	}
 

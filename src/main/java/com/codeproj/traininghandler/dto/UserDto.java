@@ -13,17 +13,19 @@ public class UserDto {
 	private Date dob;
 	private String phoneNo;
 	private String email;
+	private Long addressId;
 	
 	public UserDto() { /* empty constructor */}
 
 	public UserDto(String lastName, String firstName, String displayName,
-			Date dob, String phoneNo, String email) {
+			Date dob, String phoneNo, String email, Long addressId) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.displayName = displayName;
 		this.dob = dob;
 		this.phoneNo = phoneNo;
 		this.email = email;
+		this.addressId = addressId;
 	}
 
 	@XmlElement(name="lastName")
@@ -55,6 +57,11 @@ public class UserDto {
 	public String getEmail() {
 		return email;
 	}
+	
+	@XmlElement(name="addressId")
+	public Long getAddressId() {
+		return addressId;
+	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -79,11 +86,17 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result
 				+ ((displayName == null) ? 0 : displayName.hashCode());
 		result = prime * result + ((dob == null) ? 0 : dob.hashCode());
@@ -108,6 +121,13 @@ public class UserDto {
 			return false;
 		}
 		UserDto other = (UserDto) obj;
+		if (addressId == null) {
+			if (other.addressId != null) {
+				return false;
+			}
+		} else if (!addressId.equals(other.addressId)) {
+			return false;
+		}
 		if (displayName == null) {
 			if (other.displayName != null) {
 				return false;
@@ -157,9 +177,9 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [lastName=" + lastName + ", firstName=" + firstName
 				+ ", displayName=" + displayName + ", dob=" + dob
-				+ ", phoneNo=" + phoneNo + ", email=" + email + "]";
+				+ ", phoneNo=" + phoneNo + ", email=" + email + ", addressId="
+				+ addressId + "]";
 	}
-	
 }
 
 

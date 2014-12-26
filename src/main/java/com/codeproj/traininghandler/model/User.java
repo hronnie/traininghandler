@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.codeproj.traininghandler.util.Constants;
+
 public class User implements HibernatePersistable, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -78,6 +80,18 @@ public class User implements HibernatePersistable, Serializable {
 		this.setLocale(locale);
 		this.userType = userType;
 		this.created = created;
+	}
+	
+	public User(String lastName, String firstName, String displayName,
+			Date dob, String mobileNo, String email, Long addressId) {
+		this.displayName = displayName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.userType = new UserType(Constants.USER_TYPE_DATA_TRAINEE_ID, Constants.USER_TYPE_DATA_TRAINEE);
+		this.address = new Address(addressId);
 	}
 
 	@Override

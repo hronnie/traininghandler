@@ -24,6 +24,10 @@ public class Address implements HibernatePersistable, Serializable {
 	public Address() {
 		// empty constructor
 	}
+	
+	public Address(Long addressId) {
+		this.addressId = addressId;
+	}
 
 	public Address(Long addressId, String postalCode, String city,
 			String street, String houseNo, String country,

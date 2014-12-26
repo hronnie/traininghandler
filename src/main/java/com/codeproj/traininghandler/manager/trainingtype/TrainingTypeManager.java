@@ -25,15 +25,16 @@ public class TrainingTypeManager {
 		return trainingTypeDAO.getAll();
 	}
 
-	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
-		this.trainingTypeDAO = trainingTypeDAO;
-	}
-
 	public boolean update(Long trainingTypeId, String name, String levelNo, String description) throws DatabaseEntityNotFoundException {
 		return trainingTypeDAO.update(new TrainingType(trainingTypeId, name, levelNo, description));
 	}
 
 	public boolean delete(Long trainingTypeId) throws DatabaseEntityNotFoundException {
 		return trainingTypeDAO.delete(trainingTypeId);
+	}
+	
+
+	public void setTrainingTypeDAO(TrainingTypeDAO trainingTypeDAO) {
+		this.trainingTypeDAO = trainingTypeDAO;
 	}
 }

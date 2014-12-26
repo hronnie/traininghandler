@@ -8,7 +8,7 @@ import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 public class UserServiceValidator extends ValidatorBaseUtility {
 
 	public static void create(String lastName, String firstName,
-			String displayName, Date dob, String phoneNumber, String email) throws ValidationException {
+			String displayName, Date dob, String phoneNumber, String email, Long addressId) throws ValidationException {
 		
 		mandatoryParameter("lastName", lastName);
 		mandatoryParameter("firstName", firstName);
@@ -16,6 +16,7 @@ public class UserServiceValidator extends ValidatorBaseUtility {
 		mandatoryParameter("dob", dob);
 		mandatoryParameter("phoneNumber", phoneNumber);
 		mandatoryParameter("email", email);
+		mandatoryParameter("addressId", addressId);
 		
 		validateStringLength("lastName", lastName, 50);
 		validateStringLength("firstName", firstName, 50);
@@ -25,5 +26,6 @@ public class UserServiceValidator extends ValidatorBaseUtility {
 		
 		emailValidator(email);
 		isDateLater(dob, 6);
+		entityIdValidator(addressId);
 	}
 }
