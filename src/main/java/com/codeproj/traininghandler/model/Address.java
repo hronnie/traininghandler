@@ -14,8 +14,8 @@ public class Address implements Serializable {
 	private String street;
 	private String houseNo;
 	private String country;
-	private Boolean isTrainingPlace;
-	private Boolean isAppointmentPlace;
+	private Boolean isTrainingPlace = new Boolean(false);
+	private Boolean isAppointmentPlace = new Boolean(false);
 	private Set<TrainingType> trainingTypes = new HashSet<>(0);
 	private Set<User> users = new HashSet<>(0);
 	private Set<Training> trainings = new HashSet<>(0);
@@ -55,6 +55,8 @@ public class Address implements Serializable {
 		this.houseNo = houseNo;
 		this.postalCode = postalCode;
 		this.street = street;
+		this.isAppointmentPlace = new Boolean(false);
+		this.isTrainingPlace = new Boolean(false);
 	}
 
 	public Long getAddressId() {

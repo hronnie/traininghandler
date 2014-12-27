@@ -96,6 +96,9 @@ public class User implements Serializable {
 		this.mobileNo = mobileNo;
 		this.userType = new UserType(Constants.USER_TYPE_DATA_TRAINEE_ID, Constants.USER_TYPE_DATA_TRAINEE);
 		this.address = new Address(addressId);
+		this.isEnabled = new Boolean(true);
+		this.created = new Date();
+		this.locale = "hu_HU"; // FIXME: will be changed in the future
 	}
 	
 	public Long getUserId() {

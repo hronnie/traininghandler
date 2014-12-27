@@ -3,9 +3,8 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
      <class name="com.codeproj.traininghandler.model.Address" table="Address" catalog="traininghandler">
-        <id name="addressId" type="long">
-            <column name="addressId" />
-            <generator class="assigned" />
+        <id access="field" column="addressId" name="addressId" unsaved-value="0">
+            <generator class="increment"/>
         </id>
         <property name="postalCode" type="string">
             <column name="postalCode" length="15" not-null="true" />
@@ -55,9 +54,8 @@
     </class>
  
      <class name="com.codeproj.traininghandler.model.Appointment" table="Appointment" catalog="traininghandler">
-        <id name="appointmentId" type="long">
-            <column name="appointmentId" />
-            <generator class="assigned" />
+        <id access="field" column="appointmentId" name="appointmentId" unsaved-value="0">
+            <generator class="increment"/>
         </id>
         <many-to-one name="userByHealerId" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="healerId" not-null="true" />
@@ -83,9 +81,8 @@
     </class>
  
      <class name="com.codeproj.traininghandler.model.CompletedUserTraining" table="CompletedUserTraining" catalog="traininghandler">
-        <id name="completedUserTrainingId" type="long">
-            <column name="completedUserTrainingId" />
-            <generator class="assigned" />
+        <id access="field" column="completedUserTrainingId" name="completedUserTrainingId" unsaved-value="0">
+            <generator class="increment"/>
         </id>
         <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="userId" not-null="true" />
@@ -99,10 +96,9 @@
     </class>
  
      <class name="com.codeproj.traininghandler.model.UserRole" table="UserRole" catalog="traininghandler">
-        <id name="userRoleId" type="long">
-            <column name="userRoleId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="userRoleId" name="userRoleId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>        
         <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="userId" not-null="true" />
         </many-to-one>
@@ -112,10 +108,9 @@
     </class>
  
      <class name="com.codeproj.traininghandler.model.Role" table="Role" catalog="traininghandler">
-        <id name="roleId" type="long">
-            <column name="roleId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="roleId" name="roleId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>    
         <property name="roleName" type="string">
             <column name="roleName" length="50" />
         </property>
@@ -123,10 +118,9 @@
  
  
     <class name="com.codeproj.traininghandler.model.EmailTemplate" table="EmailTemplate" catalog="traininghandler">
-        <id name="emailTemplateId" type="long">
-            <column name="emailTemplateId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="emailTemplateId" name="emailTemplateId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>          
         <property name="subject" type="string">
             <column name="subject" not-null="true" />
         </property>
@@ -143,10 +137,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.GeneralSettings" table="GeneralSettings" catalog="traininghandler">
-        <id name="generalSettingsId" type="long">
-            <column name="generalSettingsId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="generalSettingsId" name="generalSettingsId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>            
         <property name="name" type="string">
             <column name="name" not-null="true" />
         </property>
@@ -157,10 +150,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.Log" table="Log" catalog="traininghandler">
-        <id name="logId" type="long">
-            <column name="logId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="logId" name="logId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>          
         <many-to-one name="user" class="com.codeproj.traininghandler.model.User" fetch="select">
             <column name="who" not-null="true" />
         </many-to-one>
@@ -177,10 +169,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.SentTrainingEmail" table="SentTrainingEmail" catalog="traininghandler">
-        <id name="sentTrainingEmailId" type="long">
-            <column name="sentTrainingEmailId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="sentTrainingEmailId" name="sentTrainingEmailId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>             
         <many-to-one name="training" class="com.codeproj.traininghandler.model.Training" fetch="select">
             <column name="trainingId" not-null="true" />
         </many-to-one>
@@ -203,10 +194,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.Training" table="Training" catalog="traininghandler">
-        <id name="trainingId" type="long">
-            <column name="trainingId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="trainingId" name="trainingId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>     
         <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="trainingTypeId" not-null="true" />
         </many-to-one>
@@ -244,10 +234,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.TrainingPrerequisite" table="TrainingPrerequisite" catalog="traininghandler">
-        <id name="trainingPrerequisiteId" type="long">
-            <column name="trainingPrerequisiteId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="trainingPrerequisiteId" name="trainingPrerequisiteId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>           
         <many-to-one name="dependentTrainingTypeId" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="dependentTrainingTypeId" not-null="true" />
         </many-to-one>
@@ -271,10 +260,9 @@
 
 
     <class name="com.codeproj.traininghandler.model.User" table="User" catalog="traininghandler">
-        <id name="userId" type="long">
-            <column name="userId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="userId" name="userId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>             
         <many-to-one name="address" class="com.codeproj.traininghandler.model.Address" fetch="select">
             <column name="addressId" not-null="true" />
         </many-to-one>
@@ -353,10 +341,9 @@
     </class>
 
     <class name="com.codeproj.traininghandler.model.UserLevel" table="UserLevel" catalog="traininghandler">
-        <id name="userLevelId" type="long">
-            <column name="userLevelId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="userLevelId" name="userLevelId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>          
         <many-to-one name="trainingType" class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
             <column name="trainingTypeId" not-null="true" />
         </many-to-one>
@@ -369,10 +356,9 @@
     </class>
 
     <class name="com.codeproj.traininghandler.model.UserType" table="UserType" catalog="traininghandler">
-        <id name="userTypeId" type="long">
-            <column name="userTypeId" />
-            <generator class="assigned" />
-        </id>
+        <id access="field" column="userTypeId" name="userTypeId" unsaved-value="0">
+            <generator class="increment"/>
+        </id>     
         <property name="userTypeName" type="string">
             <column name="userTypeName" length="50" />
         </property>

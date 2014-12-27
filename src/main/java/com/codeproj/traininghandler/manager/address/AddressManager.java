@@ -12,7 +12,8 @@ public class AddressManager {
 
 	public Long create(String city, String country, String houseNo,
 			String postCode, String street) {
-		return addressDAO.create(new Address(city, country, houseNo, postCode, street));
+		Address addressModel = new Address(city, country, houseNo, postCode, street);
+		return addressDAO.create(addressModel);
 	}
 
 	public void setAddressDAO(AddressDAO addressDAO) {
