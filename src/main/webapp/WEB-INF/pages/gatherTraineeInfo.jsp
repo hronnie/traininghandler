@@ -14,58 +14,58 @@
     </head>
     <body ng-app="thGatherTraineeInfoModule" ng-controller="thGatherTraineeInfoController as infoCtrl">
           <div id="register" class="animate form">
-              <form action="/trainingType" method="post" class="me-select"> 
+              <form  method="post" class="me-select"> 
               <h4 class="gridMainTitle"><spring:message code="gatherTraineeInfo.main.title" /></h4>
               <h4 class="gridSubTitle"><spring:message code="gatherTraineeInfo.sub.personal.data.title" /></h4>
               <section class="ss-style-dots">
                   <p> 
                       <label for="lastName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.name.last" /></label><br>
-                      <input id="lastName" class="gridInputPersonalData" name="lastName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />' />
+                      <input id="lastName" ng-model="traineeInfoDto.user.lastName" class="gridInputPersonalData" name="lastName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.last" />' />
                   </p>
                   <p> 
                       <label for="firstName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.name.first" /></label><br>
-                      <input id="firstName" class="gridInputPersonalData" name="firstName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.first" />' />
+                      <input id="firstName" ng-model="traineeInfoDto.user.firstName" class="gridInputPersonalData" name="firstName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.name.first" />' />
                   </p>
                   <p> 
                       <label for="displayName" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.displayName" /></label><br>
-                      <input id="displayName" class="gridInputPersonalData" name="displayName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />' />
+                      <input id="displayName" ng-model="traineeInfoDto.user.displayName" class="gridInputPersonalData" name="displayName" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.displayName" />' />
                   </p>
                   <p> 
                       <label for="dob" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.dob" /></label><br>
 						     <input type="text" class="gridInputPersonalData" readonly
 						     title='<spring:message code="gatherTraineeInfo.grid.date.hint" />'
-						      id="dob" name="dob" required="required" ng-model="dob" style="width: 150px" 
+						      id="dob" name="dob" required="required"  ng-model="traineeInfoDto.user.dob" style="width: 150px" 
 						      datepicker-popup="yyyy/MM/dd" is-open="isDobOpen" placeholder='<spring:message code="gatherTraineeInfo.personal.data.dob" />' />
 						        <button type="button" class="btn btn-default" ng-click="openDob($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 
                   </p><br>
                   <p> 
                       <label for="zipCode" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.zipCode" /></label><br>
-                      <input id="zipCode" class="gridInputPersonalData" name="zipCode" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />' />
+                      <input id="zipCode" ng-model="traineeInfoDto.address.postCode" class="gridInputPersonalData" name="zipCode" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.zipCode" />' />
                   </p>
                   <p> 
                       <label for="city" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.city" /></label><br>
-                      <input id="city" class="gridInputPersonalData" name="city" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />' />
+                      <input id="city" ng-model="traineeInfoDto.address.city" class="gridInputPersonalData" name="city" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.city" />' />
                   </p>
                   <p> 
                       <label for="street" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.street" /></label><br>
-                      <input id="street" class="gridInputPersonalData" name="street" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.street" />' />
+                      <input id="street" ng-model="traineeInfoDto.address.street" class="gridInputPersonalData" name="street" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.street" />' />
                   </p>
                   <p> 
                       <label for="houseNo" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.houseNo" /></label><br>
-                      <input id="houseNo" class="gridInputPersonalData" name="houseNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />' />
+                      <input id="houseNo" ng-model="traineeInfoDto.address.houseNo" class="gridInputPersonalData" name="houseNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.houseNo" />' />
                   </p>
                   <p> 
                       <label for="country" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.address.country" /></label><br>
-                      <input id="country" class="gridInputPersonalData" name="country" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.country"/>'  ng-model="defaultCountry"/>
+                      <input id="country" ng-model="traineeInfoDto.address.country" class="gridInputPersonalData" name="country" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.address.country"/>' />
                   </p>
                   <p> 
                       <label for="mobileNo" class="uname" data-icon="u"><spring:message code="gatherTraineeInfo.personal.data.mobileNo" /></label><br>
-                      <input id="mobileNo" class="gridInputPersonalData" name="mobileNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />' />
+                      <input id="mobileNo" ng-model="traineeInfoDto.user.phoneNo" class="gridInputPersonalData" name="mobileNo" required="required" type="text" placeholder='<spring:message code="gatherTraineeInfo.personal.data.mobileNo" />' />
                   </p>
                   <p> 
                       <label for="email" class="uname" data-icon="e"><spring:message code="gatherTraineeInfo.personal.data.email" /></label><br>
-                      <input id="email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
+                      <input id="email" ng-model="traineeInfoDto.user.email" class="gridInputPersonalData" name="email" required="required" type="email" placeholder='<spring:message code="gatherTraineeInfo.personal.data.email" />' />
                   </p>
                   <h4 class="gridExplanation"><spring:message code="gatherTraineeInfo.sub.personal.data.next" /></h4>
                   </section>
@@ -84,6 +84,7 @@
 							<tr ng-repeat="trainingTypeWrapper in trainingTypeWrapperArray" class="gridRow" align="center">
 								<td>
 									<span class="gridCell"> {{trainingTypeWrapper.name}} </span>
+									<input ng-show="false">
 								</td>
 								<td>
 									<span class="gridCell"> {{trainingTypeWrapper.levelNo}} </span>
@@ -98,7 +99,7 @@
 							</tr>
 						<tbody>
 					</table>
-					<button class="btn btn-primary" style="padding: 25px 80px"><spring:message code="gatherTraineeInfo.grid.submit.button.title" /></button>
+					<button class="btn btn-primary" style="padding: 25px 80px" ng-click="saveTraineeData()"><spring:message code="gatherTraineeInfo.grid.submit.button.title" /></button>
  				</form>
           </div>
 						

@@ -1,7 +1,11 @@
 thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, datepickerPopupConfig) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
-	$scope.defaultCountry = thGlobalConstants.DEFAULT_COUNTRY;
+	$scope.traineeInfoDto = {};
+	$scope.traineeInfoDto.address = {};
+	$scope.traineeInfoDto.user = {};
+	$scope.traineeInfoDto.completedUserTrainingList = [];
+	$scope.traineeInfoDto.address.country = thGlobalConstants.DEFAULT_COUNTRY;
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
@@ -49,6 +53,21 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 	$scope.dob=null;
 	
 	$scope.isDobOpen = false;
+	
+	$scope.saveTraineeData = function() {
+		_.forEach($scope.trainingTypeWrapperArray, function(item) {
+			if (item.completedDate) {
+				var completedUserTraining = {
+						trainingTypeId: item.id,
+						completedDate: moment(item.completedDate).format()
+				}
+				$scope.traineeInfoDto.completedUserTrainingList.push(completedUserTraining);
+			}
+		});
+		$scope.traineeInfoDto.user.dob = moment($scope.traineeInfoDto.user.dob).format();
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/gatherTraineeInfo/saveTraineePersonalAndTrainingInfo');
+		saveResource.customPOST($scope.traineeInfoDto);
+	}
 	// ****
 	
 	 // TRANSLATION
