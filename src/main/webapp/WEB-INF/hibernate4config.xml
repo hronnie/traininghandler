@@ -17,7 +17,7 @@
 		destroy-method="close">
 		<!-- access -->
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost/traininghandler" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost/traininghandler?useUnicode=true&characterEncoding=utf-8" />
 		<property name="user" value="training" />
 		<property name="password" value="rootpass" />
 		<!-- pool sizing -->
