@@ -1,4 +1,4 @@
-thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, datepickerPopupConfig) {
+thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, datepickerPopupConfig, $location) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
 	$scope.traineeInfoDto = {};
@@ -65,8 +65,10 @@ thGatherTraineeInfoModule.controller('thGatherTraineeInfoController', function($
 			}
 		});
 		$scope.traineeInfoDto.user.dob = moment($scope.traineeInfoDto.user.dob).format();
-		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/gatherTraineeInfo/saveTraineePersonalAndTrainingInfo');
-		saveResource.customPOST($scope.traineeInfoDto);
+		$location.path("/");
+		//var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/gatherTraineeInfo/saveTraineePersonalAndTrainingInfo');
+		//saveResource.customPOST($scope.traineeInfoDto).then(function() {
+		//});
 	}
 	// ****
 	
