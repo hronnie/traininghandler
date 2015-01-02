@@ -7,7 +7,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	});
 
 	$scope.validateName = function(data) {
-		return thValidationService.validateText(data, 'Name', 'Név', 20, $scope.locale);
+		return thValidationService.validateText(data, 'Name', 'Név', 100, $scope.locale);
 	};
 	
 	$scope.validateLevelNo = function(data) {
