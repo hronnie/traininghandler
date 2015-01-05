@@ -44,7 +44,7 @@
 			<artifactId>joda-time</artifactId>
 			<version>2.6</version>
 		</dependency>
-		
+
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -420,6 +420,9 @@
 									<!-- no transaction -->
 									<autocommit>true</autocommit>
 									<sqlCommand>create database ${th.db.mysql.dbname}</sqlCommand>
+									<driverProperties>characterEncoding=utf8,
+										connectionCollation=utf8_general_ci,
+										sql_mode=STRICT_TRANS_TABLES</driverProperties>
 								</configuration>
 							</execution>
 
@@ -430,7 +433,7 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}?useUnicode=true&amp;characterEncoding=UTF-8</url>
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- TABLES -->
@@ -461,7 +464,7 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}?useUnicode=true&amp;characterEncoding=UTF-8</url>
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- DATA -->
