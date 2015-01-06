@@ -16,8 +16,7 @@ public class User implements Serializable {
 	private String displayName;
 	private String password;
 	private UserType userType;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private String userName;
 	private Date dob;
 	private String email;
@@ -41,12 +40,11 @@ public class User implements Serializable {
 	}
 
 	public User(Long userId, Address address, 
-			String firstName, String lastName, String email, 
+			String name, String email, 
 			Boolean isEnabled, String locale, UserType userType, Date created) {
 		this.userId = userId;
 		this.address = address;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.email = email;
 		this.isEnabled = isEnabled;
 		this.setLocale(locale);
@@ -55,8 +53,7 @@ public class User implements Serializable {
 	}
 
 	public User(Long userId, Address address, String displayName,
-			String password, String firstName,
-			String lastName, String userName, Date dob, String email,
+			String password, String name, String userName, Date dob, String email,
 			String mobileNo, Boolean isEnabled, 
 			Set<UserLevel> userLevels,
 			Set<Appointment> appointmentsForPatientId,
@@ -68,8 +65,7 @@ public class User implements Serializable {
 		this.address = address;
 		this.displayName = displayName;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.userName = userName;
 		this.dob = dob;
 		this.email = email;
@@ -86,11 +82,10 @@ public class User implements Serializable {
 		this.created = created;
 	}
 	
-	public User(String lastName, String firstName, String displayName,
+	public User(String name, String displayName,
 			Date dob, String mobileNo, String email, Long addressId) {
 		this.displayName = displayName;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.dob = dob;
 		this.email = email;
 		this.mobileNo = mobileNo;
@@ -141,20 +136,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return this.firstName;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUserName() {
@@ -282,11 +269,9 @@ public class User implements Serializable {
 		result = prime * result + ((dob == null) ? 0 : dob.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
+				+ ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((isEnabled == null) ? 0 : isEnabled.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((logs == null) ? 0 : logs.hashCode());
 		result = prime * result
@@ -375,11 +360,11 @@ public class User implements Serializable {
 		} else if (!email.equals(other.email)) {
 			return false;
 		}
-		if (firstName == null) {
-			if (other.firstName != null) {
+		if (name == null) {
+			if (other.name != null) {
 				return false;
 			}
-		} else if (!firstName.equals(other.firstName)) {
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
 		if (isEnabled == null) {
@@ -387,13 +372,6 @@ public class User implements Serializable {
 				return false;
 			}
 		} else if (!isEnabled.equals(other.isEnabled)) {
-			return false;
-		}
-		if (lastName == null) {
-			if (other.lastName != null) {
-				return false;
-			}
-		} else if (!lastName.equals(other.lastName)) {
 			return false;
 		}
 		if (locale == null) {

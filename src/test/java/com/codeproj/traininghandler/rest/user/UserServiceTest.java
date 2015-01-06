@@ -27,7 +27,7 @@ import com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoServ
 public class UserServiceTest {
 	
 	public UserService service;
-	public static final String VALID_LAST_NAME = "Lastname";
+	public static final String VALID_LAST_NAME = "Lastname ";
 	public static final String VALID_FIRST_NAME = "Firstname";
 	public static final String VALID_DISPLAY_NAME = "mycustomDisplay name";
 	public static final String VALID_TELEPHONE_NUMBER = "077-6637-3338";
@@ -51,7 +51,7 @@ public class UserServiceTest {
 	public void setUp() {
 		service = new UserService();
 		service.setUserManager(userManager);
-		when(userManager.create(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
+		when(userManager.create(VALID_LAST_NAME + VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
 	}
 
 	@Test(expected = ValidationException.class)

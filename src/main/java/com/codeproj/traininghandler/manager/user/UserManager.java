@@ -12,10 +12,10 @@ public class UserManager {
 	
 	UserDAO userDAO;
 
-	public Long create(String lastName, String firstName, String displayName,
+	public Long create(String name, String displayName,
 			Date dob, String phoneNumber, String email, Long addressId) {
 		
-		User newUser = new User(lastName, firstName, displayName, dob, phoneNumber, email, addressId);
+		User newUser = new User(name, displayName, dob, phoneNumber, email, addressId);
 		return userDAO.create(newUser);
 	}
 

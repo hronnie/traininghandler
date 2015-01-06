@@ -33,7 +33,7 @@ public class UserService {
 
 		UserServiceValidator.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
 		
-		Long result = userManager.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
+		Long result = userManager.create(lastName + firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
 		return new GeneralIdResponse(result);
 	}
 

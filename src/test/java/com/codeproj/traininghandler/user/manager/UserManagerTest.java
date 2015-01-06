@@ -34,12 +34,12 @@ public class UserManagerTest {
 	public void setUp() throws Exception {
 		manager = new UserManager();
 		manager.setUserDAO(userDAO);
-		when(userDAO.create(new User("lastname", "firstName", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
+		when(userDAO.create(new User("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
 	}
 
 	@Test
 	public void testCreateUser() {
-		Long result = manager.create("lastname", "firstName", "displayName", VALID_DATE, "324234315", "a@b.com", 1L);
+		Long result = manager.create("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L);
 		assertEquals("Failed to call DAO method", new Long(1L), result);
 	}
 
