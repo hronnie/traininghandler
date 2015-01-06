@@ -14,6 +14,7 @@ public class Address implements Serializable {
 	private String street;
 	private String houseNo;
 	private String country;
+	private String oneLineAddress;
 	private Boolean isTrainingPlace = new Boolean(false);
 	private Boolean isAppointmentPlace = new Boolean(false);
 	private Set<TrainingType> trainingTypes = new HashSet<>(0);
@@ -30,7 +31,7 @@ public class Address implements Serializable {
 	}
 
 	public Address(Long addressId, String postalCode, String city,
-			String street, String houseNo, String country,
+			String street, String houseNo, String country, String oneLineAddress,
 			Boolean isTrainingPlace, Boolean isAppointmentPlace,
 			Set<TrainingType> trainingTypes, Set<User> users,
 			Set<Training> trainings, Set<Appointment> appointments) {
@@ -40,6 +41,7 @@ public class Address implements Serializable {
 		this.street = street;
 		this.houseNo = houseNo;
 		this.country = country;
+		this.oneLineAddress = oneLineAddress;
 		this.isTrainingPlace = isTrainingPlace;
 		this.isAppointmentPlace = isAppointmentPlace;
 		this.trainingTypes = trainingTypes;
@@ -55,6 +57,13 @@ public class Address implements Serializable {
 		this.houseNo = houseNo;
 		this.postalCode = postalCode;
 		this.street = street;
+		this.isAppointmentPlace = new Boolean(false);
+		this.isTrainingPlace = new Boolean(false);
+	}
+	
+	public Address(String postalCode, String oneLineAddress) {
+		this.oneLineAddress = oneLineAddress;
+		this.postalCode = postalCode;
 		this.isAppointmentPlace = new Boolean(false);
 		this.isTrainingPlace = new Boolean(false);
 	}
@@ -105,6 +114,14 @@ public class Address implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getOneLineAddress() {
+		return oneLineAddress;
+	}
+
+	public void setOneLineAddress(String oneLineAddress) {
+		this.oneLineAddress = oneLineAddress;
 	}
 
 	public Boolean getIsTrainingPlace() {
@@ -174,6 +191,8 @@ public class Address implements Serializable {
 				+ ((isTrainingPlace == null) ? 0 : isTrainingPlace.hashCode());
 		result = prime * result
 				+ ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result
+				+ ((oneLineAddress == null) ? 0 : oneLineAddress.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		result = prime * result
 				+ ((trainingTypes == null) ? 0 : trainingTypes.hashCode());
@@ -228,6 +247,13 @@ public class Address implements Serializable {
 				return false;
 			}
 		} else if (!houseNo.equals(other.houseNo)) {
+			return false;
+		}
+		if (oneLineAddress == null) {
+			if (other.oneLineAddress != null) {
+				return false;
+			}
+		} else if (!oneLineAddress.equals(other.oneLineAddress)) {
 			return false;
 		}
 		if (isAppointmentPlace == null) {
