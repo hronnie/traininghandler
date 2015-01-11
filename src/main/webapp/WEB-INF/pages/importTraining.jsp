@@ -7,19 +7,19 @@
 	    <script src="<c:url value="/resources/js/application/module/importTraining/thImportTrainingModule.js" />"></script>
 	    <script src="<c:url value="/resources/js/application/module/importTraining/thImportTrainingController.js" />"></script>
     
-        </head>
+    </head>
     <body ng-app="thImportTrainingModule" ng-controller="thImportTrainingController as importCtrl">
     
-<div class="container" id="containerId">
- <select ng-model="selectedTrainingType" ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray">
-      <option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
- </select>
- <br>
- 
- ***<input type="text" ng-model="trainingDateYear">/<input type="text" ng-model="trainingDateMonth">/<input type="text" ng-model="trainingDateDay"> 
-</div>
-
-
+		<div class="container" id="containerId">
+ 			<form action="<c:url value="/importTraining" />" method="post">
+ 				<select ng-model="selectedTrainingType" ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray">
+      				<option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
+ 				</select>
+ 				<br>
+ 				<input type="text" ng-model="trainingDateYear">/<input type="text" ng-model="trainingDateMonth">/<input type="text" ng-model="trainingDateDay"><br>
+ 				<button type="submit"><spring:message code="importTraining.button.import" /></button>
+			</form>
+		</div>
 
 <!-- /container -->
 

@@ -21,4 +21,12 @@ public class ImportTrainingController {
 		logger.debug("Going to importTraining page..");
 		return new ModelAndView("importTraining");
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView handlePostRequest(HttpServletRequest arg0,
+			HttpServletResponse arg1) throws Exception {
+		
+		logger.debug("Processing POST request for importTraining page..");
+		return new ModelAndView("importTraining");
+	}
 }
