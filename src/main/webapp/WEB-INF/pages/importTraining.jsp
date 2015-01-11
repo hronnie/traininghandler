@@ -11,12 +11,19 @@
     <body ng-app="thImportTrainingModule" ng-controller="thImportTrainingController as importCtrl">
     
 		<div class="container" id="containerId">
- 			<form action="<c:url value="/importTraining" />" method="post">
- 				<select ng-model="selectedTrainingType" ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray">
+ 			<form action="<c:url value="/importTraining" />" method="post" enctype="multipart/form-data" autocomplete="off">
+ 				<select ng-model="selectedTrainingType" 
+ 					ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
+ 					name="trainingTypeId">
       				<option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
  				</select>
  				<br>
- 				<input type="text" ng-model="trainingDateYear">/<input type="text" ng-model="trainingDateMonth">/<input type="text" ng-model="trainingDateDay"><br>
+ 				<input type="text" ng-model="trainingDateYear" name="year">/
+ 				<input type="text" ng-model="trainingDateMonth" name="month">/
+ 				<input type="text" ng-model="trainingDateDay" name="day"><br>
+ 				
+ 				File to upload: <input type="file" name="importFile"><br /> 
+ 				
  				<button type="submit"><spring:message code="importTraining.button.import" /></button>
 			</form>
 		</div>
