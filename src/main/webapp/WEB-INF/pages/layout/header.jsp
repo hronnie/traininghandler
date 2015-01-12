@@ -17,6 +17,7 @@
 <script src="<c:url value="/resources/js/application/lib/ui-utils-ieshiv.min.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/ui-utils.min.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/ui-bootstrap-tpls-0.12.0.js" />"></script>
+<script src="<c:url value="/resources/js/application/lib/bootstrap-filestyle.js" />"></script>
 <c:if test="${fn:startsWith(pageContext.response.locale, 'hu')}">
 <script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_hu-hu.js"></script>
 </c:if>
