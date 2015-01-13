@@ -22,7 +22,7 @@
  				<input type="text" ng-model="trainingDateMonth" name="month">/
  				<input type="text" ng-model="trainingDateDay" name="day"><br>
  				
- 				File to upload: <input type="file" name="importFile"><br /> 
+ 				<spring:message code="importTraining.fileChoose.title" /> <input type="file" name="importFile"><br /> 
  				
  				<button type="submit"><spring:message code="importTraining.button.import" /></button>
 			</form>
