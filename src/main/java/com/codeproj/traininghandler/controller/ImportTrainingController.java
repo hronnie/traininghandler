@@ -49,9 +49,37 @@ public class ImportTrainingController {
 			@RequestParam("importFile") MultipartFile importFile) throws Exception {
 		
 		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
+		for (TrainingExcelDto item : trainingAttendendList) {
+			if (getUserIdIfExist(item) != -1L) {
+				// ***** if yes:
+				// get userId 
+				// save completed training with userId and trainingTypeId
+				
+			} else {
+				// ***** if not: 
+				// save address got addresssId
+				// save user with addressId
+				// save completed training with userId and trainingTypeId
+				
+			}
+		}
 		
 		logger.debug("Processing POST request for importTraining page..");
 		 return "You successfully uploaded file";
+	}
+
+	private Long getUserIdIfExist(TrainingExcelDto item) {
+/*
+		 ha az email nem egyenlo a nincs email cimmel, 
+		 akkor {
+		 	getUserByEmail(). 
+		 	ha nincs email, akkor getUserByPhoneEmail()
+
+
+		 }
+		 */ 
+		// TODO Auto-generated method stub
+		return -1L;
 	}
 
 
