@@ -10,4 +10,12 @@ public class Constants {
 	public static final Long USER_TYPE_DATA_PATIENT_ID = 2L;
 	public static final Long USER_TYPE_DATA_HEALER_ID = 3L;
 	public static final Long USER_TYPE_DATA_TRAINEE_ID = 4L;
+	
+	public static final int EXCEL_TRAINING_START_ROW_INDEX = 3;
+	public static final int EXCEL_TRAINING_START_COLUMN_INDEX = 2;
+	public static final int EXCEL_TRAINING_NAME_COL_INDEX = 0;
+	public static final int EXCEL_TRAINING_POST_CODE_COL_INDEX = 1;
+	public static final int EXCEL_TRAINING_ADDRESS_COL_INDEX = 2;
+	public static final int EXCEL_TRAINING_PHONE_NO_COL_INDEX = 3;
+	public static final int EXCEL_TRAINING_EMAIL_COL_INDEX = 4;
 }

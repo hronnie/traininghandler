@@ -2,11 +2,15 @@ package com.codeproj.traininghandler.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -21,20 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
+import com.codeproj.traininghandler.util.excel.ExcelImportHelper;
 
 
 @Controller
 @RequestMapping("/importTraining")
 public class ImportTrainingController {
 	private static final Logger logger = Logger.getLogger(ImportTrainingController.class);
-	
-	public static final int EXCEL_TRAINING_START_ROW_INDEX = 3;
-	public static final int EXCEL_TRAINING_START_COLUMN_INDEX = 2;
-	public static final int EXCEL_TRAINING_NAME_COL_INDEX = 0;
-	public static final int EXCEL_TRAINING_POST_CODE_COL_INDEX = 1;
-	public static final int EXCEL_TRAINING_ADDRESS_COL_INDEX = 2;
-	public static final int EXCEL_TRAINING_PHONE_NO_COL_INDEX = 3;
-	public static final int EXCEL_TRAINING_EMAIL_COL_INDEX = 4;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
@@ -51,41 +48,11 @@ public class ImportTrainingController {
 			@RequestParam("day") String day, 
 			@RequestParam("importFile") MultipartFile importFile) throws Exception {
 		
-		
-		FileInputStream fileIn = null;
-
-        try
-        {
-        	File file = new File(importFile.getOriginalFilename());
-        	importFile.transferTo(file);
-        	fileIn = new FileInputStream(file);
-        	
-        	Workbook wb = WorkbookFactory.create(fileIn);
-            Sheet sheet = wb.getSheetAt(0);
-            
-            Row row = sheet.getRow(EXCEL_TRAINING_START_ROW_INDEX);
-//            Cell cell = row.getCell(5);
-            TrainingExcelDto training = new TrainingExcelDto(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX).getStringCellValue(), 
-            		row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_POST_CODE_COL_INDEX).getStringCellValue(), 
-            		row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_ADDRESS_COL_INDEX).getStringCellValue(), 
-            		row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_PHONE_NO_COL_INDEX).getStringCellValue(), 
-            		row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_EMAIL_COL_INDEX).getStringCellValue());
-        } finally {
-            if (fileIn != null) {
-            	fileIn.close();
-            }
-        }
+		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
 		
 		logger.debug("Processing POST request for importTraining page..");
 		 return "You successfully uploaded file";
 	}
-	
-	public static boolean isRowEmpty(Row row) {
-	    for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
-	        Cell cell = row.getCell(c);
-	        if (cell != null && cell.getCellType() != Cell.CELL_TYPE_BLANK)
-	            return false;
-	    }
-	    return true;
-	}
+
+
 }
