@@ -1,21 +1,14 @@
 package com.codeproj.traininghandler.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,14 +17,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.codeproj.traininghandler.dto.AddressDto;
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
+import com.codeproj.traininghandler.dto.UserDto;
+import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
+import com.codeproj.traininghandler.rest.user.UserService;
+import com.codeproj.traininghandler.util.Constants;
+import com.codeproj.traininghandler.util.ThStringUtils;
 import com.codeproj.traininghandler.util.excel.ExcelImportHelper;
+import com.codeproj.traininghandler.util.excel.TrainingExcelValidator;
 
 
 @Controller
 @RequestMapping("/importTraining")
 public class ImportTrainingController {
 	private static final Logger logger = Logger.getLogger(ImportTrainingController.class);
+	//TODO: inject dependency
+	UserService userService;
+	CompletedTrainingService completedTrainingService;
+	AddressService addressService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
@@ -42,44 +49,61 @@ public class ImportTrainingController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	protected @ResponseBody String handlePostRequest(@RequestParam("trainingTypeId") String trainingTypeId, 
+	protected @ResponseBody ModelAndView handlePostRequest(@RequestParam("trainingTypeId") String trainingTypeId, 
 			@RequestParam("year") String year, 
 			@RequestParam("month") String month, 
 			@RequestParam("day") String day, 
 			@RequestParam("importFile") MultipartFile importFile) throws Exception {
 		
+		ModelAndView mav = new ModelAndView("importTraining");
+		
+		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
+		
 		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
+		
+		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
+		
+		if (!"".equals(paramValidMsg) || !"".equals(excelValuesValidMsg)) {
+			mav.addObject("validationMsg", paramValidMsg + excelValuesValidMsg);
+			return mav;
+		}
+		
+		DateTime complDt = new DateTime(new Integer(year), new Integer(month), new Integer(day), 0, 0, 0);
+		Date complDate = complDt.toDate();
+		
 		for (TrainingExcelDto item : trainingAttendendList) {
-			if (getUserIdIfExist(item) != -1L) {
-				// ***** if yes:
-				// get userId 
-				// save completed training with userId and trainingTypeId
-				
-			} else {
-				// ***** if not: 
-				// save address got addresssId
-				// save user with addressId
-				// save completed training with userId and trainingTypeId
-				
+			Long userId = getUserIdIfExist(item);
+			if (userId == -1L) {
+				userId = createNewUser(item);
 			}
+			completedTrainingService.create(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
 		}
 		
 		logger.debug("Processing POST request for importTraining page..");
-		 return "You successfully uploaded file";
+		mav.addObject("successMsg", generateSuccessMsg(trainingAttendendList));
+		return mav;
+	}
+
+	private Long createNewUser(TrainingExcelDto item) {
+		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
+		GeneralIdResponse userIdResp = userService.createFromForm(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()));
+		return userIdResp.getValue();
+	}
+
+	private Object generateSuccessMsg(
+			List<TrainingExcelDto> trainingAttendendList) {
+		// TODO implement method
+		return null;
 	}
 
 	private Long getUserIdIfExist(TrainingExcelDto item) {
-/*
-		 ha az email nem egyenlo a nincs email cimmel, 
-		 akkor {
-		 	getUserByEmail(). 
-		 	ha nincs email, akkor getUserByPhoneEmail()
-
-
-		 }
-		 */ 
-		// TODO Auto-generated method stub
-		return -1L;
+		String email = item.getEmail();
+		if (StringUtils.isEmpty(email)) {
+			String cleanedPhoneNo = ThStringUtils.cleanPhoneNumber(item.getPhoneNo());
+			email = cleanedPhoneNo + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
+		}
+		GeneralIdResponse userId = userService.getUserIdByEmail(email);
+		return userId.getValue();
 	}
 
 

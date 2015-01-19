@@ -38,4 +38,9 @@ public class AddressService {
 		this.addressManager = addressManager;
 	}
 
+	public GeneralIdResponse createFromForm(AddressDto addressDto) {
+		// implement method with tests
+		return null;
+	}
+
 }

@@ -18,4 +18,7 @@ public class Constants {
 	public static final int EXCEL_TRAINING_ADDRESS_COL_INDEX = 2;
 	public static final int EXCEL_TRAINING_PHONE_NO_COL_INDEX = 3;
 	public static final int EXCEL_TRAINING_EMAIL_COL_INDEX = 4;
+	
+	public static final String EXCEL_TRAINING_MISSING_EMAIL_DOMAIN = "@nincs.com";
+	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
 }

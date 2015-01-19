@@ -41,4 +41,18 @@ public class UserService {
 		this.userManager = userManager;
 	}
 
+	/**
+	 * 
+	 * @return userId if user exists, -1 otherwise
+	 */
+	public GeneralIdResponse getUserIdByEmail(String email) {
+		// TODO implement method
+		return null;
+	}
+
+	public GeneralIdResponse createFromForm(UserDto userDto) {
+		// TODO implement method
+		return null;
+	}
+
 }

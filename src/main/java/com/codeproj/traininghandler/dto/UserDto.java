@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="User")
 public class UserDto {
+	private String name;
 	private String lastName;
 	private String firstName;
 	private String displayName;
@@ -23,6 +24,13 @@ public class UserDto {
 		this.firstName = firstName;
 		this.displayName = displayName;
 		this.dob = dob;
+		this.phoneNo = phoneNo;
+		this.email = email;
+		this.addressId = addressId;
+	}
+	
+	public UserDto(String name, String phoneNo, String email, Long addressId) {
+		this.name = name;
 		this.phoneNo = phoneNo;
 		this.email = email;
 		this.addressId = addressId;
@@ -89,6 +97,14 @@ public class UserDto {
 	
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

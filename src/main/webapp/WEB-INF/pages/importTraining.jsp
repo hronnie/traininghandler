@@ -27,6 +27,12 @@
  				<button type="submit"><spring:message code="importTraining.button.import" /></button>
 			</form>
 		</div>
+		
+		<div class="errorMsg">
+			<c:out value="${validationMsg}" />
+		</div>
+		<div class="successMsg">
+		</div>
 
 <!-- /container -->
 

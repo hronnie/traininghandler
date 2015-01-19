@@ -28,6 +28,11 @@ public class CompletedTrainingService {
 		return new GeneralIdListResponse(result);
 	}
 
+	public GeneralIdListResponse create(CompletedUserTrainingDto complatedUserTrainingDtoList) throws ValidationException {
+		// TODO: implement method with tests refactor with other create
+		return null;
+	}
+
 	public void setCompletedTrainingManager(
 			CompletedTrainingManager completedTrainingManager) {
 		this.completedTrainingManager = completedTrainingManager;

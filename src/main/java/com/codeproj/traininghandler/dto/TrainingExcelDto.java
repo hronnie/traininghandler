@@ -6,9 +6,6 @@ public class TrainingExcelDto {
 	private String address;
 	private String phoneNo;
 	private String email;
-	public String getName() {
-		return name;
-	}
 	
 	public TrainingExcelDto() {
 		// empty constructor
@@ -21,6 +18,10 @@ public class TrainingExcelDto {
 		this.address = address;
 		this.phoneNo = phoneNo;
 		this.email = email;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {

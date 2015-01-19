@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Address")
 public class AddressDto {
+	private String address;
 	private String postCode;
 	private String city;
 	private String street;
@@ -14,6 +15,11 @@ public class AddressDto {
 	private Boolean isAppointmentPlace;
 	
 	public AddressDto() { /* empty constructor */ }
+	
+	public AddressDto(String postCode, String address) {
+		this.postCode = postCode;
+		this.address = address;
+	}
 	
 	public AddressDto(String postCode, String city, String street,
 			String houseNo, String country) {
@@ -85,6 +91,14 @@ public class AddressDto {
 	
 	public void setIsAppointmentPlace(Boolean isAppointmentPlace) {
 		this.isAppointmentPlace = isAppointmentPlace;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override

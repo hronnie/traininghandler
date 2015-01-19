@@ -59,11 +59,6 @@ public class CompletedTrainingServiceTest {
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithNullObject() throws ValidationException {
-		service.create(null);
-	}
-	
-	@Test(expected = ValidationException.class)
 	public void testCreateComplatedTrainingServiceWithEmptyList() throws ValidationException {
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		service.create(complatedUserTrainingDtoList);
