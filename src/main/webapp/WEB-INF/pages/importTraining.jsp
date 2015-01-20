@@ -32,6 +32,11 @@
 			<c:out value="${validationMsg}" />
 		</div>
 		<div class="successMsg">
+		<c:choose>
+		    <c:when test="${isImportSuccess == 'true'}">
+		      <spring:message code="importTraining.success.message" />
+		    </c:when>
+		</c:choose> 
 		</div>
 
 <!-- /container -->

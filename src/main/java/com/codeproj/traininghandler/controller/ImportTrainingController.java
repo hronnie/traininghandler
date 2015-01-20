@@ -86,7 +86,7 @@ public class ImportTrainingController {
 		}
 		
 		logger.debug("Processing POST request for importTraining page..");
-		mav.addObject("successMsg", generateSuccessMsg(trainingAttendendList));
+		mav.addObject("isImportSuccess", new Boolean(true));
 		return mav;
 	}
 
@@ -94,12 +94,6 @@ public class ImportTrainingController {
 		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
 		GeneralIdResponse userIdResp = userService.createFromForm(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()));
 		return userIdResp.getValue();
-	}
-
-	private Object generateSuccessMsg(
-			List<TrainingExcelDto> trainingAttendendList) {
-		// TODO implement method
-		return null;
 	}
 
 	private Long getUserIdIfExist(TrainingExcelDto item) {
