@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,9 +36,14 @@ import com.codeproj.traininghandler.util.excel.TrainingExcelValidator;
 @RequestMapping("/importTraining")
 public class ImportTrainingController {
 	private static final Logger logger = Logger.getLogger(ImportTrainingController.class);
-	//TODO: inject dependency
+	
+	@Autowired
 	UserService userService;
+	
+	@Autowired
 	CompletedTrainingService completedTrainingService;
+	
+	@Autowired
 	AddressService addressService;
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -104,6 +110,19 @@ public class ImportTrainingController {
 		}
 		GeneralIdResponse userId = userService.getUserIdByEmail(email);
 		return userId.getValue();
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setCompletedTrainingService(
+			CompletedTrainingService completedTrainingService) {
+		this.completedTrainingService = completedTrainingService;
+	}
+
+	public void setAddressService(AddressService addressService) {
+		this.addressService = addressService;
 	}
 
 
