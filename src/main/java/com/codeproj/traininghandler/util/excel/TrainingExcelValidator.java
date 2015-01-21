@@ -18,9 +18,9 @@ public class TrainingExcelValidator {
 	// return "" if no message
 	public static String validateImportExcelInputParams(String year,
 			String month, String day, MultipartFile importFile) {
-		// TODO implement method with tests
-		return null;
 		
+		// TODO implement method with tests
+		return "";
 	}
 
 }
