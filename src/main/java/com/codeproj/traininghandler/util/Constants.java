@@ -21,4 +21,10 @@ public class Constants {
 	
 	public static final String EXCEL_TRAINING_MISSING_EMAIL_DOMAIN = "@nincs.com";
 	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
+	
+	public static final String VALIDATION_EXCEL_IMPORT_INVALID_YEAR = "Hibas ev! Minimum 1992";
+	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
+	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
+	public static final String VALIDATION_EXCEL_IMPORT_INVALID_FILE = "Nem talalom az excel fajlt";
+	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";
 }
