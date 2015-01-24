@@ -9,4 +9,6 @@ import com.codeproj.traininghandler.model.User;
 @Transactional
 public interface UserDAO {
 	public Long create(User user);
+
+	public Long getUserIdByEmail(String email);
 }

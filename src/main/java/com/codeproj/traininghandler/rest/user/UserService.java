@@ -46,8 +46,8 @@ public class UserService {
 	 * @return userId if user exists, -1 otherwise
 	 */
 	public GeneralIdResponse getUserIdByEmail(String email) {
-		// TODO implement method
-		return null;
+		Long result = userManager.getUserIdByEmail(email);
+		return new GeneralIdResponse(result);
 	}
 
 	public GeneralIdResponse createFromForm(UserDto userDto) {

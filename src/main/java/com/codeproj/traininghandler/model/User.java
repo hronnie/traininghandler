@@ -335,8 +335,8 @@ public class User implements Serializable {
 		if (created == null) {
 			if (other.created != null) {
 				return false;
-			}
-		} else if (!created.equals(other.created)) {
+			}other.created.getTime();
+		} else if (!created.equals(other.created) && (Math.abs(created.getTime() - other.created.getTime()) > 3000)) {
 			return false;
 		}
 		if (displayName == null) {

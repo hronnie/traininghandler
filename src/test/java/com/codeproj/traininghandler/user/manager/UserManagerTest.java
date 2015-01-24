@@ -21,6 +21,7 @@ public class UserManagerTest {
 	
 	public UserManager manager = null;
 	public static final Date VALID_DATE;
+	public static final String VALID_EMAIL = "test@test.com";
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
@@ -35,12 +36,19 @@ public class UserManagerTest {
 		manager = new UserManager();
 		manager.setUserDAO(userDAO);
 		when(userDAO.create(new User("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
+		when(userDAO.getUserIdByEmail(VALID_EMAIL)).thenReturn(1L);
 	}
 
 	@Test
 	public void testCreateUser() {
 		Long result = manager.create("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L);
 		assertEquals("Failed to call DAO method", new Long(1L), result);
+	}
+	
+	@Test
+	public void testGetUserIdByEmail() {
+		Long result = manager.getUserIdByEmail(VALID_EMAIL);
+		assertEquals("Getting user id failed", new Long(1L), result);
 	}
 
 }

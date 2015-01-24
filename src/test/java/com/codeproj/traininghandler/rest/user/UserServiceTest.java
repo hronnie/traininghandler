@@ -35,6 +35,8 @@ public class UserServiceTest {
 	public static final String VALID_TELEPHONE_NUMBER = "077-6637-3338";
 	public static final String VALID_EMAIL = "asdf@asf.com";
 	public static final String INVALID_EMAIL = "simpletext";
+	public static final String EMAIL_WHICH_DOESNT_EXIST = "idontexist@nonexist.com";
+	public static final String EMAIL_WHICH_EXISTS = "idoexist@exist.com";
 	public static final Date VALID_DOB;
 	public static final Long VALID_ADDRESS_ID = 1L;
 	
@@ -51,6 +53,8 @@ public class UserServiceTest {
 		service = new UserService();
 		service.setUserManager(userManager);
 		when(userManager.create(VALID_LAST_NAME + VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
+		when(userManager.getUserIdByEmail(EMAIL_WHICH_DOESNT_EXIST)).thenReturn(new Long(-1));
+		when(userManager.getUserIdByEmail(EMAIL_WHICH_EXISTS)).thenReturn(new Long(1));
 	}
 
 	@Test(expected = ValidationException.class)
@@ -195,5 +199,14 @@ public class UserServiceTest {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, -5L);
 		service.create(user);
 	}
-
+	
+	// get user by email
+	
+	@Test
+	public void testGetUserIdByEmail() {
+		GeneralIdResponse serviceResult = service.getUserIdByEmail(EMAIL_WHICH_DOESNT_EXIST);
+		assertEquals("user id should be -1 for non existing user", new Long(-1L), serviceResult.getValue());
+		serviceResult = service.getUserIdByEmail(EMAIL_WHICH_EXISTS);
+		assertEquals("user id should be 1 for existing user", new Long(1L), serviceResult.getValue());
+	}
 }

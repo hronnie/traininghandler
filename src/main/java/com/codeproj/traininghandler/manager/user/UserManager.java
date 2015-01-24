@@ -19,9 +19,11 @@ public class UserManager {
 		return userDAO.create(newUser);
 	}
 
+	public Long getUserIdByEmail(String email) {
+		return userDAO.getUserIdByEmail(email);
+	}
 	
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
-
 }
