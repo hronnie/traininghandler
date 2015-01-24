@@ -3,6 +3,8 @@ package com.codeproj.traininghandler.rest.user;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
+import static com.codeproj.traininghandler.util.Constants.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +40,6 @@ public class UserServiceTest {
 	
 	@Mock
 	public UserManager userManager;
-	
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
-			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);

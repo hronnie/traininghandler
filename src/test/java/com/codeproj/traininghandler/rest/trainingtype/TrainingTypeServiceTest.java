@@ -1,11 +1,12 @@
 package com.codeproj.traininghandler.rest.trainingtype;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
+import static com.codeproj.traininghandler.util.Constants.*;
 
 import java.util.List;
 
@@ -26,13 +27,6 @@ import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrainingTypeServiceTest extends TrainingTypeTestBase {
-	
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
-							+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_300 = "Lorem ipsum dolor sit amet, consectetur "
-							+ "adipiscing elit. Aliquam nec blandit dolor. Aenean at volutpat ipsum, quis dignissim nisi. Ut "
-							+ "sed arcu elementum, dignissim nisl a, adipiscing tortor. Nullam sit amet risus faucibus, luctus turpis ut, rhoncus massa. Sed mollis justo dapibus faucibus turpis duis. ";
 	
 	public TrainingTypeService service;
 	

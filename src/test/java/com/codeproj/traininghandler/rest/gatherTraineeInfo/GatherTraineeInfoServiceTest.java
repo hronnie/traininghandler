@@ -3,6 +3,8 @@ package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
+import static com.codeproj.traininghandler.util.Constants.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,9 +57,6 @@ public class GatherTraineeInfoServiceTest {
 	
 	@Mock 
 	public CompletedTrainingService completedTrainingService;
-	
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
-			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 	
 	static {
 		VALID_ADDRESS = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);

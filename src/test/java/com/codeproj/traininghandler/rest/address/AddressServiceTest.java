@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import static com.codeproj.traininghandler.util.Constants.*;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,8 +35,6 @@ public class AddressServiceTest {
 	@Mock
 	public AddressManager manager;
 
-	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
-			+ "adipiscing elit. Proin quis sem eget erat pharetra mattis sed. ";
 
 	static {
 		VALID_ADDRESS = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);

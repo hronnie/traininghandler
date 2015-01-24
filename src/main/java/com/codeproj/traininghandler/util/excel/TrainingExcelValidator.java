@@ -10,11 +10,24 @@ import com.codeproj.traininghandler.dto.TrainingExcelDto;
 
 public class TrainingExcelValidator {
 
-	// return "" if no message
 	public static String validateTrainingExcelList(
 			List<TrainingExcelDto> trainingAttendendList) {
-		// TODO implement method with tests
-		return null;
+		
+		StringBuilder validationMsg = new StringBuilder("");
+		
+		if (trainingAttendendList == null || trainingAttendendList.size() == 0) {
+			return VALIDATION_EXCEL_EMPTY_LIST;
+		}
+		
+		for (TrainingExcelDto item : trainingAttendendList) {
+			appendFieldValidationMsgs(validationMsg, item.getName(), VALIDATION_EXCEL_IMPORT_NAME_EMPTY, VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG, 100);
+			appendFieldValidationMsgs(validationMsg, item.getPostCode(), VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY, VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG, 15);
+			appendFieldValidationMsgs(validationMsg, item.getAddress(), VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY, VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG, 100);
+			appendFieldValidationMsgs(validationMsg, item.getPhoneNo(), VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY, VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, 50);
+			appendFieldValidationMsgs(validationMsg, item.getEmail(), VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, 80);
+		}
+		
+		return cutSplitter(validationMsg);
 	}
 
 	public static String validateImportExcelInputParams(String year,
@@ -23,18 +36,12 @@ public class TrainingExcelValidator {
 		StringBuilder validationMsg = new StringBuilder("");
 		String result = null;
 		
-		if (!StringUtils.isNumeric(year)) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_YEAR); 
-			addSeparator(validationMsg);
-		}
-		if (!StringUtils.isNumeric(month)) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_MONTH); 
-			addSeparator(validationMsg);
-		}
-		if (!StringUtils.isNumeric(day)) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_DAY); 
-			addSeparator(validationMsg);
-		}
+		appendValidationMsgIfNotNumeric(year, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_YEAR);
+
+		appendValidationMsgIfNotNumeric(month, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_MONTH);
+
+		appendValidationMsgIfNotNumeric(day, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_DAY);
+		
 		if (importFile == null) {
 			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_FILE); 
 			addSeparator(validationMsg);
@@ -50,21 +57,42 @@ public class TrainingExcelValidator {
 		Integer dayInt = new Integer(day);
 		
 		if (yearInt < 1992) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_YEAR); 
-			addSeparator(validationMsg);
+			appendValidationMsgWithMsgAndSeparator(validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_YEAR);
 		}
 		
 		if (monthInt < 1 || monthInt > 12) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_MONTH); 
-			addSeparator(validationMsg);
+			appendValidationMsgWithMsgAndSeparator(validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_MONTH);
 		}
 		
 		if (dayInt < 1 || dayInt > 31) {
-			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_DAY); 
-			addSeparator(validationMsg);
+			appendValidationMsgWithMsgAndSeparator(validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_DAY);
 		}
 		
 		return cutSplitter(validationMsg);
+	}
+
+	private static void appendFieldValidationMsgs(StringBuilder validationMsg,
+			String inParam, String emptyMsg, String tooLongMsg, int maxSize) {
+		if (inParam == null || "".equals(inParam)) {
+			appendValidationMsgWithMsgAndSeparator(validationMsg, emptyMsg);
+		}
+		if (inParam != null && inParam.length() > maxSize) {
+			appendValidationMsgWithMsgAndSeparator(validationMsg, tooLongMsg);
+		}
+	}
+
+	private static void appendValidationMsgWithMsgAndSeparator(
+			StringBuilder validationMsg, String message) {
+		validationMsg.append(message); 
+		addSeparator(validationMsg);
+	}
+
+	private static void appendValidationMsgIfNotNumeric(String year,
+			StringBuilder validationMsg, String message) {
+		if (!StringUtils.isNumeric(year)) {
+			validationMsg.append(message); 
+			addSeparator(validationMsg);
+		}
 	}
 	
 	private static String cutSplitter(StringBuilder validationMsg) {
