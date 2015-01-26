@@ -21,38 +21,43 @@ public class UserService {
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody UserDto user) throws ValidationException {
-		if (user == null) {
-			throw new ValidationException("Input User dto is null");
-		}
-
-		String lastName = ValidatorBaseUtility.stripXSS(user.getLastName());
-		String firstName = ValidatorBaseUtility.stripXSS(user.getFirstName());
-		String displayName = ValidatorBaseUtility.stripXSS(user.getDisplayName());
-		String email = ValidatorBaseUtility.stripXSS(user.getEmail());
-		String phoneNumber = ValidatorBaseUtility.stripXSS(user.getPhoneNo());
-
-		UserServiceValidator.create(lastName, firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
-		
-		Long result = userManager.create(lastName + firstName, displayName, user.getDob(), phoneNumber, email, user.getAddressId());
-		return new GeneralIdResponse(result);
+		return createUser(user, true);
 	}
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public GeneralIdResponse createFromForm(UserDto userDto) throws ValidationException {
+		return createUser(userDto, false);
 	}
-
-	/**
-	 * 
-	 * @return userId if user exists, -1 otherwise
-	 */
+	
 	public GeneralIdResponse getUserIdByEmail(String email) {
 		Long result = userManager.getUserIdByEmail(email);
 		return new GeneralIdResponse(result);
 	}
 
-	public GeneralIdResponse createFromForm(UserDto userDto) {
-		// TODO implement method
-		return null;
+	private GeneralIdResponse createUser(UserDto user, boolean isNeedValidate)
+			throws ValidationException {
+		if (user == null) {
+			throw new ValidationException("Input User dto is null");
+		}
+		
+		if (isNeedValidate) {
+			stripXssUserDto(user);
+		}
+		
+		UserServiceValidator.create(user.getLastName(), user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
+		
+		Long result = userManager.create(user.getLastName() + user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
+		return new GeneralIdResponse(result);
+	}
+	
+	private static void stripXssUserDto(UserDto user) {
+		user.setLastName(ValidatorBaseUtility.stripXSS(user.getLastName()));
+		user.setFirstName(ValidatorBaseUtility.stripXSS(user.getFirstName()));
+		user.setDisplayName(ValidatorBaseUtility.stripXSS(user.getDisplayName()));
+		user.setEmail(ValidatorBaseUtility.stripXSS(user.getEmail()));
+		user.setPhoneNo(ValidatorBaseUtility.stripXSS(user.getPhoneNo()));
 	}
 
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
 }
