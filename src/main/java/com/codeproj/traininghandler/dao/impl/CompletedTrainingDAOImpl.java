@@ -1,8 +1,5 @@
 package com.codeproj.traininghandler.dao.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,14 +17,11 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 
 	@Override
 	@Transactional
-	public List<Long> create(List<CompletedUserTraining> complatedUserTrainingList) {
-		
-		List<Long> result = new ArrayList<>();
-		for (CompletedUserTraining item : complatedUserTrainingList) {
-			sessionFactory.getCurrentSession().save(item);
-			result.add(item.getCompletedUserTrainingId());
-		}
-        return result;
+	public Long create(CompletedUserTraining complatedUserTraining) {
+		sessionFactory.getCurrentSession().save(complatedUserTraining);
+		return complatedUserTraining.getCompletedUserTrainingId();
 	}
+	
+	
 
 }

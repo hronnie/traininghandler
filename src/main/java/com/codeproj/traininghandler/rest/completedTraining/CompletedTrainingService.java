@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.rest.completedTraining;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,22 @@ public class CompletedTrainingService {
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdListResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
 		CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
-		List<Long> result = completedTrainingManager.create(complatedUserTrainingDtoList);
-		return new GeneralIdListResponse(result);
+		List<Long> resultValue = new ArrayList<>();
+		for (CompletedUserTrainingDto item : complatedUserTrainingDtoList) {
+			GeneralIdResponse itemResult = createCompletedTraining(item);
+			resultValue.add(itemResult.getValue());
+		}
+		return new GeneralIdListResponse(resultValue);
+	}
+	
+	public GeneralIdResponse create(CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException {
+		return createCompletedTraining(complatedUserTrainingDto);
 	}
 
-	public GeneralIdListResponse create(CompletedUserTrainingDto complatedUserTrainingDtoList) throws ValidationException {
-		// TODO: implement method with tests refactor with other create
-		return null;
+	private GeneralIdResponse createCompletedTraining(CompletedUserTrainingDto complatedUserTrainingDto)
+			throws ValidationException {
+		Long result = completedTrainingManager.create(complatedUserTrainingDto);
+		return new GeneralIdResponse(result);
 	}
 
 	public void setCompletedTrainingManager(

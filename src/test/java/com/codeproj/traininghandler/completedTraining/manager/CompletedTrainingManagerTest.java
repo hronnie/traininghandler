@@ -27,22 +27,17 @@ import com.codeproj.traininghandler.model.User;
 public class CompletedTrainingManagerTest {
 
 	public CompletedTrainingManager manager;
-	public static List<CompletedUserTrainingDto> complTrDto;
-	public static List<CompletedUserTraining> complTr;
+	public static CompletedUserTrainingDto complTrDto;
+	public static CompletedUserTraining complTr;
 	public static final Date VALID_DATE;
-	public static List<Long> result_ref;
+	public static Long result_ref;
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
 		VALID_DATE = dt.toDate();
-		complTrDto = new ArrayList<>();
-		complTr = new ArrayList<>();
-		CompletedUserTrainingDto first = new CompletedUserTrainingDto(1L, 1L, VALID_DATE);
-		complTrDto.add(first);
-		CompletedUserTraining firstModel = new CompletedUserTraining(null, new TrainingType(1L), VALID_DATE, new User(1L));
-		complTr.add(firstModel);
-		result_ref = new ArrayList<>();
-		result_ref.add(1L);
+		complTrDto = new CompletedUserTrainingDto(1L, 1L, VALID_DATE);
+		complTr = new CompletedUserTraining(null, new TrainingType(1L), VALID_DATE, new User(1L));
+		result_ref = 1L;
 	}
 	
 	@Mock
@@ -57,7 +52,7 @@ public class CompletedTrainingManagerTest {
 	
 	@Test
 	public void testCreateCompletedTrainingList() {
-		List<Long> result = manager.create(complTrDto);
+		Long result = manager.create(complTrDto);
 		assertEquals("Failed to call DAO method", result_ref, result);
 	}
 }

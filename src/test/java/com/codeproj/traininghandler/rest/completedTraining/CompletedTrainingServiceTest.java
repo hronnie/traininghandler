@@ -50,7 +50,7 @@ public class CompletedTrainingServiceTest {
 		service.setCompletedTrainingManager(manager);
 		List<Long> complServResult = new ArrayList<>();
 		complServResult.add(1L);
-		when(manager.create(VALID_COMPLETED_TRAINING_LIST)).thenReturn(complServResult);
+		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(1L);
 	}
 
 	@Test
