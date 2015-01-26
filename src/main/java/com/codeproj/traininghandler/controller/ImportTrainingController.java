@@ -22,6 +22,7 @@ import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.dto.UserDto;
+import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
@@ -90,7 +91,7 @@ public class ImportTrainingController {
 		return mav;
 	}
 
-	private Long createNewUser(TrainingExcelDto item) {
+	private Long createNewUser(TrainingExcelDto item) throws ValidationException {
 		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
 		GeneralIdResponse userIdResp = userService.createFromForm(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()));
 		return userIdResp.getValue();
