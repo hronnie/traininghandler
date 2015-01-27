@@ -1,10 +1,14 @@
 package com.codeproj.traininghandler.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ThStringUtils {
 
 	public static String cleanPhoneNumber(String phoneNo) {
-		// TODO implement method with test (trim, remove -,/,( and ))
-		return null;
+		if (StringUtils.isEmpty(phoneNo)) {
+			return "";
+		}
+		return phoneNo.replaceAll("[^0-9]", "");
 	}
 	
 }
