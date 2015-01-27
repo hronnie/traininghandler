@@ -39,11 +39,11 @@ public class UserService {
 			throw new ValidationException("Input User dto is null");
 		}
 		
+		stripXssUserDto(user);
 		if (isNeedValidate) {
-			stripXssUserDto(user);
+			UserServiceValidator.create(user.getLastName(), user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
 		}
 		
-		UserServiceValidator.create(user.getLastName(), user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
 		
 		Long result = userManager.create(user.getLastName() + user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
 		return new GeneralIdResponse(result);

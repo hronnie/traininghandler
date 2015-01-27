@@ -2,6 +2,7 @@ package com.codeproj.traininghandler.manager.user;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.codeproj.traininghandler.dao.UserDAO;
@@ -10,6 +11,7 @@ import com.codeproj.traininghandler.model.User;
 @Component
 public class UserManager {
 	
+	@Autowired
 	UserDAO userDAO;
 
 	public Long create(String name, String displayName,

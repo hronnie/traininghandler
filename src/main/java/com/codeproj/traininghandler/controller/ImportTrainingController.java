@@ -55,7 +55,7 @@ public class ImportTrainingController {
 		return new ModelAndView("importTraining");
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	protected @ResponseBody ModelAndView handlePostRequest(@RequestParam("trainingTypeId") String trainingTypeId, 
 			@RequestParam("year") String year, 
 			@RequestParam("month") String month, 
