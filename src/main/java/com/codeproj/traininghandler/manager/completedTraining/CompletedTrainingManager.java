@@ -3,6 +3,7 @@ package com.codeproj.traininghandler.manager.completedTraining;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.codeproj.traininghandler.dao.CompletedTrainingDAO;
@@ -14,6 +15,7 @@ import com.codeproj.traininghandler.model.User;
 @Component
 public class CompletedTrainingManager {
 	
+	@Autowired
 	CompletedTrainingDAO completedTrainingDAO;
 
 //	public List<Long> create(List<CompletedUserTrainingDto> complatedUserTrainingDtoList) {

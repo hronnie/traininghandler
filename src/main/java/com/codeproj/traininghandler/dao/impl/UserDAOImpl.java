@@ -34,6 +34,9 @@ public class UserDAOImpl implements UserDAO {
 		criteria.add(Restrictions.eq("email", email));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		User user = (User)criteria.uniqueResult();
+		if (user == null) {
+			return -1L;
+		}
 		return user.getUserId();
 	}
 

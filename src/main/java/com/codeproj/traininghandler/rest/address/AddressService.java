@@ -21,10 +21,17 @@ public class AddressService {
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody AddressDto addressDto) throws ValidationException {
+		return createAddress(addressDto, true);
+	}
+
+	private GeneralIdResponse createAddress(AddressDto addressDto, boolean isNeedValidation)
+			throws ValidationException {
 		if (addressDto == null) {
 			throw new ValidationException("Address dto object is null");
 		}
-		AddressServiceValidator.create(addressDto);
+		if (isNeedValidation) {
+			AddressServiceValidator.create(addressDto);
+		}
 		String city = ValidatorBaseUtility.stripXSS(addressDto.getCity());
 		String country = ValidatorBaseUtility.stripXSS(addressDto.getCountry());
 		String houseNo = ValidatorBaseUtility.stripXSS(addressDto.getHouseNo());
@@ -38,9 +45,8 @@ public class AddressService {
 		this.addressManager = addressManager;
 	}
 
-	public GeneralIdResponse createFromForm(AddressDto addressDto) {
-		// implement method with tests
-		return null;
+	public GeneralIdResponse createFromForm(AddressDto addressDto) throws ValidationException {
+		return createAddress(addressDto, false);
 	}
 
 }
