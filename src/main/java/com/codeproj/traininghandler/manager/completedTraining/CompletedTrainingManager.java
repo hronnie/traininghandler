@@ -1,8 +1,5 @@
 package com.codeproj.traininghandler.manager.completedTraining;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +27,11 @@ public class CompletedTrainingManager {
 	public Long create(CompletedUserTrainingDto dto) {
 		CompletedUserTraining model = new CompletedUserTraining(null, new TrainingType(dto.getTrainingTypeId()), dto.getCompletedDate(), new User(dto.getUserId()));
 		return completedTrainingDAO.create(model);
+	}
+	
+	public boolean isCompletedTrainingExist(CompletedUserTrainingDto dto) {
+		CompletedUserTraining model = new CompletedUserTraining(null, new TrainingType(dto.getTrainingTypeId()), dto.getCompletedDate(), new User(dto.getUserId()));
+		return completedTrainingDAO.isCompletedTrainingExist(model);
 	}
 
 	public void setCompletedTrainingDAO(CompletedTrainingDAO completedTrainingDAO) {

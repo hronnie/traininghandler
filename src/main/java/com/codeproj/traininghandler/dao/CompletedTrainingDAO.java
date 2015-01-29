@@ -9,4 +9,6 @@ import com.codeproj.traininghandler.model.CompletedUserTraining;
 @Transactional
 public interface CompletedTrainingDAO {
 	public Long create(CompletedUserTraining complatedUserTrainingList);
+	
+	public boolean isCompletedTrainingExist(CompletedUserTraining complatedUserTrainingList);
 }

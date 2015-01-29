@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
@@ -37,6 +38,11 @@ public class CompletedTrainingService {
 		return createCompletedTraining(complatedUserTrainingDto);
 	}
 
+	public BooleanResponse isCompletedTrainingExist(
+			CompletedUserTrainingDto newComplTraining) {
+		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
+	}
+
 	private GeneralIdResponse createCompletedTraining(CompletedUserTrainingDto complatedUserTrainingDto)
 			throws ValidationException {
 		Long result = completedTrainingManager.create(complatedUserTrainingDto);
@@ -47,5 +53,4 @@ public class CompletedTrainingService {
 			CompletedTrainingManager completedTrainingManager) {
 		this.completedTrainingManager = completedTrainingManager;
 	}
-
 }

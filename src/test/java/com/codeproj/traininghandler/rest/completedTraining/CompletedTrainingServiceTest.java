@@ -29,6 +29,7 @@ public class CompletedTrainingServiceTest {
 	public static final Date INVALID_FUTURE_COMPLETED_DATE;
 	public static final Long INVALID_ID = -34L;
 	public static final CompletedUserTrainingDto VALID_COMPLETED_TRAINING;
+	public static final CompletedUserTrainingDto VALID_COMPLETED_TRAINING_DONT_EXIST;
 	public static final List<CompletedUserTrainingDto> VALID_COMPLETED_TRAINING_LIST;
 	
 	@Mock
@@ -40,6 +41,7 @@ public class CompletedTrainingServiceTest {
 		DateTime dt_future = new DateTime(2100, 3, 26, 12, 0, 0, 0);
 		INVALID_FUTURE_COMPLETED_DATE = dt_future.toDate();
 		VALID_COMPLETED_TRAINING = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		VALID_COMPLETED_TRAINING_DONT_EXIST = new CompletedUserTrainingDto(33L, 11L, VALID_COMPLETED_DATE);
 		VALID_COMPLETED_TRAINING_LIST = new ArrayList<>();
 		VALID_COMPLETED_TRAINING_LIST.add(VALID_COMPLETED_TRAINING);
 	}
@@ -51,7 +53,19 @@ public class CompletedTrainingServiceTest {
 		List<Long> complServResult = new ArrayList<>();
 		complServResult.add(1L);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(1L);
+		when(manager.isCompletedTrainingExist(VALID_COMPLETED_TRAINING)).thenReturn(true);
+		when(manager.isCompletedTrainingExist(VALID_COMPLETED_TRAINING_DONT_EXIST)).thenReturn(false);
 	}
+	
+	// isCompletedTrainingExist
+	
+	@Test
+	public void testIsCompletedTrainingExist() {
+		assertTrue("The completed training object exist", service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING).getPrimitiveBooleanValue());
+		assertFalse("The completed training object exist", service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING_DONT_EXIST).getPrimitiveBooleanValue());
+	}
+	
+	// create
 
 	@Test
 	public void testCreateComplatedTrainingServiceWithValidObject() throws ValidationException {

@@ -24,6 +24,7 @@ import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
@@ -82,6 +83,11 @@ public class ImportTrainingController {
 			Long userId = getUserIdIfExist(item);
 			if (userId == -1L) {
 				userId = createNewUser(item);
+			}
+			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
+			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
+			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
+				continue;
 			}
 			completedTrainingService.create(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
 		}
