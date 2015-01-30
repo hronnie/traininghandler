@@ -1,6 +1,8 @@
 package com.codeproj.traininghandler.util;
 
 public class Constants {
+	public static final String GLOBAL_DEFAULT_LOCALE = "hu_HU";
+	
 	public static final String USER_TYPE_DATA_MASTER = "USER_TYPE_MASTER";
 	public static final String USER_TYPE_DATA_PATIENT = "USER_TYPE_PATIENT";
 	public static final String USER_TYPE_DATA_HEALER = "USER_TYPE_HEALER";

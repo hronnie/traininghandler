@@ -93,7 +93,7 @@ public class User implements Serializable {
 		this.address = new Address(addressId);
 		this.isEnabled = new Boolean(true);
 		this.created = new Date();
-		this.locale = "hu_HU"; // FIXME: will be changed in the future
+		this.locale = Constants.GLOBAL_DEFAULT_LOCALE;
 	}
 	
 	public Long getUserId() {
