@@ -45,17 +45,21 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	@Override
 	@Transactional
 	public TrainingType getTrainingTypeById(Long id) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(TrainingType.class);
-		criteria.add(Restrictions.eq("trainingTypeId", id));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return (TrainingType)criteria.uniqueResult();
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(TrainingType.class);
+			criteria.add(Restrictions.eq("trainingTypeId", id));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			return (TrainingType)criteria.uniqueResult();
+		} finally {
+			session.close();
+		}
 	}
 	
 	@Override
 	@Transactional
 	public List<TrainingType> getAll() {
-		@SuppressWarnings("unchecked")
 		List<TrainingType> trainingTypes = (List<TrainingType>) sessionFactory.getCurrentSession()
 		.createCriteria(TrainingType.class)
 		.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

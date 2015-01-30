@@ -39,17 +39,33 @@ public class ExcelImportHelper {
             	if (isRowEmpty(row)) {
             		break;
             	}
-            	TrainingExcelDto training = new TrainingExcelDto(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX).getStringCellValue(), 
-            			row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_POST_CODE_COL_INDEX).getStringCellValue(), 
-            			row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_ADDRESS_COL_INDEX).getStringCellValue(), 
-            			row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_PHONE_NO_COL_INDEX).getStringCellValue(), 
-            			row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_EMAIL_COL_INDEX).getStringCellValue());
+            	TrainingExcelDto training = new TrainingExcelDto(
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_POST_CODE_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_ADDRESS_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_PHONE_NO_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_EMAIL_COL_INDEX))
+            			);
             	
             	result.add(training);
             	currentExcelRow++;
             }
         } 
         return result;
+	}
+	
+	private static String getCellValueAsString(Cell cell) {
+		if (cell.getCellType() == Cell.CELL_TYPE_BLANK || cell.getCellType() == Cell.CELL_TYPE_ERROR) {
+			return "";
+		} else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+			return new Boolean(cell.getBooleanCellValue()).toString();
+		} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA || cell.getCellType() == Cell.CELL_TYPE_STRING) {
+			return cell.getStringCellValue();
+		} else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+			return new Double(cell.getNumericCellValue()).toString();
+		} else {
+			return "";
+		}
 	}
 	
 	public static boolean isRowEmpty(Row row) {

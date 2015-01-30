@@ -7,7 +7,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.UserDAO;
-import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
 
 public class UserDAOImpl implements UserDAO {
@@ -29,15 +28,20 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	@Transactional
 	public Long getUserIdByEmail(String email) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("email", email));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		User user = (User)criteria.uniqueResult();
-		if (user == null) {
-			return -1L;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.add(Restrictions.eq("email", email));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			User user = (User)criteria.uniqueResult();
+			if (user == null) {
+				return -1L;
+			}
+			return user.getUserId();
+		} finally {
+			session.close();
 		}
-		return user.getUserId();
 	}
 
 }
