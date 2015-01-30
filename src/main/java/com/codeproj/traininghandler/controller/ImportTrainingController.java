@@ -65,34 +65,34 @@ public class ImportTrainingController {
 		
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
-//		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
-//		
-//		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
-//		
-//		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
-//		
-//		if (!"".equals(paramValidMsg) || !"".equals(excelValuesValidMsg)) {
-//			mav.addObject("validationMsg", paramValidMsg + excelValuesValidMsg);
-//			return mav;
-//		}
-//		
-//		DateTime complDt = new DateTime(new Integer(year), new Integer(month), new Integer(day), 0, 0, 0);
-//		Date complDate = complDt.toDate();
-//		
-//		for (TrainingExcelDto item : trainingAttendendList) {
-//			Long userId = getUserIdIfExist(item);
-//			if (userId == -1L) {
-//				userId = createNewUser(item);
-//			}
-//			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
-//			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
-//			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
-//				continue;
-//			}
-//			completedTrainingService.create(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
-//		}
-//		
-//		logger.debug("Processing POST request for importTraining page..");
+		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
+		
+		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
+		
+		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
+		
+		if (!"".equals(paramValidMsg) || !"".equals(excelValuesValidMsg)) {
+			mav.addObject("validationMsg", paramValidMsg + excelValuesValidMsg);
+			return mav;
+		}
+		
+		DateTime complDt = new DateTime(new Integer(year), new Integer(month), new Integer(day), 0, 0, 0);
+		Date complDate = complDt.toDate();
+		
+		for (TrainingExcelDto item : trainingAttendendList) {
+			Long userId = getUserIdIfExist(item);
+			if (userId == -1L) {
+				userId = createNewUser(item);
+			}
+			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
+			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
+			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
+				continue;
+			}
+			completedTrainingService.create(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
+		}
+		
+		logger.debug("Processing POST request for importTraining page..");
 		mav.addObject("isImportSuccess", new Boolean(true));
 		return mav;
 	}
