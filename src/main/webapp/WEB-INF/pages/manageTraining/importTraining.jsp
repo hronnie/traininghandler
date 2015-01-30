@@ -11,7 +11,7 @@
     <body ng-app="thImportTrainingModule" ng-controller="thImportTrainingController as importCtrl">
     
 		<div class="container" id="containerId">
- 			<form action="<c:url value="/importTraining" />" method="post" enctype="multipart/form-data" autocomplete="off">
+ 			<form action="<c:url value="/manageTraining/importTraining" />" method="post" enctype="multipart/form-data" autocomplete="off">
  				<select ng-model="selectedTrainingType" 
  					ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
  					name="trainingTypeId">

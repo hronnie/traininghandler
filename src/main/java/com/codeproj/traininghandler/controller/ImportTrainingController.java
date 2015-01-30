@@ -53,17 +53,17 @@ public class ImportTrainingController {
 			HttpServletResponse arg1) throws Exception {
 		
 		logger.debug("Going to importTraining page..");
-		return new ModelAndView("importTraining");
+		return new ModelAndView("manageTraining/importTraining");
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-	protected @ResponseBody ModelAndView handlePostRequest(@RequestParam("trainingTypeId") String trainingTypeId, 
+	@RequestMapping(method = RequestMethod.POST)
+	protected  ModelAndView handlePostRequest(@RequestParam("trainingTypeId") String trainingTypeId, 
 			@RequestParam("year") String year, 
 			@RequestParam("month") String month, 
 			@RequestParam("day") String day, 
 			@RequestParam("importFile") MultipartFile importFile) throws Exception {
 		
-		ModelAndView mav = new ModelAndView("importTraining");
+		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
 //		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
 //		
