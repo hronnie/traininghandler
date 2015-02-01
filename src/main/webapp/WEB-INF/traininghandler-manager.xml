@@ -42,6 +42,12 @@
 		class="com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService">
 		<property name="completedTrainingManager" ref="completedTrainingManager" />
 	</bean>
+	
+	<bean id="showTraineesEligibleForTrainingService"
+		class="com.codeproj.traininghandler.rest.showEligibles.ShowTraineesEligibleForTrainingService">
+		<property name="trainingTypeService" ref="trainingTypeService" />
+		<property name="showTraineesEligibleForTrainingManager" ref="showTraineesEligibleForTrainingManager" />
+	</bean>
 
 <!--     ***** MANAGERS ***** -->
 
@@ -63,5 +69,9 @@
 	<bean id="completedTrainingManager"
 		class="com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager">
 		<property name="completedTrainingDAO" ref="completedTrainingDAO" />
+	</bean>
+
+	<bean id="showTraineesEligibleForTrainingManager"
+		class="com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager">
 	</bean>
 </beans>
