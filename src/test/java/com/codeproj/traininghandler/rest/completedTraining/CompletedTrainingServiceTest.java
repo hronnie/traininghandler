@@ -1,7 +1,8 @@
 package com.codeproj.traininghandler.rest.completedTraining;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
-import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingServiceTest {

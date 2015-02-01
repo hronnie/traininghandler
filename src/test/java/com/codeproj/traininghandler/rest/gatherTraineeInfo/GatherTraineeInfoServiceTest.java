@@ -1,9 +1,7 @@
 package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 
-import static org.junit.Assert.*;
+import static com.codeproj.traininghandler.util.Constants.PARAMETER_STRING_SIZE_MORE_THEN_100;
 import static org.mockito.Mockito.when;
-
-import static com.codeproj.traininghandler.util.Constants.*;
 
 import java.util.ArrayList;
 import java.util.Date;

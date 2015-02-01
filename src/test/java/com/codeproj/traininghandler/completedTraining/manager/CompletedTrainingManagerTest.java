@@ -1,11 +1,11 @@
 package com.codeproj.traininghandler.completedTraining.manager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -16,9 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dao.CompletedTrainingDAO;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
-import com.codeproj.traininghandler.manager.address.AddressManager;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
-import com.codeproj.traininghandler.model.Address;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;

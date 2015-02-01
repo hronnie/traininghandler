@@ -1,13 +1,10 @@
 package com.codeproj.traininghandler.rest.user;
 
-import static org.junit.Assert.*;
+import static com.codeproj.traininghandler.util.Constants.PARAMETER_STRING_SIZE_MORE_THEN_100;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import static com.codeproj.traininghandler.util.Constants.*;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -16,14 +13,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.codeproj.traininghandler.dto.AddressDto;
-import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
-import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
-import com.codeproj.traininghandler.rest.gatherTraineeInfo.GatherTraineeInfoService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
