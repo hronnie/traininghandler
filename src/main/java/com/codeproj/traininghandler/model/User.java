@@ -96,6 +96,13 @@ public class User implements Serializable {
 		this.locale = Constants.GLOBAL_DEFAULT_LOCALE;
 	}
 	
+	public User(Long userId, String name, String mobileNo, String email) {
+		this.userId = userId;
+		this.name = name;
+		this.email = email;
+		this.mobileNo = mobileNo;
+	}
+	
 	public Long getUserId() {
 		return this.userId;
 	}

@@ -15,6 +15,7 @@ public class TrainingType implements  Serializable {
 	public TrainingType() {
 		// empty constructor
 	}
+	
 	public TrainingType(Long trainingTypeId) {
 		this.trainingTypeId = trainingTypeId;
 	}

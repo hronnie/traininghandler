@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
-import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.User;
 

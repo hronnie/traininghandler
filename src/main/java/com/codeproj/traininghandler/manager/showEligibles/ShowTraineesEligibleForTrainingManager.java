@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import com.codeproj.traininghandler.dao.ShowTraineesEligibleForTrainingDAO;
 import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
+import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.User;
 
@@ -19,11 +20,18 @@ public class ShowTraineesEligibleForTrainingManager {
 		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingId(trainingTypeId);
 		List<TrainingTypePrerequisite> trainingPrerequisites = generatePrerequiseteDates(prerequisites);
 		List<User> allUsers = showTraineesEligibleForTrainingDAO.getEligibleTrainees(trainingPrerequisites);
-		List<User> hasEmailUsers = new ArrayList<>();
-		List<User> onlyPhoneUsers = new ArrayList<>();
-		return null;
+		List<UserDto> hasEmailUsers = new ArrayList<>();
+		List<UserDto> onlyPhoneUsers = new ArrayList<>();
+		sortUsersByHasEmailOrNot(allUsers, hasEmailUsers, onlyPhoneUsers);
+		return new TraineesEligibleForTrainingDto(hasEmailUsers, onlyPhoneUsers);
 	}
 	
+	private void sortUsersByHasEmailOrNot(List<User> allUsers,
+			List<UserDto> hasEmailUsers, List<UserDto> onlyPhoneUsers) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private List<TrainingTypePrerequisite> generatePrerequiseteDates
 			(List<TrainingPrerequisite> prerequisites) {
 		
