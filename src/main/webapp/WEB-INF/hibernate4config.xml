@@ -82,4 +82,10 @@
 	    </constructor-arg>
 	</bean>
     
+    <bean id="showTraineesEligibleForTrainingDAO" class="com.codeproj.traininghandler.dao.impl.ShowTraineesEligibleForTrainingDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    
 </beans>

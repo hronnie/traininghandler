@@ -20,7 +20,7 @@ import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleFo
 import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ShowTraineesEligibleForTrainingTest {
+public class ShowTraineesEligibleForTrainingServiceTest {
 	
 	@Mock
 	TrainingTypeService trainingTypeService;
@@ -38,15 +38,20 @@ public class ShowTraineesEligibleForTrainingTest {
 	@Before
 	public void setUp() throws DatabaseEntityNotFoundException, ValidationException {
 		service = new ShowTraineesEligibleForTrainingService();
+		
 		service.setTrainingTypeService(trainingTypeService);
 		service.setManager(manager);
+		
 		when(trainingTypeService.getTrainingTypeById(NOT_EXISTING_TRAINING_TYPE_ID)).thenThrow(DatabaseEntityNotFoundException.class);
+
 		UserDto hasEmailUser = new UserDto("Test Name 1", "1111111111111", "email1@email.com", 1L);
 		UserDto onlyPhoneUser = new UserDto("Test Name 1", "2222222222", "2222222222@nincs.com", 2L);
+		
 		List<UserDto> hasEmailUserList = new ArrayList<>();
 		hasEmailUserList.add(hasEmailUser);
 		List<UserDto> onlyPhoneUserList = new ArrayList<>();
 		onlyPhoneUserList.add(onlyPhoneUser);
+		
 		REF_ELIGIBLE_DTO = new TraineesEligibleForTrainingDto(hasEmailUserList, onlyPhoneUserList);
 		when(manager.getEligibleTraineesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_ELIGIBLE_DTO);
 	}
