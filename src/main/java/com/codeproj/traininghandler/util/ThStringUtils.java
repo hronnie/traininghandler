@@ -11,4 +11,8 @@ public class ThStringUtils {
 		return phoneNo.replaceAll("[^0-9]", "");
 	}
 	
+	public static boolean isEmailPhoneEmail(String email) {
+		String emailHead = email.substring(0, email.indexOf("@"));
+		return StringUtils.isNumeric(emailHead);
+	}
 }

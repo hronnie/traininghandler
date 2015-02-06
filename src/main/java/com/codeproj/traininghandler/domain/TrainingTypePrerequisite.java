@@ -2,6 +2,8 @@ package com.codeproj.traininghandler.domain;
 
 import java.util.Date;
 
+import com.codeproj.traininghandler.util.ThDateUtils;
+
 public class TrainingTypePrerequisite {
 	
 	Long prerequisiteTrainingTypeId;
@@ -63,7 +65,7 @@ public class TrainingTypePrerequisite {
 			if (other.minCompletedDate != null) {
 				return false;
 			}
-		} else if (!minCompletedDate.equals(other.minCompletedDate)) {
+		} else if (!ThDateUtils.isDateEqualsWithoutMs(minCompletedDate, other.minCompletedDate)) {
 			return false;
 		}
 		if (prerequisiteTrainingTypeId == null) {

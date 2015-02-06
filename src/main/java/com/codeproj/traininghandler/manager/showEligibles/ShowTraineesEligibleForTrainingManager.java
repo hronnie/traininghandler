@@ -10,7 +10,9 @@ import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
+import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
+import com.codeproj.traininghandler.util.ThStringUtils;
 
 public class ShowTraineesEligibleForTrainingManager {
 	
@@ -28,8 +30,22 @@ public class ShowTraineesEligibleForTrainingManager {
 	
 	private void sortUsersByHasEmailOrNot(List<User> allUsers,
 			List<UserDto> hasEmailUsers, List<UserDto> onlyPhoneUsers) {
-		// TODO Auto-generated method stub
+		for (User item : allUsers) {
+			if (ThStringUtils.isEmailPhoneEmail(item.getEmail())) {
+				onlyPhoneUsers.add(convertUserToDto(item));
+				continue;
+			}
+			hasEmailUsers.add(convertUserToDto(item));
+		}
 		
+	}
+
+	private UserDto convertUserToDto(User item) {
+		UserDto result = new UserDto();
+		result.setName(item.getName());
+		result.setEmail(item.getEmail());
+		result.setPhoneNo(item.getMobileNo());
+		return result;
 	}
 
 	private List<TrainingTypePrerequisite> generatePrerequiseteDates
@@ -38,8 +54,13 @@ public class ShowTraineesEligibleForTrainingManager {
 		List<TrainingTypePrerequisite> result = new ArrayList<>();
 		for (TrainingPrerequisite item : prerequisites) {
 			DateTime complDate = new DateTime();
-			complDate.minusMonths(item.getBetweenMonth());
-			TrainingTypePrerequisite ttPrereq = new TrainingTypePrerequisite(item.getTrainingPrerequisiteId(), complDate.toDate());
+			complDate = complDate.minusMonths(item.getBetweenMonth());
+			TrainingType prerequisiteTrainingType = item.getPrerequisiteTrainingType();
+			Long prerequisiteTrainingTypeId = 0L;
+			if (prerequisiteTrainingType != null) {
+				prerequisiteTrainingTypeId = prerequisiteTrainingType.getTrainingTypeId();
+			}
+			TrainingTypePrerequisite ttPrereq = new TrainingTypePrerequisite(prerequisiteTrainingTypeId, complDate.toDate());
 			result.add(ttPrereq);
 		}
 		

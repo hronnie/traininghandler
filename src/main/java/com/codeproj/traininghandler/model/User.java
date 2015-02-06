@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.codeproj.traininghandler.util.Constants;
+import com.codeproj.traininghandler.util.ThDateUtils;
 
 public class User implements Serializable {
 
@@ -96,7 +97,7 @@ public class User implements Serializable {
 		this.locale = Constants.GLOBAL_DEFAULT_LOCALE;
 	}
 	
-	public User(Long userId, String name, String mobileNo, String email) {
+	public User(Long userId, String name, String email, String mobileNo) {
 		this.userId = userId;
 		this.name = name;
 		this.email = email;
@@ -342,8 +343,8 @@ public class User implements Serializable {
 		if (created == null) {
 			if (other.created != null) {
 				return false;
-			}other.created.getTime();
-		} else if (!created.equals(other.created) && (Math.abs(created.getTime() - other.created.getTime()) > 3000)) {
+			}
+		} else if (ThDateUtils.isDateEqualsWithoutMs(created, other.created)) {
 			return false;
 		}
 		if (displayName == null) {

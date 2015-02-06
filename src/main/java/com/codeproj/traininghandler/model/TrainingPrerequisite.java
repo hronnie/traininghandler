@@ -7,8 +7,8 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	private static final long serialVersionUID = 1L;
 	
 	private Long trainingPrerequisiteId;
-	private TrainingType dependentTrainingTypeId;
-	private TrainingType prerequisiteTrainingTypeId;
+	private TrainingType dependentTrainingType;
+	private TrainingType prerequisiteTrainingType;
 	private Integer betweenMonth;
 
 	public TrainingPrerequisite() {
@@ -17,8 +17,8 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
 			TrainingType dependentTrainingTypeId, TrainingType prerequisiteTrainingTypeId, Integer betweenMonth) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-		this.dependentTrainingTypeId = dependentTrainingTypeId;
-		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
+		this.dependentTrainingType = dependentTrainingTypeId;
+		this.prerequisiteTrainingType = prerequisiteTrainingTypeId;
 		this.betweenMonth = betweenMonth;
 	}
 
@@ -32,21 +32,21 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.trainingPrerequisiteId = id;
 	}
 	
-	public TrainingType getDependentTrainingTypeId() {
-		return dependentTrainingTypeId;
+	public TrainingType getDependentTrainingType() {
+		return dependentTrainingType;
 	}
 
-	public void setDependentTrainingTypeId(TrainingType dependentTrainingTypeId) {
-		this.dependentTrainingTypeId = dependentTrainingTypeId;
+	public void setDependentTrainingType(TrainingType dependentTrainingTypeId) {
+		this.dependentTrainingType = dependentTrainingTypeId;
 	}
 
-	public TrainingType getPrerequisiteTrainingTypeId() {
-		return prerequisiteTrainingTypeId;
+	public TrainingType getPrerequisiteTrainingType() {
+		return prerequisiteTrainingType;
 	}
 
-	public void setPrerequisiteTrainingTypeId(
+	public void setPrerequisiteTrainingType(
 			TrainingType prerequisiteTrainingTypeId) {
-		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
+		this.prerequisiteTrainingType = prerequisiteTrainingTypeId;
 	}
 
 	public Long getTrainingPrerequisiteId() {

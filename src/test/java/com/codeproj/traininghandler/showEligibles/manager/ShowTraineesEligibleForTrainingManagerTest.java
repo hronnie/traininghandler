@@ -70,7 +70,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		REF_TRAINING_TYPE_PREREQ.add(firstTrTypePrereq);
 		REF_TRAINING_TYPE_PREREQ.add(secondTrTypePrereq);
 		
-		HAS_EMAIL_USER = new User(1L, TEST_NAME1, VALID_EMAIL, null);
+		HAS_EMAIL_USER = new User(1L, TEST_NAME1, VALID_EMAIL, PHONE_NO);
 		PHONE_EMAIL_USER = new User(2L, TEST_NAME1, PHONE_EMAIL, PHONE_NO);
 		REF_USER_LIST.add(HAS_EMAIL_USER);
 		REF_USER_LIST.add(PHONE_EMAIL_USER);
@@ -78,7 +78,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		when(dao.getEligibleTrainees(REF_TRAINING_TYPE_PREREQ)).thenReturn(REF_USER_LIST);
 
 		
-		UserDto hasEmailUser = new UserDto(TEST_NAME1, null, VALID_EMAIL, null);
+		UserDto hasEmailUser = new UserDto(TEST_NAME1, PHONE_NO, VALID_EMAIL, null);
 		UserDto onlyPhoneUser = new UserDto(TEST_NAME1, PHONE_NO, PHONE_EMAIL, null);
 		
 		List<UserDto> hasEmailUserList = new ArrayList<>();

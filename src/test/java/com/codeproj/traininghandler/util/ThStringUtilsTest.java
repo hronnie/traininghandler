@@ -17,5 +17,11 @@ public class ThStringUtilsTest {
 		assertEquals("The input string wasn't cleaned correctly", "", ThStringUtils.cleanPhoneNumber(null));
 		assertEquals("The input string wasn't cleaned correctly", "001444", ThStringUtils.cleanPhoneNumber(" -001-/dfdf444 "));
 	}
+	
+	@Test
+	public void testIsEmailPhoneEmail() {
+		assertTrue("This is a phone email", ThStringUtils.isEmailPhoneEmail("11111111111@gmail.com"));
+		assertFalse("This is *not* a phone email", ThStringUtils.isEmailPhoneEmail("validemaikl222@gmail.com"));
+	}
 
 }
