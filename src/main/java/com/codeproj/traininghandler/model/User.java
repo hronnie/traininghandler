@@ -344,7 +344,7 @@ public class User implements Serializable {
 			if (other.created != null) {
 				return false;
 			}
-		} else if (ThDateUtils.isDateEqualsWithoutMs(created, other.created)) {
+		} else if (!ThDateUtils.isDateEqualsWithoutMs(created, other.created)) {
 			return false;
 		}
 		if (displayName == null) {
