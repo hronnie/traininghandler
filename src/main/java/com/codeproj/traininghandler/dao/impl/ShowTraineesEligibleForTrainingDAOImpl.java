@@ -39,7 +39,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(TrainingPrerequisite.class);
-			criteria.add(Restrictions.eq("trainingTypeId", trainingTypeId));
+			criteria.add(Restrictions.eq("dependentTrainingType", trainingTypeId));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			return (List<TrainingPrerequisite>)criteria.list();
 		} finally {

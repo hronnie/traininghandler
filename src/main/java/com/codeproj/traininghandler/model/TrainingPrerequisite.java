@@ -2,7 +2,7 @@ package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
 
-public class TrainingPrerequisite implements HibernatePersistable, Serializable {
+public class TrainingPrerequisite implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,16 +20,6 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 		this.dependentTrainingType = dependentTrainingType;
 		this.prerequisiteTrainingType = prerequisiteTrainingType;
 		this.betweenMonth = betweenMonth;
-	}
-
-	@Override
-	public Long getId() {
-		return this.trainingPrerequisiteId;
-	}
-	
-	@Override
-	public void setId(Long id) {
-		this.trainingPrerequisiteId = id;
 	}
 
 	public Long getTrainingPrerequisiteId() {
