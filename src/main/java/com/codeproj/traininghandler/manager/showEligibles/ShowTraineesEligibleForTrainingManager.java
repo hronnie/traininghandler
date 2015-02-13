@@ -24,11 +24,11 @@ public class ShowTraineesEligibleForTrainingManager {
 		List<User> allUsers = showTraineesEligibleForTrainingDAO.getEligibleTrainees(trainingPrerequisites);
 		List<UserDto> hasEmailUsers = new ArrayList<>();
 		List<UserDto> onlyPhoneUsers = new ArrayList<>();
-		sortUsersByHasEmailOrNot(allUsers, hasEmailUsers, onlyPhoneUsers);
+		sortUsersByHaveEmailOrNot(allUsers, hasEmailUsers, onlyPhoneUsers);
 		return new TraineesEligibleForTrainingDto(hasEmailUsers, onlyPhoneUsers);
 	}
 	
-	private void sortUsersByHasEmailOrNot(List<User> allUsers,
+	private void sortUsersByHaveEmailOrNot(List<User> allUsers,
 			List<UserDto> hasEmailUsers, List<UserDto> onlyPhoneUsers) {
 		for (User item : allUsers) {
 			if (ThStringUtils.isEmailPhoneEmail(item.getEmail())) {

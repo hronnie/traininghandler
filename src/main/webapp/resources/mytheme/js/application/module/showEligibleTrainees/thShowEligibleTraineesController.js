@@ -1,7 +1,7 @@
 thShowEligibleTraineesModule.controller('thShowEligibleTraineesController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, thTrainingTypeService) {
 	
-	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
-	resource.getList().then(function(trainingTypes){
+	var trainingTypeResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
+	trainingTypeResource.getList().then(function(trainingTypes){
 		$scope.trainingTypeWrapperArray = [];
 		$scope.trainingTypes = trainingTypes;
 		for (i = 0; i < $scope.trainingTypes.length; i++) {

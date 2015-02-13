@@ -15,10 +15,10 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingType dependentTrainingTypeId, TrainingType prerequisiteTrainingTypeId, Integer betweenMonth) {
+			TrainingType dependentTrainingType, TrainingType prerequisiteTrainingType, Integer betweenMonth) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-		this.dependentTrainingType = dependentTrainingTypeId;
-		this.prerequisiteTrainingType = prerequisiteTrainingTypeId;
+		this.dependentTrainingType = dependentTrainingType;
+		this.prerequisiteTrainingType = prerequisiteTrainingType;
 		this.betweenMonth = betweenMonth;
 	}
 
@@ -31,37 +31,37 @@ public class TrainingPrerequisite implements HibernatePersistable, Serializable 
 	public void setId(Long id) {
 		this.trainingPrerequisiteId = id;
 	}
-	
-	public TrainingType getDependentTrainingType() {
-		return dependentTrainingType;
-	}
-
-	public void setDependentTrainingType(TrainingType dependentTrainingTypeId) {
-		this.dependentTrainingType = dependentTrainingTypeId;
-	}
-
-	public TrainingType getPrerequisiteTrainingType() {
-		return prerequisiteTrainingType;
-	}
-
-	public void setPrerequisiteTrainingType(
-			TrainingType prerequisiteTrainingTypeId) {
-		this.prerequisiteTrainingType = prerequisiteTrainingTypeId;
-	}
 
 	public Long getTrainingPrerequisiteId() {
-		return this.trainingPrerequisiteId;
+		return trainingPrerequisiteId;
 	}
 
 	public void setTrainingPrerequisiteId(Long trainingPrerequisiteId) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 	}
 
+	public TrainingType getDependentTrainingType() {
+		return dependentTrainingType;
+	}
+
+	public void setDependentTrainingType(TrainingType dependentTrainingType) {
+		this.dependentTrainingType = dependentTrainingType;
+	}
+
+	public TrainingType getPrerequisiteTrainingType() {
+		return prerequisiteTrainingType;
+	}
+
+	public void setPrerequisiteTrainingType(TrainingType prerequisiteTrainingType) {
+		this.prerequisiteTrainingType = prerequisiteTrainingType;
+	}
+
 	public Integer getBetweenMonth() {
-		return this.betweenMonth;
+		return betweenMonth;
 	}
 
 	public void setBetweenMonth(Integer betweenMonth) {
 		this.betweenMonth = betweenMonth;
 	}
+	
 }

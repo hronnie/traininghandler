@@ -40,7 +40,7 @@ public class ShowTraineesEligibleForTrainingServiceTest {
 		service = new ShowTraineesEligibleForTrainingService();
 		
 		service.setTrainingTypeService(trainingTypeService);
-		service.setManager(manager);
+		service.setShowTraineesEligibleForTrainingManager(manager);
 		
 		when(trainingTypeService.getTrainingTypeById(NOT_EXISTING_TRAINING_TYPE_ID)).thenThrow(DatabaseEntityNotFoundException.class);
 
