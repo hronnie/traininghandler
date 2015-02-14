@@ -21,11 +21,11 @@ public class UserService {
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody UserDto user) throws ValidationException {
-		return createUser(user, true);
+		return createUser(user, true, false);
 	}
 
 	public GeneralIdResponse createFromForm(UserDto userDto) throws ValidationException {
-		return createUser(userDto, false);
+		return createUser(userDto, false, true);
 	}
 	
 	public GeneralIdResponse getUserIdByEmail(String email) {
@@ -33,19 +33,23 @@ public class UserService {
 		return new GeneralIdResponse(result);
 	}
 
-	private GeneralIdResponse createUser(UserDto user, boolean isNeedValidate)
+	private GeneralIdResponse createUser(UserDto user, boolean isNeedValidate, boolean isUseFullName)
 			throws ValidationException {
 		if (user == null) {
 			throw new ValidationException("Input User dto is null");
 		}
 		
 		stripXssUserDto(user);
-		if (isNeedValidate) {
+		if (isNeedValidate) {user.getName();
 			UserServiceValidator.create(user.getLastName(), user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
 		}
 		
-		
-		Long result = userManager.create(user.getLastName() + user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
+		Long result = null;
+		if (isUseFullName) {
+			result = userManager.create(user.getName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
+		} else {
+			result = userManager.create(user.getLastName() + user.getFirstName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
+		}
 		return new GeneralIdResponse(result);
 	}
 	
