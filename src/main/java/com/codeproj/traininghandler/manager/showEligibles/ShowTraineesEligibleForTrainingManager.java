@@ -55,11 +55,7 @@ public class ShowTraineesEligibleForTrainingManager {
 		for (TrainingPrerequisite item : prerequisites) {
 			DateTime complDate = new DateTime();
 			complDate = complDate.minusMonths(item.getBetweenMonth());
-			TrainingType prerequisiteTrainingType = item.getPrerequisiteTrainingType();
-			Long prerequisiteTrainingTypeId = 0L;
-			if (prerequisiteTrainingType != null) {
-				prerequisiteTrainingTypeId = prerequisiteTrainingType.getTrainingTypeId();
-			}
+			Long prerequisiteTrainingTypeId = item.getPrerequisiteTrainingTypeId();
 			TrainingTypePrerequisite ttPrereq = new TrainingTypePrerequisite(prerequisiteTrainingTypeId, complDate.toDate());
 			result.add(ttPrereq);
 		}

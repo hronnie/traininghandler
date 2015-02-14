@@ -53,8 +53,8 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		manager = new ShowTraineesEligibleForTrainingManager();
 		manager.setShowTraineesEligibleForTrainingDAO(dao);
 		
-		TrainingPrerequisite firstTrPrereq = new TrainingPrerequisite(1L, new TrainingType(1L), new TrainingType(3L), 3);
-		TrainingPrerequisite secondTrPrereq = new TrainingPrerequisite(2L, new TrainingType(1L), new TrainingType(4L), 6);
+		TrainingPrerequisite firstTrPrereq = new TrainingPrerequisite(1L, 1L, 3L, 3);
+		TrainingPrerequisite secondTrPrereq = new TrainingPrerequisite(2L, 1L, 4L, 6);
 		
 		REF_TRAINING_PREREQ.add(firstTrPrereq);
 		REF_TRAINING_PREREQ.add(secondTrPrereq);

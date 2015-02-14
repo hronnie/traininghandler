@@ -1,6 +1,8 @@
 package com.codeproj.traininghandler.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainingType implements  Serializable {
 
@@ -11,6 +13,7 @@ public class TrainingType implements  Serializable {
 	private String name;
 	private String levelNo;
 	private String description;
+	private Set<TrainingPrerequisite> trainingPrerequisites = new HashSet<>();
 
 	public TrainingType() {
 		// empty constructor
@@ -33,6 +36,15 @@ public class TrainingType implements  Serializable {
 		this.name = name;
 		this.levelNo = levelNo;
 		this.description = description;
+	}
+	
+	public TrainingType(Long trainingTypeId, String name,
+			String levelNo, String description, Set<TrainingPrerequisite> trainingPrerequisites) {
+		this.trainingTypeId = trainingTypeId;
+		this.name = name;
+		this.levelNo = levelNo;
+		this.description = description;
+		this.trainingPrerequisites = trainingPrerequisites;
 	}
 
 	public Long getTrainingTypeId() {
@@ -65,6 +77,15 @@ public class TrainingType implements  Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<TrainingPrerequisite> getTrainingPrerequisites() {
+		return trainingPrerequisites;
+	}
+
+	public void setTrainingPrerequisites(
+			Set<TrainingPrerequisite> trainingPrerequisites) {
+		this.trainingPrerequisites = trainingPrerequisites;
 	}
 
 	@Override

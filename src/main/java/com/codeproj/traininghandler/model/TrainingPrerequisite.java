@@ -7,18 +7,18 @@ public class TrainingPrerequisite implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long trainingPrerequisiteId;
-	private TrainingType dependentTrainingType;
-	private TrainingType prerequisiteTrainingType;
+	private Long dependentTrainingTypeId;
+	private Long prerequisiteTrainingTypeId;
 	private Integer betweenMonth;
 
 	public TrainingPrerequisite() {
 	}
 
 	public TrainingPrerequisite(Long trainingPrerequisiteId,
-			TrainingType dependentTrainingType, TrainingType prerequisiteTrainingType, Integer betweenMonth) {
+			Long dependentTrainingTypeId, Long prerequisiteTrainingTypeId, Integer betweenMonth) {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
-		this.dependentTrainingType = dependentTrainingType;
-		this.prerequisiteTrainingType = prerequisiteTrainingType;
+		this.dependentTrainingTypeId = dependentTrainingTypeId;
+		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
 		this.betweenMonth = betweenMonth;
 	}
 
@@ -30,20 +30,20 @@ public class TrainingPrerequisite implements Serializable {
 		this.trainingPrerequisiteId = trainingPrerequisiteId;
 	}
 
-	public TrainingType getDependentTrainingType() {
-		return dependentTrainingType;
+	public Long getDependentTrainingTypeId() {
+		return dependentTrainingTypeId;
 	}
 
-	public void setDependentTrainingType(TrainingType dependentTrainingType) {
-		this.dependentTrainingType = dependentTrainingType;
+	public void setDependentTrainingTypeId(Long dependentTrainingTypeId) {
+		this.dependentTrainingTypeId = dependentTrainingTypeId;
 	}
 
-	public TrainingType getPrerequisiteTrainingType() {
-		return prerequisiteTrainingType;
+	public Long getPrerequisiteTrainingTypeId() {
+		return prerequisiteTrainingTypeId;
 	}
 
-	public void setPrerequisiteTrainingType(TrainingType prerequisiteTrainingType) {
-		this.prerequisiteTrainingType = prerequisiteTrainingType;
+	public void setPrerequisiteTrainingTypeId(Long prerequisiteTrainingTypeId) {
+		this.prerequisiteTrainingTypeId = prerequisiteTrainingTypeId;
 	}
 
 	public Integer getBetweenMonth() {
