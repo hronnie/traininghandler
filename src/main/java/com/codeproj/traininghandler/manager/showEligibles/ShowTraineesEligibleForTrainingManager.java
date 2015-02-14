@@ -30,6 +30,9 @@ public class ShowTraineesEligibleForTrainingManager {
 	
 	private void sortUsersByHaveEmailOrNot(List<User> allUsers,
 			List<UserDto> hasEmailUsers, List<UserDto> onlyPhoneUsers) {
+		if (allUsers.size() < 1) {
+			return;
+		}
 		for (User item : allUsers) {
 			if (ThStringUtils.isEmailPhoneEmail(item.getEmail())) {
 				onlyPhoneUsers.add(convertUserToDto(item));

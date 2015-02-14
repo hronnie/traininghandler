@@ -36,11 +36,13 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 	public List<TrainingPrerequisite> getPrerequisitesByTrainingId(
 			Long trainingTypeId) {
 		Session session = null;
+		List obj = null;
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(TrainingPrerequisite.class);
-			criteria.add(Restrictions.eq("dependentTrainingType", trainingTypeId));
+			criteria.add(Restrictions.eq("dependentTrainingTypeId", trainingTypeId));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			obj = criteria.list();
 			return (List<TrainingPrerequisite>)criteria.list();
 		} finally {
 			session.close();
@@ -54,6 +56,9 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		
         Session session = sessionFactory.openSession();
         try {
+        	if (trainingPrerequisites == null || trainingPrerequisites.size() < 1) {
+        		return new ArrayList<>();
+        	}
             Query query = session.createSQLQuery(buildEligibleTraineesQuery(trainingPrerequisites.size()));
             addParameters(query, trainingPrerequisites);
             List<Object[]> resultSet = query.list();
@@ -63,9 +68,9 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
             while (rowIt.hasNext()) {
                 Object[] row = rowIt.next();
                 User user = new User();
-                user.setName((String)row[1]);
-                user.setEmail((String)row[2]);
-                user.setMobileNo((String)row[3]);
+                user.setName((String)row[0]);
+                user.setEmail((String)row[1]);
+                user.setMobileNo((String)row[2]);
                 
                 result.add(user);
             }
@@ -90,6 +95,9 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		sb.append(" FROM ");
 		sb.append("  CompletedUserTraining cu ");
 		sb.append(" INNER JOIN User u ON (u.userId = cu.userId) ");
+		if (size < 1) {
+			return sb.toString();
+		}
 		sb.append(" WHERE ");
 		for (int i = 0; i < size; i++) {
 			sb.append(" (cu.trainingTypeId = ? AND cu.completedDate <= ?) ");
