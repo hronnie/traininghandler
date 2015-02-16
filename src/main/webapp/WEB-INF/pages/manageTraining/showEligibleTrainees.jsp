@@ -18,12 +18,9 @@
                 </select>
                 <br>
                 
-                
-             <button class="btn btn-1 btn-1e mainButton" id="trainingTypeId" ng-click="" />'">
-                <spring:message code="index.button.manage.training.types" />
-            </button>
-                
-                
+        <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="index.button.manage.training.types" /></a>
+		<div class="gridStyle" ng-grid="hasEmailUsersGrid"></div>    
+		<div class="gridStyle" ng-grid="onlyPhoneUsersGrid"></div>    
         </div>
         
 
