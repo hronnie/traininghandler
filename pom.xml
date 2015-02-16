@@ -408,9 +408,129 @@
 
 
 	<profiles>
-		<!-- DATABASE BUILD -->
+		<!-- DATABASE BUILD for PRODUCTION -->
 		<profile>
 			<id>mysql_th</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+						<version>1.5</version>
+
+						<dependencies>
+							<!-- specify the dependent JDBC driver here -->
+							<dependency>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
+								<version>5.1.33</version>
+							</dependency>
+
+						</dependencies>
+
+						<!-- common configuration shared by all executions -->
+						<configuration>
+							<driver>org.gjt.mm.mysql.Driver</driver>
+							<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}</url>
+							<username>${th.db.mysql.username}</username>
+							<password>${th.db.mysql.password}</password>
+						</configuration>
+
+						<executions>
+							<execution>
+								<id>drop-db</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<!-- specific configuration for this execution -->
+
+								<configuration>
+									<!-- need another database to drop the targeted one -->
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dummydb.name}</url>
+									<autocommit>true</autocommit>
+									<sqlCommand>drop database ${th.db.mysql.dbname}</sqlCommand>
+									<!-- ignore error when database is not avaiable -->
+									<onError>continue</onError>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>create-db</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dummydb.name}</url>
+									<!-- no transaction -->
+									<autocommit>true</autocommit>
+									<sqlCommand>create database ${th.db.mysql.dbname}</sqlCommand>
+									<driverProperties>characterEncoding=utf8,
+										connectionCollation=utf8_general_ci,
+										sql_mode=STRICT_TRANS_TABLES</driverProperties>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>create-schema</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}?useUnicode=true&amp;characterEncoding=UTF-8</url>
+									<autocommit>true</autocommit>
+									<srcFiles>
+										<!-- TABLES -->
+										<srcFile>src/main/sql/schema/Address.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserType.sql</srcFile>
+										<srcFile>src/main/sql/schema/User.sql</srcFile>
+										<srcFile>src/main/sql/schema/Appointment.sql</srcFile>
+										<srcFile>src/main/sql/schema/Role.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserRole.sql</srcFile>
+										<srcFile>src/main/sql/schema/EmailTemplate.sql</srcFile>
+										<srcFile>src/main/sql/schema/GeneralSettings.sql</srcFile>
+										<srcFile>src/main/sql/schema/Log.sql</srcFile>
+										<srcFile>src/main/sql/schema/TrainingType.sql</srcFile>
+										<srcFile>src/main/sql/schema/Training.sql</srcFile>
+										<srcFile>src/main/sql/schema/SentTrainingEmail.sql</srcFile>
+										<srcFile>src/main/sql/schema/TrainingPrerequisite.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserLevel.sql</srcFile>
+										<srcFile>src/main/sql/schema/UserTraining.sql</srcFile>
+										<srcFile>src/main/sql/schema/CompletedUserTraining.sql</srcFile>
+									</srcFiles>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>create-data</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<url>jdbc:mysql://${th.db.mysql.server.name}:${th.db.mysql.server.port}/${th.db.mysql.dbname}?useUnicode=true&amp;characterEncoding=UTF-8</url>
+									<autocommit>true</autocommit>
+									<srcFiles>
+										<!-- DATA -->
+										<srcFile>src/main/sql/data/UserTypeData.sql</srcFile>
+										<srcFile>src/main/sql/data/UserRoleData.sql</srcFile>
+										<srcFile>src/main/sql/data/EmailTemplateData.sql</srcFile>
+										<srcFile>src/main/sql/data/GeneralSettingsData.sql</srcFile>
+										<srcFile>src/main/sql/data/TrainingTypeData.sql</srcFile>
+										<srcFile>src/main/sql/data/TrainingPrerequisiteData.sql</srcFile>
+									</srcFiles>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<!-- DATABASE BUILD for DEVELOPMENT -->
+		<profile>
+			<id>mysql_th_dev</id>
 			<build>
 				<plugins>
 					<plugin>
