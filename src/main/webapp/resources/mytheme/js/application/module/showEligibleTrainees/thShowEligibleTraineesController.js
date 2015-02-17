@@ -16,7 +16,6 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController', func
 	
 	//trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	$scope.getEligibleTrainees = function(trainingTypeId) {
-		debugger;
 		var eligibleTraineesResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/manageTraining/getEligibleTraineesByTrainingTypeId/' + trainingTypeId.id);
 		eligibleTraineesResource.get().then(function(eligibleTrinees) {
 			$scope.hasEmailUsers = eligibleTrinees.hasEmailUsers;
@@ -24,13 +23,20 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController', func
 		});
 	}
 	
+	
     $scope.hasEmailUsersGrid = { 
     	      data: 'hasEmailUsers',
+    	      columnDefs: [{ field: 'fullName', displayName: 'Név' },
+    	                   { field: 'email', displayName: 'Email' },
+    	                   { field: 'phoneNo', displayName: 'Telefonszám', headerClass: 'ageHeader' }],
     	      jqueryUITheme: false
     };
     
     $scope.onlyPhoneUsersGrid = { 
     		data: 'onlyPhoneUsers',
+    		columnDefs: [{ field: 'fullName', displayName: 'Név' },
+    		             { field: 'email', displayName: 'Email' },
+    		             { field: 'phoneNo', displayName: 'Telefonszám', headerClass: 'ageHeader' }],
     		jqueryUITheme: true
     };
 	

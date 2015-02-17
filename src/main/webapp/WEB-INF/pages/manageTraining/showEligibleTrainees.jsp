@@ -19,7 +19,12 @@
                 <br>
                 
         <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="index.button.manage.training.types" /></a>
-		<div class="gridStyle" ng-grid="hasEmailUsersGrid"></div>    
+        <h3>Email címmel rendelkezők listája:</h3>
+		<div class="gridStyle" ng-grid="hasEmailUsersGrid"></div>
+		<ul>
+			<li ng-repeat="user in hasEmailUsers">{{user.email}}</li>,
+		</ul>    
+        <h3>Csak telefonszámmal rendelkezők listája:</h3>
 		<div class="gridStyle" ng-grid="onlyPhoneUsersGrid"></div>    
         </div>
         
