@@ -18,12 +18,14 @@
                 </select>
                 <br>
                 
-                
-             <button class="btn btn-1 btn-1e mainButton" id="trainingTypeId" ng-click="" />'">
-                <spring:message code="index.button.manage.training.types" />
-            </button>
-                
-                
+        <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="index.button.manage.training.types" /></a>
+        <h3>Email címmel rendelkezők listája:</h3>
+		<div class="gridStyle" ng-grid="hasEmailUsersGrid"></div>
+		<ul>
+			<li ng-repeat="user in hasEmailUsers">{{user.email}}</li>,
+		</ul>    
+        <h3>Csak telefonszámmal rendelkezők listája:</h3>
+		<div class="gridStyle" ng-grid="onlyPhoneUsersGrid"></div>    
         </div>
         
 

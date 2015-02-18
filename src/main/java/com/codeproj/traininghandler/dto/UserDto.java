@@ -70,6 +70,11 @@ public class UserDto {
 	public Long getAddressId() {
 		return addressId;
 	}
+	
+	@XmlElement(name="fullName")
+	public String getName() {
+		return name;
+	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -97,10 +102,6 @@ public class UserDto {
 	
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public void setName(String name) {
