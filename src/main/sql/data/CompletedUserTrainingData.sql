@@ -1,0 +1,9 @@
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (1,7,2,'2014-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (2,8,2,'2014-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (3,9,2,'2013-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (4,10,2,'2014-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (5,11,2,'2013-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (6,12,2,'2014-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (7,13,2,'2014-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (8,14,2,'2013-11-11 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (9,15,2,'2014-11-11 00:00:00');
