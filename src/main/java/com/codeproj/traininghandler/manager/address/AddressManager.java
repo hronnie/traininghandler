@@ -13,8 +13,8 @@ public class AddressManager {
 	AddressDAO addressDAO;
 
 	public Long create(String city, String country, String houseNo,
-			String postCode, String street) {
-		Address addressModel = new Address(city, country, houseNo, postCode, street);
+			String postCode, String street, String fullAddress) {
+		Address addressModel = new Address(city, country, houseNo, postCode, street, fullAddress);
 		return addressDAO.create(addressModel);
 	}
 

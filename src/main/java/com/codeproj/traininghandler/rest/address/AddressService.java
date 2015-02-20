@@ -37,16 +37,17 @@ public class AddressService {
 		String houseNo = ValidatorBaseUtility.stripXSS(addressDto.getHouseNo());
 		String postCode = ValidatorBaseUtility.stripXSS(addressDto.getPostCode());
 		String street = ValidatorBaseUtility.stripXSS(addressDto.getStreet());
-		Long result = addressManager.create(city, country, houseNo, postCode, street);
+		String fullAddress = ValidatorBaseUtility.stripXSS(addressDto.getAddress());
+		Long result = addressManager.create(city, country, houseNo, postCode, street, fullAddress);
 		return new GeneralIdResponse(result);
+	}
+	
+	public GeneralIdResponse createFromForm(AddressDto addressDto) throws ValidationException {
+		return createAddress(addressDto, false);
 	}
 
 	public void setAddressManager(AddressManager addressManager) {
 		this.addressManager = addressManager;
-	}
-
-	public GeneralIdResponse createFromForm(AddressDto addressDto) throws ValidationException {
-		return createAddress(addressDto, false);
 	}
 
 }

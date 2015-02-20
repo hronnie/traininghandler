@@ -14,6 +14,7 @@ import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.address.AddressManager;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.mchange.util.AssertException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddressServiceTest {
@@ -25,6 +26,7 @@ public class AddressServiceTest {
 	public static final String VALID_STREET = "Test Street name 1";
 	public static final String VALID_HOUSE_NUMBER = "18/a";
 	public static final String VALID_COUNTRY = "Magyarorszag";
+	public static final String VALID_ONE_LINE_ADDRESS = "Street name 5, London";
 	public AddressService service;
 	
 	@Mock
@@ -39,13 +41,14 @@ public class AddressServiceTest {
 	public void setUp() throws Exception {
 		service = new AddressService();
 		service.setAddressManager(manager);
-		when(manager.create(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY)).thenReturn(1L);
+		when(manager.create(VALID_CITY, VALID_COUNTRY, VALID_HOUSE_NUMBER, VALID_POST_CODE, VALID_STREET, null)).thenReturn(1L);
+		when(manager.create(null, null, null, VALID_POST_CODE, null, VALID_ONE_LINE_ADDRESS)).thenReturn(2L);
 	}
 	
 	// valid inputs
 	
-	
-	public void testGatherTraineeInfoWithValidData() throws ValidationException {
+	@Test
+	public void testCreateAddressValidData() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		
 		GeneralIdResponse result = service.create(addressDto);
@@ -55,67 +58,67 @@ public class AddressServiceTest {
 	// null check 
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullObject() throws ValidationException {
+	public void testCreateAddressWithNullObject() throws ValidationException {
 		service.create(null);  
 	}
 
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullPostCode() throws ValidationException {
+	public void testCreateAddressWithNullPostCode() throws ValidationException {
 		AddressDto addressDto = new AddressDto(null, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullCity() throws ValidationException {
+	public void testCreateAddressWithNullCity() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, null, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullStreet() throws ValidationException {
+	public void testCreateAddressWithNullStreet() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, null, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullHouseNumber() throws ValidationException {
+	public void testCreateAddressWithNullHouseNumber() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, null, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithNullCountry() throws ValidationException {
+	public void testCreateAddressWithNullCountry() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, null);
 		service.create(addressDto);  
 	}
 	// empty check 
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithEmptyPostCode() throws ValidationException {
+	public void testCreateAddressWithEmptyPostCode() throws ValidationException {
 		AddressDto addressDto = new AddressDto("", VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithEmptyCity() throws ValidationException {
+	public void testCreateAddressWithEmptyCity() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, "", VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithEmptyStreet() throws ValidationException {
+	public void testCreateAddressWithEmptyStreet() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, "", VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithEmptyHouseNumber() throws ValidationException {
+	public void testCreateAddressWithEmptyHouseNumber() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, "", VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithEmptyCountry() throws ValidationException {
+	public void testCreateAddressWithEmptyCountry() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, "");
 		service.create(addressDto);  
 	}
@@ -123,32 +126,40 @@ public class AddressServiceTest {
 	// too long check 
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithTooLongPostCode() throws ValidationException {
+	public void testCreateAddressWithTooLongPostCode() throws ValidationException {
 		AddressDto addressDto = new AddressDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithTooLongCity() throws ValidationException {
+	public void testCreateAddressWithTooLongCity() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithTooLongStreet() throws ValidationException {
+	public void testCreateAddressWithTooLongStreet() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_HOUSE_NUMBER, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithTooLongHouseNumber() throws ValidationException {
+	public void testCreateAddressWithTooLongHouseNumber() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_COUNTRY);
 		service.create(addressDto);  
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithTooLongCountry() throws ValidationException {
+	public void testCreateAddressWithTooLongCountry() throws ValidationException {
 		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100);
 		service.create(addressDto);  
+	}
+	
+	
+	@Test
+	public void testCreateFormForm() throws ValidationException {
+		AddressDto addressDto = new AddressDto(VALID_POST_CODE, VALID_ONE_LINE_ADDRESS);
+		GeneralIdResponse result = service.createFromForm(addressDto);
+		assertEquals("Result should be 2L ", new Long(2L), result.getValue());
 	}
 }

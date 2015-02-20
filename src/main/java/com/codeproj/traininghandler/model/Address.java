@@ -51,12 +51,13 @@ public class Address implements Serializable {
 	}
 	
 	public Address(String city, String country, String houseNo, String postalCode,
-			String street) {
+			String street, String address) {
 		this.city = city;
 		this.country = country;
 		this.houseNo = houseNo;
 		this.postalCode = postalCode;
 		this.street = street;
+		this.oneLineAddress = address;
 		this.isAppointmentPlace = new Boolean(false);
 		this.isTrainingPlace = new Boolean(false);
 	}

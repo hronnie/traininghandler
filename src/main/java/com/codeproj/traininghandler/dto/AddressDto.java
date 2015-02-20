@@ -97,6 +97,7 @@ public class AddressDto {
 		return address;
 	}
 
+	@XmlElement(name="address")
 	public void setAddress(String address) {
 		this.address = address;
 	}
