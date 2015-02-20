@@ -18,6 +18,7 @@ import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.TrainingType;
@@ -36,6 +37,8 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	List<User> REF_USER_LIST = new ArrayList<>();
 	User HAS_EMAIL_USER;
 	User PHONE_EMAIL_USER;
+	User COMPLETED_USER;
+	List<Long> REF_COMPL_USER_LIST = new ArrayList<>();;
 	
 	public static final String VALID_EMAIL = "email1@email.com";
 	public static final String PHONE_EMAIL = "2222222222@nincs.com";
@@ -47,11 +50,15 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	
 	ShowTraineesEligibleForTrainingManager manager = null;
 	
+	@Mock
+	CompletedTrainingManager completedTrainingManager;
+	
 
 	@Before
 	public void setUp() throws Exception {
 		manager = new ShowTraineesEligibleForTrainingManager();
 		manager.setShowTraineesEligibleForTrainingDAO(dao);
+		manager.setCompletedTrainingManager(completedTrainingManager);
 		
 		TrainingPrerequisite firstTrPrereq = new TrainingPrerequisite(1L, 1L, 3L, 3);
 		TrainingPrerequisite secondTrPrereq = new TrainingPrerequisite(2L, 1L, 4L, 6);
@@ -72,11 +79,15 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		
 		HAS_EMAIL_USER = new User(1L, TEST_NAME1, VALID_EMAIL, PHONE_NO);
 		PHONE_EMAIL_USER = new User(2L, TEST_NAME1, PHONE_EMAIL, PHONE_NO);
+		COMPLETED_USER = new User(3L, TEST_NAME1, PHONE_EMAIL, PHONE_NO);
 		REF_USER_LIST.add(HAS_EMAIL_USER);
 		REF_USER_LIST.add(PHONE_EMAIL_USER);
+		REF_USER_LIST.add(COMPLETED_USER);
+		
+		REF_COMPL_USER_LIST.add(3L);
 		
 		when(dao.getEligibleTrainees(REF_TRAINING_TYPE_PREREQ)).thenReturn(REF_USER_LIST);
-
+		when(completedTrainingManager.getUsersWhoCompletedTrainingType(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_COMPL_USER_LIST);
 		
 		UserDto hasEmailUser = new UserDto(TEST_NAME1, PHONE_NO, VALID_EMAIL, null);
 		UserDto onlyPhoneUser = new UserDto(TEST_NAME1, PHONE_NO, PHONE_EMAIL, null);

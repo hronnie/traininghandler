@@ -100,11 +100,11 @@
 			<generator class="increment" />
 		</id>
 		<many-to-one name="user"
-			class="com.codeproj.traininghandler.model.User" fetch="select">
+			class="com.codeproj.traininghandler.model.User" fetch="select"  lazy="false">
 			<column name="userId" not-null="true" />
 		</many-to-one>
 		<many-to-one name="trainingType"
-			class="com.codeproj.traininghandler.model.TrainingType" fetch="select">
+			class="com.codeproj.traininghandler.model.TrainingType" fetch="select" lazy="false">
 			<column name="trainingTypeId" not-null="true" />
 		</many-to-one>
 		<property name="completedDate" type="timestamp">

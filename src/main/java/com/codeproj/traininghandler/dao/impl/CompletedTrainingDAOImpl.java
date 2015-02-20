@@ -1,12 +1,17 @@
 package com.codeproj.traininghandler.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.CompletedTrainingDAO;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
+import com.codeproj.traininghandler.model.TrainingType;
 
 public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 	private SessionFactory sessionFactory;
@@ -47,6 +52,20 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 			
 			return false;
 			
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<CompletedUserTraining> getCompletedListByTrainingTypeId(
+			Long trainingTypeId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Query query = session.createQuery("from CompletedUserTraining where trainingTypeId = :trainingTypeId ");
+			query.setParameter("trainingTypeId", trainingTypeId);
+			return (List<CompletedUserTraining>)query.list();
 		} finally {
 			session.close();
 		}

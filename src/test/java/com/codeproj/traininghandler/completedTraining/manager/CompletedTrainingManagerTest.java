@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -20,6 +22,7 @@ import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingM
 import com.codeproj.traininghandler.model.CompletedUserTraining;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
+import com.mchange.util.AssertException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingManagerTest {
@@ -65,5 +68,15 @@ public class CompletedTrainingManagerTest {
 		when(completedTrainingDAO.isCompletedTrainingExist(INVALID_COMPL_TRAINING)).thenReturn(false);
 		assertTrue("Completed training should exist", manager.isCompletedTrainingExist(VALID_COMPLETED_TRAINING_DTO));
 		assertFalse("Completed training should exist", manager.isCompletedTrainingExist(INVALID_COMPLETED_TRAINING_DTO));
+	}
+	
+	@Test
+	public void testGetCompletedListByTrainingTypeId() {
+		List<CompletedUserTraining> userIds = new ArrayList<>();
+		userIds.add(VALID_COMPL_TRAINING);
+		List<Long> result_ref = new ArrayList<>();
+		result_ref.add(1L);
+		when(completedTrainingDAO.getCompletedListByTrainingTypeId(1L)).thenReturn(userIds);
+		assertEquals("Wrong user id list", manager.getUsersWhoCompletedTrainingType(1L), result_ref);
 	}
 }

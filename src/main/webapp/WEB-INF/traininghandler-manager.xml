@@ -73,6 +73,7 @@
 
 	<bean id="showTraineesEligibleForTrainingManager"
 		class="com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager">
+		<property name="completedTrainingManager" ref="completedTrainingManager" />
 		<property name="showTraineesEligibleForTrainingDAO" ref="showTraineesEligibleForTrainingDAO" />
 	</bean>
 </beans>

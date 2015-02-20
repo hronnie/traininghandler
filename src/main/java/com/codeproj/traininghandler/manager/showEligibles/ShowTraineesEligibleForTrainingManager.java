@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.codeproj.traininghandler.dao.ShowTraineesEligibleForTrainingDAO;
 import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
 import com.codeproj.traininghandler.dto.UserDto;
+import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
@@ -16,18 +18,35 @@ import com.codeproj.traininghandler.util.ThStringUtils;
 
 public class ShowTraineesEligibleForTrainingManager {
 	
+	@Autowired
 	ShowTraineesEligibleForTrainingDAO showTraineesEligibleForTrainingDAO;
+	
+	@Autowired
+	CompletedTrainingManager completedTrainingManager;
 
 	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(Long trainingTypeId) {
 		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingId(trainingTypeId);
 		List<TrainingTypePrerequisite> trainingPrerequisites = generatePrerequiseteDates(prerequisites);
 		List<User> allUsers = showTraineesEligibleForTrainingDAO.getEligibleTrainees(trainingPrerequisites);
+		filterAlreadyCompletedUsers(allUsers, trainingTypeId);
+		
 		List<UserDto> hasEmailUsers = new ArrayList<>();
 		List<UserDto> onlyPhoneUsers = new ArrayList<>();
 		sortUsersByHaveEmailOrNot(allUsers, hasEmailUsers, onlyPhoneUsers);
 		return new TraineesEligibleForTrainingDto(hasEmailUsers, onlyPhoneUsers);
 	}
 	
+	private void filterAlreadyCompletedUsers(List<User> allUsers, Long trainingTypeId) {
+		List<Long> alreadyCompletedUsers = completedTrainingManager.getUsersWhoCompletedTrainingType(trainingTypeId);
+		List<User> filterOutTheseUsersList = new ArrayList<>();
+		for (User item : allUsers) {
+			if (alreadyCompletedUsers.contains(item.getUserId())) {
+				filterOutTheseUsersList.add(item);
+			}
+		}
+		allUsers.removeAll(filterOutTheseUsersList);
+	}
+
 	private void sortUsersByHaveEmailOrNot(List<User> allUsers,
 			List<UserDto> hasEmailUsers, List<UserDto> onlyPhoneUsers) {
 		if (allUsers.size() < 1) {
@@ -69,6 +88,11 @@ public class ShowTraineesEligibleForTrainingManager {
 	public void setShowTraineesEligibleForTrainingDAO(
 			ShowTraineesEligibleForTrainingDAO showTraineesEligibleForTrainingDAO) {
 		this.showTraineesEligibleForTrainingDAO = showTraineesEligibleForTrainingDAO;
+	}
+
+	public void setCompletedTrainingManager(
+			CompletedTrainingManager completedTrainingManager) {
+		this.completedTrainingManager = completedTrainingManager;
 	}
 
 }
