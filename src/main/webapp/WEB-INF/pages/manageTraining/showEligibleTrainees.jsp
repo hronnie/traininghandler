@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
-    <title><spring:message code="importTraining.main.title" /></title>
+    <title><spring:message code="showEligibleUsers.title" /></title>
         <script src="<c:url value="/resources/js/application/module/showEligibleTrainees/thShowEligibleTraineesModule.js" />"></script>
         <script src="<c:url value="/resources/js/application/module/showEligibleTrainees/thShowEligibleTraineesController.js" />"></script>
     
@@ -11,24 +11,36 @@
     <body ng-app="thShowEligibleTraineesModule" ng-controller="thShowEligibleTraineesController as eligibleCtrl">
     
         <div class="container" id="containerId">
-                <select ng-model="selectedTrainingType" 
-                    ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
-                    name="trainingTypeId">
-                    <option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
-                </select>
-                <br>
-                
-        <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="index.button.manage.training.types" /></a>
-        <h3>Email címmel rendelkezők listája:</h3>
-		<div class="gridStyle" ng-grid="hasEmailUsersGrid"></div>
-		<ul>
-			<li ng-repeat="user in hasEmailUsers">{{user.email}}</li>,
-		</ul>    
-        <h3>Csak telefonszámmal rendelkezők listája:</h3>
-		<div class="gridStyle" ng-grid="onlyPhoneUsersGrid"></div>    
+	        <select ng-model="selectedTrainingType" 
+	            ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
+	            name="trainingTypeId">
+	            <option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
+	        </select>
+	        <br>
+	        <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="showEligibleUsers.get.users.link" /></a>
+	        <br>
+	        <div class="span12">        
+		        <h3><spring:message code="showEligibleUsers.has.email.table.title" /></h3>
+		            <table class="table table-bordered table-striped" >       
+			            <tr ng-repeat="user in hasEmailUsers">
+		                    <td title="Név">{{user.name}}</td>
+		                    <td title="Email">{{user.email}}</td>
+		                    <td title="phoneNo">{{user.phoneNo}}</td>                                       
+	                    </tr> 
+	                </table>
+<!-- 				<div class="table table-bordered table-striped" ng-grid="hasEmailUsersGrid"></div> -->
+		  
+		        <h3><spring:message code="showEligibleUsers.only.phoneno.table.title" /></h3>
+		        	<table class="table table-bordered table-striped" >       
+			            <tr ng-repeat="user in onlyPhoneUsers">
+		                    <td title="Név">{{user.name}}</td>
+		                    <td title="phoneNo">{{user.phoneNo}}</td>                                       
+	                    </tr> 
+	                </table>
+<!-- 				<div class="table table-bordered table-striped" ng-grid="onlyPhoneUsersGrid"></div>     -->
+	        </div>
         </div>
         
-
 <!-- /container -->
 
 <!-- help -->
