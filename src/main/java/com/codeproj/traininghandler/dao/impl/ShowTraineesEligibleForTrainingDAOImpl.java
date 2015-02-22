@@ -56,7 +56,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		
         Session session = sessionFactory.openSession();
         try {
-        	if (trainingPrerequisites == null || trainingPrerequisites.size() < 1) {
+        	if (trainingPrerequisites == null) {
         		return new ArrayList<>();
         	}
             Query query = session.createSQLQuery(buildEligibleTraineesQuery(trainingPrerequisites.size()));
@@ -90,7 +90,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 
 	private String buildEligibleTraineesQuery(int size) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(" SELECT ");
+		sb.append(" SELECT DISTINCT ");
 		sb.append("  u.name, u.email, u.mobileNo ");
 		sb.append(" FROM ");
 		sb.append("  CompletedUserTraining cu ");
