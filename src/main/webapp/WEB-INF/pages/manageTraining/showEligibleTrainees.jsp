@@ -28,6 +28,8 @@
 		                    <td title="phoneNo">{{user.phoneNo}}</td>                                       
 	                    </tr> 
 	                </table>
+	                
+	                <textarea class="form-control" rows="3"></textarea>
 <!-- 				<div class="table table-bordered table-striped" ng-grid="hasEmailUsersGrid"></div> -->
 		  
 		        <h3><spring:message code="showEligibleUsers.only.phoneno.table.title" /></h3>

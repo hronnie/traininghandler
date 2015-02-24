@@ -18,6 +18,27 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 		}
 	});
 	
+	$scope.jumpToNextFromYear = function() {
+		if ($scope.trainingDateYear.length >= 4) {
+			document.importForm.elements[2].focus();
+		}
+	}
+	
+	$scope.jumpToNextFromMonth = function() {
+		if ($scope.trainingDateMonth.length >= 2) {
+			document.importForm.elements[3].focus();
+		}
+	}
+	
+//	$scope.jumpToNext = function(element)	{
+//		if (content.length == element.maxLength) {
+//			next = element.tabIndex;
+//			if (next<document.maxform.elements.length) {
+//				document.maxform.elements[next].focus();
+//			}
+//		}
+//	}
+	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	
 });

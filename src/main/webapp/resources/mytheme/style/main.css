@@ -308,3 +308,19 @@ section {
 	margin-right: 200px;
 }
 
+.dateCustomStyleLong {
+	width: 100px;
+}
+
+.dateCustomStyleShort {
+	width: 60px;
+}
+
+.form-date .form-group {
+float: left;
+width: 50px;
+margin-right: 20px;
+margin-bottom: 0;
+clear: none;
+}
+
