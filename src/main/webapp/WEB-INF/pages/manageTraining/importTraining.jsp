@@ -9,12 +9,14 @@
     
     </head>
     <body ng-app="thImportTrainingModule" ng-controller="thImportTrainingController as importCtrl">
+    <h4 class="gridMainTitle"><spring:message code="importTraining.main.title" /></h4>
     
 		<div class="container" id="containerId">
  			<form action="<c:url value="/manageTraining/importTraining" />" method="post" enctype="multipart/form-data" autocomplete="off" name="importForm">
  				<select ng-model="selectedTrainingType" 
  					ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
- 					name="trainingTypeId">
+ 					name="trainingTypeId"
+ 					class="form-control">
       				<option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
  				</select>
  				<br>
@@ -29,10 +31,10 @@
 	 				<input type="text" ng-model="trainingDateDay" tabindex="3" maxlength="2" name="day" class="form-control dateCustomStyleShort" placeholder="<spring:message code="importTraining.dateinput.day" />"><br>
 				  </div>
 				</div>
-				
- 				<spring:message code="importTraining.fileChoose.title" /> <input type="file" name="importFile"><br /> 
- 				
- 				<button type="submit"><spring:message code="importTraining.button.import" /></button>
+				<div class="form-group">
+ 				   <spring:message code="importTraining.fileChoose.title" /> <input type="file" name="importFile"><br /> 
+ 				</div>
+ 				<button type="submit" class="btn btn-primary btn-lg active"><spring:message code="importTraining.button.import" /></button>
 			</form>
 		</div>
 		
