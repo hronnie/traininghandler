@@ -9,15 +9,18 @@
     
     </head>
     <body ng-app="thShowEligibleTraineesModule" ng-controller="thShowEligibleTraineesController as eligibleCtrl">
-    
+    <h4 class="gridMainTitle"><spring:message code="showEligibleUsers.title" /></h4>
         <div class="container" id="containerId">
 	        <select ng-model="selectedTrainingType" 
 	            ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
-	            name="trainingTypeId">
+	            name="trainingTypeId"
+	            class="form-control">
 	            <option value="">-- <spring:message code="importTraining.trainingType.choose" /> --</option>
 	        </select>
 	        <br>
-	        <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="showEligibleUsers.get.users.link" /></a>
+	        <nav class="cl-effect-7">
+	           <a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message code="showEligibleUsers.get.users.link" /></a>
+	        </nav>
 	        <br>
 	        <div class="span12">        
 		        <h3><spring:message code="showEligibleUsers.has.email.table.title" /></h3>

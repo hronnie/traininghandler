@@ -38,6 +38,7 @@
 <link href="<c:url value="/resources/style/main.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
+<link href="<c:url value="/resources/style/linkStyles.css" />" rel="stylesheet" />
 
 
 

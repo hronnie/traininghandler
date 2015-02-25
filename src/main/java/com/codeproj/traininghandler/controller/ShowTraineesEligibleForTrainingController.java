@@ -18,9 +18,12 @@ public class ShowTraineesEligibleForTrainingController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
+		ModelAndView mav = new ModelAndView("manageTraining/showEligibleTrainees");
 		
+		mav.addObject("backUrl", "/manageTraining");
+
 		logger.debug("Going to showEligibleTrainees page..");
-		return new ModelAndView("manageTraining/showEligibleTrainees");
+		return mav;
 	}
 
 }
