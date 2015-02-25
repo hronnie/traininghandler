@@ -18,6 +18,8 @@ public class IndexController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("isNotMainPage", new Boolean(true));
 		logger.debug("Going to index page...");
 		return new ModelAndView("index");
 	}

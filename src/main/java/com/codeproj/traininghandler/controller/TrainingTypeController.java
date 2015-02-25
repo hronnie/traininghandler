@@ -18,7 +18,10 @@ public class TrainingTypeController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
+		ModelAndView mav = new ModelAndView("trainingType");
+		
+		mav.addObject("backUrl", "/");
 		logger.debug("Going to trainingType page..");
-		return new ModelAndView("trainingType");
+		return mav;
 	}
 }

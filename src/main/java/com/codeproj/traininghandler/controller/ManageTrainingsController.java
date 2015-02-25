@@ -19,8 +19,11 @@ public class ManageTrainingsController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
+		ModelAndView mav = new ModelAndView("manageTraining");
+		
+		mav.addObject("backUrl", "/");
 		logger.debug("Going to manageTraining page..");
-		return new ModelAndView("manageTraining");
+		return mav;
 	}
 
 }

@@ -50,9 +50,11 @@ public class ImportTrainingController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
+		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
+		mav.addObject("backUrl", "/manageTraining");
 		logger.debug("Going to importTraining page..");
-		return new ModelAndView("manageTraining/importTraining");
+		return mav;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
