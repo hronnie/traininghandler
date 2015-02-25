@@ -12,6 +12,15 @@
     <h4 class="gridMainTitle"><spring:message code="importTraining.main.title" /></h4>
     
 		<div class="container" id="containerId">
+	        <div class="successMsg">
+	            <c:choose>
+	                <c:when test="${isImportSuccess == 'true'}">
+	                <dl class="dl-horizontal">
+	                  <dt><spring:message code="importTraining.success.message" /></dt>
+	                </dl>
+	                </c:when>
+	            </c:choose> 
+	        </div>		
  			<form action="<c:url value="/manageTraining/importTraining" />" method="post" enctype="multipart/form-data" autocomplete="off" name="importForm">
  				<select ng-model="selectedTrainingType" 
  					ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
@@ -40,13 +49,6 @@
 		
 		<div class="errorMsg">
 			<c:out value="${validationMsg}" />
-		</div>
-		<div class="successMsg">
-		<c:choose>
-		    <c:when test="${isImportSuccess == 'true'}">
-		      <spring:message code="importTraining.success.message" />
-		    </c:when>
-		</c:choose> 
 		</div>
 
 <!-- /container -->
