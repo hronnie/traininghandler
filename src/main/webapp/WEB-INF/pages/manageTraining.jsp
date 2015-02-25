@@ -5,7 +5,8 @@
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
     <title><spring:message code="importTraining.main.title" /></title>
 <div class="container" id="containerId">
-<img class="aligncenter size-full wp-image-6465" src="../resources/images/exp_horz.jpg" alt="horizontal lines" width="580" height="100">
+	<div class="spacerDiv" id="containerId"></div>
+
     <section>
         <p><nobr>
             <button class="btn btn-1 btn-1e mainButton" onclick="window.location.href='<c:url value="/manageTraining/importTraining" />'">

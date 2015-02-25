@@ -20,6 +20,7 @@ public class IndexController {
 		
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("isNotMainPage", new Boolean(true));
+		mav.addObject("isPublicPage", new Boolean(false));
 		logger.debug("Going to index page...");
 		return new ModelAndView("index");
 	}

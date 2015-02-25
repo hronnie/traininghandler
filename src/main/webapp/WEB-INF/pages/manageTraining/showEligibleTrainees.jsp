@@ -9,7 +9,7 @@
     
     </head>
     <body ng-app="thShowEligibleTraineesModule" ng-controller="thShowEligibleTraineesController as eligibleCtrl">
-    <h4 class="gridMainTitle"><spring:message code="showEligibleUsers.title" /></h4>
+    <h4 class="mainPageTitle"><spring:message code="showEligibleUsers.title" /></h4>
         <div class="container" id="containerId">
 	        <select ng-model="selectedTrainingType" 
 	            ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 

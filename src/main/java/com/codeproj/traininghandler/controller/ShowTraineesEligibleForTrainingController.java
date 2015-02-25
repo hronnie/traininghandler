@@ -21,7 +21,8 @@ public class ShowTraineesEligibleForTrainingController {
 		ModelAndView mav = new ModelAndView("manageTraining/showEligibleTrainees");
 		
 		mav.addObject("backUrl", "/manageTraining");
-
+		mav.addObject("isNotMainPage", new Boolean(true));
+		mav.addObject("isPublicPage", new Boolean(false));
 		logger.debug("Going to showEligibleTrainees page..");
 		return mav;
 	}

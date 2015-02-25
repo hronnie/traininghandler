@@ -42,7 +42,7 @@ public class TrainingExcelValidator {
 
 		appendValidationMsgIfNotNumeric(day, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_DAY);
 		
-		if (importFile == null) {
+		if (importFile == null || importFile.isEmpty()) {
 			validationMsg.append(VALIDATION_EXCEL_IMPORT_INVALID_FILE); 
 			addSeparator(validationMsg);
 		}

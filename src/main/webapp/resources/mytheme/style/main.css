@@ -2,11 +2,11 @@ body {
 	background: #FCF5E3 url(../images/bg.jpg) repeat;
 }
 
-td,th {
+td, th {
 	padding: 0
 }
 
-body,html {
+body, html {
 	margin: 0;
 	height: 100%;
 }
@@ -50,8 +50,7 @@ html {
 	text-align: center;
 }
 
-
-b,strong {
+b, strong {
 	font-weight: 700;
 }
 
@@ -71,10 +70,7 @@ img {
 	border: 0;
 }
 
-
-
-
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 1.4rem;
 }
 
@@ -162,7 +158,7 @@ a.headerLink {
 	font-family: "Futura W01 Bold";
 	font-weight: 400;
 	letter-spacing: 0.04em;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 a:hover.headerLink {
@@ -187,12 +183,12 @@ a {
 	
 }
 
-a:active,a:hover {
+a:active, a:hover {
 	
 }
 
 .mainButton {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .headerIcon {
@@ -201,107 +197,107 @@ a:active,a:hover {
 	vertical-align: middle;
 }
 
-div[ng-app] { 
-	margin: 10px; 
+div[ng-app] {
+	margin: 10px;
 }
 
 .table {
-	width: 100% 
+	width: 100%
 }
 
-form[editable-form] > div {
+form[editable-form]>div {
 	margin: 10px 0;
 }
 
 #wrapper {
-    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
-    text-align: left;
-    font-size: 15px;
-    font-weight: 400;
+	font-family: "Trebuchet MS", "Myriad Pro", Arial, sans-serif;
+	text-align: left;
+	font-size: 15px;
+	font-weight: 400;
 }
 
 input {
-    outline: medium none;
+	outline: medium none;
 }
 
 @font-face {
-    font-family: 'FontomasCustomRegular';
-    src: url('fonts/fontomas-webfont.eot');
-    src: url('fonts/fontomas-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/fontomas-webfont.woff') format('woff'),
-         url('fonts/fontomas-webfont.ttf') format('truetype'),
-         url('fonts/fontomas-webfont.svg#FontomasCustomRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'FontomasCustomRegular';
+	src: url('fonts/fontomas-webfont.eot');
+	src: url('fonts/fontomas-webfont.eot?#iefix')
+		format('embedded-opentype'), url('fonts/fontomas-webfont.woff')
+		format('woff'), url('fonts/fontomas-webfont.ttf') format('truetype'),
+		url('fonts/fontomas-webfont.svg#FontomasCustomRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 [data-icon]:after {
-    color: rgb(106, 159, 171);
-    content: attr(data-icon);
-    font-family: 'FontomasCustomRegular';
-    left: 10px;
-    position: absolute;
-    top: 43px;
-    width: 30px;
+	color: rgb(106, 159, 171);
+	content: attr(data-icon);
+	font-family: 'FontomasCustomRegular';
+	left: 10px;
+	position: absolute;
+	top: 43px;
+	width: 30px;
 }
 
 #wrapper label {
-    color: rgb(64, 92, 96);
-    position: relative;
+	color: rgb(64, 92, 96);
+	position: relative;
 }
 
-#wrapper input:not([type="checkbox"]) {
-    border: 1px solid rgb(178, 178, 178);
-    border-radius: 3px;
-    box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
-    margin-top: 4px;
-    transition: all 0.2s linear 0s;
+#wrapper input:not ([type="checkbox"] ) {
+	border: 1px solid rgb(178, 178, 178);
+	border-radius: 3px;
+	box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
+	margin-top: 4px;
+	transition: all 0.2s linear 0s;
 }
 
 .gridInputPersonalData {
 	width: 50%;
-    padding: 10px 5px 10px 32px;
+	padding: 10px 5px 10px 32px;
 }
 
 .gridInputTrainingData {
-	width: 180px;	
-    padding: 10px 5px 10px 5px;
-    align: center;
+	width: 180px;
+	padding: 10px 5px 10px 5px;
+	align: center;
 }
 
 .gatherSubmit {
 	padding: 200px 200px;
 }
 
-.formStyle input([type="text"]) {
+.formStyle input ([type="text"] ) {
 	width: 405px;
 	height: 17px;
 }
 
 .ss-style-dots:before {
-    background: none repeat scroll 0 0 #3b453d;
-    border-radius: 50%;
-    bottom: 20px;
-    box-shadow: 30px 0 #3b453d, -30px 0 #3b453d;
-    height: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
+	background: none repeat scroll 0 0 #3b453d;
+	border-radius: 50%;
+	bottom: 20px;
+	box-shadow: 30px 0 #3b453d, -30px 0 #3b453d;
+	height: 14px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 14px;
 }
 
 .ss-style-dots {
-    padding-bottom: 80px;
+	padding-bottom: 80px;
 }
 
 section:before, section:after {
-    content: "";
-    pointer-events: none;
-    position: absolute;
+	content: "";
+	pointer-events: none;
+	position: absolute;
 }
 
 section {
-    padding-bottom: 12%;
-    position: relative;
+	padding-bottom: 12%;
+	position: relative;
 }
 
 .btn-success {
@@ -324,14 +320,56 @@ section {
 	clear: none;
 }
 
-.ct-post img {
-	position: relative;
-	display: block;
-	margin: 10px auto;
-	text-align: center;
+.spacerDiv {
+	padding-top: 50px;
 }
 
-.aligncenter {
-    margin: 0 auto;
+.mainPageTitle {
+	font-family: 'Raleway', Arial, sans-serif;
+	padding: 20px 0;
+	text-indent: 0;
+	color: #404d5b;
+	font-weight: bold;
+	font-size: 28px;
+	letter-spacing: 0.04em;
+	text-align: left;
+	vertical-align: middle;
 }
 
+.selectwidthauto {
+	width: auto !important;
+}
+
+input[type="text"].w-2, input[type="date"].w-2, input[type="datetime"].w-2,
+	input[type="email"].w-2, input[type="number"].w-2, select.w-2 {
+	width: 12%;
+}
+
+input[type="text"].w-3, input[type="date"].w-3, input[type="datetime"].w-3,
+	input[type="email"].w-3, input[type="number"].w-3, select.w-3 {
+	width: 25%;
+}
+
+input[type="text"].w-4, input[type="date"].w-4, input[type="datetime"].w-4,
+	input[type="email"].w-4, input[type="number"].w-4, select.w-4 {
+	width: 33.33333333%;
+}
+
+input[type="text"].w-5, input[type="date"].w-5, input[type="datetime"].w-5,
+	input[type="email"].w-5, input[type="number"].w-5, select.w-5 {
+	width: 41.66666667%;
+}
+
+.form-inline input[type="text"].w-5, input[type="date"].w-5, input[type="datetime"].w-5,
+	input[type="email"].w-5, input[type="number"].w-5, select.w-5 {
+	
+}
+
+.form-horizontal .control-label{
+  /* text-align:right; */
+  text-align:left;
+}
+
+.control-group {
+	padding-bottom: 25px;
+}

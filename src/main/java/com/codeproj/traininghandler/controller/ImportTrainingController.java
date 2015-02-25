@@ -52,6 +52,8 @@ public class ImportTrainingController {
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
+		mav.addObject("isNotMainPage", new Boolean(true));
+		mav.addObject("isPublicPage", new Boolean(false));
 		mav.addObject("backUrl", "/manageTraining");
 		logger.debug("Going to importTraining page..");
 		return mav;
@@ -63,16 +65,21 @@ public class ImportTrainingController {
 			@RequestParam("month") String month, 
 			@RequestParam("day") String day, 
 			@RequestParam("importFile") MultipartFile importFile) throws Exception {
-		
+		importFile.isEmpty();
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
 		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
+		
+		if (!"".equals(paramValidMsg)) {
+			mav.addObject("validationMsg", paramValidMsg);
+			return mav;
+		}
 		
 		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
 		
 		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
 		
-		if (!"".equals(paramValidMsg) || !"".equals(excelValuesValidMsg)) {
+		if (!"".equals(excelValuesValidMsg)) {
 			mav.addObject("validationMsg", paramValidMsg + excelValuesValidMsg);
 			return mav;
 		}

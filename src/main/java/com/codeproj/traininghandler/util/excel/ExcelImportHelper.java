@@ -55,7 +55,7 @@ public class ExcelImportHelper {
 	}
 	
 	private static String getCellValueAsString(Cell cell) {
-		if (cell.getCellType() == Cell.CELL_TYPE_BLANK || cell.getCellType() == Cell.CELL_TYPE_ERROR) {
+		if (cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK || cell.getCellType() == Cell.CELL_TYPE_ERROR) {
 			return "";
 		} else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
 			return new Boolean(cell.getBooleanCellValue()).toString();

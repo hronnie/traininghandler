@@ -20,7 +20,8 @@ public class ManageTrainingsController {
 			HttpServletResponse arg1) throws Exception {
 		
 		ModelAndView mav = new ModelAndView("manageTraining");
-		
+		mav.addObject("isNotMainPage", new Boolean(true));
+		mav.addObject("isPublicPage", new Boolean(false));
 		mav.addObject("backUrl", "/");
 		logger.debug("Going to manageTraining page..");
 		return mav;
