@@ -317,10 +317,21 @@ section {
 }
 
 .form-date .form-group {
-float: left;
-width: 50px;
-margin-right: 20px;
-margin-bottom: 0;
-clear: none;
+	float: left;
+	width: 50px;
+	margin-right: 20px;
+	margin-bottom: 0;
+	clear: none;
+}
+
+.ct-post img {
+	position: relative;
+	display: block;
+	margin: 10px auto;
+	text-align: center;
+}
+
+.aligncenter {
+    margin: 0 auto;
 }
 

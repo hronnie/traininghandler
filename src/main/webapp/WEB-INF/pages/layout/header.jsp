@@ -5,6 +5,8 @@
 <html>
 <head>
 <!-- <link rel="icon" href="../../favicon.ico"> -->
+<link rel="shortcut icon" href="/resources/images/favicon-edit.ico" />
+
 <script src="<c:url value="/resources/js/application/lib/jquery-2.1.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/angular.js" />"></script>
 <script src="<c:url value="/resources/js/application/lib/angular-mocks.js" />"></script>
