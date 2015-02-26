@@ -9,8 +9,8 @@
     
     </head>
     <body ng-app="thShowEligibleTraineesModule" ng-controller="thShowEligibleTraineesController as eligibleCtrl">
-    <h4 class="mainPageTitle"><spring:message code="showEligibleUsers.title" /></h4>
         <div class="container" id="containerId">
+		    <h4 class="mainPageTitle"><spring:message code="showEligibleUsers.title" /></h4>
 	        <select ng-model="selectedTrainingType" 
 	            ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id" 
 	            name="trainingTypeId"
@@ -31,8 +31,9 @@
 		                    <td title="phoneNo">{{user.phoneNo}}</td>                                       
 	                    </tr> 
 	                </table>
-	                
-	                <textarea class="form-control" rows="3"></textarea>
+<!-- 	                <span ng-show="emailList.length > 0"> -->
+	                   <textarea class="form-control" rows="3" ng-model="emailList"></textarea>
+<!-- 	                </span> -->
 <!-- 				<div class="table table-bordered table-striped" ng-grid="hasEmailUsersGrid"></div> -->
 		  
 		        <h3><spring:message code="showEligibleUsers.only.phoneno.table.title" /></h3>

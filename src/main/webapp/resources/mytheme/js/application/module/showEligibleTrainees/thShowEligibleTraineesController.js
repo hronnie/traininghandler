@@ -15,6 +15,8 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 		}
 	});
 	
+	$scope.emailList = "";
+	
 	//trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	$scope.getEligibleTrainees = function(trainingTypeId) {
 		if (!trainingTypeId) {
@@ -24,6 +26,15 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 		eligibleTraineesResource.get().then(function(eligibleTrinees) {
 			$scope.hasEmailUsers = eligibleTrinees.hasEmailUsers;
 			$scope.onlyPhoneUsers = eligibleTrinees.onlyPhoneUsers;
+			
+			if (!$scope.hasEmailUsers || $scope.hasEmailUsers.length < 1) {
+				return;
+			}
+            _($scope.hasEmailUsers).forEach(function(user) {
+            	$scope.emailList += user.email;
+            	$scope.emailList += ", ";
+            });
+            $scope.emailList = $scope.emailList.substring(0, $scope.emailList.length - 2);
 		});
 	}
 	
