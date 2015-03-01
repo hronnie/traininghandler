@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+
+import static org.mockito.Mockito.when;
 
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 
@@ -52,6 +55,9 @@ public class TrainingExcelValidatorTest {
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_EMPTY_EMAIL;
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_NULL_EMAIL;
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_LONG_EMAIL;
+
+	@Mock
+	public MultipartFile importFile;
 	
 	static {
 		INVALID_EXCEL_DTO_EMPTY_NAME = new TrainingExcelDto("", VALID_POST_CODE, VALID_ADDRESS, VALID_PHONE_NO, VALID_EMAIL);
@@ -75,7 +81,8 @@ public class TrainingExcelValidatorTest {
 	@Before
 	public void setUp() {
 		byte[] emptyArray = {};
-		importFile = new MockMultipartFile("fileData", "none", "text/plain", emptyArray);
+		when(importFile.isEmpty()).thenReturn(false);
+		//importFile = new MockMultipartFile("fileData", "none", "text/plain", emptyArray);
 	}
 	
 	public List<TrainingExcelDto> trainingAttendendList;
@@ -133,11 +140,10 @@ public class TrainingExcelValidatorTest {
 	}
 	
 	
-	public MultipartFile importFile;
 
 	//TODO: find a way to put something into excel file due to improved validation
 	
-	//@Test
+	@Test
 	public void testValidateImportExcelInputParamsMethod() {
 		assertEquals("Validation result should be empty string", "", TrainingExcelValidator.validateImportExcelInputParams(VALID_YEAR, VALID_MONTH1, VALID_DAY1, importFile));
 		assertEquals("Validation result should be empty string", "", TrainingExcelValidator.validateImportExcelInputParams(VALID_YEAR, VALID_MONTH2, VALID_DAY2, importFile));

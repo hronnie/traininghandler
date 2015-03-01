@@ -25,7 +25,6 @@ public class Constants {
 	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
 	
 	
-	// TODO: get text from properties file with getResource...
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_YEAR = "Hibas ev! Minimum 1992";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
