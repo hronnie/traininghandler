@@ -373,3 +373,10 @@ input[type="text"].w-5, input[type="date"].w-5, input[type="datetime"].w-5,
 .control-group {
 	padding-bottom: 25px;
 }
+
+textarea.custom-textbox {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	width: 650px;
+	height: 200px; 
+}

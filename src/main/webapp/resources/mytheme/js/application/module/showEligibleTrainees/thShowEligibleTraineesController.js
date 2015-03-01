@@ -27,6 +27,8 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 			$scope.hasEmailUsers = eligibleTrinees.hasEmailUsers;
 			$scope.onlyPhoneUsers = eligibleTrinees.onlyPhoneUsers;
 			
+			$scope.emailList = '';
+			
 			if (!$scope.hasEmailUsers || $scope.hasEmailUsers.length < 1) {
 				return;
 			}

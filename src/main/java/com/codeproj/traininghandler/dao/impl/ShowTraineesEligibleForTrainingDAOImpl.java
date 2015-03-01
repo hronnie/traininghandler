@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.dao.impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -68,9 +69,11 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
             while (rowIt.hasNext()) {
                 Object[] row = rowIt.next();
                 User user = new User();
-                user.setName((String)row[0]);
-                user.setEmail((String)row[1]);
-                user.setMobileNo((String)row[2]);
+                BigInteger userId = (BigInteger)row[0];
+                user.setUserId(userId.longValue());
+                user.setName((String)row[1]);
+                user.setEmail((String)row[2]);
+                user.setMobileNo((String)row[3]);
                 
                 result.add(user);
             }
@@ -91,7 +94,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 	private String buildEligibleTraineesQuery(int size) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT DISTINCT ");
-		sb.append("  u.name, u.email, u.mobileNo ");
+		sb.append("  u.userId, u.name, u.email, u.mobileNo ");
 		sb.append(" FROM ");
 		sb.append("  CompletedUserTraining cu ");
 		sb.append(" INNER JOIN User u ON (u.userId = cu.userId) ");

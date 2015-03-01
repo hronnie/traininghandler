@@ -17,7 +17,6 @@ import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 public class TrainingTypeIT extends GenericAPITest {
 	
-	public static Long var;
 	RestTemplate restTemplate = null;
 	
 	public TrainingTypeIT(String name) {
