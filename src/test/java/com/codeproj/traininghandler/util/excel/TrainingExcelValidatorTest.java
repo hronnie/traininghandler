@@ -8,14 +8,16 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.springframework.mock.web.MockMultipartFile;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import static org.mockito.Mockito.when;
 
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TrainingExcelValidatorTest {
 	
 	public static final String VALID_YEAR = "2014";
@@ -82,7 +84,6 @@ public class TrainingExcelValidatorTest {
 	public void setUp() {
 		byte[] emptyArray = {};
 		when(importFile.isEmpty()).thenReturn(false);
-		//importFile = new MockMultipartFile("fileData", "none", "text/plain", emptyArray);
 	}
 	
 	public List<TrainingExcelDto> trainingAttendendList;
@@ -138,10 +139,6 @@ public class TrainingExcelValidatorTest {
 		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG", VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
 		trainingAttendendList.clear();
 	}
-	
-	
-
-	//TODO: find a way to put something into excel file due to improved validation
 	
 	@Test
 	public void testValidateImportExcelInputParamsMethod() {
