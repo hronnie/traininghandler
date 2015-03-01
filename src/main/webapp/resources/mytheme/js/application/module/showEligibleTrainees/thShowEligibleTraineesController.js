@@ -45,16 +45,14 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 //    	      data: 'hasEmailUsers',
 //    	      columnDefs: [{ field: 'name', displayName: 'Név' },
 //    	                   { field: 'email', displayName: 'Email' },
-//    	                   { field: 'phoneNo', displayName: 'Telefonszám' }],
-//    	      jqueryUITheme: false
+//    	                   { field: 'phoneNo', displayName: 'Telefonszám' }]
 //    };
 //    
 //    $scope.onlyPhoneUsersGrid = { 
 //    		data: 'onlyPhoneUsers',
 //    		columnDefs: [{ field: 'name', displayName: 'Név' },
 //    		             { field: 'email', displayName: 'Email' },
-//    		             { field: 'phoneNo', displayName: 'Telefonszám' }],
-//    		jqueryUITheme: true
+//    		             { field: 'phoneNo', displayName: 'Telefonszám' }]
 //    };
 	
 });

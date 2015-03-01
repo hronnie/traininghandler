@@ -18,7 +18,7 @@
 		</h4>
 		<select ng-model="selectedTrainingType"
 			ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id"
-			name="trainingTypeId" class="form-control">
+			name="trainingTypeId" class="form-control selectwidthauto">
 			<option value="">--
 				<spring:message code="importTraining.trainingType.choose" /> --
 			</option>
@@ -34,6 +34,11 @@
 					<spring:message code="showEligibleUsers.has.email.table.title" />
 				</h3>
 				<table class="table table-bordered table-striped">
+					<tr>
+						<th title="Név"><spring:message code="showEligibleUsers.grid.name" /></th>
+						<th title="Email"><spring:message code="showEligibleUsers.grid.email" /></th>
+						<th title="phoneNo"><spring:message code="showEligibleUsers.grid.phoneNo" /></th>
+					</tr>
 					<tr ng-repeat="user in hasEmailUsers">
 						<td title="Név">{{user.name}}</td>
 						<td title="Email">{{user.email}}</td>
@@ -43,13 +48,17 @@
 				<textarea class="form-control custom-textbox" rows="3"
 					ng-model="emailList"></textarea>
 			</div>
-			<!-- 				<div class="table table-bordered table-striped" ng-grid="hasEmailUsersGrid"></div> -->
+<!-- 							<div class="table table-bordered table-striped" ng-grid="hasEmailUsersGrid"></div> -->
 
 			<div ng-show="onlyPhoneUsers.length">
 				<h3>
 					<spring:message code="showEligibleUsers.only.phoneno.table.title" />
 				</h3>
 				<table class="table table-bordered table-striped">
+					<tr>
+						<th title="Név"><spring:message code="showEligibleUsers.grid.name" /></th>
+						<th title="phoneNo"><spring:message code="showEligibleUsers.grid.phoneNo" /></th>
+					</tr>
 					<tr ng-repeat="user in onlyPhoneUsers">
 						<td title="Név">{{user.name}}</td>
 						<td title="phoneNo">{{user.phoneNo}}</td>
