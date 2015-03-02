@@ -70,6 +70,10 @@ public class ImportTrainingController {
 		
 		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
 		
+		mav.addObject("isNotMainPage", new Boolean(true));
+		mav.addObject("isPublicPage", new Boolean(false));
+		mav.addObject("backUrl", "/manageTraining");
+		
 		if (!"".equals(paramValidMsg)) {
 			mav.addObject("validationMsg", paramValidMsg);
 			return mav;
