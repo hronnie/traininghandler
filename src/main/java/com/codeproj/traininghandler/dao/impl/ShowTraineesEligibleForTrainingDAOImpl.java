@@ -98,10 +98,12 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		sb.append(" FROM ");
 		sb.append("  CompletedUserTraining cu ");
 		sb.append(" INNER JOIN User u ON (u.userId = cu.userId) ");
+		sb.append(" WHERE ");
+		sb.append(" u.userTypeId = 4 ");
 		if (size < 1) {
 			return sb.toString();
 		}
-		sb.append(" WHERE ");
+		sb.append(" AND ");
 		for (int i = 0; i < size; i++) {
 			sb.append(" (cu.trainingTypeId = ? AND cu.completedDate <= ?) ");
 			if (i != size - 1) {
