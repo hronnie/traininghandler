@@ -23,3 +23,8 @@ INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (23,24,26,'2014-01-01 00:00:00');
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (24,25,26,'2014-01-01 00:00:00');
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (25,26,26,'2014-01-01 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (26,17,1,'2012-02-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (27,18,1,'2012-02-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (28,19,1,'2012-02-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (29,20,1,'2012-02-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (30,21,1,'2012-02-02 00:00:00');

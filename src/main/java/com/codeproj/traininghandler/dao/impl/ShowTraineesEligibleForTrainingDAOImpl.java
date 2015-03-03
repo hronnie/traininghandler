@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.codeproj.traininghandler.dao.ShowTraineesEligibleForTrainingDAO;
 import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
-import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
 
 public class ShowTraineesEligibleForTrainingDAOImpl implements
@@ -60,7 +59,14 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
         	if (trainingPrerequisites == null) {
         		return new ArrayList<>();
         	}
-            Query query = session.createSQLQuery(buildEligibleTraineesQuery(trainingPrerequisites.size()));
+        	String queryStr = null;
+    		if (trainingPrerequisites.size() > 0) {
+    			queryStr = buildEligibleTraineesQuery(trainingPrerequisites.size());
+    		} else {
+    			queryStr = buildEligibleTraineesQueryWithNoPrereq(trainingPrerequisites.size());
+    		}
+        	
+            Query query = session.createSQLQuery(queryStr);
             addParameters(query, trainingPrerequisites);
             List<Object[]> resultSet = query.list();
             Iterator<Object[]> rowIt = resultSet.iterator();
@@ -100,9 +106,6 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		sb.append(" INNER JOIN User u ON (u.userId = cu.userId) ");
 		sb.append(" WHERE ");
 		sb.append(" u.userTypeId = 4 ");
-		if (size < 1) {
-			return sb.toString();
-		}
 		sb.append(" AND ");
 		for (int i = 0; i < size; i++) {
 			sb.append(" (cu.trainingTypeId = ? AND cu.completedDate <= ?) ");
@@ -110,6 +113,17 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 				sb.append(" OR ");
 			}
 		}
+		return sb.toString();
+	}
+	
+	private String buildEligibleTraineesQueryWithNoPrereq(int size) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT DISTINCT ");
+		sb.append("  u.userId, u.name, u.email, u.mobileNo ");
+		sb.append(" FROM ");
+		sb.append("  User u ");
+		sb.append(" WHERE ");
+		sb.append(" u.userTypeId = 4 ");
 		return sb.toString();
 	}
 }
