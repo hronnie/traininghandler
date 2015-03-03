@@ -1,6 +1,7 @@
 package com.codeproj.traininghandler.util.excel;
 
 import static com.codeproj.traininghandler.util.Constants.*;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,11 +31,13 @@ public class TrainingExcelValidator {
 		return cutSplitter(validationMsg);
 	}
 
-	public static String validateImportExcelInputParams(String year,
+	public static String validateImportExcelInputParams(String trainingTypeId, String year,
 			String month, String day, MultipartFile importFile) {
 		
 		StringBuilder validationMsg = new StringBuilder("");
 		String result = null;
+		
+		appendValidationMsgIfNotNumeric(trainingTypeId, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_TRAINING_TYPE_ID);
 		
 		appendValidationMsgIfNotNumeric(year, validationMsg, VALIDATION_EXCEL_IMPORT_INVALID_YEAR);
 
