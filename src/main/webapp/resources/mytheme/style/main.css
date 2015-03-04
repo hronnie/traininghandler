@@ -336,6 +336,18 @@ section {
 	vertical-align: middle;
 }
 
+.mainPageTitleCentered {
+	font-family: 'Raleway', Arial, sans-serif;
+	padding: 20px 0;
+	text-indent: 0;
+	color: #404d5b;
+	font-weight: bold;
+	font-size: 28px;
+	letter-spacing: 0.04em;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .selectwidthauto {
 	width: auto !important;
 }
@@ -379,4 +391,28 @@ textarea.custom-textbox {
 	margin-bottom: 25px;
 	width: 650px;
 	height: 200px; 
+}
+
+#over
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    text-align: center;
+}
+.centerer
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.centered
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+img.errorImg {
+	width: 650px;
+	height: auto;
 }
