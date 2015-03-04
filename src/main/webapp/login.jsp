@@ -1,4 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <%-- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> --%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +13,7 @@
     <meta name="author" content="">
 	<link href="<c:url value="/resources/style/lib/bootstrap.min.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/style/signin.css" />" rel="stylesheet" />
-    <title><spring:message code="login.title" /></title>
+    <title>Bejelentkezés</title>
 
   </head>
 
@@ -26,10 +29,10 @@
 
       <form class="form-signin" role="form" method="POST"
 			action="<c:url value="/j_spring_security_check" />">
-        <h2 class="form-signin-heading"><spring:message code="login.head.title" /></h2>
-        <input type="text" class="form-control" name="j_username" placeholder="<spring:message code="login.username.text" />" required autofocus>
-        <input type="password" class="form-control" name="j_password" placeholder="<spring:message code="login.password.text" />" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">placeholder="<spring:message code="login.login.button" />"</button>
+        <h2 class="form-signin-heading">Bejelentkezés</h2>
+        <input type="text" class="form-control" name="j_username" placeholder="Felhasználónév" required autofocus>
+        <input type="password" class="form-control" name="j_password" placeholder="Jelszó" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Bejelentkezés</button>
       </form>
 
     </div> <!-- /container -->
