@@ -22,8 +22,8 @@ import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingServ
 import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
-@RestController
-@RequestMapping("/gatherTraineeInfo")
+//@RestController
+//@RequestMapping("/gatherTraineeInfo")
 public class GatherTraineeInfoService {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class GatherTraineeInfoService {
 	@Autowired
 	CompletedTrainingService completedTrainingService;
 	
-	@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
+	//@RequestMapping(value="/saveTraineePersonalAndTrainingInfo", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse saveTraineePersonalAndTrainingInfo(
 			@RequestBody TraineePersonalAndTrainingInfoDto traineeInfoDto) throws ValidationException {
 		
