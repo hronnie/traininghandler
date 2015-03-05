@@ -9,8 +9,26 @@
 
 	<http>
 		<intercept-url pattern="/index.htm*" access="ROLE_ADMIN" />
-		<intercept-url pattern="/prototype.htm*" access="ROLE_GUEST" />
-		<intercept-url pattern="/*" access="ROLE_GUEST" />
+		<intercept-url pattern="/gatherTraineeInfo*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/gatherTraineeInfo/success*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/manageTraining/importTraining*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/manageTraining*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/manageTraining/showEligibleTrainees*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/trainingType*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/address*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/completedTraining*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/gatherTraineeInfo*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/manageTraining/getEligibleTraineesByTrainingTypeId*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype/create*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype/get*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype/getAll*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype/update*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/trainingtype/delete*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/rest/user*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/login.jsp" access="ROLE_GUEST" />
+		<intercept-url pattern="/*" access="ROLE_ADMIN" />
+		
 		<form-login 
 			login-page="/login.jsp" 
 			default-target-url="/index.htm"

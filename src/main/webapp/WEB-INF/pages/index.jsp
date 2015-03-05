@@ -33,8 +33,6 @@
 	
 </div><!-- /container -->
 		
-<!-- help -->
-<jsp:include page="/WEB-INF/pages/help/indexHelp.jsp" />
 
 <jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
 

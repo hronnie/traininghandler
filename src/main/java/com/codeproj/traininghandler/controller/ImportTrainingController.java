@@ -68,7 +68,7 @@ public class ImportTrainingController {
 		importFile.isEmpty();
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
-		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(year, month, day, importFile);
+		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(trainingTypeId, year, month, day, importFile);
 		
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));

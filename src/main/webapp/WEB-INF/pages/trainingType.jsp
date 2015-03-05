@@ -111,8 +111,5 @@
 </div>
 <!-- /container -->
 
-<!-- help -->
-<jsp:include page="/WEB-INF/pages/help/trainingTypeHelp.jsp" />
-
 <jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
 

@@ -108,8 +108,5 @@
 </div>
 <!-- /container -->
 
-<!-- help -->
-<jsp:include page="/WEB-INF/pages/help/gatherTraineeInfoHelp.jsp" />
-
 <jsp:include page="/WEB-INF/pages/layout/footer.jsp" />
 
