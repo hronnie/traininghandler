@@ -1,0 +1,44 @@
+Requirements: 
+Java 1.7
+Maven 3.x
+MySQL 5.x
+
+########### DB #############
+ - Run setup.sql file for setting up local DB (you can change the DB name here)
+ - Remove every test users and create admin users (UserData.sql) and generate encrypted password with PasswordEncoderGenerator class
+ - in /traininghandler/src/main/webapp/WEB-INF/traininghandler-security.xml set DB creditentials for spring security
+########### Maven #############
+Add profile in ~/.m2/settings.xml: 
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <profiles>
+        <profile>
+            <id>mysql_th</id>
+            <properties>
+                <th.db.mysql.server.name>localhost</th.db.mysql.server.name>
+                <th.db.mysql.server.port>3306</th.db.mysql.server.port>
+                <th.db.mysql.dbname>traininghandler</th.db.mysql.dbname>
+                <th.db.mysql.dummydb.name>db_bootstrap</th.db.mysql.dummydb.name>
+                <th.db.mysql.username>training</th.db.mysql.username>
+                <th.db.mysql.password>rootpass</th.db.mysql.password>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>mysql_th</activeProfile>
+    </activeProfiles>
+
+    <servers>
+      <server>
+        <id>localhost</id>
+        <username>tomcat</username>
+        <password>s3cret</password>
+      </server>
+    </servers>
+</settings>
+
+########### Maven #############
