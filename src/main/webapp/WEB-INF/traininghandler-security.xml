@@ -34,7 +34,7 @@
 			default-target-url="/index.htm"
 			authentication-failure-url="/login.jsp?error=true" />
 		
-		<logout logout-success-url="/login.jsp" />
+		<logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID"/>
 
 		<anonymous username="guest" granted-authority="ROLE_GUEST" />
 		
@@ -64,8 +64,13 @@
 											LEFT JOIN Role AS r on (ur.roleId = r.roleId)
 											WHERE 
 											 username = ?;" />
+            <password-encoder ref="encoder" />											 
 		</authentication-provider>
 	</authentication-manager>
+	
+	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="10" />
+    </beans:bean>
 	
 	<beans:bean id="dataSource"
           class="com.mchange.v2.c3p0.ComboPooledDataSource"
