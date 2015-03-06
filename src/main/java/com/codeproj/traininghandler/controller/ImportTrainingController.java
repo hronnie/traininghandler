@@ -78,6 +78,12 @@ public class ImportTrainingController {
 			mav.addObject("validationMsg", paramValidMsg);
 			return mav;
 		}
+		String excelFileContentCorrectMsg = null;
+		try {
+			excelFileContentCorrectMsg = ExcelImportHelper.validateExcelFileContent(importFile);
+		} catch (Exception e) {
+			excelFileContentCorrectMsg = Constants.VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL;
+		}
 		
 		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
 		

@@ -79,4 +79,36 @@ public class ExcelImportHelper {
         }
         return false;
 	}
+
+	public static String validateExcelFileContent(MultipartFile importFile) throws IllegalStateException, IOException, InvalidFormatException {
+		String result = "";
+		
+		File file = new File(importFile.getOriginalFilename());
+		importFile.transferTo(file);
+        try(FileInputStream fileIn = new FileInputStream(file)) {
+        	
+        	Workbook wb = WorkbookFactory.create(fileIn);
+            Sheet sheet = wb.getSheetAt(0);
+            
+            int currentExcelRow = EXCEL_TRAINING_START_ROW_INDEX;
+            
+            while (true) { // TODO : IMPLEMENT VALIDATION
+            	Row row = sheet.getRow(currentExcelRow);
+            	if (isRowEmpty(row)) {
+            		break;
+            	}
+            	TrainingExcelDto training = new TrainingExcelDto(
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_POST_CODE_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_ADDRESS_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_PHONE_NO_COL_INDEX)), 
+            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_EMAIL_COL_INDEX))
+            			);
+            	
+            	//result.add(training);
+            	currentExcelRow++;
+            }
+        } 
+		return result;
+	}
 }

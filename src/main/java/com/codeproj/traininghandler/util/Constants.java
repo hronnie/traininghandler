@@ -25,6 +25,8 @@ public class Constants {
 	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
 	
 	
+	public static final String VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy nem sérült e a fájl";
+	public static final String VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy a sor és oszlop megfelelő helyen kezdődik e. A helyes kezdési pont: Sor: " + EXCEL_TRAINING_START_ROW_INDEX + ", Oszlop: " + EXCEL_TRAINING_START_COLUMN_INDEX;
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_TRAINING_TYPE_ID = "Nem választottál ki tanfolyamot";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_YEAR = "Hibas ev! Minimum 1992";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
