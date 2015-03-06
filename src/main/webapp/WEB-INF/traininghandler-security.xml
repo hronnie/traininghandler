@@ -5,9 +5,8 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
-    <http use-expressions="true">
 
-	<http>
+	<http use-expressions="true">
 		<intercept-url pattern="/index.htm**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/gatherTraineeInfo**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/gatherTraineeInfo/success**" access="hasRole('ROLE_ADMIN')" />

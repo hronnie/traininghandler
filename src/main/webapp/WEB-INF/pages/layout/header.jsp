@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +40,9 @@
 <link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/linkStyles.css" />" rel="stylesheet" />
 
-
-
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="username" />
+</sec:authorize>
 
 <script>
 $(document).ready(function() {
@@ -66,7 +68,7 @@ $(document).ready(function() {
 		<div id="header" align="right">
 		
 			<header data-scroll-header="" role="banner" class="header header--page" id="js-header">
-			     
+			    
 				<c:if test="${!isPublicPage && isNotMainPage}">
 					<span class="splitter">|</span>
 					<a href="${backUrlPath}" class="headerLink" id="backLinkId"><i class="fa fa-backward fa-lg"></i></a>
@@ -77,6 +79,10 @@ $(document).ready(function() {
 				</c:if>
 				<span class="splitter">|</span>
 				<a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId"><spring:message code="header.link.change.language" /></a>
+				<span class="splitter">|</span>
+				<a href="#" class="headerLink">${username}</i></a>
+				<span class="splitter">|</span>
+				<a href="<c:url value="/logout" />" class="headerLink"><spring:message code="header.link.logout" /></a>
 				<span class="splitter">|</span>
 				<a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a>
 				<span class="splitter">|</span>
