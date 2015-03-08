@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.controller;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -78,9 +79,13 @@ public class ImportTrainingController {
 			mav.addObject("validationMsg", paramValidMsg);
 			return mav;
 		}
+		
+		File file = new File(importFile.getOriginalFilename());
+		importFile.transferTo(file);
+		
 		String excelFileContentCorrectMsg = null;
 		try {
-			excelFileContentCorrectMsg = ExcelImportHelper.validateExcelFileContent(importFile);
+			excelFileContentCorrectMsg = ExcelImportHelper.validateExcelFileContent(file);
 		} catch (Exception e) {
 			excelFileContentCorrectMsg = Constants.VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL;
 		}
@@ -90,7 +95,7 @@ public class ImportTrainingController {
 			return mav;
 		}
 		
-		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(importFile);
+		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(file);
 		
 		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
 		

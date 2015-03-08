@@ -84,7 +84,6 @@ public class TrainingExcelValidatorTest {
 	
 	@Before
 	public void setUp() {
-		byte[] emptyArray = {};
 		when(importFile.isEmpty()).thenReturn(false);
 	}
 	

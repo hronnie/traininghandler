@@ -1,5 +1,17 @@
 package com.codeproj.traininghandler.util.excel;
 
+import static com.codeproj.traininghandler.util.Constants.EXCEL_NUMBER_OF_DATA_ROWS;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_ADDRESS_COL_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_EMAIL_COL_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_MAX_CHECK_COLUMN;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_MAX_CHECK_ROW;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_NAME_COL_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_PHONE_NO_COL_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_POST_CODE_COL_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_START_COLUMN_INDEX;
+import static com.codeproj.traininghandler.util.Constants.EXCEL_TRAINING_START_ROW_INDEX;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,20 +25,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 
-import static com.codeproj.traininghandler.util.Constants.*;
-
 public class ExcelImportHelper {
 	
-	public static List<TrainingExcelDto> importTrainingExcel(MultipartFile importFile)
+	public static List<TrainingExcelDto> importTrainingExcel(File file)
 			throws IOException, FileNotFoundException, InvalidFormatException {
 		List<TrainingExcelDto> result = new ArrayList<>();
 
-		File file = new File(importFile.getOriginalFilename());
-		importFile.transferTo(file);
         try(FileInputStream fileIn = new FileInputStream(file)) {
         	
         	Workbook wb = WorkbookFactory.create(fileIn);
@@ -54,6 +61,31 @@ public class ExcelImportHelper {
         return result;
 	}
 	
+	public static String validateExcelFileContent(File file) throws IllegalStateException, IOException, InvalidFormatException {
+		String result = "";
+		
+        try(FileInputStream fileIn = new FileInputStream(file)) {
+        	
+        	Workbook wb = WorkbookFactory.create(fileIn);
+            Sheet sheet = wb.getSheetAt(0);
+            
+            for (int i = 0; i < EXCEL_TRAINING_START_ROW_INDEX - 1; i++) {
+            	Row row = sheet.getRow(i);
+            	if (!isNonDataRowEmpty(row)) {
+            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
+            	}
+            }
+            
+            for (int i = EXCEL_TRAINING_START_ROW_INDEX - 1; i < EXCEL_TRAINING_MAX_CHECK_ROW; i++) {
+            	Row row = sheet.getRow(i);
+            	if (!isNonDataCellsAreEmptyInDataRow(row)) {
+            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
+            	}
+            }
+        } 
+		return result;
+	}
+	
 	private static String getCellValueAsString(Cell cell) {
 		if (cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK || cell.getCellType() == Cell.CELL_TYPE_ERROR) {
 			return "";
@@ -62,7 +94,8 @@ public class ExcelImportHelper {
 		} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA || cell.getCellType() == Cell.CELL_TYPE_STRING) {
 			return cell.getStringCellValue();
 		} else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-			return new Double(cell.getNumericCellValue()).toString();
+			cell.setCellType(Cell.CELL_TYPE_STRING);
+			return cell.getStringCellValue();
 		} else {
 			return "";
 		}
@@ -96,38 +129,14 @@ public class ExcelImportHelper {
         return false;
 	}
 
-	public static String validateExcelFileContent(MultipartFile importFile) throws IllegalStateException, IOException, InvalidFormatException {
-		String result = "";
-		
-		File file = new File(importFile.getOriginalFilename());
-		importFile.transferTo(file);
-        try(FileInputStream fileIn = new FileInputStream(file)) {
-        	
-        	Workbook wb = WorkbookFactory.create(fileIn);
-            Sheet sheet = wb.getSheetAt(0);
-            
-            for (int i = 0; i < EXCEL_TRAINING_START_ROW_INDEX; i++) {
-            	Row row = sheet.getRow(i);
-            	if (!isNonDataRowEmpty(row)) {
-            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
-            	}
-            }
-            
-            for (int i = EXCEL_TRAINING_START_ROW_INDEX; i < EXCEL_TRAINING_MAX_CHECK_ROW; i++) {
-            	Row row = sheet.getRow(i);
-            	if (!isNonDataCellsAreEmptyInDataRow(row)) {
-            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
-            	}
-            }
-        } 
-		return result;
-	}
-
 	private static boolean isNonDataCellsAreEmptyInDataRow(Row row) {
 		if (row == null) {
 			return true;
 		}
-		for (int i = 0; i < EXCEL_TRAINING_MAX_CHECK_COLUMN && i < EXCEL_TRAINING_START_COLUMN_INDEX && i > (EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_NUMBER_OF_DATA_ROWS); i++) {
+		for (int i = 0; i < EXCEL_TRAINING_MAX_CHECK_COLUMN; i++) {
+			if (i >= EXCEL_TRAINING_START_COLUMN_INDEX && i < (EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_NUMBER_OF_DATA_ROWS)) {
+				continue;
+			}
 			if (!isCellEmpty(row, i)) {
 				return false;
 			}
