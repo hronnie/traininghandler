@@ -21,12 +21,17 @@ public class Constants {
 	public static final int EXCEL_TRAINING_PHONE_NO_COL_INDEX = 3;
 	public static final int EXCEL_TRAINING_EMAIL_COL_INDEX = 4;
 	
+	public static final int EXCEL_TRAINING_MAX_CHECK_COLUMN = 20;
+	public static final int EXCEL_TRAINING_MAX_CHECK_ROW = 80;
+
+	public static final int EXCEL_NUMBER_OF_DATA_ROWS = 5;
+	
 	public static final String EXCEL_TRAINING_MISSING_EMAIL_DOMAIN = "@nincs.com";
 	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
 	
 	
 	public static final String VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy nem sérült e a fájl";
-	public static final String VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy a sor és oszlop megfelelő helyen kezdődik e. A helyes kezdési pont: Sor: " + EXCEL_TRAINING_START_ROW_INDEX + ", Oszlop: " + EXCEL_TRAINING_START_COLUMN_INDEX;
+	public static final String VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy a sor és oszlop megfelelő helyen kezdődik e. A helyes kezdési pont: Sor: " + EXCEL_TRAINING_START_ROW_INDEX + ", Oszlop: " + EXCEL_TRAINING_START_COLUMN_INDEX + ". A problémás sor: ";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_TRAINING_TYPE_ID = "Nem választottál ki tanfolyamot";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_YEAR = "Hibas ev! Minimum 1992";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";

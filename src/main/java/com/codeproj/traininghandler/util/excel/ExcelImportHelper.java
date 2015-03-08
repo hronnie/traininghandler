@@ -36,7 +36,7 @@ public class ExcelImportHelper {
             
             while (true) {
             	Row row = sheet.getRow(currentExcelRow);
-            	if (isRowEmpty(row)) {
+            	if (isDataRowEmpty(row)) {
             		break;
             	}
             	TrainingExcelDto training = new TrainingExcelDto(
@@ -68,12 +68,28 @@ public class ExcelImportHelper {
 		}
 	}
 	
-	public static boolean isRowEmpty(Row row) {
+	private static boolean isDataRowEmpty(Row row) {
 		if (row == null) {
 			return true;
 		}
 		
-        Cell cell = row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX);
+		return isCellEmpty(row, EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX);
+	}
+	
+	private static boolean isNonDataRowEmpty(Row row) {
+		if (row == null) {
+			return true;
+		}
+		for (int i = 0; i < EXCEL_TRAINING_MAX_CHECK_COLUMN; i++) {
+			if (!isCellEmpty(row, i)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean isCellEmpty(Row row, int cellIndex) {
+        Cell cell = row.getCell(cellIndex);
         if (cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK) {
         	return true;
         }
@@ -90,25 +106,32 @@ public class ExcelImportHelper {
         	Workbook wb = WorkbookFactory.create(fileIn);
             Sheet sheet = wb.getSheetAt(0);
             
-            int currentExcelRow = EXCEL_TRAINING_START_ROW_INDEX;
-            
-            while (true) { // TODO : IMPLEMENT VALIDATION
-            	Row row = sheet.getRow(currentExcelRow);
-            	if (isRowEmpty(row)) {
-            		break;
+            for (int i = 0; i < EXCEL_TRAINING_START_ROW_INDEX; i++) {
+            	Row row = sheet.getRow(i);
+            	if (!isNonDataRowEmpty(row)) {
+            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
             	}
-            	TrainingExcelDto training = new TrainingExcelDto(
-            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_NAME_COL_INDEX)), 
-            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_POST_CODE_COL_INDEX)), 
-            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_ADDRESS_COL_INDEX)), 
-            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_PHONE_NO_COL_INDEX)), 
-            			getCellValueAsString(row.getCell(EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_TRAINING_EMAIL_COL_INDEX))
-            			);
-            	
-            	//result.add(training);
-            	currentExcelRow++;
+            }
+            
+            for (int i = EXCEL_TRAINING_START_ROW_INDEX; i < EXCEL_TRAINING_MAX_CHECK_ROW; i++) {
+            	Row row = sheet.getRow(i);
+            	if (!isNonDataCellsAreEmptyInDataRow(row)) {
+            		return VALIDATION_EXCEL_PROBLEM_DURING_READING_CONTENT + (i + 1);
+            	}
             }
         } 
 		return result;
+	}
+
+	private static boolean isNonDataCellsAreEmptyInDataRow(Row row) {
+		if (row == null) {
+			return true;
+		}
+		for (int i = 0; i < EXCEL_TRAINING_MAX_CHECK_COLUMN && i < EXCEL_TRAINING_START_COLUMN_INDEX && i > (EXCEL_TRAINING_START_COLUMN_INDEX + EXCEL_NUMBER_OF_DATA_ROWS); i++) {
+			if (!isCellEmpty(row, i)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
