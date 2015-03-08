@@ -25,14 +25,14 @@
 		<intercept-url pattern="/rest/trainingtype/update**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/rest/trainingtype/delete**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/rest/user**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/login.jsp**" access="hasRole('ROLE_GUEST')" />
+		<intercept-url pattern="/login**" access="hasRole('ROLE_GUEST')" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 		
 		<form-login 
-			login-page="/login.jsp" 
-			default-target-url="/index.htm"
-			authentication-failure-url="/login.jsp?error=true" />
-		<logout logout-success-url="/login.jsp" invalidate-session="true" logout-url="/logout" delete-cookies="JSESSIONID"/>
+			login-page="/login" 
+			default-target-url="/"
+			authentication-failure-url="/login?error=true" />
+		<logout logout-success-url="/login?logout" invalidate-session="true" logout-url="/logout" delete-cookies="JSESSIONID"/>
 
 		<anonymous username="guest" granted-authority="ROLE_GUEST" />
 		
