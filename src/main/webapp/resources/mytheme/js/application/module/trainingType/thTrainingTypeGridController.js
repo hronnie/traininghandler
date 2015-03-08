@@ -1,6 +1,9 @@
 trainingTypeModule.controller('thTrainingTypeController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
+	$scope.isEditSuccess = false;
+	$scope.isAddSuccess = false;
+	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
 		$scope.trainingTypes = trainingTypes;
@@ -36,31 +39,32 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 		}
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/update');
 		saveResource.customPOST(traningTypePostObj);
+		$scope.isEditSuccess = true;
 	};
 
-	// remove TrainingType
-	$scope.removeTrainingType = function(index, id) {
-		var removeMsg = '';
-		if ($scope.locale.indexOf('en') == 0) {
-			removeMsg = 'Are you absolutely sure you want to delete?';
-		} else {
-			removeMsg = 'Teljesen biztos vagy benne, hogy törölni szeretnéd ezt az elemet?';
-		}
-		var deleteTrainingType = window.confirm(removeMsg);
-		if (!deleteTrainingType) {
-			return;
-		}
-		$scope.trainingTypes.splice(index, 1);
-		var deleteResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/delete');
-		var traningTypePostObj = {
-				trainingTypeId: id, 
-				name: '',
-				levelNo: '',
-				description: ''
-		}
-		// TODO: PROVIDE ERROR MESSAGE FOR CLIENT SIDE
-		deleteResource.customPOST(traningTypePostObj);
-	};
+	// remove TrainingType - temporarily switched off
+//	$scope.removeTrainingType = function(index, id) {
+//		var removeMsg = '';
+//		if ($scope.locale.indexOf('en') == 0) {
+//			removeMsg = 'Are you absolutely sure you want to delete?';
+//		} else {
+//			removeMsg = 'Teljesen biztos vagy benne, hogy törölni szeretnéd ezt az elemet?';
+//		}
+//		var deleteTrainingType = window.confirm(removeMsg);
+//		if (!deleteTrainingType) {
+//			return;
+//		}
+//		$scope.trainingTypes.splice(index, 1);
+//		var deleteResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/delete');
+//		var traningTypePostObj = {
+//				trainingTypeId: id, 
+//				name: '',
+//				levelNo: '',
+//				description: ''
+//		}
+//		// TODO: PROVIDE ERROR MESSAGE FOR CLIENT SIDE
+//		deleteResource.customPOST(traningTypePostObj);
+//	};
 
 	// add TrainingType
 	$scope.addTrainingType = function() {
@@ -75,6 +79,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	$scope.saveNewTrainingType = function(traningTypePostObj) {
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/create');
 		saveResource.customPOST(traningTypePostObj);
+		$scope.isAddSuccess = true;
 	};
 });
 

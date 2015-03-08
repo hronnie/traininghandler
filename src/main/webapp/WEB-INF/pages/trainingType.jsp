@@ -15,6 +15,15 @@
 	<body ng-app="trainingTypeModule">
 		<h4 class="gridMainTitle"><spring:message code="trainingtype.grid.main.title" /></h4>
 		<div ng-controller="thTrainingTypeController as ttCtrl">
+		<div ng-show="isEditSuccess" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<spring:message code="trainingType.edit.success.message" />
+		</div>
+		<div ng-show="isAddSuccess" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<spring:message code="trainingType.add.success.message" />
+		</div>
+		
 			<div class="table-responsive">
 				<div class="outerDIV">
 					<div class="innerDIV">
@@ -82,11 +91,11 @@
 													title="<spring:message code="grid.general.button.edit" />">
 													<i class="fa fa-pencil-square-o fa-2x"></i>
 											</button>
-											<button class="btn btn-danger rowButton rowButtonDelete"
-													ng-click="removeTrainingType($index, trainingType.trainingTypeId)" 
-													title="<spring:message code="grid.general.button.delete" />">
-													<i class="fa fa-times fa-2x"></i>
-											</button>
+<!-- 											<button class="btn btn-danger rowButton rowButtonDelete" -->
+<!-- 													ng-click="removeTrainingType($index, trainingType.trainingTypeId)"  -->
+<%-- 													title="<spring:message code="grid.general.button.delete" />"> --%>
+<!-- 													<i class="fa fa-times fa-2x"></i> -->
+<!-- 											</button> -->
 											<!-- $index -->
 										</div>
 									</td>
@@ -100,6 +109,15 @@
 
 			<button class="btn btn-primary addRowButton"
 				ng-click="addTrainingType()"><spring:message code="grid.general.button.add.row" /></button>
+		
+		<div ng-show="isEditSuccess" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<spring:message code="trainingType.edit.success.message" />
+		</div>
+		<div ng-show="isAddSuccess" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<spring:message code="trainingType.add.success.message" />
+		</div>
 		</div>
 
 		<script
