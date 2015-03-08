@@ -58,6 +58,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 				levelNo: '',
 				description: ''
 		}
+		// TODO: PROVIDE ERROR MESSAGE FOR CLIENT SIDE
 		deleteResource.customPOST(traningTypePostObj);
 	};
 
