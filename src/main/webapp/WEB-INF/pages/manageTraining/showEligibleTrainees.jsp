@@ -29,6 +29,11 @@
 		</nav>
 		<br>
 		<div class="span12">
+			<div ng-show="isResultEmpty">
+				<h3>
+					<spring:message code="showEligibleUsers.emptyResult" />
+				</h3>
+			</div>
 			<div ng-show="emailList.length">
 				<h3>
 					<spring:message code="showEligibleUsers.has.email.table.title" />

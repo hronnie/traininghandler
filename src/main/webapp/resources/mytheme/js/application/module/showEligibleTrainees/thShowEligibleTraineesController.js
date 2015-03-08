@@ -16,9 +16,11 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 	});
 	
 	$scope.emailList = "";
+	$scope.isResultEmpty = false;
 	
 	//trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	$scope.getEligibleTrainees = function(trainingTypeId) {
+		$scope.isResultEmpty = false;
 		if (!trainingTypeId) {
 			return;
 		}
@@ -26,6 +28,10 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 		eligibleTraineesResource.get().then(function(eligibleTrinees) {
 			$scope.hasEmailUsers = eligibleTrinees.hasEmailUsers;
 			$scope.onlyPhoneUsers = eligibleTrinees.onlyPhoneUsers;
+			
+			if ((!$scope.hasEmailUsers || $scope.hasEmailUsers.length < 1) && (!$scope.onlyPhoneUsers || $scope.onlyPhoneUsers.length < 1)) {
+				$scope.isResultEmpty = true; 
+			}
 			
 			$scope.emailList = '';
 			
