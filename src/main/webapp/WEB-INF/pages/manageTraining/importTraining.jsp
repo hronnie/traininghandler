@@ -14,7 +14,6 @@
 	ng-controller="thImportTrainingController as importCtrl">
 
 	<div class="container" id="containerId">
-
 		<form action="<c:url value="/manageTraining/importTraining" />"
 			method="post" enctype="multipart/form-data" autocomplete="off"
 			name="importForm" class="form-horizontal">
@@ -39,7 +38,7 @@
 			</c:choose>
 
 			<div class="control-group">
-				<label class="col-sm-2 control-label">Tanfolyam:</label>
+				<label class="col-sm-2 control-label"><spring:message code="importTraining.training.label" /></label>
 				<div class="controls">
 					<div class="form-inline">
 						<select ng-model="selectedTrainingType"
@@ -83,6 +82,9 @@
 			<button type="submit" class="btn btn-primary btn-lg active">
 				<spring:message code="importTraining.button.import" />
 			</button>
+			<div class="control-group excelLink">
+			    <a href="<c:url value="/resources/tanfolyam.xlsx" />"> <i class="fa fa-file-excel-o"></i> <spring:message code="importTraining.download.sample.xls" /></a>
+			</div>
 		</form>
 	</div>
 	<!-- /container -->
