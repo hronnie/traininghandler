@@ -4,7 +4,7 @@ Maven 3.x
 MySQL 5.x
 
 ########### DB #############
- - change connection parameters for DB in setup.sql, settings.xml (see also in Maven section), hibernate.cfg.xml, traininghandler-security.xml, datasource-testcontext.xml
+ - change connection parameters for DB in setup.sql, settings.xml (see also in Maven section), database.properties
  - Run setup.sql file for setting up local DB (you can change the DB name here)
  - Remove every test users and create admin users (UserData.sql) and generate encrypted password with PasswordEncoderGenerator class
  - in /traininghandler/src/main/webapp/WEB-INF/traininghandler-security.xml set DB creditentials for spring security

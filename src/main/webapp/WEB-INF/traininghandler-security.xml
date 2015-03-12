@@ -69,24 +69,5 @@
 	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="10" />
     </beans:bean>
-	
-	<beans:bean id="dataSource"
-          class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-
-        <beans:property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <beans:property name="jdbcUrl"
-                  value="jdbc:mysql://localhost/traininghandler" />
-
-        <beans:property name="properties">
-            <beans:props>
-                <beans:prop key="com.mchange.v2.c3p0.management.ManagementCoordinator">com.mchange.v2.c3p0.management.NullManagementCoordinator</beans:prop>
-                <beans:prop key="user">training</beans:prop>
-                <beans:prop key="password">rootpass</beans:prop>
-                <beans:prop key="autoReconnect">true</beans:prop>
-                <beans:prop key="autoReconnectForPools">true</beans:prop>
-            </beans:props>
-        </beans:property>
-    </beans:bean>
 
 </beans:beans>

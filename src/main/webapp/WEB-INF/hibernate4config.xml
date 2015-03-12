@@ -15,7 +15,7 @@
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
  
         <property name="location">
-            <value>database.properties</value>
+            <value>classpath:database.properties</value>
         </property>
     </bean>
 	
@@ -23,14 +23,10 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<!-- access -->
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/traininghandler?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="training" />
-		<property name="password" value="rootpass" />
-<!-- 		<property name="driverClass" value="${jdbc.driverClassName}" /> -->
-<!--         <property name="jdbcUrl" value="${jdbc.url}" /> -->
-<!--         <property name="user" value="${jdbc.username}" /> -->
-<!--         <property name="password" value="${jdbc.password}" /> -->
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
 		<!-- pool sizing -->
 		<property name="initialPoolSize" value="3" />
 		<property name="minPoolSize" value="6" />
