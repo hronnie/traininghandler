@@ -49,3 +49,6 @@ Add profile in ~/.m2/settings.xml:
  - Change every catalog="traininghandler" with the name of DB
  - Change arcifactId and name in pom.xml
  - Change the name of traininghandler-servlet.xml for [servlet name]-.... .xml
+ - Forward port 8080 to 80 with iptables: execute and put to /etc/rc.local the following command: 
+ iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to 8080
+ 
