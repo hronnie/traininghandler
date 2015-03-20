@@ -520,12 +520,16 @@
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- DATA -->
+										<srcFile>src/main/sql/data/AddressProdData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserTypeData.sql</srcFile>
+										<srcFile>src/main/sql/data/UserData.sql</srcFile>
+										<srcFile>src/main/sql/data/RoleData.sql</srcFile>
 										<srcFile>src/main/sql/data/UserRoleData.sql</srcFile>
 										<srcFile>src/main/sql/data/EmailTemplateData.sql</srcFile>
 										<srcFile>src/main/sql/data/GeneralSettingsData.sql</srcFile>
 										<srcFile>src/main/sql/data/TrainingTypeData.sql</srcFile>
 										<srcFile>src/main/sql/data/TrainingPrerequisiteData.sql</srcFile>
+
 									</srcFiles>
 								</configuration>
 							</execution>
