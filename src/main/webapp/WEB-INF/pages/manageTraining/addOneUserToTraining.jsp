@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
-<title><spring:message code="importTraining.main.title" /></title>
+<title>Tanítványok hozzáadása tanfolyamokhoz</title>
 <script
 	src="<c:url value="/resources/js/application/module/addOneUserToTraining/thAddOneUserToTrainingModule.js" />"></script>
 <script
@@ -18,34 +18,26 @@
 			autocomplete="off"
 			name="addOneUserToTrainingForm" class="form-horizontal">
 			<h4 class="mainPageTitle">
-				<spring:message code="importTraining.main.title" />
+				Tanítványok hozzáadása tanfolyamokhoz
 			</h4>
-			<c:choose>
-				<c:when test="${isImportSuccess == 'true'}">
-					<div class="alert alert-success">
-						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<spring:message code="importTraining.success.message" />
-					</div>
-				</c:when>
-			</c:choose>
-			<c:choose>
-				<c:when test="${not empty validationMsg}">
-					<div class="alert alert-danger alert-error">
-						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<c:out value="${validationMsg}" />
-					</div>
-				</c:when>
-			</c:choose>
+			<div ng-show="isAddOneUserSuccess" class="alert alert-success">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+				<spring:message code="importTraining.success.message" />
+			</div>
+			<div ng-show="validationMsg" class="alert alert-danger alert-error">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+				{{validationMsg}}
+			</div>
 
 			<div class="control-group">
-				<label class="col-sm-2 control-label"><spring:message code="importTraining.training.label" /></label>
+				<label class="col-sm-2 control-label">Tanfolyam:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<select ng-model="selectedTrainingType"
+						<select ng-model="selectedTrainingType" tabindex="0"
 							ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id"
 							name="trainingTypeId" class="form-control selectwidthauto">
 							<option value="">--
-								<spring:message code="importTraining.trainingType.choose" /> --
+								Kérlek válassz --
 							</option>
 						</select> <br>
 					</div>
@@ -72,8 +64,62 @@
 					</div>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Név:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="text" ng-model="name" tabindex="4"
+							maxlength="100" name="name" class="form-control w-3"
+							placeholder="Név">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Irányítószám:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="text" ng-model="postCode" tabindex="5"
+							maxlength="15" name="postCode" class="form-control w-3"
+							placeholder="Irányítószám">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Cím:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="text" ng-model="address" tabindex="6"
+							maxlength="100" name="address" class="form-control w-3"
+							placeholder="Cím">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Telefonszám:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="text" ng-model="phoneNo" tabindex="7"
+							maxlength="50" name="phoneNo" class="form-control w-3"
+							placeholder="Telefonszám">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Email:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="text" ng-model="email" tabindex="8"
+							maxlength="80" name="email" class="form-control w-3"
+							placeholder="Email">
+					</div>
+				</div>
+			</div>
+
 			<button type="submit" class="btn btn-primary btn-lg active">
-				<spring:message code="importTraining.button.import" />
+				Hozzáadás
+			</button>
+			<button type="button" class="btn btn-primary btn-lg active" ng-click="resetFields()">
+				Mezők törlése
 			</button>
 
 		</form>

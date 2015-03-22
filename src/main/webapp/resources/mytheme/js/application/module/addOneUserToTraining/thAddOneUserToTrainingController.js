@@ -1,8 +1,20 @@
 thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, thTrainingTypeService) {
-	$scope.trainingDateYear = "";
-	$scope.trainingDateMonth = "";
-	$scope.trainingDateDay = "";
-	$scope.selectedTrainingType = "";
+	$scope.isAddOneUserSuccess = false;
+	
+	$scope.resetFields = function () {
+		$scope.trainingDateYear = "";
+		$scope.trainingDateMonth = "";
+		$scope.trainingDateDay = "";
+		$scope.selectedTrainingType = "";
+		$scope.validationMsg = "";
+		$scope.name = "";
+		$scope.postCode = "";
+		$scope.address = "";
+		$scope.phoneNo = "";
+		$scope.email = "";
+	}
+	
+	$scope.resetFields();
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.getList().then(function(trainingTypes){
@@ -29,6 +41,7 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 			document.importForm.elements[3].focus();
 		}
 	}
+	
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	
