@@ -14,6 +14,8 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 		$scope.email = "";
 	}
 	
+	$scope.validationNeeded = false;
+	
 	$scope.resetFields();
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
@@ -32,16 +34,25 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	
 	$scope.jumpToNextFromYear = function() {
 		if ($scope.trainingDateYear.length >= 4) {
-			document.importForm.elements[2].focus();
+			document.addOneUserToTrainingForm.elements[2].focus();
 		}
 	}
 	
 	$scope.jumpToNextFromMonth = function() {
 		if ($scope.trainingDateMonth.length >= 2) {
-			document.importForm.elements[3].focus();
+			document.addOneUserToTrainingForm.elements[3].focus();
 		}
 	}
 	
+	$scope.jumpToNextFromDay = function() {
+		if ($scope.trainingDateDay.length >= 2) {
+			document.addOneUserToTrainingForm.elements[4].focus();
+		}
+	}
+	
+	$scope.onSubmit = function() {
+		$scope.validationNeeded = true;
+	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	

@@ -420,3 +420,7 @@ img.errorImg {
 .excelLink {
 	margin-top: 25px;
 }
+
+.validationMsg {
+	color: red;
+}

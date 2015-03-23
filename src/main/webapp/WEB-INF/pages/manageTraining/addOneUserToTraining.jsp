@@ -60,6 +60,7 @@
 
 						<input type="text" ng-model="trainingDateDay" tabindex="3"
 							maxlength="2" name="day" class="form-control w-2"
+							ng-keyup="jumpToNextFromDay()"
 							placeholder="<spring:message code="importTraining.dateinput.day" />">
 					</div>
 				</div>
@@ -69,18 +70,22 @@
 				<div class="controls">
 					<div class="form-inline">
 						<input type="text" ng-model="name" tabindex="4"
-							maxlength="100" name="name" class="form-control w-3"
-							placeholder="Név">
+							ng-maxlength="100" name="name" class="form-control w-3"
+							placeholder="Név" required>
+						<span class="control-label validationMsg" ng-show="addOneUserToTrainingForm.name.$error.required && validationNeeded" >Username is required.</span>
 					</div>
 				</div>
 			</div>
+<!-- 			TODO: put min, max and required check. put the necessary error messages. handle drop down also. change hard coded messages with spring:code -->
 			<div class="control-group">
 				<label class="col-sm-2 control-label">Irányítószám:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="postCode" tabindex="5"
-							maxlength="15" name="postCode" class="form-control w-3"
-							placeholder="Irányítószám">
+						<input type="text" ng-model="postCode" tabindex="5" ng-minlength="3" ng-maxlength="15"
+							 name="postCode" class="form-control w-3"
+							placeholder="Irányítószám" required>
+						<span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.postCode.$error.required ||
+						addOneUserToTrainingForm.postCode.$error.minlength || addOneUserToTrainingForm.postCode.$error.maxlength) && validationNeeded" >Username is required.</span>
 					</div>
 				</div>
 			</div>
@@ -115,7 +120,7 @@
 				</div>
 			</div>
 
-			<button type="submit" class="btn btn-primary btn-lg active">
+			<button type="button" class="btn btn-primary btn-lg active" ng-click="onSubmit()">
 				Hozzáadás
 			</button>
 			<button type="button" class="btn btn-primary btn-lg active" ng-click="resetFields()">
