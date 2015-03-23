@@ -108,10 +108,7 @@ public class ImportTrainingController {
 		Date complDate = complDt.toDate();
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
-			Long userId = getUserIdIfExist(item);
-			if (userId == -1L) {
-				userId = createNewUser(item);
-			}
+			Long userId = userService.createUserWithAddress(item);
 			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
 			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
 			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
@@ -125,22 +122,7 @@ public class ImportTrainingController {
 		return mav;
 	}
 
-	private Long createNewUser(TrainingExcelDto item) throws ValidationException {
-		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
-		GeneralIdResponse userIdResp = userService.createFromForm(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()));
-		return userIdResp.getValue();
-	}
-
-	private Long getUserIdIfExist(TrainingExcelDto item) {
-		String email = item.getEmail();
-		if (StringUtils.isEmpty(email)) {
-			String cleanedPhoneNo = ThStringUtils.cleanPhoneNumber(item.getPhoneNo());
-			email = cleanedPhoneNo + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
-		}
-		GeneralIdResponse userId = userService.getUserIdByEmail(email);
-		return userId.getValue();
-	}
-
+	
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}

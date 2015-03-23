@@ -1,5 +1,9 @@
 package com.codeproj.traininghandler.dto;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="trainingExcelDto")
 public class TrainingExcelDto {
 	private String name;
 	private String postCode;
@@ -20,6 +24,7 @@ public class TrainingExcelDto {
 		this.email = email;
 	}
 
+	@XmlElement(name="name")
 	public String getName() {
 		return name;
 	}
@@ -28,6 +33,7 @@ public class TrainingExcelDto {
 		this.name = name;
 	}
 	
+	@XmlElement(name="postCode")
 	public String getPostCode() {
 		return postCode;
 	}
@@ -36,6 +42,7 @@ public class TrainingExcelDto {
 		this.postCode = postCode;
 	}
 	
+	@XmlElement(name="address")
 	public String getAddress() {
 		return address;
 	}
@@ -44,6 +51,7 @@ public class TrainingExcelDto {
 		this.address = address;
 	}
 	
+	@XmlElement(name="phone")
 	public String getPhoneNo() {
 		return phoneNo;
 	}
@@ -52,6 +60,7 @@ public class TrainingExcelDto {
 		this.phoneNo = phoneNo;
 	}
 	
+	@XmlElement(name="email")
 	public String getEmail() {
 		return email;
 	}

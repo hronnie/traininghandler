@@ -1,5 +1,6 @@
 thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants, thTrainingTypeService) {
 	$scope.isAddOneUserSuccess = false;
+	$scope.format = 'yyyy-mm-dd';
 	
 	$scope.resetFields = function () {
 		$scope.trainingDateYear = "";
@@ -7,11 +8,12 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 		$scope.trainingDateDay = "";
 		$scope.selectedTrainingType = "";
 		$scope.validationMsg = "";
-		$scope.name = "";
-		$scope.postCode = "";
-		$scope.address = "";
-		$scope.phoneNo = "";
-		$scope.email = "";
+		$scope.trainingExcelDto = {};
+		$scope.trainingExcelDto.name = "";
+		$scope.trainingExcelDto.postCode = "";
+		$scope.trainingExcelDto.address = "";
+		$scope.trainingExcelDto.phoneNo = "";
+		$scope.trainingExcelDto.email = "";
 	}
 	
 	$scope.validationNeeded = false;
@@ -52,6 +54,14 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	
 	$scope.onSubmit = function() {
 		$scope.validationNeeded = true;
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/user/createUserWithAddress');
+		saveResource.customPOST($scope.trainingExcelDto).then(function() {
+			$scope.isAddOneUserSuccess = true;
+			$scope.trainingExcelDto = {};
+			$scope.validationMsg = "";
+			$scope.validationNeeded = false;
+		});
+		// TODO: add message when not success
 	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();

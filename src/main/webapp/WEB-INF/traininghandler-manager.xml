@@ -9,7 +9,6 @@
 <!--     ***** CONTROLLERS ***** -->
 	<bean id="importTrainingController"
 		class="com.codeproj.traininghandler.controller.ImportTrainingController">
-		<property name="addressService" ref="addressService" />
 		<property name="completedTrainingService" ref="completedTrainingService" />
 		<property name="userService" ref="userService" />
 	</bean>
@@ -36,6 +35,7 @@
 	<bean id="userService"
 		class="com.codeproj.traininghandler.rest.user.UserService">
 		<property name="userManager" ref="userManager" />
+		<property name="addressService" ref="addressService" />
 	</bean>
 	
 	<bean id="completedTrainingService"

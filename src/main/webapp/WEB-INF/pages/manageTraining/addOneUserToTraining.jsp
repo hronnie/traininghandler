@@ -69,7 +69,7 @@
 				<label class="col-sm-2 control-label">Név:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="name" tabindex="4"
+						<input type="text" ng-model="trainingExcelDto.name" tabindex="4"
 							ng-maxlength="100" name="name" class="form-control w-3"
 							placeholder="Név" required>
 						<span class="control-label validationMsg" ng-show="addOneUserToTrainingForm.name.$error.required && validationNeeded" >Username is required.</span>
@@ -81,7 +81,7 @@
 				<label class="col-sm-2 control-label">Irányítószám:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="postCode" tabindex="5" ng-minlength="3" ng-maxlength="15"
+						<input type="text" ng-model="trainingExcelDto.postCode" tabindex="5" ng-minlength="3" ng-maxlength="15"
 							 name="postCode" class="form-control w-3"
 							placeholder="Irányítószám" required>
 						<span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.postCode.$error.required ||
@@ -93,7 +93,7 @@
 				<label class="col-sm-2 control-label">Cím:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="address" tabindex="6"
+						<input type="text" ng-model="trainingExcelDto.address" tabindex="6"
 							maxlength="100" name="address" class="form-control w-3"
 							placeholder="Cím">
 					</div>
@@ -103,7 +103,7 @@
 				<label class="col-sm-2 control-label">Telefonszám:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="phoneNo" tabindex="7"
+						<input type="text" ng-model="trainingExcelDto.phoneNo" tabindex="7"
 							maxlength="50" name="phoneNo" class="form-control w-3"
 							placeholder="Telefonszám">
 					</div>
@@ -113,7 +113,7 @@
 				<label class="col-sm-2 control-label">Email:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="email" tabindex="8"
+						<input type="text" ng-model="trainingExcelDto.email" tabindex="8"
 							maxlength="80" name="email" class="form-control w-3"
 							placeholder="Email">
 					</div>
