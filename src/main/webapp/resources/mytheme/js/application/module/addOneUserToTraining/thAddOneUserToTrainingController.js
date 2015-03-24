@@ -60,8 +60,9 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 			$scope.trainingExcelDto = {};
 			$scope.validationMsg = "";
 			$scope.validationNeeded = false;
-		});
-		// TODO: add message when not success
+		}, function() {
+			validationMsg = "Hiba történt a hozzáadás közben!";
+		);
 	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
