@@ -60,7 +60,7 @@
 							placeholder="<spring:message code="importTraining.dateinput.month" />" required>
 
 						<input type="text" ng-model="trainingDateDay" tabindex="3"
-							ng-minlength="1" ng-maxlength="2 name="day" class="form-control w-2"
+							ng-minlength="1" ng-maxlength="2" name="day" class="form-control w-2"
 							ng-keyup="jumpToNextFromDay()"
 							placeholder="<spring:message code="importTraining.dateinput.day" />" required>
 						<span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.year.$error.required ||
@@ -68,7 +68,7 @@
                         addOneUserToTrainingForm.year.$error.maxlength ||
                         addOneUserToTrainingForm.month.$error.required ||
                         addOneUserToTrainingForm.month.$error.minlength || 
-                        addOneUserToTrainingForm..month$error.maxlength ||
+                        addOneUserToTrainingForm.month.$error.maxlength ||
                         addOneUserToTrainingForm.day.$error.required ||
                         addOneUserToTrainingForm.day.$error.minlength || 
                         addOneUserToTrainingForm.day.$error.maxlength

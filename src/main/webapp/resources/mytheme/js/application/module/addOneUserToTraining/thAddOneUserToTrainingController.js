@@ -62,6 +62,7 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 			$scope.validationNeeded = false;
 		}, function() {
 			validationMsg = "Hiba történt a hozzáadás közben!";
+		}
 		);
 	}
 	
