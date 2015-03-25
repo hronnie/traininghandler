@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
-import com.codeproj.traininghandler.dto.UserDto;
-import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
-import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.Constants;
-import com.codeproj.traininghandler.util.ThStringUtils;
 import com.codeproj.traininghandler.util.excel.ExcelImportHelper;
 import com.codeproj.traininghandler.util.excel.TrainingExcelValidator;
 
@@ -108,7 +102,7 @@ public class ImportTrainingController {
 		Date complDate = complDt.toDate();
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
-			Long userId = userService.createUserWithAddress(item);
+			Long userId = userService.createUserWithAddress(item, true);
 			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
 			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
 			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {

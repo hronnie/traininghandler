@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.validator.EmailValidator;
 import org.joda.time.DateTime;
 
 public class ValidatorBaseUtility {
@@ -131,9 +132,7 @@ public class ValidatorBaseUtility {
 	}
 	
 	private static boolean isValidEmailAddress(String email) {
-         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-         java.util.regex.Matcher m = p.matcher(email);
-         return m.matches();
+		EmailValidator emailValidator= EmailValidator.getInstance();
+		return emailValidator.isValid(email);
 	}
 }

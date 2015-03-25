@@ -13,9 +13,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.user.UserManager;
+import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,8 +35,16 @@ public class UserServiceTest {
 	public static final Date VALID_DOB;
 	public static final Long VALID_ADDRESS_ID = 1L;
 	
+	public static final String VALID_NAME = "Valid Name";
+	public static final String VALID_POSTCODE = "nei 93d";
+	public static final String VALID_ADDRESS = "ad dafdf  dasfdsf df";
+	public static final String VALID_PHONE_NO = "54-54454-4545/7";
+	
 	@Mock
 	public UserManager userManager;
+	
+	@Mock
+	public AddressService addressService;
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
@@ -45,6 +55,7 @@ public class UserServiceTest {
 	public void setUp() {
 		service = new UserService();
 		service.setUserManager(userManager);
+		service.setAddressService(addressService);
 		when(userManager.create(VALID_LAST_NAME + VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
 		when(userManager.getUserIdByEmail(EMAIL_WHICH_DOESNT_EXIST)).thenReturn(new Long(-1));
 		when(userManager.getUserIdByEmail(EMAIL_WHICH_EXISTS)).thenReturn(new Long(1));
@@ -202,4 +213,5 @@ public class UserServiceTest {
 		serviceResult = service.getUserIdByEmail(EMAIL_WHICH_EXISTS);
 		assertEquals("user id should be 1 for existing user", new Long(1L), serviceResult.getValue());
 	}
+
 }

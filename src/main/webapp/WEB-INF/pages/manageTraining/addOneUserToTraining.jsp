@@ -130,10 +130,10 @@
 				<label class="col-sm-2 control-label"><spring:message code="addOneUserToTraining.email.label" />:</label>
 				<div class="controls">
 					<div class="form-inline">
-						<input type="text" ng-model="trainingExcelDto.email" tabindex="8"
+						<input type="email" ng-model="trainingExcelDto.email" tabindex="8"
 							ng-maxlength="80" name="email" class="form-control w-3"
 							placeholder="<spring:message code="addOneUserToTraining.email.label" />">
-                        <span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.email.$error.maxlength) && validationNeeded" ><spring:message code="addOneUserToTraining.validation.email" /></span>
+                        <span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.email.$error.maxlength || addOneUserToTrainingForm.email.$error.email) && validationNeeded" ><spring:message code="addOneUserToTraining.validation.email" /></span>
 					</div>
 				</div>
 			</div>
