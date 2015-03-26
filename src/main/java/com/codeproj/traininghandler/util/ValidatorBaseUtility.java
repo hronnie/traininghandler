@@ -26,6 +26,9 @@ public class ValidatorBaseUtility {
 
 	public static void validateStringLength(String name, String strAttr,
 			int maxLength) throws ValidationException {
+		if (strAttr == null || "".equals(strAttr)) {
+			return;
+		}
 		if (strAttr.length() > maxLength) {
 			throw new ValidationException("Parameter " + name
 					+ " is too long! Maximum length is " + maxLength);
@@ -131,7 +134,7 @@ public class ValidatorBaseUtility {
 		}
 	}
 	
-	private static boolean isValidEmailAddress(String email) {
+	public static boolean isValidEmailAddress(String email) {
 		EmailValidator emailValidator= EmailValidator.getInstance();
 		return emailValidator.isValid(email);
 	}

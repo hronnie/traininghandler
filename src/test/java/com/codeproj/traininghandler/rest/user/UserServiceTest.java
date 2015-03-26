@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.user.UserManager;
@@ -105,7 +104,7 @@ public class UserServiceTest {
 		service.create(user);
 	}
 	
-	@Test(expected = ValidationException.class)
+	@Test
 	public void testCreateUserWithNullEmail() throws ValidationException {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, null, VALID_ADDRESS_ID);
 		service.create(user);
@@ -144,7 +143,7 @@ public class UserServiceTest {
 		service.create(user);
 	}
 	
-	@Test(expected = ValidationException.class)
+	@Test
 	public void testCreateUserWithEmptyEmail() throws ValidationException {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, "", VALID_ADDRESS_ID);
 		service.create(user);

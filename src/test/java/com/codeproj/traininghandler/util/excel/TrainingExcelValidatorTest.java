@@ -130,14 +130,14 @@ public class TrainingExcelValidatorTest {
 		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_PHONE_NO);
 		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG", VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
 		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
+//		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_EMAIL);
+//		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
+//		trainingAttendendList.clear();
+//		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_EMAIL);
+//		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
+//		trainingAttendendList.clear();
 		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG", VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
+		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_INVALID", VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_INVALID, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
 		trainingAttendendList.clear();
 	}
 	

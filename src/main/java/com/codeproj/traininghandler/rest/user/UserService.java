@@ -79,6 +79,8 @@ public class UserService {
 		stripXssUserDto(user);
 		UserServiceValidator.create(user, isUseBasicFields);
 		
+		addEmailIfEmpty(user);
+		
 		Long result = null;
 		if (isUseBasicFields) {
 			result = userManager.create(user.getName(), user.getDisplayName(), user.getDob(), user.getPhoneNo(), user.getEmail(), user.getAddressId());
@@ -88,6 +90,16 @@ public class UserService {
 		return new GeneralIdResponse(result);
 	}
 	
+	private void addEmailIfEmpty(UserDto user) {
+		if (StringUtils.isEmpty(user.getPhoneNo())) {
+			return;
+		}
+		if (StringUtils.isEmpty(user.getEmail())) {
+			String newEmail = ThStringUtils.cleanPhoneNumber(user.getPhoneNo()) + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
+			user.setEmail(newEmail);
+		}
+	}
+
 	private static void stripXssUserDto(UserDto user) {
 		user.setLastName(ValidatorBaseUtility.stripXSS(user.getLastName()));
 		user.setFirstName(ValidatorBaseUtility.stripXSS(user.getFirstName()));

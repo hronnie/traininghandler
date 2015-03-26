@@ -49,6 +49,7 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG = "Tul hosszu a telefonszam. Maximum 50 karakter lehet";
 	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY = "Az email nem lehet ures";
 	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG = "Tul hosszu az email. Maximum 80 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_INVALID = "Az email cim formatuma nem jo";
 	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";

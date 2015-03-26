@@ -1,5 +1,7 @@
 package com.codeproj.traininghandler.rest.user;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
@@ -23,13 +25,14 @@ public class UserServiceValidator extends ValidatorBaseUtility {
 			validateStringLength("fullName", user.getName(), 100);
 		}
 		mandatoryParameter("phoneNumber", user.getPhoneNo());
-		mandatoryParameter("email", user.getEmail());
 		mandatoryParameter("addressId", user.getAddressId());
 		
 		validateStringLength("phoneNumber", user.getPhoneNo(), 50);
 		validateStringLength("email", user.getEmail(), 80);
 		
-		emailValidator(user.getEmail());
+		if (!StringUtils.isEmpty(user.getEmail())) {
+			emailValidator(user.getEmail());
+		}
 		entityIdValidator(user.getAddressId());
 	}
 }
