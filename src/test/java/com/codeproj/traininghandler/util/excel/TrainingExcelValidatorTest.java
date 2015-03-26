@@ -42,6 +42,7 @@ public class TrainingExcelValidatorTest {
 	public static final String VALID_ADDRESS = "long address line";
 	public static final String VALID_PHONE_NO = "00-113434-344";
 	public static final String VALID_EMAIL = "a@b.com";
+	public static final String INVALID_EMAIL = "aasdfsdaf";
 	
 	public static final TrainingExcelDto VALID_EXCEL_DTO = null;
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_EMPTY_NAME;
@@ -59,6 +60,7 @@ public class TrainingExcelValidatorTest {
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_EMPTY_EMAIL;
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_NULL_EMAIL;
 	public static final TrainingExcelDto INVALID_EXCEL_DTO_LONG_EMAIL;
+	public static final TrainingExcelDto INVALID_EXCEL_DTO_INVALID_EMAIL;
 
 	@Mock
 	public MultipartFile importFile;
@@ -79,6 +81,7 @@ public class TrainingExcelValidatorTest {
 		INVALID_EXCEL_DTO_EMPTY_EMAIL = new TrainingExcelDto(VALID_NAME, VALID_POST_CODE, VALID_ADDRESS, VALID_PHONE_NO, "");
 		INVALID_EXCEL_DTO_NULL_EMAIL = new TrainingExcelDto(VALID_NAME, VALID_POST_CODE, VALID_ADDRESS, VALID_PHONE_NO, null);
 		INVALID_EXCEL_DTO_LONG_EMAIL = new TrainingExcelDto(VALID_NAME, VALID_POST_CODE, VALID_ADDRESS, VALID_PHONE_NO, PARAMETER_STRING_SIZE_MORE_THEN_300);
+		INVALID_EXCEL_DTO_INVALID_EMAIL = new TrainingExcelDto(VALID_NAME, VALID_POST_CODE, VALID_ADDRESS, VALID_PHONE_NO, INVALID_EMAIL);
 
 	}
 	
@@ -130,14 +133,11 @@ public class TrainingExcelValidatorTest {
 		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_PHONE_NO);
 		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG", VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
 		trainingAttendendList.clear();
-//		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_EMAIL);
-//		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-//		trainingAttendendList.clear();
-//		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_EMAIL);
-//		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY", VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-//		trainingAttendendList.clear();
+		trainingAttendendList.add(INVALID_EXCEL_DTO_INVALID_EMAIL);
+		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_INVALID", VALIDATION_EXCEL_IMPORT_EMAIL_INVALID, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
+		trainingAttendendList.clear();
 		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_INVALID", VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_INVALID, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
+		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_INVALID + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG", VALIDATION_EXCEL_IMPORT_EMAIL_INVALID + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
 		trainingAttendendList.clear();
 	}
 	
