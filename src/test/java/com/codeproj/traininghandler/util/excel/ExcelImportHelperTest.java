@@ -26,31 +26,31 @@ public class ExcelImportHelperTest {
 		assertEquals("The post code should be: 111111", "111111", row1.getPostCode());
 		assertEquals("The address should be: 1-es nem reg cim 1", "1-es nem reg cim 1", row1.getAddress());
 		assertEquals("The phone no should be: 1111111111 1", "1111111111 1", row1.getPhoneNo());
-		assertEquals("The email should be: nemreg1es@mail.com1", "nemreg1es@mail.com1", row1.getEmail());
+		assertEquals("The email should be: nemreg1es1@mail.com", "nemreg1es1@mail.com", row1.getEmail());
 		TrainingExcelDto row2 = rows.get(1);
 		assertEquals("The name should be: ", "Most 1es 2", row2.getName());
 		assertEquals("The post code should be: 111112", "111112", row2.getPostCode());
 		assertEquals("The address should be: 1-es nem reg cim 2", "1-es nem reg cim 2", row2.getAddress());
 		assertEquals("The phone no should be: 1111111111 2", "1111111111 2", row2.getPhoneNo());
-		assertEquals("The email should be: nemreg1es@mail.com2", "nemreg1es@mail.com2", row2.getEmail());
+		assertEquals("The email should be: nemreg1es2@mail.com", "nemreg1es2@mail.com", row2.getEmail());
 		TrainingExcelDto row3 = rows.get(2);
 		assertEquals("The name should be: ", "Most 1es 3", row3.getName());
 		assertEquals("The post code should be: 111113", "111113", row3.getPostCode());
 		assertEquals("The address should be: 1-es nem reg cim 3", "1-es nem reg cim 3", row3.getAddress());
 		assertEquals("The phone no should be: 1111111111 3", "1111111111 3", row3.getPhoneNo());
-		assertEquals("The email should be: nemreg1es@mail.com3", "nemreg1es@mail.com3", row3.getEmail());
+		assertEquals("The email should be: nemreg1es3@mail.com", "nemreg1es3@mail.com", row3.getEmail());
 		TrainingExcelDto row4 = rows.get(3);
 		assertEquals("The name should be: ", "Most 1es 4", row4.getName());
 		assertEquals("The post code should be: 111114", "111114", row4.getPostCode());
 		assertEquals("The address should be: 1-es nem reg cim 4", "1-es nem reg cim 4", row4.getAddress());
 		assertEquals("The phone no should be: 1111111111 4", "1111111111 4", row4.getPhoneNo());
-		assertEquals("The email should be: nemreg1es@mail.com4", "nemreg1es@mail.com4", row4.getEmail());
+		assertEquals("The email should be: nemreg1es4@mail.com", "nemreg1es4@mail.com", row4.getEmail());
 		TrainingExcelDto row5 = rows.get(4);
 		assertEquals("The name should be: ", "Most 1es 5", row5.getName());
 		assertEquals("The post code should be: 111115", "111115", row5.getPostCode());
 		assertEquals("The address should be: 1-es nem reg cim 5", "1-es nem reg cim 5", row5.getAddress());
 		assertEquals("The phone no should be: 1111111111 5", "1111111111 5", row5.getPhoneNo());
-		assertEquals("The email should be: nemreg1es@mail.com5", "nemreg1es@mail.com5", row5.getEmail());
+		assertEquals("The email should be: nemreg1es5@mail.com", "nemreg1es5@mail.com", row5.getEmail());
 	}
 
 	@Test
