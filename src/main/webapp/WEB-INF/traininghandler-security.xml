@@ -25,6 +25,7 @@
 		<intercept-url pattern="/rest/trainingtype/update**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/rest/trainingtype/delete**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/rest/user**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/rest/createUserWithAddress**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/login**" access="hasRole('ROLE_GUEST')" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 		

@@ -102,7 +102,7 @@ public class ImportTrainingController {
 		Date complDate = complDt.toDate();
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
-			Long userId = userService.createUserWithAddress(item, true);
+			Long userId = userService.createUserWithAddress(item);
 			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
 			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
 			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {

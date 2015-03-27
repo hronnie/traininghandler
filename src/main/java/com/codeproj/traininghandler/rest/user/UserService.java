@@ -34,8 +34,8 @@ public class UserService {
 		return createUser(user, false);
 	}
 	
-	@RequestMapping(value="/createUserWithAddress/{isUseBasicFields}", method = RequestMethod.POST,headers="Accept=application/json")
-	public Long createUserWithAddress(@RequestBody TrainingExcelDto item, @PathVariable("isUseBasicFields") boolean isUseBasicFields) throws ValidationException {
+	@RequestMapping(value="/createUserWithAddress", method = RequestMethod.POST,headers="Accept=application/json")
+	public Long createUserWithAddress(@RequestBody TrainingExcelDto item) throws ValidationException {
 		if (item == null) {
 			throw new ValidationException("dto is null");
 		}
@@ -45,18 +45,8 @@ public class UserService {
 		}
 		
 		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
-		GeneralIdResponse userIdResp = createFromForm(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()), isUseBasicFields);
+		GeneralIdResponse userIdResp = createUser(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()), true);
 		return userIdResp.getValue();
-	}
-	
-	public Long getUserIdIfExist(TrainingExcelDto item) {
-        String email = item.getEmail();
-        if (StringUtils.isEmpty(email)) {
-                String cleanedPhoneNo = ThStringUtils.cleanPhoneNumber(item.getPhoneNo());
-                email = cleanedPhoneNo + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
-        }
-        GeneralIdResponse userId = getUserIdByEmail(email);
-        return userId.getValue();
 	}
 	
 	public GeneralIdResponse getUserIdByEmail(String email) {
@@ -66,8 +56,14 @@ public class UserService {
 	
 	// private methods
 
-	private GeneralIdResponse createFromForm(UserDto userDto, boolean isUseBasicFields) throws ValidationException {
-		return createUser(userDto, isUseBasicFields);
+	private Long getUserIdIfExist(TrainingExcelDto item) {
+		String email = item.getEmail();
+		if (StringUtils.isEmpty(email)) {
+			String cleanedPhoneNo = ThStringUtils.cleanPhoneNumber(item.getPhoneNo());
+			email = cleanedPhoneNo + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
+		}
+		GeneralIdResponse userId = getUserIdByEmail(email);
+		return userId.getValue();
 	}
 
 	private GeneralIdResponse createUser(UserDto user, boolean isUseBasicFields)

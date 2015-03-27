@@ -57,7 +57,7 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	    if(!$scope.addOneUserToTrainingForm.$valid) {
 	         return;
 	    }
-		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/user/createUserWithAddress/true');
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/user/createUserWithAddress');
 		saveResource.customPOST($scope.trainingExcelDto).then(function() {
 			$scope.isAddOneUserSuccess = true;
 			$scope.trainingExcelDto = {};
