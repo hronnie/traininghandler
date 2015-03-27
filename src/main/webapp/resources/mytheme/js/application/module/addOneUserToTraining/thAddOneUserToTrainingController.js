@@ -2,6 +2,9 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	$scope.isAddOneUserSuccess = false;
 	$scope.format = 'yyyy-mm-dd';
 	
+	$scope.userId = "";
+	$scope.complatedUserTrainingDto = {};
+	
 	$scope.resetFields = function () {
 		$scope.trainingDateYear = "";
 		$scope.trainingDateMonth = "";
@@ -58,15 +61,33 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	         return;
 	    }
 		var saveUserResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/user/createUserWithAddress');
-		saveUserResource.customPOST($scope.trainingExcelDto).then(function() {
-			$scope.isAddOneUserSuccess = true;
-			$scope.trainingExcelDto = {};
+		saveUserResource.customPOST($scope.trainingExcelDto).then(function(userIdResult) {
 			$scope.validationMsg = "";
-			$scope.validationNeeded = false;
+			$scope.userId = userIdResult;
+			$scope.complatedUserTrainingDto = {
+					userId: $scope.userId,
+					trainingTypeId: $scope.selectedTrainingType.id,
+					completedDate: moment({ year: $scope.trainingDateYear, month: $scope.trainingDateMonth, day: $scope.trainingDateDay}).format()
+			}
+			var saveCompletedTrainingResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/completedTraining/createOne');
+			saveCompletedTrainingResource.customPOST($scope.complatedUserTrainingDto).then(function(complResult) {
+				$scope.isAddOneUserSuccess = true;
+				$scope.trainingExcelDto = {};
+				$scope.validationMsg = "";
+				$scope.validationNeeded = false;
+				if (complResult.value === -1) {
+					$scope.validationMsg = "A megadott tanítványt nem lehetett hozzáadni a tanfolyamhoz, mert még nem végezte el az előfeltételeket.";
+				}
+			}, function() {
+				$scope.validationMsg = "Hiba történt a hozzáadás közben!";
+			});
 		}, function() {
-			validationMsg = "Hiba történt a hozzáadás közben!";
-		}
-		);
+			$scope.validationMsg = "Hiba történt a hozzáadás közben!";
+			return;
+		});
+		
+
+		
 	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
