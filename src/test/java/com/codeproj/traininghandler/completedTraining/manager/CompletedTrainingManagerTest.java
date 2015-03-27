@@ -18,11 +18,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dao.CompletedTrainingDAO;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
+import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
+import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
-import com.mchange.util.AssertException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingManagerTest {
@@ -35,6 +37,11 @@ public class CompletedTrainingManagerTest {
 	public static CompletedUserTraining INVALID_COMPL_TRAINING;
 	public static final Date VALID_DATE;
 	public static Long RESULT_REFERENCE;
+	
+	public static final Long USER_ELIGIBLE = 10L;
+	public static final Long TRAINING_TYPE_ID_ELIGIBLE = 10L;
+	public static final Long USER_NOT_ELIGIBLE = 15L;
+	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
@@ -49,10 +56,14 @@ public class CompletedTrainingManagerTest {
 	@Mock
 	public CompletedTrainingDAO completedTrainingDAO;
 	
+	@Mock
+	public ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager;
+	
 	@Before
 	public void setUp() throws Exception {
 		manager = new CompletedTrainingManager();
 		manager.setCompletedTrainingDAO(completedTrainingDAO);
+		manager.setShowTraineesEligibleForTrainingManager(showTraineesEligibleForTrainingManager);
 		when(completedTrainingDAO.create(VALID_COMPL_TRAINING)).thenReturn(RESULT_REFERENCE);
 	}
 	
@@ -78,5 +89,22 @@ public class CompletedTrainingManagerTest {
 		result_ref.add(1L);
 		when(completedTrainingDAO.getCompletedListByTrainingTypeId(1L)).thenReturn(userIds);
 		assertEquals("Wrong user id list", manager.getUsersWhoCompletedTrainingType(1L), result_ref);
+	}
+	
+	@Test
+	public void testIsUserEligibleToAddTraining() {
+		List<UserDto> hasEmailUsers = new ArrayList<>();
+		UserDto curUsr = new UserDto("anything", "anything", "anything", 3L);
+		curUsr.setUserId(USER_ELIGIBLE);
+		hasEmailUsers.add(curUsr);
+		
+		TraineesEligibleForTrainingDto traineesEligibleForTrainingDto = new TraineesEligibleForTrainingDto(hasEmailUsers, new ArrayList<UserDto>());
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(TRAINING_TYPE_ID_ELIGIBLE)).thenReturn(traineesEligibleForTrainingDto);
+		boolean result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_ELIGIBLE, TRAINING_TYPE_ID_ELIGIBLE, VALID_DATE));
+		assertTrue("User sould be eligible", result);
+		
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(TRAINING_TYPE_ID_NOT_ELIGIBLE)).thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
+		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_DATE));
+		assertFalse("User souldn't be eligible", result);
 	}
 }

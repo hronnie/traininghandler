@@ -28,25 +28,30 @@ public class CompletedTrainingService {
 		CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
 		List<Long> resultValue = new ArrayList<>();
 		for (CompletedUserTrainingDto item : complatedUserTrainingDtoList) {
-			GeneralIdResponse itemResult = createCompletedTraining(item);
+			GeneralIdResponse itemResult = createOne(item);
 			resultValue.add(itemResult.getValue());
 		}
 		return new GeneralIdListResponse(resultValue);
 	}
 	
-	public GeneralIdResponse create(CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException {
-		return createCompletedTraining(complatedUserTrainingDto);
+	@RequestMapping(value="/createOne", method = RequestMethod.POST,headers="Accept=application/json")
+	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException {
+		BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
+		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue() || !isUserEligibleToAddTraining(complatedUserTrainingDto)) {
+			return new GeneralIdResponse(-1L);
+		}
+		Long result = completedTrainingManager.create(complatedUserTrainingDto);
+		return new GeneralIdResponse(result);
 	}
 
 	public BooleanResponse isCompletedTrainingExist(
 			CompletedUserTrainingDto newComplTraining) {
 		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
 	}
-
-	private GeneralIdResponse createCompletedTraining(CompletedUserTrainingDto complatedUserTrainingDto)
-			throws ValidationException {
-		Long result = completedTrainingManager.create(complatedUserTrainingDto);
-		return new GeneralIdResponse(result);
+	
+	private boolean isUserEligibleToAddTraining(
+			CompletedUserTrainingDto complatedUserTrainingDto) {
+		return completedTrainingManager.isUserEligibleToAddTraining(complatedUserTrainingDto);
 	}
 
 	public void setCompletedTrainingManager(

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="User")
 public class UserDto {
+	private Long userId;
 	private String name;
 	private String lastName;
 	private String firstName;
@@ -34,6 +35,11 @@ public class UserDto {
 		this.phoneNo = phoneNo;
 		this.email = email;
 		this.addressId = addressId;
+	}
+	
+	@XmlElement(name="userId")
+	public Long getUserId() {
+		return userId;
 	}
 
 	@XmlElement(name="lastName")
@@ -108,6 +114,10 @@ public class UserDto {
 		this.name = name;
 	}
 
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,6 +133,7 @@ public class UserDto {
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -138,6 +149,13 @@ public class UserDto {
 			return false;
 		}
 		UserDto other = (UserDto) obj;
+		if (userId == null) {
+			if (other.userId != null) {
+				return false;
+			}
+		} else if (!userId.equals(other.userId)) {
+			return false;
+		}
 		if (addressId == null) {
 			if (other.addressId != null) {
 				return false;
@@ -192,7 +210,7 @@ public class UserDto {
 
 	@Override
 	public String toString() {
-		return "UserDto [name=" + name + ", lastName=" + lastName
+		return "UserDto [userId = " + userId + ", name=" + name + ", lastName=" + lastName
 				+ ", firstName=" + firstName + ", displayName=" + displayName
 				+ ", dob=" + dob + ", phoneNo=" + phoneNo + ", email=" + email
 				+ ", addressId=" + addressId + "]";

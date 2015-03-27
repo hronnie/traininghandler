@@ -103,12 +103,7 @@ public class ImportTrainingController {
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
 			Long userId = userService.createUserWithAddress(item);
-			CompletedUserTrainingDto newComplTraining = new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate);
-			BooleanResponse completedUserTrainingCheckResult = completedTrainingService.isCompletedTrainingExist(newComplTraining);
-			if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
-				continue;
-			}
-			completedTrainingService.create(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
+			completedTrainingService.createOne(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
 		}
 		
 		logger.debug("Processing POST request for importTraining page..");

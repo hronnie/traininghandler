@@ -12,7 +12,6 @@ import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
 import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
-import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
 import com.codeproj.traininghandler.util.ThStringUtils;
 
@@ -64,6 +63,7 @@ public class ShowTraineesEligibleForTrainingManager {
 
 	private UserDto convertUserToDto(User item) {
 		UserDto result = new UserDto();
+		result.setUserId(item.getUserId());
 		result.setName(item.getName());
 		result.setEmail(item.getEmail());
 		result.setPhoneNo(item.getMobileNo());

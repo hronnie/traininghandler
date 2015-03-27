@@ -21,7 +21,6 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
-import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -90,7 +89,9 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		when(completedTrainingManager.getUsersWhoCompletedTrainingType(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_COMPL_USER_LIST);
 		
 		UserDto hasEmailUser = new UserDto(TEST_NAME1, PHONE_NO, VALID_EMAIL, null);
+		hasEmailUser.setUserId(1L);
 		UserDto onlyPhoneUser = new UserDto(TEST_NAME1, PHONE_NO, PHONE_EMAIL, null);
+		onlyPhoneUser.setUserId(2L);
 		
 		List<UserDto> hasEmailUserList = new ArrayList<>();
 		hasEmailUserList.add(hasEmailUser);

@@ -2,6 +2,7 @@ package com.codeproj.traininghandler.rest.completedTraining;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingServiceTest {
@@ -31,6 +33,12 @@ public class CompletedTrainingServiceTest {
 	public static final CompletedUserTrainingDto VALID_COMPLETED_TRAINING;
 	public static final CompletedUserTrainingDto VALID_COMPLETED_TRAINING_DONT_EXIST;
 	public static final List<CompletedUserTrainingDto> VALID_COMPLETED_TRAINING_LIST;
+	
+	public static final Long USER_ID_EXIST = 10L;
+	public static final Long TRAINING_TYPE_ID_EXIST = 10L;
+	
+	public static final Long USER_ID_NOT_ELIGIBLE = 15L;
+	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
 	@Mock
 	public CompletedTrainingManager manager;
@@ -124,6 +132,22 @@ public class CompletedTrainingServiceTest {
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
 		service.create(complatedUserTrainingDtoList);
+	}
+	
+	// createOne
+	
+	@Test public void testCreateOneAlreadyExist() throws ValidationException {
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_EXIST, TRAINING_TYPE_ID_EXIST, VALID_COMPLETED_DATE);
+		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertEquals("This record already exist so id should be -1", new Long(-1L), result.getValue());
+	}
+	
+	@Test public void testCreateOneUserNotEligible() throws ValidationException {
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE);
+		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertEquals("This record already exist so id should be -1", new Long(-1L), result.getValue());
 	}
 
 }
