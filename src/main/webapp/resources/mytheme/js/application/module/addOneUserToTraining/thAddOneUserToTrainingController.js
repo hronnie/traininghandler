@@ -71,12 +71,13 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 			}
 			var saveCompletedTrainingResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/completedTraining/createOne');
 			saveCompletedTrainingResource.customPOST($scope.complatedUserTrainingDto).then(function(complResult) {
-				$scope.isAddOneUserSuccess = true;
 				$scope.trainingExcelDto = {};
 				$scope.validationMsg = "";
 				$scope.validationNeeded = false;
 				if (complResult.value === -1) {
 					$scope.validationMsg = "A megadott tanítványt nem lehetett hozzáadni a tanfolyamhoz, mert még nem végezte el az előfeltételeket.";
+				} else {
+					$scope.isAddOneUserSuccess = true;
 				}
 			}, function() {
 				$scope.validationMsg = "Hiba történt a hozzáadás közben!";
