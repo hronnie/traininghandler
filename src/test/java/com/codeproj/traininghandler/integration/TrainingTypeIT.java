@@ -53,7 +53,7 @@ public class TrainingTypeIT extends GenericAPITest {
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
 

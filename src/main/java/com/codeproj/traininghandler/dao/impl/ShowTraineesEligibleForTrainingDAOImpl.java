@@ -36,19 +36,18 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 	public List<TrainingPrerequisite> getPrerequisitesByTrainingId(
 			Long trainingTypeId) {
 		Session session = null;
-		List obj = null;
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(TrainingPrerequisite.class);
 			criteria.add(Restrictions.eq("dependentTrainingTypeId", trainingTypeId));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			obj = criteria.list();
 			return (List<TrainingPrerequisite>)criteria.list();
 		} finally {
 			session.close();
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<User> getEligibleTrainees(

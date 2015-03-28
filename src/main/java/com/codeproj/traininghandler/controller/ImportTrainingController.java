@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.rest.address.AddressService;
-import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.Constants;

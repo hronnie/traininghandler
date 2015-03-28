@@ -14,7 +14,6 @@ import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.address.AddressManager;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
-import com.mchange.util.AssertException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddressServiceTest {

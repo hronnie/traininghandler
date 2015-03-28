@@ -21,7 +21,6 @@ import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.util.Constants;
-import com.mchange.util.AssertException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
