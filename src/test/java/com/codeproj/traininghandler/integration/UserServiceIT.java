@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.codeproj.traininghandler.common.GenericAPITest;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
-import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 public class UserServiceIT extends GenericAPITest {

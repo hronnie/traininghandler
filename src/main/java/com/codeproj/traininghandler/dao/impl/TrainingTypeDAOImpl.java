@@ -57,7 +57,6 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<TrainingType> getAll() {
