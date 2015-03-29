@@ -20,17 +20,17 @@ public class UserServiceIT extends GenericAPITest {
 		restTemplate = new RestTemplate();
 	}
 	
-	@Test()
-	public void testCreate() {
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started creating User");
-        restTemplate = new RestTemplate();
-        UserDto userDto = new UserDto(getResource("userService.user.name"), getResource("userService.user.phoneNo"), getResource("userService.user.email"), new Long(getResource("userService.user.addressId")));
-
-        GeneralIdResponse response = restTemplate.postForObject(getResource("userService.create.url"), userDto, GeneralIdResponse.class);
-
-        Assert.assertTrue(validateGenerateIdResponse(response), "Create wasn't successful");
-        Logger.getLogger(UserServiceIT.class.getName()).log(Level.INFO, "Finished create user" + response.toString());
-	}
+	//@Test()
+//	public void testCreate() {
+//        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started creating User");
+//        restTemplate = new RestTemplate();
+//        UserDto userDto = new UserDto(getResource("userService.user.name"), getResource("userService.user.phoneNo"), getResource("userService.user.email"), new Long(getResource("userService.user.addressId")));
+//
+//        GeneralIdResponse response = restTemplate.postForObject(getResource("userService.create.url"), userDto, GeneralIdResponse.class);
+//
+//        Assert.assertTrue(validateGenerateIdResponse(response), "Create wasn't successful");
+//        Logger.getLogger(UserServiceIT.class.getName()).log(Level.INFO, "Finished create user" + response.toString());
+//	}
 	
 	@Test()
 	public void testCreateUserWithAddress() {

@@ -1,7 +1,6 @@
 package com.codeproj.traininghandler.integration;
 
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -18,6 +17,8 @@ import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 public class TrainingTypeIT extends GenericAPITest {
 	
 	RestTemplate restTemplate = null;
+	
+	public static final Long TEST_GET_TRAINING_TYPE_ID = 1L;
 	
 	public TrainingTypeIT(String name) {
 		super(name);
@@ -43,21 +44,20 @@ public class TrainingTypeIT extends GenericAPITest {
 	public void testGetTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting Training type");
         
-        TrainingTypeDto trainingType = restTemplate.getForObject(getResource("trainingType.get.url") + createdId, TrainingTypeDto.class);
+        TrainingTypeDto trainingType = restTemplate.getForObject(getResource("trainingType.get.url") + TEST_GET_TRAINING_TYPE_ID, TrainingTypeDto.class);
 
-		Assert.assertEquals(trainingType.getTrainingTypeId(), createdId);
-		Assert.assertEquals(trainingType.getName(), getResource("trainingtype.create.name"));
-		Assert.assertEquals(trainingType.getLevelNo(), getResource("trainingtype.create.levelNo"));
-		Assert.assertEquals(trainingType.getDescription(), getResource("trainingtype.create.description"));
+		Assert.assertEquals(trainingType.getTrainingTypeId(), TEST_GET_TRAINING_TYPE_ID);
+		Assert.assertEquals(trainingType.getName(), getResource("trainingtype.get.name"));
+		Assert.assertEquals(trainingType.getLevelNo(), getResource("trainingtype.get.levelNo"));
+		Assert.assertEquals(trainingType.getDescription(), "");
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + trainingType.toString());
 	}
 	
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
 
-		List<LinkedHashMap> trainingTypeList = restTemplate.getForObject(getResource("trainingType.get.all.url"), List.class);
+		List<TrainingTypeDto> trainingTypeList = restTemplate.getForObject(getResource("trainingType.get.all.url"), List.class);
         assertNotNull("The result is null", trainingTypeList);
         assertTrue("The size of the list should be greater then 0", trainingTypeList.size() > 0);
  
@@ -90,20 +90,20 @@ public class TrainingTypeIT extends GenericAPITest {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testUpdateTrainingType" + getTrainingTypeResp.toString());
     }
 	
-	@Test(dependsOnMethods = { "testUpdateTrainingType" })
-	public void testDeleteTrainingType() {
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started deleting Training type");
-        
-        TrainingTypeDto trainingType = new TrainingTypeDto(createdId, null, null, null);
-        BooleanResponse response = restTemplate.postForObject(getResource("trainingType.delete.url"), trainingType, BooleanResponse.class);
-        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Delete wasn't successful");
-
-        // get updated training type and assert
-        
-        Assert.assertTrue(confirmObjectNotFound(getRequestReturnTextResponse("trainingType.get.url", true, createdId.toString())), "Object still found after delete");
-        
-        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testDeleteTrainingType");
-
-	}
+//	@Test(dependsOnMethods = { "testUpdateTrainingType" })
+//	public void testDeleteTrainingType() {
+//        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started deleting Training type");
+//        
+//        TrainingTypeDto trainingType = new TrainingTypeDto(createdId, null, null, null);
+//        BooleanResponse response = restTemplate.postForObject(getResource("trainingType.delete.url"), trainingType, BooleanResponse.class);
+//        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Delete wasn't successful");
+//
+//        // get updated training type and assert
+//        
+//        Assert.assertTrue(confirmObjectNotFound(getRequestReturnTextResponse("trainingType.get.url", true, createdId.toString())), "Object still found after delete");
+//        
+//        Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testDeleteTrainingType");
+//
+//	}
 
 }

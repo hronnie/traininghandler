@@ -5,7 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TrainingTypeIT.class, GatherTraineeInfoIT.class, ShowEligibleUsersIT.class })
+@SuiteClasses({ 
+	TrainingTypeIT.class, 
+	ShowEligibleUsersIT.class,
+	UserServiceIT.class})
 public class AllTests {
 
 }
