@@ -20,5 +20,6 @@
 	
 		<script src="<c:url value="/resources/js/application/help/classie.js" />"></script>
 		<script src="<c:url value="/resources/js/application/help/door_overlay.js" />"></script>
+		
 </body>
 </html>

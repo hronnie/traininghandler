@@ -39,6 +39,7 @@
 <link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/linkStyles.css" />" rel="stylesheet" />
+<link href="<c:url value="/resources/style/menu.css" />" rel="stylesheet" />
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="username" />
@@ -65,9 +66,12 @@ $(document).ready(function() {
 <input type="hidden" id="localeValue" value="${pageContext.response.locale}">
 	<div id="wrapper">
 		
+		
 		<div id="header" align="right">
 		
 			<header data-scroll-header="" role="banner" class="header header--page" id="js-header">
+<!-- 				menu -->
+				<jsp:include page="/WEB-INF/pages/layout/menu.jsp" />
 			    
 				<c:if test="${!isPublicPage && isNotMainPage}">
 					<span class="splitter">|</span>
