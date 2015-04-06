@@ -39,7 +39,6 @@
 <link href="<c:url value="/resources/style/help.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/grid.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/style/linkStyles.css" />" rel="stylesheet" />
-<link href="<c:url value="/resources/style/menu.css" />" rel="stylesheet" />
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="username" />
@@ -64,6 +63,61 @@ $(document).ready(function() {
 </head>
 <body>
 <input type="hidden" id="localeValue" value="${pageContext.response.locale}">
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="index.button.manage.trainings" /> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href='<c:url value="/manageTraining/importTraining" />'><spring:message code="manageTraining.button.importTraining" /></a></li>
+            <li><a href='<c:url value="/manageTraining/addOneUserToTraining" />'><spring:message code="manageTraining.button.addOneUserToTraining" /></a></li>
+            <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />''><spring:message code="manageTraining.button.showEligibleTrainees" /></a></li>
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="index.button.manage.training.types" /> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href='<c:url value="/trainingType" />'>Szerkesztés</a></li>
+            <li class="divider"></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+
+
+
+
 	<div id="wrapper">
 		
 		
@@ -71,7 +125,6 @@ $(document).ready(function() {
 		
 			<header data-scroll-header="" role="banner" class="header header--page" id="js-header">
 <!-- 				menu -->
-				<jsp:include page="/WEB-INF/pages/layout/menu.jsp" />
 			    
 				<c:if test="${!isPublicPage && isNotMainPage}">
 					<span class="splitter">|</span>

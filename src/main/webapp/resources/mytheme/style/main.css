@@ -152,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2em;
 }
 
-a.headerLink {
+.navbar-nav>li>a.headerLink {
 	color: #FCF5E3;
 	font-size: 14px;
 	font-family: "Futura W01 Bold";
@@ -423,4 +423,12 @@ img.errorImg {
 
 .validationMsg {
 	color: red;
+}
+
+.navbar {
+		line-height: 50px;
+	/*background: #c93312 url(../images/texture.png) repeat;*/
+	background: none repeat scroll 0 0 #404d5b;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	width: 100%;
 }
