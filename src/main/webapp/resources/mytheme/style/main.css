@@ -154,17 +154,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-nav>li>a.headerLink {
 	color: #FCF5E3;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: "Futura W01 Bold";
 	font-weight: 400;
 	letter-spacing: 0.04em;
 	text-decoration: none;
 }
 
-a:hover.headerLink {
+.navbar-nav>li>a:hover.headerLink {
 	color: #000066;
 	background: #FCF5E3;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: "Futura W01 Bold";
 	font-weight: 400;
 	letter-spacing: 0.04em;

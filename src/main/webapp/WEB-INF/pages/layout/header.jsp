@@ -65,19 +65,20 @@ $(document).ready(function() {
 <input type="hidden" id="localeValue" value="${pageContext.response.locale}">
 
 
-
+	<div id="wrapper">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#"><spring:message code="mainMenu.home" /></a></li>
+        <li><a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.training.root" /> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href='<c:url value="/manageTraining/importTraining" />'><spring:message code="mainMenu.training.importTraining" /></a></li>
             <li><a href='<c:url value="/manageTraining/addOneUserToTraining" />'><spring:message code="mainMenu.training.addOneUserToTraining" /></a></li>
+            <li class="divider"></li>
             <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />'><spring:message code="mainMenu.training.showEligibleTrainees" /></a></li>
           </ul>
         </li>
@@ -86,36 +87,17 @@ $(document).ready(function() {
           <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.settings.root" /> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href='<c:url value="/trainingType" />'><spring:message code="mainMenu.settings.trainingType.edit" /></a></li>
-            <li class="divider"></li>
           </ul>
         </li>
       </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <c:if test="${!isPublicPage}">
-	        <li>
-				<span class="splitter">|</span>
-	            <a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a>
-	        </li>
-        </c:if>
-        <li>
-	        <span class="splitter">|</span>
-	        <a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId"><a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId">Angol</a></a>
-	    </li>
-        <li>
-	        <span class="splitter">|</span>
-	        <a href="#" class="headerLink">${username}</a>
-        </li>
-        <li>
-	        <span class="splitter">|</span>
-	        <a href="<c:url value="/logout" />" class="headerLink"><spring:message code="mainMenu.logout" /></a>
-        </li>
-        <li>
-	        <span class="splitter">|</span>
-	        <a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a>
-        </li>
-
+      
+       <ul class="nav navbar-nav navbar-right">
+        <li><a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId">Angol</a></li>     
+        <li><a href="#" class="headerLink">${username}</a></li>
+        <li><a href="<c:url value="/logout" />" class="headerLink"><spring:message code="mainMenu.logout" /></a></li>
+        <li><a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a></li>
       </ul>
+      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -127,7 +109,7 @@ $(document).ready(function() {
 
 
 
-	<div id="wrapper">
+
 		
 		
 

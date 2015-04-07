@@ -13,14 +13,11 @@
 		support = { transitions : Modernizr.csstransitions };
 
 	function toggleOverlay() {
-		var contentDiv = document.getElementById("content");
-		var headerDiv = document.getElementById("header");
+		var contentDiv = document.getElementById("wrapper");
         if (contentDiv.style.visibility == "hidden") {
             contentDiv.style.visibility = "";
-            headerDiv.style.visibility = "";
         } else {
             contentDiv.style.visibility = "hidden";
-            headerDiv.style.visibility = "hidden";
         }
 		if( classie.has( overlay, 'open' ) ) {
 			classie.remove( overlay, 'open' );
