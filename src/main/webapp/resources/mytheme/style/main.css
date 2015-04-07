@@ -417,6 +417,11 @@ img.errorImg {
 	height: auto;
 }
 
+img.homeImg {
+	width: 400px;
+	height: auto;
+}
+
 .excelLink {
 	margin-top: 25px;
 }
