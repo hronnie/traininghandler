@@ -118,6 +118,18 @@ h1, h2, h3, h4, h5, h6 {
 		format("svg")
 }
 
+@font-face {
+	font-family: 'linecons';
+	src: url('../fonts/linecons/linecons.eot');
+	src: url('../fonts/linecons/linecons.eot?#iefix')
+		format('embedded-opentype'), url('../fonts/linecons/linecons.woff')
+		format('woff'), url('../fonts/linecons/linecons.ttf')
+		format('truetype'), url('../fonts/linecons/linecons.svg#linecons')
+		format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .header--page {
 	line-height: 50px;
 	/*background: #c93312 url(../images/texture.png) repeat;*/
@@ -152,23 +164,24 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2em;
 }
 
+.navbar-nav>li>a.headerLink, .navbar-nav>li>a:hover.headerLink {
+	font-size: 16px;
+    font-family: 'linecons';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+	text-decoration: none;
+}
+
 .navbar-nav>li>a.headerLink {
 	color: #FCF5E3;
-	font-size: 16px;
-	font-family: "Futura W01 Bold";
-	font-weight: 400;
-	letter-spacing: 0.04em;
-	text-decoration: none;
 }
 
 .navbar-nav>li>a:hover.headerLink {
 	color: #000066;
 	background: #FCF5E3;
-	font-size: 16px;
-	font-family: "Futura W01 Bold";
-	font-weight: 400;
-	letter-spacing: 0.04em;
-	text-decoration: none;
 }
 
 .splitter {
@@ -177,14 +190,6 @@ h1, h2, h3, h4, h5, h6 {
 	color: #FCF5E3;
 	font-size: 14px;
 	font-family: "Futura W01 Bold";
-}
-
-a {
-	
-}
-
-a:active, a:hover {
-	
 }
 
 .mainButton {
@@ -247,11 +252,11 @@ input {
 }
 
 #wrapper input:not ([type="checkbox"] ) {
-	border: 1px solid rgb(178, 178, 178);
-	border-radius: 3px;
-	box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
-	margin-top: 4px;
-	transition: all 0.2s linear 0s;
+       border: 1px solid rgb(178, 178, 178);
+       border-radius: 3px;
+       box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
+       margin-top: 4px;
+       transition: all 0.2s linear 0s;
 }
 
 .gridInputPersonalData {
@@ -270,8 +275,8 @@ input {
 }
 
 .formStyle input ([type="text"] ) {
-	width: 405px;
-	height: 17px;
+       width: 405px;
+       height: 17px;
 }
 
 .ss-style-dots:before {
@@ -377,9 +382,9 @@ input[type="text"].w-5, input[type="date"].w-5, input[type="datetime"].w-5,
 	
 }
 
-.form-horizontal .control-label{
-  /* text-align:right; */
-  text-align:left;
+.form-horizontal .control-label {
+	/* text-align:right; */
+	text-align: left;
 }
 
 .control-group {
@@ -390,26 +395,25 @@ textarea.custom-textbox {
 	margin-top: 25px;
 	margin-bottom: 25px;
 	width: 650px;
-	height: 200px; 
+	height: 200px;
 }
 
-#over
-{
-    position:absolute;
-    width:100%;
-    height:100%;
-    text-align: center;
+#over {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
 }
-.centerer
-{
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
+
+.centerer {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }
-.centered
-{
-    display: inline-block;
-    vertical-align: top;
+
+.centered {
+	display: inline-block;
+	vertical-align: top;
 }
 
 img.errorImg {
@@ -431,9 +435,24 @@ img.homeImg {
 }
 
 .navbar {
-		line-height: 50px;
 	/*background: #c93312 url(../images/texture.png) repeat;*/
 	background: none repeat scroll 0 0 #404d5b;
-	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	/*border-bottom: 1px solid rgba(0, 0, 0, .1);*/
 	width: 100%;
+}
+
+.navbar-xs {
+	min-height: 45px;
+	height: 45px;
+}
+
+.navbar-xs .navbar-brand {
+	padding: 0px 12px;
+	font-size: 16px;
+	line-height: 28px;
+}
+
+.navbar-xs .navbar-nav>li>a {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }

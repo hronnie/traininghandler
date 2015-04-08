@@ -67,7 +67,7 @@ $(document).ready(function() {
 
 	<div id="wrapper">
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-xs">
   <div class="container-fluid">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
