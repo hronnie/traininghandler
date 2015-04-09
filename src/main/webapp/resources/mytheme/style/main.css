@@ -175,6 +175,10 @@ h1, h2, h3, h4, h5, h6 {
 	text-decoration: none;
 }
 
+.navbar-nav>li>a.headerLinkIcon, .navbar-nav>li>a:hover.headerLinkIcon {
+	margin-bottom: 10px;
+}
+
 .navbar-nav>li>a.headerLink {
 	color: #FCF5E3;
 }
