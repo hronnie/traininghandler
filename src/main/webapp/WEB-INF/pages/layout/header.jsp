@@ -72,7 +72,7 @@ $(document).ready(function() {
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="${homeUrl}" class="headerLink headerLinkIcon" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
+        <li class="headerLinkIcon"><a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.training.root" /> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -95,23 +95,11 @@ $(document).ready(function() {
         <li><a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId">Angol</a></li>     
         <li><a href="#" class="headerLink">${username}</a></li>
         <li><a href="<c:url value="/logout" />" class="headerLink"><spring:message code="mainMenu.logout" /></a></li>
-        <li><a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a></li>
+        <li class="headerLinkIcon"><a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a></li>
       </ul>
       
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-
-
-
-
-
-
-
-
-		
-		
-
 		
 		<div id="content" >
