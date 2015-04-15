@@ -82,6 +82,12 @@ $(document).ready(function() {
             <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />'><spring:message code="mainMenu.training.showEligibleTrainees" /></a></li>
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.trainees.root" /> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href='<c:url value="/listAndEditTrainees" />'><spring:message code="mainMenu.trainees.listAndEditTrainees" /></a></li>
+          </ul>
+        </li>
         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.settings.root" /> <span class="caret"></span></a>

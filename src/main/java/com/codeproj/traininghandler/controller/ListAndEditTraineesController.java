@@ -10,19 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/trainingType")
-public class TrainingTypeController {
-	private static final Logger logger = Logger.getLogger(TrainingTypeController.class);
+@RequestMapping("/listAndEditTrainees")
+public class ListAndEditTraineesController {
+	private static final Logger logger = Logger.getLogger(ListAndEditTraineesController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
-		ModelAndView mav = new ModelAndView("trainingType");
-		mav.addObject("isNotMainPage", new Boolean(true));
+		ModelAndView mav = new ModelAndView("listAndEditTrainees");
 		mav.addObject("isPublicPage", new Boolean(false));
-		mav.addObject("backUrl", "/");
-		logger.debug("Going to trainingType page..");
+		logger.debug("Going to listAndEditTrainees page..");
 		return mav;
 	}
+
 }
