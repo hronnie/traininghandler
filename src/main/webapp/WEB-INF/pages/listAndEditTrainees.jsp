@@ -8,13 +8,13 @@
 
 	<title><spring:message code="listAndEditTrainees.main.title" /></title>
 	<script	src="<c:url value="/resources/js/application/module/listAndEditTrainees/thListAndEditTraineesModule.js" />"></script>
-	<script	src="<c:url value="/resources/js/application/module/listAndEditTrainees/thistAndEditTraineesController.js" />"></script>
+	<script	src="<c:url value="/resources/js/application/module/listAndEditTrainees/thListAndEditTraineesController.js" />"></script>
 
 
 	</head>
 	<body ng-app="listAndEditTraineesModule">
 		<h4 class="gridMainTitle"><spring:message code="listAndEditTrainees.main.title" /></h4>
-		<div ng-controller="thListAndEditTraineesController as laetCtrl">
+		<div ng-controller="listAndEditTraineesController as laetCtrl">
 		<div ng-show="isEditSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
 			<spring:message code="listAndEditTrainees.edit.success.message" />

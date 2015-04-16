@@ -1,4 +1,4 @@
-trainingTypeModule.controller('thTrainingTypeController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants) {
+listAndEditTraineesModule.controller('listAndEditTraineesController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
 	$scope.isEditSuccess = false;
