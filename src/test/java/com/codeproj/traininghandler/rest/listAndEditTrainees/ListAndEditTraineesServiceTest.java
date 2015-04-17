@@ -27,13 +27,14 @@ public class ListAndEditTraineesServiceTest {
 	static final String TEST_COMPLETED_TRAINING = "1st training";
 	
 	static {
-		TRAINEE_DTO = new TraineeDto("Test name", "RG1 444", "18 Test road, London", "09034-34343434", "test@example.com");
-		COMPLETED_TRAINING_LIST = new ArrayList<>();
-		COMPLETED_TRAINING_LIST.add(TEST_COMPLETED_TRAINING);
+ 		COMPLETED_TRAINING_LIST = new ArrayList<>();
+ 		COMPLETED_TRAINING_LIST.add(TEST_COMPLETED_TRAINING);
+ 		TRAINEE_DTO = new TraineeDto("Test Name", "EC12 7LB", "12 Test Street, London", "2323-2323/23", "mail@example.com", 1L, 2L, COMPLETED_TRAINING_LIST);
 		TRAINEE_DTO.setCompletedTrainings(COMPLETED_TRAINING_LIST);
-		TRAINEE_LIST = new ArrayList<>();
-		TRAINEE_LIST.add(TRAINEE_DTO);
-		TRAINEE_DTOS = new TraineeDtos(TRAINEE_LIST);
+ 		TRAINEE_LIST = new ArrayList<>();
+ 		TRAINEE_LIST.add(TRAINEE_DTO);
+ 		TRAINEE_DTOS = new TraineeDtos(TRAINEE_LIST);
+
 	}
 	
 	@Mock

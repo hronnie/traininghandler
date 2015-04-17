@@ -12,6 +12,8 @@ public class TraineeDto {
 	private String address;
 	private String phone;
 	private String email;
+	private Long userId;
+	private Long addressId;
 	private List<String> completedTrainings;
 	
 	public TraineeDto() {
@@ -19,12 +21,16 @@ public class TraineeDto {
 	}
 
 	public TraineeDto(String name, String postCode, String address,
-			String phone, String email) {
+			String phone, String email, Long userId, Long addressId,
+			List<String> completedTrainings) {
 		this.name = name;
 		this.postCode = postCode;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
+		this.userId = userId;
+		this.addressId = addressId;
+		this.completedTrainings = completedTrainings;
 	}
 
 	@XmlElement(name="name")
@@ -52,6 +58,16 @@ public class TraineeDto {
 		return email;
 	}
 
+	@XmlElement(name="userId")
+	public Long getUserId() {
+		return userId;
+	}
+
+	@XmlElement(name="addressId")
+	public Long getAddressId() {
+		return addressId;
+	}
+
 	@XmlElement(name="completedTraings")
 	public List<String> getCompletedTrainings() {
 		return completedTrainings;
@@ -77,6 +93,14 @@ public class TraineeDto {
 		this.email = email;
 	}
 	
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+	
 	public void setCompletedTrainings(List<String> completedTrainings) {
 		this.completedTrainings = completedTrainings;
 	}
@@ -86,6 +110,8 @@ public class TraineeDto {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime
 				* result
 				+ ((completedTrainings == null) ? 0 : completedTrainings
@@ -95,63 +121,59 @@ public class TraineeDto {
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result
 				+ ((postCode == null) ? 0 : postCode.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof TraineeDto)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		TraineeDto other = (TraineeDto) obj;
 		if (address == null) {
-			if (other.address != null) {
+			if (other.address != null)
 				return false;
-			}
-		} else if (!address.equals(other.address)) {
+		} else if (!address.equals(other.address))
 			return false;
-		}
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
 		if (completedTrainings == null) {
-			if (other.completedTrainings != null) {
+			if (other.completedTrainings != null)
 				return false;
-			}
-		} else if (!completedTrainings.equals(other.completedTrainings)) {
+		} else if (!completedTrainings.equals(other.completedTrainings))
 			return false;
-		}
 		if (email == null) {
-			if (other.email != null) {
+			if (other.email != null)
 				return false;
-			}
-		} else if (!email.equals(other.email)) {
+		} else if (!email.equals(other.email))
 			return false;
-		}
 		if (name == null) {
-			if (other.name != null) {
+			if (other.name != null)
 				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!name.equals(other.name))
 			return false;
-		}
 		if (phone == null) {
-			if (other.phone != null) {
+			if (other.phone != null)
 				return false;
-			}
-		} else if (!phone.equals(other.phone)) {
+		} else if (!phone.equals(other.phone))
 			return false;
-		}
 		if (postCode == null) {
-			if (other.postCode != null) {
+			if (other.postCode != null)
 				return false;
-			}
-		} else if (!postCode.equals(other.postCode)) {
+		} else if (!postCode.equals(other.postCode))
 			return false;
-		}
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		return true;
 	}
 
@@ -159,6 +181,7 @@ public class TraineeDto {
 	public String toString() {
 		return "TraineeDto [name=" + name + ", postCode=" + postCode
 				+ ", address=" + address + ", phone=" + phone + ", email="
-				+ email + ", completedTrainings=" + completedTrainings + "]";
+				+ email + ", userId=" + userId + ", addressId=" + addressId
+				+ ", completedTrainings=" + completedTrainings + "]";
 	}
 }
