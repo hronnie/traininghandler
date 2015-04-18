@@ -54,6 +54,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CompletedUserTraining> getCompletedListByTrainingTypeId(
 			Long trainingTypeId) {

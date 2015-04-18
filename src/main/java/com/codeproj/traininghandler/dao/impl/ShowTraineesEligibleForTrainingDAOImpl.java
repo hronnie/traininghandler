@@ -30,6 +30,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		// empty constructor
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<TrainingPrerequisite> getPrerequisitesByTrainingId(
@@ -46,6 +47,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<User> getEligibleTrainees(
