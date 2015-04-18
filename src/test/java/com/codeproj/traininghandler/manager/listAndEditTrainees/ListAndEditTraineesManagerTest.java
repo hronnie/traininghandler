@@ -21,14 +21,9 @@ public class ListAndEditTraineesManagerTest {
 	ListAndEditTraineesManager manager;
 	static final TraineeDto TRAINEE_DTO;
 	static final List<TraineeDto> TRAINEE_LIST;
-	static final List<String> COMPLETED_TRAINING_LIST;
-	static final String TEST_COMPLETED_TRAINING = "1st training";
 
 	static {
- 		COMPLETED_TRAINING_LIST = new ArrayList<>();
- 		COMPLETED_TRAINING_LIST.add(TEST_COMPLETED_TRAINING);
- 		TRAINEE_DTO = new TraineeDto("Test Name", "EC12 7LB", "12 Test Street, London", "2323-2323/23", "mail@example.com", 1L, 2L, COMPLETED_TRAINING_LIST);
-		TRAINEE_DTO.setCompletedTrainings(COMPLETED_TRAINING_LIST);
+ 		TRAINEE_DTO = new TraineeDto("Test Name", "EC12 7LB", "12 Test Street, London", "2323-2323/23", "mail@example.com", 1L, 2L, "1st training");
  		TRAINEE_LIST = new ArrayList<>();
  		TRAINEE_LIST.add(TRAINEE_DTO);
 	}
@@ -56,9 +51,8 @@ public class ListAndEditTraineesManagerTest {
 		assertEquals("Email doesn't match", TRAINEE_DTO.getEmail(), resultTrainee.getEmail());
 		assertEquals("User id doesn't match", TRAINEE_DTO.getUserId(), resultTrainee.getUserId());
 		assertEquals("Address id doesn't match", TRAINEE_DTO.getAddressId(), resultTrainee.getAddressId());
+		assertEquals("The content of the completed list is not correct", TRAINEE_DTO.getCompletedTrainings(), resultTrainee.getCompletedTrainings());
 		assertNotNull("Completed training list shouldn't be null", resultTrainee.getCompletedTrainings());
 		assertFalse("Completed training list shouldn't be empty", resultTrainee.getCompletedTrainings().isEmpty());
-		assertTrue("Completed training list shouldn't be empty", resultTrainee.getCompletedTrainings().size() == 1);
-		assertEquals("The content of the completed list is not correct", TEST_COMPLETED_TRAINING, resultTrainee.getCompletedTrainings().get(0));
 	}
 }

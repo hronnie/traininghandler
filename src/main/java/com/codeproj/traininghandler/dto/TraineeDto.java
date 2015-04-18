@@ -1,20 +1,18 @@
 package com.codeproj.traininghandler.dto;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Trainee")
 public class TraineeDto {
+	private Long userId;
+	private Long addressId;
 	private String name;
 	private String postCode;
 	private String address;
 	private String phone;
 	private String email;
-	private Long userId;
-	private Long addressId;
-	private List<String> completedTrainings;
+	private String completedTrainings;
 	
 	public TraineeDto() {
 		// empty constructor
@@ -22,7 +20,7 @@ public class TraineeDto {
 
 	public TraineeDto(String name, String postCode, String address,
 			String phone, String email, Long userId, Long addressId,
-			List<String> completedTrainings) {
+			String completedTrainings) {
 		this.name = name;
 		this.postCode = postCode;
 		this.address = address;
@@ -69,7 +67,7 @@ public class TraineeDto {
 	}
 
 	@XmlElement(name="completedTraings")
-	public List<String> getCompletedTrainings() {
+	public String getCompletedTrainings() {
 		return completedTrainings;
 	}
 
@@ -101,7 +99,7 @@ public class TraineeDto {
 		this.addressId = addressId;
 	}
 	
-	public void setCompletedTrainings(List<String> completedTrainings) {
+	public void setCompletedTrainings(String completedTrainings) {
 		this.completedTrainings = completedTrainings;
 	}
 

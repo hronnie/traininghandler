@@ -50,7 +50,7 @@
 	</bean>
 	
 	<bean id="listAndEditTraineesService"
-		class="com.codeproj.traininghandler.rest.showEligibles.ShowTraineesEligibleForTrainingService">
+		class="com.codeproj.traininghandler.rest.listAndEditTrainees.ListAndEditTraineesService">
 		<property name="listAndEditTraineesManager" ref="listAndEditTraineesManager" />
 	</bean>
 
