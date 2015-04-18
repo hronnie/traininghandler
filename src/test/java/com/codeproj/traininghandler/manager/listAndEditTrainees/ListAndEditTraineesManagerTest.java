@@ -1,4 +1,4 @@
-package com.codeproj.traininghandler.rest.listAndEditTrainees;
+package com.codeproj.traininghandler.manager.listAndEditTrainees;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -12,20 +12,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.codeproj.traininghandler.dao.ListAndEditTraineesDAO;
 import com.codeproj.traininghandler.dto.TraineeDto;
-import com.codeproj.traininghandler.dto.TraineeDtos;
-import com.codeproj.traininghandler.manager.listAndEditTrainees.ListAndEditTraineesManager;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ListAndEditTraineesServiceTest {
+public class ListAndEditTraineesManagerTest {
 	
-	ListAndEditTraineesService service;
-	static final TraineeDtos TRAINEE_DTOS;
+	ListAndEditTraineesManager manager;
 	static final TraineeDto TRAINEE_DTO;
 	static final List<TraineeDto> TRAINEE_LIST;
 	static final List<String> COMPLETED_TRAINING_LIST;
 	static final String TEST_COMPLETED_TRAINING = "1st training";
-	
+
 	static {
  		COMPLETED_TRAINING_LIST = new ArrayList<>();
  		COMPLETED_TRAINING_LIST.add(TEST_COMPLETED_TRAINING);
@@ -33,26 +31,24 @@ public class ListAndEditTraineesServiceTest {
 		TRAINEE_DTO.setCompletedTrainings(COMPLETED_TRAINING_LIST);
  		TRAINEE_LIST = new ArrayList<>();
  		TRAINEE_LIST.add(TRAINEE_DTO);
- 		TRAINEE_DTOS = new TraineeDtos(TRAINEE_LIST);
 	}
 	
 	@Mock
-	ListAndEditTraineesManager manager; 
+	public ListAndEditTraineesDAO listAndEditTraineesDAO;
 	
 	@Before
 	public void setUp() {
-		service = new ListAndEditTraineesService();
-		service.setListAndEditTraineesManager(manager);
-		when(manager.getAllTrainees()).thenReturn(TRAINEE_LIST);
+		manager = new ListAndEditTraineesManager();
+		manager.setListAndEditTraineesDAO(listAndEditTraineesDAO);
+		when(listAndEditTraineesDAO.getAllTrainees()).thenReturn(TRAINEE_LIST);
 	}
-
+	
 	@Test
 	public void testGetAllTraineese() {
-		TraineeDtos trainee = service.getAllTrainees();
-		assertNotNull("TraineeDtos is empty", trainee);
-		assertNotNull("TraineeDtos traineeList is empty", trainee.getTrainees());
-		assertTrue("TraineeDtos traineeList is empty", trainee.getTrainees().size() == 1);
-		TraineeDto resultTrainee = trainee.getTrainees().get(0);
+		List<TraineeDto> traineeList = manager.getAllTrainees();
+		assertNotNull("TraineeList is empty", traineeList);
+		assertTrue("traineeList is empty", traineeList.size() == 1);
+		TraineeDto resultTrainee = traineeList.get(0);
 		assertEquals("Name doesn't match", TRAINEE_DTO.getName(), resultTrainee.getName());
 		assertEquals("Post code doesn't match", TRAINEE_DTO.getPostCode(), resultTrainee.getPostCode());
 		assertEquals("Address doesn't match", TRAINEE_DTO.getAddress(), resultTrainee.getAddress());

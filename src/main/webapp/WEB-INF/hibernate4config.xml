@@ -95,4 +95,10 @@
 	    </constructor-arg>
 	</bean>
     
+    <bean id="listAndEditTraineesDAO" class="com.codeproj.traininghandler.dao.impl.ListAndEditTraineesDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    
 </beans>

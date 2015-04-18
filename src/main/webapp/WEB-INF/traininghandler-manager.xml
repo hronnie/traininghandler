@@ -48,6 +48,11 @@
 		<property name="trainingTypeService" ref="trainingTypeService" />
 		<property name="showTraineesEligibleForTrainingManager" ref="showTraineesEligibleForTrainingManager" />
 	</bean>
+	
+	<bean id="listAndEditTraineesService"
+		class="com.codeproj.traininghandler.rest.showEligibles.ShowTraineesEligibleForTrainingService">
+		<property name="listAndEditTraineesManager" ref="listAndEditTraineesManager" />
+	</bean>
 
 <!--     ***** MANAGERS ***** -->
 
@@ -76,5 +81,10 @@
 		class="com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager">
 		<property name="completedTrainingManager" ref="completedTrainingManager" />
 		<property name="showTraineesEligibleForTrainingDAO" ref="showTraineesEligibleForTrainingDAO" />
+	</bean>
+
+	<bean id="listAndEditTraineesManager"
+		class="com.codeproj.traininghandler.manager.listAndEditTrainees.ListAndEditTraineesManager">
+		<property name="listAndEditTraineesDAO" ref="listAndEditTraineesDAO" />
 	</bean>
 </beans>
