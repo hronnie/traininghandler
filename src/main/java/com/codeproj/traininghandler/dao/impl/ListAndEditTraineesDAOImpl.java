@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.ListAndEditTraineesDAO;
 import com.codeproj.traininghandler.dto.TraineeDto;
+import com.codeproj.traininghandler.util.Constants;
 
 public class ListAndEditTraineesDAOImpl implements ListAndEditTraineesDAO {
 	private SessionFactory sessionFactory;
@@ -71,10 +72,10 @@ public class ListAndEditTraineesDAOImpl implements ListAndEditTraineesDAO {
 		sb.append(" FROM ");
 		sb.append("  User AS u ");
 		sb.append(" INNER JOIN Address a on (u.addressId = a.addressId) ");
-		sb.append(" INNER JOIN ");
+		sb.append(" LEFT JOIN ");
 		sb.append(" ( ");
 		sb.append("  SELECT ");
-		sb.append("   cut.userId AS complUserId, group_concat(tt.name SEPARATOR ', ') AS complTrNames ");
+		sb.append("   cut.userId AS complUserId, group_concat(tt.name ORDER BY tt.trainingTypeId ASC SEPARATOR ', ') AS complTrNames ");
 		sb.append("  FROM ");
 		sb.append("   CompletedUserTraining cut ");
 		sb.append("  LEFT JOIN TrainingType tt on (tt.trainingTypeId = cut.trainingTypeId) ");
@@ -82,6 +83,9 @@ public class ListAndEditTraineesDAOImpl implements ListAndEditTraineesDAO {
 		sb.append("  ORDER BY cut.trainingTypeId DESC ");
 		sb.append(" ) ");
 		sb.append(" AS comp_training_sub_table ON (comp_training_sub_table.complUserId = u.userId) ");
+		sb.append(" WHERE ");
+		sb.append("  u.userTypeId = ");
+		sb.append(Constants.DB_USER_USER_TYPE_ID_TRAINEE);
 		return sb.toString();
 	}
 }

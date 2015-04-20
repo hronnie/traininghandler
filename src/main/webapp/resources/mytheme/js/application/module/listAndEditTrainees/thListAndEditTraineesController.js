@@ -4,6 +4,12 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.isEditSuccess = false;
 	$scope.isRemoveSuccess = false;
 	
+	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainee/getAll');
+	debugger;
+	resource.get().then(function(tranees) {
+		debugger;
+		$scope.traineeList = tranees.trainees;
+	});
 
 	$scope.validateName = function(data) {
 		return thValidationService.validateText(data, 'Name', 'Név', 100, $scope.locale);

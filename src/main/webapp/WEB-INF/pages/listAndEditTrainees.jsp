@@ -60,7 +60,7 @@
 									</td>
 									<td>
 										<span
-										class="gridCell" editable-text="trainee.fullAddress"
+										class="gridCell" editable-text="trainee.address"
 										e-name="fullAddress" e-form="rowform" onbeforesave="validateFullAddress($data)"
 										onaftersave="saveTrainee(trainee)"
 										e-placeholder="<spring:message code="listAndEditTrainees.grid.fullAddress" />"
@@ -83,9 +83,7 @@
 										 > {{ trainee.email }} </span>
 									</td>
 									<td>
-										<ul ng-repeat="completedTraining in trainee.listOfCompletedTrainings">
-											<li>completedTraining.name</li>
-										</ul>
+										 <span class="gridCell"> {{ trainee.completedTrainings }} </span>
 									</td>
 									<td style="white-space: nowrap">
 										<!-- form -->
@@ -141,8 +139,7 @@
 		</div>
 		</div>
 
-		<script
-			src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
+		<script src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
 		<script
 			src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
 	</body>

@@ -66,7 +66,7 @@ public class TraineeDto {
 		return addressId;
 	}
 
-	@XmlElement(name="completedTraings")
+	@XmlElement(name="completedTrainings")
 	public String getCompletedTrainings() {
 		return completedTrainings;
 	}
