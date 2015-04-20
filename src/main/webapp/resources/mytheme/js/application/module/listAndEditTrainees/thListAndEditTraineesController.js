@@ -5,9 +5,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.isRemoveSuccess = false;
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainee/getAll');
-	debugger;
 	resource.get().then(function(tranees) {
-		debugger;
 		$scope.traineeList = tranees.trainees;
 	});
 

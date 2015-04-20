@@ -38,6 +38,7 @@
 									<th class="gridTitle" style="width: 15%"><spring:message code="listAndEditTrainees.gridHeader.phone" /></th>
 									<th class="gridTitle" style="width: 15%"><spring:message code="listAndEditTrainees.gridHeader.email" /></th>
 									<th class="gridTitle" style="width: 10%"><spring:message code="listAndEditTrainees.gridHeader.listOfCompletedTrainings" /></th>
+									<th class="gridTitle" style="width: 20%"><spring:message code="grid.general.header.edit" /></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -64,7 +65,7 @@
 										e-name="fullAddress" e-form="rowform" onbeforesave="validateFullAddress($data)"
 										onaftersave="saveTrainee(trainee)"
 										e-placeholder="<spring:message code="listAndEditTrainees.grid.fullAddress" />"
-										 > {{ trainee.fullAddress }} </span>
+										 > {{ trainee.address }} </span>
 									</td>
 									<td>
 										<span
@@ -83,7 +84,7 @@
 										 > {{ trainee.email }} </span>
 									</td>
 									<td>
-										 <span class="gridCell"> {{ trainee.completedTrainings }} </span>
+										 <span class="gridCell"> {{ trainee.completedTrainings ?  trainee.completedTrainings : '<spring:message code="grid.general.content.none" />'}} </span>
 									</td>
 									<td style="white-space: nowrap">
 										<!-- form -->
