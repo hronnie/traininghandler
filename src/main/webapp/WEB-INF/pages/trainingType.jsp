@@ -122,8 +122,7 @@
 
 		<script
 			src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
-		<script
-			src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+		<script src="<c:url value="/resources/js/application/lib/jquery.ba-throttle-debounce.min.js" />"></script>
 	</body>
 	</html>
 </div>
