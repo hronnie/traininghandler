@@ -4,9 +4,16 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.isEditSuccess = false;
 	$scope.isRemoveSuccess = false;
 	
+	$scope.filteredTrainees = [];
+    $scope.currentPage = 1;
+    $scope.numPerPage = 10;
+    $scope.maxSize = 5;
+    $scope.traineeList = [];
+  
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainee/getAll');
 	resource.get().then(function(tranees) {
 		$scope.traineeList = tranees.trainees;
+		$scope.reinitPagination();
 	});
 
 	$scope.validateName = function(data) {
@@ -43,6 +50,19 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		saveResource.customPOST();
 		$scope.isRemoveSuccess = true;
 	};
+	
+	$scope.reinitPagination = function() {
+		  var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+		  , end = begin + $scope.numPerPage;
+		    
+		  $scope.filteredTrainees = $scope.traineeList.slice(begin, end);
+	}
+	
+	$scope.$watch('currentPage + numPerPage', function() {
+		$scope.reinitPagination();
+	});
+	
+	
 	
 });
 

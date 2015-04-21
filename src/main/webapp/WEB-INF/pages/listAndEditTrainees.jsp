@@ -42,7 +42,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainee in traineeList | filter:search:strict" class="gridRow">
+								<tr ng-repeat="trainee in filteredTrainees | filter:search:strict" class="gridRow">
 									<td>
 										<span
 										class="gridCell" editable-text="trainee.name"
@@ -129,7 +129,15 @@
 					</div>
 				</div>
 			</div>
-
+		<div align = "center">
+			<pagination 
+	  			ng-model="currentPage"
+				  total-items="traineeList.length"
+				  max-size="maxSize"  
+				  boundary-links="true"
+				  class="pagination-sm nomargin" previous-text="<spring:message code="grid.general.pager.previous" />" next-text="<spring:message code="grid.general.pager.next" />" first-text="<spring:message code="grid.general.pager.first" />" last-text="<spring:message code="grid.general.pager.last" />">
+			</pagination>
+		</div>	
 		<div ng-show="isEditSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
 			<spring:message code="listAndEditTrainees.edit.success.message" />
@@ -139,6 +147,7 @@
 			<spring:message code="listAndEditTrainees.remove.success.message" />
 		</div>
 		</div>
+<!--   		<pagination boundary-links="true" num-pages="noOfPages" total-items="totalItems" ng-model="currentPage" items-per-page="4" class="pagination-sm nomargin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> -->
 
 		<script src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
 		<script src="<c:url value="/resources/js/application/lib/jquery.ba-throttle-debounce.min.js" />"></script>
