@@ -149,8 +149,8 @@
 		</div>
 <!--   		<pagination boundary-links="true" num-pages="noOfPages" total-items="totalItems" ng-model="currentPage" items-per-page="4" class="pagination-sm nomargin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> -->
 
-		<script src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script>
-		<script src="<c:url value="/resources/js/application/lib/jquery.ba-throttle-debounce.min.js" />"></script>
+<%-- 		<script src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script> --%>
+<%-- 		<script src="<c:url value="/resources/js/application/lib/jquery.ba-throttle-debounce.min.js" />"></script> --%>
 	</body>
 	</html>
 </div>
