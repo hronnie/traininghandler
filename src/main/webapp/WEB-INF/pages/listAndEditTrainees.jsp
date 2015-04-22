@@ -134,8 +134,14 @@
 	  			ng-model="currentPage"
 				  total-items="traineeList.length"
 				  max-size="maxSize"  
+				  data-num-pages="noOfPages"
 				  boundary-links="true"
-				  class="pagination-sm nomargin" previous-text="<spring:message code="grid.general.pager.previous" />" next-text="<spring:message code="grid.general.pager.next" />" first-text="<spring:message code="grid.general.pager.first" />" last-text="<spring:message code="grid.general.pager.last" />">
+				  class="pagination-sm nomargin" 
+				  previous-text="<spring:message 
+				  code="grid.general.pager.previous" />" 
+				  next-text="<spring:message code="grid.general.pager.next" />" 
+				  first-text="<spring:message code="grid.general.pager.first" />" 
+				  last-text="<spring:message code="grid.general.pager.last" />">
 			</pagination>
 		</div>	
 		<div ng-show="isEditSuccess" class="alert alert-success">
