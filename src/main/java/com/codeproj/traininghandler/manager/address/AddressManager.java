@@ -18,18 +18,15 @@ public class AddressManager {
 		return addressDAO.create(addressModel);
 	}
 
-	public void setAddressDAO(AddressDAO addressDAO) {
-		this.addressDAO = addressDAO;
-	}
-
 	public boolean edit(Address address) {
-		return false;
-		
+		return addressDAO.edit(address);
 	}
 
 	public Address getAddressByAddressId(Long addressId) {
-		// TODO Auto-generated method stub
-		return null;
+		return addressDAO.getAddressByAddressId(addressId);
 	}
 
+	public void setAddressDAO(AddressDAO addressDAO) {
+		this.addressDAO = addressDAO;
+	}
 }

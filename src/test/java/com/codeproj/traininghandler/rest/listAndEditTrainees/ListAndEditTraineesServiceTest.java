@@ -30,14 +30,14 @@ public class ListAndEditTraineesServiceTest {
 	static final TraineeDto TRAINEE_DTO;
 	static final List<TraineeDto> TRAINEE_LIST;
 	static final String TEST_NAME = "Test Name";
-	static final String TEST_OLD_NAME = "OLD Test Name";
 	static final String TEST_POST_CODE = "EC12 7LB";
 	static final String TEST_ADDRESS = "12 Test Street, London";
+	static final String TEST_PHONE_NO = "2323-2323/23";
+	static final String TEST_EMAIL = "mail@example.com";
+	static final String TEST_OLD_NAME = "OLD Test Name";
 	static final String TEST_OLD_POST_CODE = "OLD EC12 7LB";
 	static final String TEST_OLD_ADDRESS = "OLD 12 Test Street, London";
-	static final String TEST_PHONE_NO = "2323-2323/23";
 	static final String TEST_OLD_PHONE_NO = "OLD 2323-2323/23";
-	static final String TEST_EMAIL = "mail@example.com";
 	static final String TEST_OLD_EMAIL = "OLDmail@example.com";
 	static final Long TEST_USER_ID = 1L;
 	static final Long TEST_ADDRESS_ID = 2L;
