@@ -52,6 +52,8 @@
 	<bean id="listAndEditTraineesService"
 		class="com.codeproj.traininghandler.rest.listAndEditTrainees.ListAndEditTraineesService">
 		<property name="listAndEditTraineesManager" ref="listAndEditTraineesManager" />
+		<property name="addressManager" ref="addressManager" />
+
 	</bean>
 
 <!--     ***** MANAGERS ***** -->

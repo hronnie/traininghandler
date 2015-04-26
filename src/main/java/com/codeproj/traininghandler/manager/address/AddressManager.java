@@ -22,4 +22,14 @@ public class AddressManager {
 		this.addressDAO = addressDAO;
 	}
 
+	public boolean edit(Address address) {
+		return false;
+		
+	}
+
+	public Address getAddressByAddressId(Long addressId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
