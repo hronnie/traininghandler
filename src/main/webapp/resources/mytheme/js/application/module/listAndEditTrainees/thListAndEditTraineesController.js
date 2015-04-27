@@ -10,7 +10,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
     $scope.maxSize = 5;
     $scope.traineeList = [];
   
-	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainee/getAll');
+	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/getAll');
 	resource.get().then(function(tranees) {
 		$scope.traineeList = tranees.trainees;
 		$scope.reinitPagination();
@@ -37,15 +37,26 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	};
 	
 	
-	$scope.saveTrainee = function(trainee) {
-		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/');
-		var listAndEditTraineesPostObj = {};
+	$scope.saveTrainee = function(trainee, userId, addressId) {
+		debugger;
+		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/edit');
+		var listAndEditTraineesPostObj = {
+				userId: userId,
+				addressId: addressId,
+				name: trainee.name,
+				postCode: trainee.postCode,
+				address: trainee.fullAddress,
+				phone: trainee.phone,
+				email: trainee.email,
+				completedTrainings: ''
+				
+		};
 		saveResource.customPOST(listAndEditTraineesPostObj);
 		$scope.isEditSuccess = true;
 	};
 
 	$scope.removeTrainee = function(userId) {
-		var removeResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/');
+		var removeResource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/');
 		var listAndEditTraineesPostObj = {};
 		saveResource.customPOST();
 		$scope.isRemoveSuccess = true;

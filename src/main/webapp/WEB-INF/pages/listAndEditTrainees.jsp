@@ -90,7 +90,7 @@
 										<!-- form -->
 										<form editable-form 
 												name="rowform"
-												onbeforesave="saveTrainee($data)"
+												onbeforesave="saveTrainee($data, trainee.userId, trainee.addressId)"
 												ng-show="rowform.$visible" 
 												class="form-buttons form-inline"
 												shown="inserted == trainee">

@@ -3,6 +3,7 @@ package com.codeproj.traininghandler.rest.listAndEditTrainees;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,8 +39,8 @@ public class ListAndEditTraineesService {
 		return result;
 	}
 
-	@RequestMapping(value="/edit", method = RequestMethod.GET,headers="Accept=application/json")
-	public BooleanResponse editTrainee(TraineeDto traineeDto) throws ValidationException {
+	@RequestMapping(value="/edit", method = RequestMethod.POST,headers="Accept=application/json")
+	public BooleanResponse editTrainee(@RequestBody TraineeDto traineeDto) throws ValidationException {
 		if (traineeDto == null) {
 			throw new ValidationException("Trainee dto is null");
 		}
