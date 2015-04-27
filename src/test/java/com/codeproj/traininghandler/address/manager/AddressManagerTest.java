@@ -74,6 +74,7 @@ public class AddressManagerTest {
 		when(addressDAO.create(new Address(VALID_CITY, VALID_COUNTRY, VALID_HOUSE_NUMBER, VALID_POST_CODE, VALID_STREET, null))).thenReturn(1L);
 		when(addressDAO.create(new Address(null, null, null, VALID_POST_CODE, null, VALID_ONE_LINE_ADDRESS))).thenReturn(3L);
 		when(addressDAO.getAddressByAddressId(TEST_ADDRESS_ID)).thenReturn(TEST_ADDRESS_MODEL);
+		when(addressDAO.edit(TEST_ADDRESS_MODEL)).thenReturn(true);
 	}
 
 	@Test
@@ -95,6 +96,12 @@ public class AddressManagerTest {
 		assertEquals("addressId is not as expected", TEST_ADDRESS_ID, result.getAddressId());
 		assertEquals("Postal code is not as expected", TEST_POST_CODE, result.getPostalCode());
 		assertEquals("One line address is not as expected", TEST_ADDRESS, result.getOneLineAddress());
+	}
+
+	@Test
+	public void testEditAddress() {
+		boolean result = manager.edit(TEST_ADDRESS_MODEL);
+		assertTrue("Edit should not fail", result);
 	}
 }
 
