@@ -26,13 +26,11 @@ public class UserManager {
 	}
 
 	public User getUserByUserId(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDAO.getUserByUserId(userId);
 	}
 
 	public boolean edit(User newUser) {
-		// TODO Auto-generated method stub
-		return false;
+		return userDAO.edit(newUser);
 	}
 	
 	public void setUserDAO(UserDAO userDAO) {

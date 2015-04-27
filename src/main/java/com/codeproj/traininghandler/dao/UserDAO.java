@@ -11,4 +11,8 @@ public interface UserDAO {
 	public Long create(User user);
 
 	public Long getUserIdByEmail(String email);
+
+	public User getUserByUserId(Long testUserId);
+
+	public boolean edit(User testUserModel);
 }

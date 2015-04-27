@@ -44,4 +44,26 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	@Override
+	@Transactional
+	public User getUserByUserId(Long userId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.add(Restrictions.eq("userId", userId));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			User user = (User)criteria.uniqueResult();
+			return user;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	@Transactional
+	public boolean edit(User user) {
+		sessionFactory.getCurrentSession().save(user);
+		return true;	
+	}
 }
