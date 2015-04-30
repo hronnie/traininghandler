@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	@Transactional
 	public boolean edit(User user) {
-		sessionFactory.getCurrentSession().save(user);
+		sessionFactory.getCurrentSession().update(user);
 		return true;	
 	}
 }

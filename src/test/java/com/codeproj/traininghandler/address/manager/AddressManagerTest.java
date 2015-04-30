@@ -38,30 +38,13 @@ public class AddressManagerTest {
 
 	static final TrainingType TEST_TRAINING_TYPE;
 	static final User TEST_USER;
-	static final Training TEST_TRAINING;
-	static final Appointment TEST_APPOINTMENT;
-	
-	static final Set<TrainingType> TEST_TRAINING_TYPE_SET;
-	static final Set<User> TEST_USER_SET;
-	static final Set<Training> TEST_TRAINING_SET;
-	static final Set<Appointment> TEST_APPOINTMENT_SET;
 	
 	static final Address TEST_ADDRESS_MODEL;
 	
 	static {
 		TEST_USER = new User(1L);
 		TEST_TRAINING_TYPE = new TrainingType(10L);
-		TEST_TRAINING = new Training(3L, null, null, null, null, false);
-		TEST_APPOINTMENT = new Appointment(4L, null, null, null, null, null, null);
-		TEST_TRAINING_TYPE_SET = new HashSet<>();
-		TEST_USER_SET = new HashSet<>();
-		TEST_TRAINING_SET = new HashSet<>();
-		TEST_APPOINTMENT_SET = new HashSet<>();
-		TEST_TRAINING_TYPE_SET.add(TEST_TRAINING_TYPE);
-		TEST_USER_SET.add(TEST_USER);
-		TEST_TRAINING_SET.add(TEST_TRAINING);
-		TEST_APPOINTMENT_SET.add(TEST_APPOINTMENT);
-		TEST_ADDRESS_MODEL = new Address(TEST_ADDRESS_ID, TEST_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY, TEST_ADDRESS, false, false, TEST_TRAINING_TYPE_SET, TEST_USER_SET, TEST_TRAINING_SET, TEST_APPOINTMENT_SET);
+		TEST_ADDRESS_MODEL = new Address(TEST_ADDRESS_ID, TEST_POST_CODE, VALID_CITY, VALID_STREET, VALID_HOUSE_NUMBER, VALID_COUNTRY, TEST_ADDRESS, false, false, null);
 	}
 	
 	@Mock

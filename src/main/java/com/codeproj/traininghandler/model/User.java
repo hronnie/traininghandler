@@ -28,7 +28,6 @@ public class User implements Serializable {
 	private Set<Appointment> appointmentsForHealerId = new HashSet<>(0);
 	private Set<SentTrainingEmail> sentTrainingEmails = new HashSet<>(0);
 	private Set<Log> logs = new HashSet<>(0);
-	private Set<Training> trainings = new HashSet<>(0);
 	private String locale;
 	private Date created;
 
@@ -60,7 +59,7 @@ public class User implements Serializable {
 			Set<Appointment> appointmentsForPatientId,
 			Set<Appointment> appointmentsForHealerId,
 			Set<SentTrainingEmail> sentTrainingEmails, Set<Log> logs,
-			Set<Training> trainings, String locale, Date created,
+			String locale, Date created,
 			UserType userType) {
 		this.userId = userId;
 		this.address = address;
@@ -77,7 +76,6 @@ public class User implements Serializable {
 		this.appointmentsForHealerId = appointmentsForHealerId;
 		this.sentTrainingEmails = sentTrainingEmails;
 		this.logs = logs;
-		this.trainings = trainings;
 		this.setLocale(locale);
 		this.userType = userType;
 		this.created = created;
@@ -234,14 +232,6 @@ public class User implements Serializable {
 		this.logs = logs;
 	}
 
-	public Set<Training> getTrainings() {
-		return trainings;
-	}
-
-	public void setTrainings(Set<Training> trainings) {
-		this.trainings = trainings;
-	}
-
 	public String getLocale() {
 		return locale;
 	}
@@ -286,19 +276,6 @@ public class User implements Serializable {
 				+ ((mobileNo == null) ? 0 : mobileNo.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
-		result = prime
-				* result
-				+ ((sentTrainingEmails == null) ? 0 : sentTrainingEmails
-						.hashCode());
-		result = prime * result
-				+ ((trainings == null) ? 0 : trainings.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result
-				+ ((userLevels == null) ? 0 : userLevels.hashCode());
-		result = prime * result
-				+ ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result
-				+ ((userType == null) ? 0 : userType.hashCode());
 		return result;
 	}
 
@@ -415,13 +392,6 @@ public class User implements Serializable {
 				return false;
 			}
 		} else if (!sentTrainingEmails.equals(other.sentTrainingEmails)) {
-			return false;
-		}
-		if (trainings == null) {
-			if (other.trainings != null) {
-				return false;
-			}
-		} else if (!trainings.equals(other.trainings)) {
 			return false;
 		}
 		if (userId == null) {

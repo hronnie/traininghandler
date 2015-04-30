@@ -49,7 +49,7 @@ public class ListAndEditTraineesServiceTest {
  		TRAINEE_LIST = new ArrayList<>();
  		TRAINEE_LIST.add(TRAINEE_DTO);
  		TRAINEE_DTOS = new TraineeDtos(TRAINEE_LIST);
- 		TEST_OLD_ADDRESS_MODEL = new Address(TEST_ADDRESS_ID, TEST_OLD_POST_CODE, null, null, null, null, TEST_OLD_ADDRESS, false, false, null, null, null, null);
+ 		TEST_OLD_ADDRESS_MODEL = new Address(TEST_ADDRESS_ID, TEST_OLD_POST_CODE, null, null, null, null, TEST_OLD_ADDRESS, false, false, null);
  		TEST_OLD_USER_MODEL = new User(TEST_USER_ID, TEST_NAME, TEST_OLD_EMAIL, TEST_OLD_PHONE_NO);
 	}
 	
