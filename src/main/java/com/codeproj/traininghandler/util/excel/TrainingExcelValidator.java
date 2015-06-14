@@ -22,16 +22,11 @@ public class TrainingExcelValidator {
 		}
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
-			appendFieldValidationMsgs(validationMsg, item.getName(), VALIDATION_EXCEL_IMPORT_NAME_EMPTY, VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG, 100);
-			appendFieldValidationMsgs(validationMsg, item.getPostCode(), VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY, VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG, 15);
-			appendFieldValidationMsgs(validationMsg, item.getAddress(), VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY, VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG, 100);
-			appendFieldValidationMsgs(validationMsg, item.getPhoneNo(), VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY, VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, 50);
-			if (!StringUtils.isEmpty(item.getEmail())) {
-				if (!ValidatorBaseUtility.isValidEmailAddress(item.getEmail())) {
-					appendValidationMsgWithMsgAndSeparator(validationMsg, VALIDATION_EXCEL_IMPORT_EMAIL_INVALID);
-				}
-				appendFieldValidationMsgs(validationMsg, item.getEmail(), "", VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, 80);
-			}
+			appendFieldValidationMsgsAllowEmpty(validationMsg, item.getName(), VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG, 100);
+			appendFieldValidationMsgsAllowEmpty(validationMsg, item.getPostCode(), VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG, 15);
+			appendFieldValidationMsgsAllowEmpty(validationMsg, item.getAddress(), VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG, 100);
+			appendFieldValidationMsgsAllowEmpty(validationMsg, item.getPhoneNo(), VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, 50);
+			appendFieldValidationMsgsAllowEmpty(validationMsg, item.getEmail(), VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, 80);
 		}
 		
 		return cutSplitter(validationMsg);
@@ -90,6 +85,13 @@ public class TrainingExcelValidator {
 		}
 	}
 
+	private static void appendFieldValidationMsgsAllowEmpty(StringBuilder validationMsg,
+			String inParam, String tooLongMsg, int maxSize) {
+		if (inParam != null && inParam.length() > maxSize) {
+			appendValidationMsgWithMsgAndSeparator(validationMsg, tooLongMsg);
+		}
+	}
+	
 	private static void appendValidationMsgWithMsgAndSeparator(
 			StringBuilder validationMsg, String message) {
 		validationMsg.append(message); 

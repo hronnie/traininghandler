@@ -1,4 +1,4 @@
-package com.codeproj.traininghandler.rest.completedTraining;
+	package com.codeproj.traininghandler.rest.completedTraining;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -338,7 +338,7 @@
 			<column name="dob" length="19" />
 		</property>
 		<property name="email" type="string">
-			<column name="email" length="80" not-null="true" unique="true" />
+			<column name="email" length="80" not-null="true"/>
 		</property>
 		<property name="mobileNo" type="string">
 			<column name="mobileNo" length="50" />

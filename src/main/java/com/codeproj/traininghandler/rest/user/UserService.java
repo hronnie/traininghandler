@@ -15,7 +15,6 @@ import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.util.Constants;
-import com.codeproj.traininghandler.util.ThStringUtils;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -48,20 +47,15 @@ public class UserService {
 		return userIdResp.getValue();
 	}
 	
-	public GeneralIdResponse getUserIdByEmail(String email) {
-		Long result = userManager.getUserIdByEmail(email);
+	public GeneralIdResponse getUserIdByEmailAndName(String email, String name) {
+		Long result = userManager.getUserIdByEmailAndName(email, name);
 		return new GeneralIdResponse(result);
 	}
 	
 	// private methods
 
 	private Long getUserIdIfExist(TrainingExcelDto item) {
-		String email = item.getEmail();
-		if (StringUtils.isEmpty(email)) {
-			String cleanedPhoneNo = ThStringUtils.cleanPhoneNumber(item.getPhoneNo());
-			email = cleanedPhoneNo + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
-		}
-		GeneralIdResponse userId = getUserIdByEmail(email);
+		GeneralIdResponse userId = getUserIdByEmailAndName(item.getEmail(), item.getName());
 		return userId.getValue();
 	}
 
@@ -86,11 +80,8 @@ public class UserService {
 	}
 	
 	private void addEmailIfEmpty(UserDto user) {
-		if (StringUtils.isEmpty(user.getPhoneNo())) {
-			return;
-		}
 		if (StringUtils.isEmpty(user.getEmail())) {
-			String newEmail = ThStringUtils.cleanPhoneNumber(user.getPhoneNo()) + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
+			String newEmail = Constants.EXCEL_TRAINING_MISSING_EMAIL;
 			user.setEmail(newEmail);
 		}
 	}

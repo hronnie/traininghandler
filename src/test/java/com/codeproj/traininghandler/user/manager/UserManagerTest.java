@@ -22,6 +22,7 @@ public class UserManagerTest {
 	public UserManager manager = null;
 	public static final Date VALID_DATE;
 	public static final String VALID_EMAIL = "test@test.com";
+	public static final String VALID_NAME = "Valid Name";
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
@@ -46,8 +47,8 @@ public class UserManagerTest {
 	}
 	
 	@Test
-	public void testGetUserIdByEmail() {
-		Long result = manager.getUserIdByEmail(VALID_EMAIL);
+	public void testGetUserIdByEmailAndName() {
+		Long result = manager.getUserIdByEmailAndName(VALID_EMAIL, VALID_NAME);
 		assertEquals("Getting user id failed", new Long(1L), result);
 	}
 

@@ -24,9 +24,7 @@ public class UserServiceValidator extends ValidatorBaseUtility {
 			mandatoryParameter("fullName", user.getName());
 			validateStringLength("fullName", user.getName(), 100);
 		}
-		mandatoryParameter("phoneNumber", user.getPhoneNo());
-		mandatoryParameter("addressId", user.getAddressId());
-		
+
 		validateStringLength("phoneNumber", user.getPhoneNo(), 50);
 		validateStringLength("email", user.getEmail(), 80);
 		

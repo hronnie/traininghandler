@@ -27,7 +27,7 @@ public class Constants {
 	public static final int EXCEL_NUMBER_OF_DATA_ROWS = 5;
 	
 	public static final String EXCEL_TRAINING_MISSING_EMAIL_DOMAIN = "@nincs.com";
-	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
+	public static final String EXCEL_TRAINING_MISSING_EMAIL = "none";
 	
 	
 	public static final String VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy nem sérült e a fájl. Előfordulhat, hogy nem excel fájlt próbáltál beimportálni.";

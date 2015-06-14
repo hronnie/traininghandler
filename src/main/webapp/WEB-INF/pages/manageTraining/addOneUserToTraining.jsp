@@ -89,14 +89,13 @@
 					</div>
 				</div>
 			</div>
-<!-- 			TODO: put min, max and required check. put the necessary error messages. handle drop down also. change hard coded messages with spring:code -->
 			<div class="control-group">
 				<label class="col-sm-2 control-label"><spring:message code="addOneUserToTraining.postcode.label" />:</label>
 				<div class="controls">
 					<div class="form-inline">
 						<input type="text" ng-model="trainingExcelDto.postCode" tabindex="5" ng-minlength="3" ng-maxlength="15"
 							 name="postCode" class="form-control w-3"
-							placeholder="<spring:message code="addOneUserToTraining.postcode.label" />" required>
+							placeholder="<spring:message code="addOneUserToTraining.postcode.label" />">
 						<span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.postCode.$error.required ||
 						addOneUserToTrainingForm.postCode.$error.minlength || addOneUserToTrainingForm.postCode.$error.maxlength) && validationNeeded" ><spring:message code="addOneUserToTraining.validation.postcode" /></span>
 					</div>
@@ -108,7 +107,7 @@
 					<div class="form-inline">
 						<input type="text" ng-model="trainingExcelDto.address" tabindex="6"
 							ng-minlength="3" ng-maxlength="100" name="address" class="form-control w-3"
-							placeholder="<spring:message code="addOneUserToTraining.address.label" />" required>
+							placeholder="<spring:message code="addOneUserToTraining.address.label" />">
                         <span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.address.$error.required ||
                         addOneUserToTrainingForm.address.$error.minlength || addOneUserToTrainingForm.address.$error.maxlength) && validationNeeded" ><spring:message code="addOneUserToTraining.validation.address" /></span>
 					</div>
@@ -120,7 +119,7 @@
 					<div class="form-inline">
 						<input type="text" ng-model="trainingExcelDto.phoneNo" tabindex="7"
 							ng-minlength="3" ng-maxlength="50" name="phoneNo" class="form-control w-3"
-							placeholder="<spring:message code="addOneUserToTraining.phonenumber.label" />" required>
+							placeholder="<spring:message code="addOneUserToTraining.phonenumber.label" />">
                         <span class="control-label validationMsg" ng-show="(addOneUserToTrainingForm.phoneNo.$error.required ||
                         addOneUserToTrainingForm.phoneNo.$error.minlength || addOneUserToTrainingForm.phoneNo.$error.maxlength) && validationNeeded" ><spring:message code="addOneUserToTraining.validation.phone" /></span>
 					</div>
