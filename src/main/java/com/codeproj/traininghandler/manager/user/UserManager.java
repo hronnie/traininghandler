@@ -22,7 +22,7 @@ public class UserManager {
 	}
 
 	public Long getUserIdByEmailAndName(String email, String name) {
-		return userDAO.getUserIdByEmail(email);
+		return userDAO.getUserIdByEmailAndName(email, name);
 	}
 	
 	public void setUserDAO(UserDAO userDAO) {

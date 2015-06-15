@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	@Transactional
-	public Long getUserIdByEmail(String email) {
+	public Long getUserIdByEmailAndName(String email, String name) {
 		Session session = null;
 		try {
 			session = sessionFactory.openSession();

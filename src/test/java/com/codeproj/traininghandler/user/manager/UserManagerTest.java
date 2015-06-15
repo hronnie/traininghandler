@@ -37,7 +37,7 @@ public class UserManagerTest {
 		manager = new UserManager();
 		manager.setUserDAO(userDAO);
 		when(userDAO.create(new User("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
-		when(userDAO.getUserIdByEmail(VALID_EMAIL)).thenReturn(1L);
+		when(userDAO.getUserIdByEmailAndName(VALID_EMAIL, VALID_NAME)).thenReturn(1L);
 	}
 
 	@Test
