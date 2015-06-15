@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
+import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressService;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
@@ -90,10 +91,10 @@ public class ImportTrainingController {
 		
 		List<TrainingExcelDto> trainingAttendendList = ExcelImportHelper.importTrainingExcel(file);
 		
-		String excelValuesValidMsg = TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
-		
-		if (!"".equals(excelValuesValidMsg)) {
-			mav.addObject("validationMsg", paramValidMsg + excelValuesValidMsg);
+		try {
+			TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
+		} catch (ValidationException ve) {
+			mav.addObject("validationMsg", Constants.VALIDATION_EXCEL_IMPORT_IVALID_CONTENT);
 			return mav;
 		}
 		

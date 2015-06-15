@@ -37,19 +37,9 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_FILE = "Nem talalom az excel fajlt";
+	public static final String VALIDATION_EXCEL_IMPORT_IVALID_CONTENT = "A név kitöltése mindig kötelező";
 	
 	public static final String VALIDATION_EXCEL_EMPTY_LIST = "Ures lista";
-	public static final String VALIDATION_EXCEL_IMPORT_NAME_EMPTY = "A nev nem lehet ures";
-	public static final String VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG = "Tul hosszu a nev. Maximum 100 karakter lehet";
-	public static final String VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY = "Az iranyitoszam nem lehet ures";
-	public static final String VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG = "Tul hosszu az iranyitoszam. Maximum 15 karakter lehet";
-	public static final String VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY = "A cim nem lehet ures";
-	public static final String VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG = "Tul hosszu a cim. Maximum 100 karakter lehet";
-	public static final String VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY = "A telefonszam nem lehet ures";
-	public static final String VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG = "Tul hosszu a telefonszam. Maximum 50 karakter lehet";
-	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY = "Az email nem lehet ures";
-	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG = "Tul hosszu az email. Maximum 80 karakter lehet";
-	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_INVALID = "Az email cim formatuma nem jo";
 	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";

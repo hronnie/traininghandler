@@ -224,4 +224,5 @@ public class UserServiceTest {
 		when(userManager.getUserIdByEmailAndName(INVALID_EMAIL, VALID_NAME)).thenReturn(-1L);
 		service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, INVALID_EMAIL));
 	}
+	
 }
