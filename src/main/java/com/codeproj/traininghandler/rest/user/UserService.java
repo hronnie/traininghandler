@@ -2,6 +2,7 @@ package com.codeproj.traininghandler.rest.user;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +48,11 @@ public class UserService {
 		return userIdResp.getValue();
 	}
 	
-	public GeneralIdResponse getUserIdByEmailAndName(String email, String name) {
+	@RequestMapping(value="/getUserIdByEmailAndName/{email}/{name}", method = RequestMethod.GET,headers="Accept=application/json")
+	public GeneralIdResponse getUserIdByEmailAndName(@PathVariable("email") String email, @PathVariable("name") String name) {
+		if (StringUtils.isEmpty(email)) {
+			email = Constants.EXCEL_TRAINING_MISSING_EMAIL;
+		}
 		Long result = userManager.getUserIdByEmailAndName(email, name);
 		return new GeneralIdResponse(result);
 	}
