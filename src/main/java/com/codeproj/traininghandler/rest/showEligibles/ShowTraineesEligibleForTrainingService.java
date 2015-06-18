@@ -11,6 +11,7 @@ import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
+import com.codeproj.traininghandler.util.Constants;
 
 @RestController
 @RequestMapping("/manageTraining")
@@ -27,7 +28,7 @@ public class ShowTraineesEligibleForTrainingService {
 		try {
 			trainingTypeService.getTrainingTypeById(trainingTypeId);
 		} catch (DatabaseEntityNotFoundException | ValidationException ex) {
-			throw new ValidationException("Training type doesn't exist");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
 		}
 		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(trainingTypeId);
 	}

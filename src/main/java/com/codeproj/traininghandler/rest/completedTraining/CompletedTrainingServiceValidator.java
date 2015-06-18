@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
@@ -12,7 +13,7 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 			List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
 		
 		if (complatedUserTrainingDtoList == null || complatedUserTrainingDtoList.size() == 0) {
-			throw new ValidationException("Input object is null or empty");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		for (CompletedUserTrainingDto compUsrTr : complatedUserTrainingDtoList) {

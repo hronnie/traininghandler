@@ -36,7 +36,7 @@ public class UserService {
 	@RequestMapping(value="/createUserWithAddress", method = RequestMethod.POST,headers="Accept=application/json")
 	public Long createUserWithAddress(@RequestBody TrainingExcelDto item) throws ValidationException {
 		if (item == null) {
-			throw new ValidationException("dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		Long userId = getUserIdIfExist(item);
 		if (userId != -1L) {
@@ -67,7 +67,7 @@ public class UserService {
 	private GeneralIdResponse createUser(UserDto user, boolean isUseBasicFields)
 			throws ValidationException {
 		if (user == null) {
-			throw new ValidationException("Input User dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		stripXssUserDto(user);

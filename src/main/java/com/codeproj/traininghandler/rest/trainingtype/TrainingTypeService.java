@@ -21,6 +21,7 @@ import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -41,7 +42,7 @@ public class TrainingTypeService {
 			throws ValidationException {
 		
 		if (trainingType == null) {
-			throw new ValidationException("Training type dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
@@ -65,11 +66,11 @@ public class TrainingTypeService {
 				Long id) throws DatabaseEntityNotFoundException, ValidationException {
 		
 		if (id == null || id < 0) {
-			throw new ValidationException("TrainingType id is less then 0");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_HAS_NOT_FOUND);
 		}
 		TrainingType trainingType = trainingTypeManager.getTrainingTypeById(id);
 		if (trainingType == null) {
-			throw new DatabaseEntityNotFoundException("TrainingType not found with id: [" + id + "]");
+			throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_HAS_NOT_FOUND);
 		}
 		ModelMapper modelMapper = new ModelMapper();
 		TrainingTypeDto result = modelMapper.map(trainingType, TrainingTypeDto.class);
@@ -104,7 +105,7 @@ public class TrainingTypeService {
 	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
 		
 		if (trainingType == null) {
-			throw new ValidationException("training type dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
@@ -127,7 +128,7 @@ public class TrainingTypeService {
 	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
 	public BooleanResponse delete(@RequestBody TrainingTypeDto trainingType)  throws ValidationException, DatabaseEntityNotFoundException {
 		if (trainingType == null) {
-			throw new ValidationException("training type dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());

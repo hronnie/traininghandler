@@ -2,6 +2,7 @@ package com.codeproj.traininghandler.rest.gatherTraineeInfo;
 
 import com.codeproj.traininghandler.dto.TraineePersonalAndTrainingInfoDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
@@ -10,7 +11,7 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 			TraineePersonalAndTrainingInfoDto traineeInfoDto) throws ValidationException {
 		
 		if (traineeInfoDto == null) {
-			throw new ValidationException("traineeInfoDto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		if (traineeInfoDto.getAddress() == null ||  traineeInfoDto.getCompletedUserTrainingList() == null 

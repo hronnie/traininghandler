@@ -10,6 +10,7 @@ import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.address.AddressManager;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 @RestController
@@ -27,7 +28,7 @@ public class AddressService {
 	private GeneralIdResponse createAddress(AddressDto addressDto, boolean isNeedValidation)
 			throws ValidationException {
 		if (addressDto == null) {
-			throw new ValidationException("Address dto object is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		if (isNeedValidation) {
 			AddressServiceValidator.create(addressDto);
