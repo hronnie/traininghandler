@@ -22,6 +22,7 @@ import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingM
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.User;
+import com.codeproj.traininghandler.util.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShowTraineesEligibleForTrainingManagerTest {
@@ -40,7 +41,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	List<Long> REF_COMPL_USER_LIST = new ArrayList<>();;
 	
 	public static final String VALID_EMAIL = "email1@email.com";
-	public static final String PHONE_EMAIL = "2222222222@nincs.com";
+	public static final String FAKE_EMAIL = Constants.EXCEL_TRAINING_MISSING_EMAIL;
 	public static final String PHONE_NO = "2222222222";
 	public static final String TEST_NAME1 = "Test Name 1";
 	public static final String TEST_NAME2 = "Test Name 2";
@@ -77,8 +78,8 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		REF_TRAINING_TYPE_PREREQ.add(secondTrTypePrereq);
 		
 		HAS_EMAIL_USER = new User(1L, TEST_NAME1, VALID_EMAIL, PHONE_NO);
-		PHONE_EMAIL_USER = new User(2L, TEST_NAME1, PHONE_EMAIL, PHONE_NO);
-		COMPLETED_USER = new User(3L, TEST_NAME1, PHONE_EMAIL, PHONE_NO);
+		PHONE_EMAIL_USER = new User(2L, TEST_NAME1, FAKE_EMAIL, PHONE_NO);
+		COMPLETED_USER = new User(3L, TEST_NAME1, FAKE_EMAIL, PHONE_NO);
 		REF_USER_LIST.add(HAS_EMAIL_USER);
 		REF_USER_LIST.add(PHONE_EMAIL_USER);
 		REF_USER_LIST.add(COMPLETED_USER);
@@ -90,7 +91,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		
 		UserDto hasEmailUser = new UserDto(TEST_NAME1, PHONE_NO, VALID_EMAIL, null);
 		hasEmailUser.setUserId(1L);
-		UserDto onlyPhoneUser = new UserDto(TEST_NAME1, PHONE_NO, PHONE_EMAIL, null);
+		UserDto onlyPhoneUser = new UserDto(TEST_NAME1, PHONE_NO, FAKE_EMAIL, null);
 		onlyPhoneUser.setUserId(2L);
 		
 		List<UserDto> hasEmailUserList = new ArrayList<>();

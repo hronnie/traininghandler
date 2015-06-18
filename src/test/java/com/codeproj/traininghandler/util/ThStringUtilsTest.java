@@ -20,8 +20,8 @@ public class ThStringUtilsTest {
 	
 	@Test
 	public void testIsEmailPhoneEmail() {
-		assertTrue("This is a phone email", ThStringUtils.isEmailPhoneEmail("11111111111@gmail.com"));
-		assertFalse("This is *not* a phone email", ThStringUtils.isEmailPhoneEmail("validemaikl222@gmail.com"));
+		assertTrue("This is a phone email", ThStringUtils.isFakeEmail(Constants.EXCEL_TRAINING_MISSING_EMAIL));
+		assertFalse("This is *not* a phone email", ThStringUtils.isFakeEmail("validemaikl222@gmail.com"));
 	}
 
 }

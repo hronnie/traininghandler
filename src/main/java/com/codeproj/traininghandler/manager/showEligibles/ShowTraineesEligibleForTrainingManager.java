@@ -53,7 +53,7 @@ public class ShowTraineesEligibleForTrainingManager {
 			return;
 		}
 		for (User item : allUsers) {
-			if (ThStringUtils.isEmailPhoneEmail(item.getEmail())) {
+			if (ThStringUtils.isFakeEmail(item.getEmail())) {
 				onlyPhoneUsers.add(convertUserToDto(item));
 				continue;
 			}
