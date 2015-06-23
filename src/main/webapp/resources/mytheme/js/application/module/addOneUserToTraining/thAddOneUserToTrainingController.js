@@ -79,10 +79,10 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 				} else {
 					$scope.isAddOneUserSuccess = true;
 				}
-			}, function() {
-				$scope.validationMsg = "Hiba történt a hozzáadás közben!";
+			}, function(err) {
+				$scope.validationMsg = "A megadott tanítványt nem lehetett hozzáadni a tanfolyamhoz, mert még nem végezte el az előfeltételeket!";
 			});
-		}, function() {
+		}, function(err) {
 			$scope.validationMsg = "Hiba történt a hozzáadás közben!";
 			return;
 		});
