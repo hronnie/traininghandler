@@ -38,6 +38,8 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_FILE = "Nem talalom az excel fajlt";
 	public static final String VALIDATION_EXCEL_IMPORT_IVALID_CONTENT = "A név kitöltése mindig kötelező";
+	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE = "A következő tanítványnak nincs meg a megfelelő előfeltétele a tanfolyamhoz vagy már hozzá lett adva: ";
+	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE_INFO = "\nAz előtte lévő tanítványokat sikeresen hozzáadtam. (Nem kell kitörölni azokat az ismételt próbálkozásnál, mert nem fogja a rendszer kétszer hozzáadni)";
 	
 	public static final String VALIDATION_EXCEL_EMPTY_LIST = "Ures lista";
 	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";

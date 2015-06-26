@@ -14,5 +14,5 @@ import com.codeproj.traininghandler.model.User;
 public interface ShowTraineesEligibleForTrainingDAO {
 	public List<User> getEligibleTrainees(List<TrainingTypePrerequisite> trainingPrerequisites);
 
-	public List<TrainingPrerequisite> getPrerequisitesByTrainingId(Long trainingTypeId);
+	public List<TrainingPrerequisite> getPrerequisitesByTrainingTypeId(Long trainingTypeId);
 }

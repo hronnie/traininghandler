@@ -56,7 +56,7 @@ public class UserService {
 		Long result = userManager.getUserIdByEmailAndName(email, name);
 		return new GeneralIdResponse(result);
 	}
-	
+
 	// private methods
 
 	private Long getUserIdIfExist(TrainingExcelDto item) {

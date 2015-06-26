@@ -20,7 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
+import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.util.Constants;
@@ -41,6 +44,9 @@ public class ImportTrainingController {
 	
 	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
@@ -64,6 +70,7 @@ public class ImportTrainingController {
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
 		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(trainingTypeId, year, month, day, importFile);
+		Long trainingTypeIdLong = new Long(trainingTypeId);
 		
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));
@@ -102,13 +109,37 @@ public class ImportTrainingController {
 		Date complDate = complDt.toDate();
 		
 		for (TrainingExcelDto item : trainingAttendendList) {
+			GeneralIdResponse excelItemUserId = userService.getUserIdByEmailAndName(item.getEmail(), item.getName());
+			boolean isUserExist = excelItemUserId.getValue() == -1L ? false : true; 
+			
+			if (!isUserExist) {
+				List<TrainingPrerequisite> prereqs = showTraineesEligibleForTrainingManager.getPrerequisitesByTrainingTypeId(trainingTypeIdLong);
+				boolean isTrainingTypeHasPrereq = (prereqs == null || prereqs.size() == 0) ? false : true;
+				if (isTrainingTypeHasPrereq) {
+					addFailedUserDataToView(mav, item);
+					return mav;
+				}
+			}
+			
 			Long userId = userService.createUserWithAddress(item);
-			completedTrainingService.createOne(new CompletedUserTrainingDto(userId, new Long(trainingTypeId), complDate));
+			try {
+				completedTrainingService.createOne(new CompletedUserTrainingDto(userId, trainingTypeIdLong, complDate));
+			} catch (ValidationException ve) {
+				addFailedUserDataToView(mav, item);
+				return mav;
+			}
 		}
 		
 		logger.debug("Processing POST request for importTraining page..");
 		mav.addObject("isImportSuccess", new Boolean(true));
 		return mav;
+	}
+
+	private void addFailedUserDataToView(ModelAndView mav, TrainingExcelDto item) {
+		String validationMsg = Constants.VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE +
+				item.toStringUserFriendly() + Constants.VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE_INFO; 
+		mav.addObject("validationMsg", validationMsg);
+		mav.addObject("isImportSuccess", new Boolean(false));
 	}
 
 	

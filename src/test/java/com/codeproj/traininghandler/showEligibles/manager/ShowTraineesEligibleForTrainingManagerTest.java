@@ -1,6 +1,6 @@
 package com.codeproj.traininghandler.showEligibles.manager;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	
 	
 	@Mock
-	ShowTraineesEligibleForTrainingDAO dao = null;
+	ShowTraineesEligibleForTrainingDAO dao;
 	
 	TraineesEligibleForTrainingDto REF_ELIGIBLE_DTO = null;
 	List<TrainingTypePrerequisite> REF_TRAINING_TYPE_PREREQ = new ArrayList<>();
@@ -53,7 +53,6 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	@Mock
 	CompletedTrainingManager completedTrainingManager;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		manager = new ShowTraineesEligibleForTrainingManager();
@@ -66,7 +65,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		REF_TRAINING_PREREQ.add(firstTrPrereq);
 		REF_TRAINING_PREREQ.add(secondTrPrereq);
 		
-		when(dao.getPrerequisitesByTrainingId(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_TRAINING_PREREQ);
+		when(dao.getPrerequisitesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_TRAINING_PREREQ);
 		
 		DateTime dt1 = new DateTime();
 		DateTime dt2 = new DateTime();
@@ -106,6 +105,17 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	public void testGetEligibleTraineesByTrainingTypeId() throws ValidationException {
 		TraineesEligibleForTrainingDto result = manager.getEligibleTraineesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID);
 		assertEquals("Service result is not as expected", REF_ELIGIBLE_DTO, result);
+	}
+	//		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingId(trainingTypeId);
+
+	@Test
+	public void testGetPrerequisitesByTrainingId() {
+		when(dao.getPrerequisitesByTrainingTypeId(3L)).thenReturn(REF_TRAINING_PREREQ);
+		List<TrainingPrerequisite> prerequisites = manager.getPrerequisitesByTrainingTypeId(3L);
+		assertNotNull("Training prereq shouldn't be null", prerequisites);
+		assertEquals("The number of prerequisites should be 2", 2, prerequisites.size());
+		assertEquals("The first prerequisite doesn't match", REF_TRAINING_PREREQ.get(0), prerequisites.get(0));
+		assertEquals("The second prerequisite doesn't match", REF_TRAINING_PREREQ.get(1), prerequisites.get(1));
 	}
 
 }
