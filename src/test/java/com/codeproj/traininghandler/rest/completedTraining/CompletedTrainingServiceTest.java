@@ -42,6 +42,8 @@ public class CompletedTrainingServiceTest {
 	public static final Long USER_ID_NOT_ELIGIBLE = 15L;
 	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
+	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
+	
 	@Mock
 	public CompletedTrainingManager manager;
 	
@@ -81,7 +83,7 @@ public class CompletedTrainingServiceTest {
 	public void testCreateComplatedTrainingServiceWithValidObject() throws ValidationException {
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(5L);
 		when(manager.isCompletedTrainingExist(VALID_COMPLETED_TRAINING)).thenReturn(false);
-		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
+		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING, TRAINING_COMPL_DATE)).thenReturn(true);
 		service.create(VALID_COMPLETED_TRAINING_LIST);
 	}
 	
@@ -146,7 +148,7 @@ public class CompletedTrainingServiceTest {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_EXIST, TRAINING_TYPE_ID_EXIST, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
-		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
+		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING, TRAINING_COMPL_DATE)).thenReturn(true);
 
 		service.createOne(complatedUserTrainingDto);
 	}
@@ -156,7 +158,7 @@ public class CompletedTrainingServiceTest {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(false);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
-		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
+		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto, TRAINING_COMPL_DATE)).thenReturn(false);
 		service.createOne(complatedUserTrainingDto);
 	}
 

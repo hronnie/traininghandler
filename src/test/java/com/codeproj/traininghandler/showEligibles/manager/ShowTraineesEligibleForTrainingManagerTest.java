@@ -27,7 +27,6 @@ import com.codeproj.traininghandler.util.Constants;
 @RunWith(MockitoJUnitRunner.class)
 public class ShowTraineesEligibleForTrainingManagerTest {
 	
-	
 	@Mock
 	ShowTraineesEligibleForTrainingDAO dao;
 	
@@ -47,6 +46,7 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 	public static final String TEST_NAME2 = "Test Name 2";
 	
 	public Long EXISTING_TRAINING_TYPE_ID = 2L;
+	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
 	
 	ShowTraineesEligibleForTrainingManager manager = null;
 	
@@ -67,11 +67,8 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 		
 		when(dao.getPrerequisitesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID)).thenReturn(REF_TRAINING_PREREQ);
 		
-		DateTime dt1 = new DateTime();
-		DateTime dt2 = new DateTime();
-		
-		TrainingTypePrerequisite firstTrTypePrereq = new TrainingTypePrerequisite(3L, dt1.minusMonths(3).toDate());
-		TrainingTypePrerequisite secondTrTypePrereq = new TrainingTypePrerequisite(4L, dt2.minusMonths(6).toDate());
+		TrainingTypePrerequisite firstTrTypePrereq = new TrainingTypePrerequisite(3L, TRAINING_COMPL_DATE.minusMonths(3).toDate());
+		TrainingTypePrerequisite secondTrTypePrereq = new TrainingTypePrerequisite(4L, TRAINING_COMPL_DATE.minusMonths(6).toDate());
 		
 		REF_TRAINING_TYPE_PREREQ.add(firstTrTypePrereq);
 		REF_TRAINING_TYPE_PREREQ.add(secondTrTypePrereq);
@@ -103,10 +100,9 @@ public class ShowTraineesEligibleForTrainingManagerTest {
 
 	@Test
 	public void testGetEligibleTraineesByTrainingTypeId() throws ValidationException {
-		TraineesEligibleForTrainingDto result = manager.getEligibleTraineesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID);
+		TraineesEligibleForTrainingDto result = manager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(EXISTING_TRAINING_TYPE_ID, TRAINING_COMPL_DATE);
 		assertEquals("Service result is not as expected", REF_ELIGIBLE_DTO, result);
 	}
-	//		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingId(trainingTypeId);
 
 	@Test
 	public void testGetPrerequisitesByTrainingId() {

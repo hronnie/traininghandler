@@ -1,5 +1,8 @@
 package com.codeproj.traininghandler.util;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 public class Constants {
 	public static final String GLOBAL_DEFAULT_LOCALE = "hu_HU";
 	
@@ -64,5 +67,6 @@ public class Constants {
 	public static final String VALIDATION_DATE_IN_THE_FUTURE_2 = " nem lehet a jövőben";
 	public static final String VALIDATION_TRAINING_COMPLETION_DATE = "Tanfolyam elvégzési ideje";
 	public static final String VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND = "A kért elem nem található";
-		
+	
+	public static final DateTimeFormatter HUNGARIAN_DATE_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
 }

@@ -43,6 +43,9 @@ public class CompletedTrainingManagerTest {
 	public static final Long USER_NOT_ELIGIBLE = 15L;
 	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
+	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
+
+	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
 		VALID_DATE = dt.toDate();
@@ -99,12 +102,12 @@ public class CompletedTrainingManagerTest {
 		hasEmailUsers.add(curUsr);
 		
 		TraineesEligibleForTrainingDto traineesEligibleForTrainingDto = new TraineesEligibleForTrainingDto(hasEmailUsers, new ArrayList<UserDto>());
-		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(TRAINING_TYPE_ID_ELIGIBLE)).thenReturn(traineesEligibleForTrainingDto);
-		boolean result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_ELIGIBLE, TRAINING_TYPE_ID_ELIGIBLE, VALID_DATE));
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_ELIGIBLE, TRAINING_COMPL_DATE)).thenReturn(traineesEligibleForTrainingDto);
+		boolean result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_ELIGIBLE, TRAINING_TYPE_ID_ELIGIBLE, VALID_DATE), TRAINING_COMPL_DATE);
 		assertTrue("User sould be eligible", result);
 		
-		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(TRAINING_TYPE_ID_NOT_ELIGIBLE)).thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
-		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_DATE));
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_NOT_ELIGIBLE, TRAINING_COMPL_DATE)).thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
+		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_DATE), TRAINING_COMPL_DATE);
 		assertFalse("User souldn't be eligible", result);
 	}
 }
