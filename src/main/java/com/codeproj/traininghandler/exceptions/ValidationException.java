@@ -9,7 +9,6 @@ public class ValidationException extends Exception {
 	}
 
 	public ValidationException(String message) {
-		//TODO: place all messages to the constant class
 		super(message);
 	}
 	
