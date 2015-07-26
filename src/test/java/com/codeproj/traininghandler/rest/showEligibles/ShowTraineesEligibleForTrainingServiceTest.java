@@ -57,37 +57,23 @@ public class ShowTraineesEligibleForTrainingServiceTest {
 		onlyPhoneUserList.add(onlyPhoneUser);
 		
 		REF_ELIGIBLE_DTO = new TraineesEligibleForTrainingDto(hasEmailUserList, onlyPhoneUserList);
-		when(manager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(EXISTING_TRAINING_TYPE_ID, TRAINING_COMPL_DATE)).thenReturn(REF_ELIGIBLE_DTO);
+		DateTime complDateTime = new DateTime().withTimeAtStartOfDay();
+		when(manager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(EXISTING_TRAINING_TYPE_ID, complDateTime)).thenReturn(REF_ELIGIBLE_DTO);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateTrTypeDoesntExist() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(NOT_EXISTING_TRAINING_TYPE_ID, TRAINING_COMPL_DATE_STR);
+		service.getEligibleTraineesByTrainingTypeId(NOT_EXISTING_TRAINING_TYPE_ID);
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateTrTypeIdIsNull() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(null, TRAINING_COMPL_DATE_STR);
+		service.getEligibleTraineesByTrainingTypeId(null);
 	}
-	
-	@Test(expected = ValidationException.class)
-	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateComplDateIsNull() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, null);
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateComplDateIsInInvalidFormat1() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, "notvaliddate");
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateComplDateIsInInvalidFormat2() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, "01-2012-99");
-	}
-	
+		
 	@Test
 	public void testGetEligibleTraineesByTrainingTypeId() throws ValidationException {
-		TraineesEligibleForTrainingDto result = service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, TRAINING_COMPL_DATE_STR);
+		TraineesEligibleForTrainingDto result = service.getEligibleTraineesByTrainingTypeId(EXISTING_TRAINING_TYPE_ID);
 		assertEquals("Service result is not as expected", REF_ELIGIBLE_DTO, result);
 	}
 

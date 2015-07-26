@@ -13,7 +13,6 @@ import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
 import com.codeproj.traininghandler.util.Constants;
-import com.codeproj.traininghandler.util.ThDateUtils;
 
 @RestController
 @RequestMapping("/manageTraining")
@@ -25,19 +24,17 @@ public class ShowTraineesEligibleForTrainingService {
 	@Autowired
 	ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager;
 
-	@RequestMapping(value="/getEligibleTraineesByTrainingTypeId/{trainingTypeId}/{trainingComplDate}", method = RequestMethod.GET,headers="Accept=application/json")
-	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeIdAndComplDate(@PathVariable("trainingTypeId") Long trainingTypeId, 
-			@PathVariable("trainingComplDate")  String trainingComplDateAttr) throws ValidationException {
+	@RequestMapping(value="/getEligibleTraineesByTrainingTypeId/{trainingTypeId}", method = RequestMethod.GET,headers="Accept=application/json")
+	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(@PathVariable("trainingTypeId") Long trainingTypeId) throws ValidationException {
 		
-		ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId, trainingComplDateAttr);
+		ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId);
 		
-		DateTime trainingComplDate = ThDateUtils.convertStringDateToDateTime(trainingComplDateAttr);
 		try {
 			trainingTypeService.getTrainingTypeById(trainingTypeId);
 		} catch (DatabaseEntityNotFoundException | ValidationException ex) {
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
 		}
-		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, trainingComplDate);
+		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, new DateTime().withTimeAtStartOfDay());
 	}
 
 	public void setTrainingTypeService(TrainingTypeService trainingTypeService) {
