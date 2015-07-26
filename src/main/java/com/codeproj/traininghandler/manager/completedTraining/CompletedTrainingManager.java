@@ -47,8 +47,10 @@ public class CompletedTrainingManager {
 		return result;
 	}
 
-	public boolean isUserEligibleToAddTraining(CompletedUserTrainingDto complatedUserTrainingDto, DateTime trainingComplDate) {
-		TraineesEligibleForTrainingDto eligibleTrainees = showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(complatedUserTrainingDto.getTrainingTypeId(), trainingComplDate);
+	public boolean isUserEligibleToAddTraining(CompletedUserTrainingDto complatedUserTrainingDto) {
+		TraineesEligibleForTrainingDto eligibleTrainees = 
+				showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(
+						complatedUserTrainingDto.getTrainingTypeId(), new DateTime(complatedUserTrainingDto.getCompletedDate()));
 		List<UserDto> allUserList = new ArrayList<>();
 		allUserList.addAll(eligibleTrainees.getHasEmailUsers());
 		allUserList.addAll(eligibleTrainees.getOnlyPhoneUsers());

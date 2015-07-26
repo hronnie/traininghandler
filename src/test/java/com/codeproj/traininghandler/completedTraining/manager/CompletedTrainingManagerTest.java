@@ -102,12 +102,14 @@ public class CompletedTrainingManagerTest {
 		hasEmailUsers.add(curUsr);
 		
 		TraineesEligibleForTrainingDto traineesEligibleForTrainingDto = new TraineesEligibleForTrainingDto(hasEmailUsers, new ArrayList<UserDto>());
-		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_ELIGIBLE, TRAINING_COMPL_DATE)).thenReturn(traineesEligibleForTrainingDto);
-		boolean result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_ELIGIBLE, TRAINING_TYPE_ID_ELIGIBLE, VALID_DATE), TRAINING_COMPL_DATE);
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_ELIGIBLE, TRAINING_COMPL_DATE))
+				.thenReturn(traineesEligibleForTrainingDto);
+		boolean result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_ELIGIBLE, TRAINING_TYPE_ID_ELIGIBLE, TRAINING_COMPL_DATE.toDate()));
 		assertTrue("User sould be eligible", result);
 		
-		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_NOT_ELIGIBLE, TRAINING_COMPL_DATE)).thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
-		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_DATE), TRAINING_COMPL_DATE);
+		when(showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(TRAINING_TYPE_ID_NOT_ELIGIBLE, TRAINING_COMPL_DATE))
+				.thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
+		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, TRAINING_COMPL_DATE.toDate()));
 		assertFalse("User souldn't be eligible", result);
 	}
 }

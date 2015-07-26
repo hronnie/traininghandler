@@ -82,11 +82,6 @@ public class ShowTraineesEligibleForTrainingServiceTest {
 	
 	@Test(expected = ValidationException.class)
 	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateComplDateIsInInvalidFormat2() throws ValidationException {
-		service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, "2015-99-99");
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testGetEligibleTraineesByTrainingTypeIdAndComplDateComplDateIsInInvalidFormat3() throws ValidationException {
 		service.getEligibleTraineesByTrainingTypeIdAndComplDate(EXISTING_TRAINING_TYPE_ID, "01-2012-99");
 	}
 	
