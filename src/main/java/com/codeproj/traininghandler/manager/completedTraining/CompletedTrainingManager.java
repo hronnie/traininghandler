@@ -3,6 +3,7 @@ package com.codeproj.traininghandler.manager.completedTraining;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,7 +48,9 @@ public class CompletedTrainingManager {
 	}
 
 	public boolean isUserEligibleToAddTraining(CompletedUserTrainingDto complatedUserTrainingDto) {
-		TraineesEligibleForTrainingDto eligibleTrainees = showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(complatedUserTrainingDto.getTrainingTypeId());
+		TraineesEligibleForTrainingDto eligibleTrainees = 
+				showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(
+						complatedUserTrainingDto.getTrainingTypeId(), new DateTime(complatedUserTrainingDto.getCompletedDate()));
 		List<UserDto> allUserList = new ArrayList<>();
 		allUserList.addAll(eligibleTrainees.getHasEmailUsers());
 		allUserList.addAll(eligibleTrainees.getOnlyPhoneUsers());

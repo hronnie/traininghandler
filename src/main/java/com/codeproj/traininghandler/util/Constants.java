@@ -1,5 +1,8 @@
 package com.codeproj.traininghandler.util;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 public class Constants {
 	public static final String GLOBAL_DEFAULT_LOCALE = "hu_HU";
 	
@@ -27,7 +30,7 @@ public class Constants {
 	public static final int EXCEL_NUMBER_OF_DATA_ROWS = 5;
 	
 	public static final String EXCEL_TRAINING_MISSING_EMAIL_DOMAIN = "@nincs.com";
-	public static final String EXCEL_TRAINING_MISSING_EMAIL = "nincs";
+	public static final String EXCEL_TRAINING_MISSING_EMAIL = "none";
 	
 	
 	public static final String VALIDATION_EXCEL_PROBLEM_DURING_OPENING_EXCEL = "Hiba történt az excel olvasása közben. Kérlek ellenőrízd, hogy nem sérült e a fájl. Előfordulhat, hogy nem excel fájlt próbáltál beimportálni.";
@@ -37,6 +40,9 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_FILE = "Nem talalom az excel fajlt";
+	public static final String VALIDATION_EXCEL_IMPORT_IVALID_CONTENT = "A név kitöltése mindig kötelező";
+	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE = "A következő tanítványnak nincs meg a megfelelő előfeltétele a tanfolyamhoz vagy már hozzá lett adva: ";
+	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE_INFO = "\nAz előtte lévő tanítványokat sikeresen hozzáadtam. (Nem kell kitörölni azokat az ismételt próbálkozásnál, mert nem fogja a rendszer kétszer hozzáadni)";
 	
 	public static final String VALIDATION_EXCEL_EMPTY_LIST = "Ures lista";
 	public static final String VALIDATION_EXCEL_IMPORT_NAME_EMPTY = "A nev nem lehet ures";
@@ -58,6 +64,23 @@ public class Constants {
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_300 = "Lorem ipsum dolor sit amet, consectetur "
 							+ "adipiscing elit. Aliquam nec blandit dolor. Aenean at volutpat ipsum, quis dignissim nisi. Ut "
 							+ "sed arcu elementum, dignissim nisl a, adipiscing tortor. Nullam sit amet risus faucibus, luctus turpis ut, rhoncus massa. Sed mollis justo dapibus faucibus turpis duis. ";
+	
+	public static final String VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST = "Hiba történt az adatok lekérése közben!";
+	public static final String VALIDATION_ERR_MSG_MISSING_PREREQUISITE = "Ez a tanítvány még nem rendelkezik a megfelelő előfeltételekkel: ";
+	public static final String VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST = "A tanfolyam típus nem létezik";
+	public static final String VALIDATION_ERR_MSG_TRAINING_TYPE_HAS_NOT_FOUND = "A tanfolyam típus nem létezik";
+	public static final String VALIDATION_ERR_MSG_MANDATORY_PARAMETER = "Ezt a paramétert kötelező megadni: ";
+	public static final String VALIDATION_ERR_MSG_PARAMETER_TOO_LONG = " túl hosszú. A maximum hosszúság: ";
+	public static final String VALIDATION_ERR_MSG_EMAIL_INVALID = "Az email nem megfelelő formátumú";
+	public static final String VALIDATION_DATE_NOT_VALID_1 = "A megadott idő: ";
+	public static final String VALIDATION_DATE_NOT_VALID_2 = " nem lehet régebbi, mint ";
+	public static final String VALIDATION_DATE_IN_THE_FUTURE_1 = "A megadott idő: ";
+	public static final String VALIDATION_DATE_IN_THE_FUTURE_2 = " nem lehet a jövőben";
+	public static final String VALIDATION_TRAINING_COMPLETION_DATE = "Tanfolyam elvégzési ideje";
+	public static final String VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND = "A kért elem nem található";
+	public static final String VALIDATION_ERR_MSG_TRAINING_COMPLETED_DATE_INVALID = "A megadott dátum érvénytelen";
+	
+	public static final DateTimeFormatter HUNGARIAN_DATE_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
 
 	public static final int DB_USER_USER_TYPE_ID_TRAINEE = 4;
 }

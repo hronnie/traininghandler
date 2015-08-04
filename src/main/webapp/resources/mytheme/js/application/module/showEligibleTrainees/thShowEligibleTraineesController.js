@@ -19,12 +19,12 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 	$scope.isResultEmpty = false;
 	
 	//trainingTypeArray = thTrainingTypeService.getAllTrainingType();
-	$scope.getEligibleTrainees = function(trainingTypeId) {
+	$scope.getEligibleTrainees = function(trainingType) {
 		$scope.isResultEmpty = false;
-		if (!trainingTypeId) {
+		if (!trainingType) {
 			return;
 		}
-		var eligibleTraineesResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/manageTraining/getEligibleTraineesByTrainingTypeId/' + trainingTypeId.id);
+		var eligibleTraineesResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/manageTraining/getEligibleTraineesByTrainingTypeId/' + trainingType.id);
 		eligibleTraineesResource.get().then(function(eligibleTrinees) {
 			$scope.hasEmailUsers = eligibleTrinees.hasEmailUsers;
 			$scope.onlyPhoneUsers = eligibleTrinees.onlyPhoneUsers;

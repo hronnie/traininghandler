@@ -19,8 +19,8 @@ import com.codeproj.traininghandler.dto.UserDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.rest.address.AddressService;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
-import com.codeproj.traininghandler.util.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -34,6 +34,8 @@ public class UserServiceTest {
 	public static final String INVALID_EMAIL = "simpletext";
 	public static final String EMAIL_WHICH_DOESNT_EXIST = "idontexist@nonexist.com";
 	public static final String EMAIL_WHICH_EXISTS = "idoexist@exist.com";
+	public static final String NAME_WHICH_DOESNT_EXIST = "Name Doesnt Exist";
+	public static final String NAME_WHICH_EXISTS = "Name Exist";
 	public static final Date VALID_DOB;
 	public static final Long VALID_ADDRESS_ID = 1L;
 	
@@ -62,8 +64,10 @@ public class UserServiceTest {
 		service.setUserManager(userManager);
 		service.setAddressService(addressService);
 		when(userManager.create(VALID_LAST_NAME + VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID)).thenReturn(1L);
-		when(userManager.getUserIdByEmail(EMAIL_WHICH_DOESNT_EXIST)).thenReturn(new Long(-1));
-		when(userManager.getUserIdByEmail(EMAIL_WHICH_EXISTS)).thenReturn(new Long(1));
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_EXISTS)).thenReturn(new Long(-1));
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_DOESNT_EXIST)).thenReturn(new Long(-1));
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_DOESNT_EXIST)).thenReturn(new Long(-1));
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_EXISTS)).thenReturn(new Long(1));
 		when(addressService.createFromForm(new AddressDto(VALID_POSTCODE, VALID_ADDRESS))).thenReturn(new GeneralIdResponse(1L));
 	}
 
@@ -94,30 +98,6 @@ public class UserServiceTest {
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullDisplayName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, null, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullDob() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, null, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullPhoneNumber() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, null, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test
-	public void testCreateUserWithNullEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, null, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test(expected = ValidationException.class)
 	public void testCreateUserWithNullAddressId() throws ValidationException {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, null);
 		service.create(user);
@@ -135,24 +115,6 @@ public class UserServiceTest {
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithEmptyFirstName() throws ValidationException {
 		UserDto user = new UserDto(VALID_LAST_NAME, "", VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithEmptyDisplayName() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, "", VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithEmptyPhoneNumber() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, "", VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
-	}
-	
-	@Test
-	public void testCreateUserWithEmptyEmail() throws ValidationException {
-		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, "", VALID_ADDRESS_ID);
 		service.create(user);
 	}
 	
@@ -210,13 +172,17 @@ public class UserServiceTest {
 		service.create(user);
 	}
 	
-	// get user by email
-	
+	// get user by email and name
+
 	@Test
 	public void testGetUserIdByEmail() {
-		GeneralIdResponse serviceResult = service.getUserIdByEmail(EMAIL_WHICH_DOESNT_EXIST);
-		assertEquals("user id should be -1 for non existing user", new Long(-1L), serviceResult.getValue());
-		serviceResult = service.getUserIdByEmail(EMAIL_WHICH_EXISTS);
+		GeneralIdResponse serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_EXISTS);
+		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_DOESNT_EXIST);
+		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_DOESNT_EXIST);
+		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_EXISTS);
 		assertEquals("user id should be 1 for existing user", new Long(1L), serviceResult.getValue());
 	}
 	
@@ -225,14 +191,9 @@ public class UserServiceTest {
 	@Test
 	public void testCreateUserWithAddress() throws ValidationException {
 		when(userManager.create(VALID_NAME, null, null, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST, 1L)).thenReturn(5L);
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, VALID_NAME)).thenReturn(-1L);
 		Long result = service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
 		assertEquals("user id should be 5 ", new Long(5L), result);
-		
-		String phoneEmail = VALID_NUMERIC_PHONE_NO + Constants.EXCEL_TRAINING_MISSING_EMAIL_DOMAIN;
-		when(userManager.create(VALID_NAME, null, null, VALID_NUMERIC_PHONE_NO, phoneEmail, 1L)).thenReturn(6L);
-		when(userManager.getUserIdByEmail(phoneEmail)).thenReturn(-1L);
-		result = service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_NUMERIC_PHONE_NO, null));
-		assertEquals("user id should be 6 ", new Long(6L), result);
 	}
 	
 	@Test(expected = ValidationException.class)
@@ -242,34 +203,26 @@ public class UserServiceTest {
 	
 	@Test
 	public void testCreateUserWithAddressExistingUser() throws ValidationException {
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, VALID_NAME)).thenReturn(1L);
 		Long result = service.createUserWithAddress(VALID_TRAINING_EXCEL_ITEM);
 		assertEquals("user id should be 1 for existing user", new Long(1L), result);
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithAddressEmptyName() throws ValidationException {
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, "")).thenReturn(-1L);
 		service.createUserWithAddress(new TrainingExcelDto("", VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
 	}
 	
 	@Test(expected = ValidationException.class)
 	public void testCreateUserWithAddressNullName() throws ValidationException {
+		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, null)).thenReturn(-1L);
 		service.createUserWithAddress(new TrainingExcelDto(null, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
 	}
 	
 	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressEmptyPhoneNo() throws ValidationException {
-		service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, "", EMAIL_WHICH_DOESNT_EXIST));
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressNullPhoneNo() throws ValidationException {
-		service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, "", EMAIL_WHICH_DOESNT_EXIST));
-	}
-	
-	
-	@Test(expected = ValidationException.class)
 	public void testCreateUserWithAddressInvalidEmail() throws ValidationException {
-		when(userManager.getUserIdByEmail(INVALID_EMAIL)).thenReturn(-1L);
+		when(userManager.getUserIdByEmailAndName(INVALID_EMAIL, VALID_NAME)).thenReturn(-1L);
 		service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, INVALID_EMAIL));
 	}
 }

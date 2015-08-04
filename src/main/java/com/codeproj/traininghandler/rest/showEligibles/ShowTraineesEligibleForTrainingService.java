@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.rest.showEligibles;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
+import com.codeproj.traininghandler.util.Constants;
 
 @RestController
 @RequestMapping("/manageTraining")
@@ -24,12 +26,15 @@ public class ShowTraineesEligibleForTrainingService {
 
 	@RequestMapping(value="/getEligibleTraineesByTrainingTypeId/{trainingTypeId}", method = RequestMethod.GET,headers="Accept=application/json")
 	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(@PathVariable("trainingTypeId") Long trainingTypeId) throws ValidationException {
+		
+		ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId);
+		
 		try {
 			trainingTypeService.getTrainingTypeById(trainingTypeId);
 		} catch (DatabaseEntityNotFoundException | ValidationException ex) {
-			throw new ValidationException("Training type doesn't exist");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
 		}
-		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeId(trainingTypeId);
+		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, new DateTime().withTimeAtStartOfDay());
 	}
 
 	public void setTrainingTypeService(TrainingTypeService trainingTypeService) {
@@ -40,7 +45,4 @@ public class ShowTraineesEligibleForTrainingService {
 			ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager) {
 		this.showTraineesEligibleForTrainingManager = showTraineesEligibleForTrainingManager;
 	}
-
-
-
 }

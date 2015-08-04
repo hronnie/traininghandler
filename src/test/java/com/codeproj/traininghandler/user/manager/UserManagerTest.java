@@ -27,6 +27,7 @@ public class UserManagerTest {
 	public static final String TEST_NAME = "Test Name";
 	public static final String TEST_EMAIL = "test@example.com";
 	public static final String TEST_MOBILE_NO = "235435-345";
+	public static final String VALID_NAME = "Valid Name";
 	
 	static {
 		DateTime dt = new DateTime(2000, 3, 26, 12, 0, 0, 0);
@@ -42,7 +43,7 @@ public class UserManagerTest {
 		manager = new UserManager();
 		manager.setUserDAO(userDAO);
 		when(userDAO.create(new User("name", "displayName", VALID_DATE, "324234315", "a@b.com", 1L))).thenReturn(1L);
-		when(userDAO.getUserIdByEmail(VALID_EMAIL)).thenReturn(1L);
+		when(userDAO.getUserIdByEmailAndName(VALID_EMAIL, VALID_NAME)).thenReturn(1L);
 		when(userDAO.getUserByUserId(TEST_USER_ID)).thenReturn(TEST_USER_MODEL);
 		when(userDAO.edit(TEST_USER_MODEL)).thenReturn(true);
 	}
@@ -54,8 +55,8 @@ public class UserManagerTest {
 	}
 	
 	@Test
-	public void testGetUserIdByEmail() {
-		Long result = manager.getUserIdByEmail(VALID_EMAIL);
+	public void testGetUserIdByEmailAndName() {
+		Long result = manager.getUserIdByEmailAndName(VALID_EMAIL, VALID_NAME);
 		assertEquals("Getting user id failed", new Long(1L), result);
 	}
 	

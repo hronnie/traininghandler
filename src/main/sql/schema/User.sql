@@ -8,7 +8,7 @@ CREATE TABLE User (
     name VARCHAR(100) NOT NULL,
     userName VARCHAR(30) NULL UNIQUE,
     dob DATETIME NULL,
-    email VARCHAR(80) NOT NULL UNIQUE,
+    email VARCHAR(80) NOT NULL,
     mobileNo VARCHAR(50) NULL,
     isEnabled BIT(1) NOT NULL DEFAULT b'1',
     addressId BIGINT(20) NOT NULL,

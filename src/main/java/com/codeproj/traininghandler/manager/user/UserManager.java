@@ -21,8 +21,8 @@ public class UserManager {
 		return userDAO.create(newUser);
 	}
 
-	public Long getUserIdByEmail(String email) {
-		return userDAO.getUserIdByEmail(email);
+	public Long getUserIdByEmailAndName(String email, String name) {
+		return userDAO.getUserIdByEmailAndName(email, name);
 	}
 
 	public User getUserByUserId(Long userId) {

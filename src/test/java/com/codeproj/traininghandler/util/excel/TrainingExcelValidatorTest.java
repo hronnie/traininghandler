@@ -1,9 +1,14 @@
 package com.codeproj.traininghandler.util.excel;
 
-import static org.junit.Assert.*;
-import static com.codeproj.traininghandler.util.Constants.*;
+import static com.codeproj.traininghandler.util.Constants.PARAMETER_STRING_SIZE_MORE_THEN_300;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_IMPORT_INVALID_DAY;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_IMPORT_INVALID_FILE;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_IMPORT_INVALID_MONTH;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_IMPORT_INVALID_TRAINING_TYPE_ID;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_EXCEL_IMPORT_INVALID_YEAR;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,8 +17,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.multipart.MultipartFile;
-
-import static org.mockito.Mockito.when;
 
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 
@@ -92,55 +95,6 @@ public class TrainingExcelValidatorTest {
 	
 	public List<TrainingExcelDto> trainingAttendendList;
 
-	@Test
-	public void testValidateTrainingExcelListMethod() {
-		assertEquals("Validation result should return: VALIDATION_EXCEL_EMPTY_LIST", VALIDATION_EXCEL_EMPTY_LIST, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList = new ArrayList<>();
-		assertEquals("Validation result should return: VALIDATION_EXCEL_EMPTY_LIST", VALIDATION_EXCEL_EMPTY_LIST, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_NAME);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_NAME_EMPTY", VALIDATION_EXCEL_IMPORT_NAME_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_NAME);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_NAME_EMPTY", VALIDATION_EXCEL_IMPORT_NAME_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_NAME);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG", VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_POST_CODE);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY", VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_POST_CODE);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY", VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_POST_CODE);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG", VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_ADDRESS);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY", VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_ADDRESS);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY", VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_ADDRESS);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG", VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_EMPTY_PHONE_NO);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY", VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_NULL_PHONE_NO);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY", VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_PHONE_NO);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG", VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_INVALID_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_INVALID", VALIDATION_EXCEL_IMPORT_EMAIL_INVALID, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-		trainingAttendendList.add(INVALID_EXCEL_DTO_LONG_EMAIL);
-		assertEquals("Validation result should return: VALIDATION_EXCEL_IMPORT_EMAIL_INVALID + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG", VALIDATION_EXCEL_IMPORT_EMAIL_INVALID + VALIDATION_EXCEL_SEPARATOR + VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG, TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList));
-		trainingAttendendList.clear();
-	}
-	
 	@Test
 	public void testValidateImportExcelInputParamsMethod() {
 		assertEquals("Validation result should be empty string", "", TrainingExcelValidator.validateImportExcelInputParams(VALID_TRAINING_TYPE, VALID_YEAR, VALID_MONTH1, VALID_DAY1, importFile));

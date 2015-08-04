@@ -10,7 +10,7 @@ import com.codeproj.traininghandler.model.User;
 public interface UserDAO {
 	public Long create(User user);
 
-	public Long getUserIdByEmail(String email);
+	public Long getUserIdByEmailAndName(String email, String name);
 
 	public User getUserByUserId(Long testUserId);
 

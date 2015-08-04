@@ -23,10 +23,9 @@ public class ShowTraineesEligibleForTrainingManager {
 	@Autowired
 	CompletedTrainingManager completedTrainingManager;
 
-	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(Long trainingTypeId) {
-		//TODO: check with custom date not just for today
-		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingId(trainingTypeId);
-		List<TrainingTypePrerequisite> trainingPrerequisites = generatePrerequiseteDates(prerequisites);
+	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(Long trainingTypeId, DateTime trainingComplDate) {
+		List<TrainingPrerequisite> prerequisites = showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingTypeId(trainingTypeId);
+		List<TrainingTypePrerequisite> trainingPrerequisites = generatePrerequiseteDates(prerequisites, trainingComplDate);
 		List<User> allUsers = showTraineesEligibleForTrainingDAO.getEligibleTrainees(trainingPrerequisites);
 		filterAlreadyCompletedUsers(allUsers, trainingTypeId);
 		
@@ -35,7 +34,7 @@ public class ShowTraineesEligibleForTrainingManager {
 		sortUsersByHaveEmailOrNot(allUsers, hasEmailUsers, onlyPhoneUsers);
 		return new TraineesEligibleForTrainingDto(hasEmailUsers, onlyPhoneUsers);
 	}
-	
+
 	private void filterAlreadyCompletedUsers(List<User> allUsers, Long trainingTypeId) {
 		List<Long> alreadyCompletedUsers = completedTrainingManager.getUsersWhoCompletedTrainingType(trainingTypeId);
 		List<User> filterOutTheseUsersList = new ArrayList<>();
@@ -53,7 +52,7 @@ public class ShowTraineesEligibleForTrainingManager {
 			return;
 		}
 		for (User item : allUsers) {
-			if (ThStringUtils.isEmailPhoneEmail(item.getEmail())) {
+			if (ThStringUtils.isFakeEmail(item.getEmail())) {
 				onlyPhoneUsers.add(convertUserToDto(item));
 				continue;
 			}
@@ -72,20 +71,24 @@ public class ShowTraineesEligibleForTrainingManager {
 	}
 
 	private List<TrainingTypePrerequisite> generatePrerequiseteDates
-			(List<TrainingPrerequisite> prerequisites) {
+			(final List<TrainingPrerequisite> prerequisites, final DateTime complDate) {
 		
 		List<TrainingTypePrerequisite> result = new ArrayList<>();
 		for (TrainingPrerequisite item : prerequisites) {
-			DateTime complDate = new DateTime();
-			complDate = complDate.minusMonths(item.getBetweenMonth());
 			Long prerequisiteTrainingTypeId = item.getPrerequisiteTrainingTypeId();
-			TrainingTypePrerequisite ttPrereq = new TrainingTypePrerequisite(prerequisiteTrainingTypeId, complDate.toDate());
+			TrainingTypePrerequisite ttPrereq = new TrainingTypePrerequisite(prerequisiteTrainingTypeId, complDate.minusMonths(item.getBetweenMonth()).toDate());
 			result.add(ttPrereq);
 		}
 		
 		return result;
 	}
+	
+	public List<TrainingPrerequisite> getPrerequisitesByTrainingTypeId(Long trainingTypeId) {
+		return showTraineesEligibleForTrainingDAO.getPrerequisitesByTrainingTypeId(trainingTypeId);
+	}
 
+	// accessors
+	
 	public void setShowTraineesEligibleForTrainingDAO(
 			ShowTraineesEligibleForTrainingDAO showTraineesEligibleForTrainingDAO) {
 		this.showTraineesEligibleForTrainingDAO = showTraineesEligibleForTrainingDAO;
@@ -95,5 +98,4 @@ public class ShowTraineesEligibleForTrainingManager {
 			CompletedTrainingManager completedTrainingManager) {
 		this.completedTrainingManager = completedTrainingManager;
 	}
-
 }

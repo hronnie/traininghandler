@@ -3,6 +3,8 @@ package com.codeproj.traininghandler.dto;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.StringUtils;
+
 @XmlRootElement(name="trainingExcelDto")
 public class TrainingExcelDto {
 	private String name;
@@ -137,5 +139,36 @@ public class TrainingExcelDto {
 		return "TrainingExcelDto [name=" + name + ", postCode=" + postCode
 				+ ", address=" + address + ", phoneNo=" + phoneNo + ", email="
 				+ email + "]";
+	}
+	
+	public String toStringUserFriendly() {
+		StringBuffer sb = new StringBuffer();
+		if (!StringUtils.isEmpty(name)) {
+			sb.append("Név: ");
+			sb.append(name);
+			sb.append(", ");
+		}
+		if (!StringUtils.isEmpty(postCode)) {
+			sb.append("Irányítószám");
+			sb.append(postCode);
+			sb.append(", ");
+		}
+		if (!StringUtils.isEmpty(address)) {
+			sb.append("Cím:");
+			sb.append(address);
+			sb.append(", ");
+		}
+		if (!StringUtils.isEmpty(phoneNo)) {
+			sb.append("Telefonszám: ");
+			sb.append(phoneNo);
+			sb.append(", ");
+		}
+		if (!StringUtils.isEmpty(email)) {
+			sb.append("Email:");
+			sb.append(email);
+			sb.append(", ");
+		}
+		
+		return sb.toString().substring(0, sb.length() - 2);
 	}
 }

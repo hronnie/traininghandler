@@ -57,10 +57,10 @@ public class ShowEligibleUsersIT extends GenericAPITest {
         assertEquals("The number of phone users is incorrectq", 4, phoneUsers.size());
         
         UserDto user6 = phoneUsers.get(0);
-        assertEquals("Got an unexpected user (wrong name)", "No training", user6.getName());
+        assertEquals("Got an unexpected user (wrong name)", "No training4", user6.getName());
         assertEquals("Got an unexpected user (wrong phone number)", "444444444", user6.getPhoneNo());
         UserDto user7 = phoneUsers.get(1);
-        assertEquals("Got an unexpected user (wrong name)", "No training", user7.getName());
+        assertEquals("Got an unexpected user (wrong name)", "No training5", user7.getName());
         assertEquals("Got an unexpected user (wrong phone number)", "5555555551", user7.getPhoneNo());
         UserDto user8 = phoneUsers.get(2);
         assertEquals("Got an unexpected user (wrong name)", "5os es tk1 any tanfolyam nev4", user8.getName());
@@ -79,6 +79,7 @@ public class ShowEligibleUsersIT extends GenericAPITest {
 		TraineesEligibleForTrainingDto response = restTemplate.getForObject(getResource("showEligibleTrainees.get.url") + "/2", TraineesEligibleForTrainingDto.class);
 		List<UserDto> emailUsers = response.getHasEmailUsers();
 		List<UserDto> phoneUsers = response.getOnlyPhoneUsers();
+		//Update CompletedUserTrainingData.sql for 2nd training now if it fails
 		assertEquals("The number of email users is incorrectq", 3, emailUsers.size());
 		assertEquals("The number of phone users is incorrectq", 2, phoneUsers.size());
 		

@@ -2,24 +2,26 @@ package com.codeproj.traininghandler.util;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
+import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.validator.EmailValidator;
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
 public class ValidatorBaseUtility {
+	private static final Logger logger = Logger.getLogger(ValidatorBaseUtility.class);
+
 	public static void mandatoryParameter(String name, Object object)
 			throws ValidationException {
 		if (object == null) {
-			throw new ValidationException("Mandatory parameter " + name
-					+ " is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_MANDATORY_PARAMETER + name);
 		} else if (object instanceof String) {
 			if (((String) object).trim().isEmpty()) {
-				throw new ValidationException("Mandatory parameter " + name
-						+ " is empty");
+				throw new ValidationException(Constants.VALIDATION_ERR_MSG_MANDATORY_PARAMETER + name);
 			}
 		}
 	}
@@ -30,8 +32,8 @@ public class ValidatorBaseUtility {
 			return;
 		}
 		if (strAttr.length() > maxLength) {
-			throw new ValidationException("Parameter " + name
-					+ " is too long! Maximum length is " + maxLength);
+			throw new ValidationException(name
+					+ Constants.VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + maxLength);
 		}
 	}
 
@@ -101,13 +103,14 @@ public class ValidatorBaseUtility {
 	
 	public static void entityIdValidator(Long id) throws ValidationException {
 		if (id == null || id < 1) {
-			throw new ValidationException("Id parameter: " + id + " is not valid. Cannot be null or less then 1");
+			logger.error("Id parameter: " + id + " is not valid. Cannot be null or less then 1");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 	}
 	
 	public static void emailValidator(String email) throws ValidationException {
 		if (!isValidEmailAddress(email)) {
-			throw new ValidationException("Email parameter: " + email + " is not valid.");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_EMAIL_INVALID);
 		}
 	}
 	
@@ -115,14 +118,14 @@ public class ValidatorBaseUtility {
 		DateTime curDate = new DateTime();
 		curDate = curDate.minusYears(year);
 		if (curDate.isBefore(date.getTime())) {
-			throw new ValidationException("The given date: " + date + " must be older then " + year + " years");
+			throw new ValidationException(Constants.VALIDATION_DATE_NOT_VALID_1 + date + Constants.VALIDATION_DATE_NOT_VALID_2 + year);
 		}
 	}
 	
 	public static void isDateInTheFuture(Date date) throws ValidationException {
 		DateTime curDate = new DateTime();
 		if (curDate.isBefore(date.getTime())) {
-			throw new ValidationException("The given date: " + date + " must be in the past.");
+			throw new ValidationException(Constants.VALIDATION_DATE_IN_THE_FUTURE_1 + date + Constants.VALIDATION_DATE_IN_THE_FUTURE_2);
 		}
 	}
 	
@@ -130,7 +133,7 @@ public class ValidatorBaseUtility {
 			List<CompletedUserTrainingDto> completedUserTrainingList) throws ValidationException {
 		for (CompletedUserTrainingDto compTr : completedUserTrainingList) {
 			entityIdValidator(compTr.getTrainingTypeId());
-			mandatoryParameter("Completed user training date", compTr.getCompletedDate());
+			mandatoryParameter(Constants.VALIDATION_TRAINING_COMPLETION_DATE, compTr.getCompletedDate());
 		}
 	}
 	

@@ -1,8 +1,8 @@
-INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (1,7,1,'2015-03-02 00:00:00');
-INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (2,8,1,'2015-03-02 00:00:00');
-INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (3,9,1,'2015-03-02 00:00:00');
-INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (4,10,1,'2015-03-02 00:00:00');
-INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (5,11,1,'2015-03-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (1,7,1,'2015-06-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (2,8,1,'2015-06-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (3,9,1,'2015-06-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (4,10,1,'2015-06-02 00:00:00');
+INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (5,11,1,'2015-06-02 00:00:00');
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (6,12,1,'2011-01-01 00:00:00');
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (7,13,1,'2011-01-01 00:00:00');
 INSERT INTO CompletedUserTraining (completedUserTrainingId,userId,trainingTypeId,completedDate) VALUES (8,14,1,'2011-01-01 00:00:00');

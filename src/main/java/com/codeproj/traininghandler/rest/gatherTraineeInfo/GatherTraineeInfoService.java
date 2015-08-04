@@ -17,6 +17,7 @@ import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 import com.codeproj.traininghandler.rest.user.UserService;
+import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
 //@RestController
@@ -37,7 +38,7 @@ public class GatherTraineeInfoService {
 			@RequestBody TraineePersonalAndTrainingInfoDto traineeInfoDto) throws ValidationException {
 		
 		if (traineeInfoDto == null) {
-			throw new ValidationException("trainee info dto is null");
+			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		GatherTraineeInfoValidator.saveTraineePersonalAndTrainingInfo(traineeInfoDto);

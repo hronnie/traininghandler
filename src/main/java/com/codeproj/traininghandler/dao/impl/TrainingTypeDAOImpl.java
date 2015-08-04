@@ -37,7 +37,7 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 		try {
 			sessionFactory.getCurrentSession().update(trainingType);
 		} catch (HibernateException e) {
-			throw new DatabaseEntityNotFoundException("The requested object cannot be found");
+			throw new DatabaseEntityNotFoundException();
 		}
 		return true;
 	}

@@ -74,12 +74,12 @@ $(document).ready(function() {
       <ul class="nav navbar-nav">
         <li class="headerLinkIcon"><a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.training.root" /> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false">Tanfolyamok <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href='<c:url value="/manageTraining/importTraining" />'><spring:message code="mainMenu.training.importTraining" /></a></li>
-            <li><a href='<c:url value="/manageTraining/addOneUserToTraining" />'><spring:message code="mainMenu.training.addOneUserToTraining" /></a></li>
+            <li><a href='<c:url value="/manageTraining/importTraining" />'>Importálás</a></li>
+            <li><a href='<c:url value="/manageTraining/addOneUserToTraining" />'>Egyenként hozzáadás</a></li>
             <li class="divider"></li>
-            <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />'><spring:message code="mainMenu.training.showEligibleTrainees" /></a></li>
+            <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />'>Meghívók</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -90,17 +90,16 @@ $(document).ready(function() {
         </li>
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false"><spring:message code="mainMenu.settings.root" /> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false">Beállítások <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href='<c:url value="/trainingType" />'><spring:message code="mainMenu.settings.trainingType.edit" /></a></li>
+            <li><a href='<c:url value="/trainingType" />'>Tanfolyam típusok szerkesztése</a></li>
           </ul>
         </li>
       </ul>
       
        <ul class="nav navbar-nav navbar-right">
-        <li><a href="javascript: toogleLanguage();" class="headerLink" id="changeLanguageLinkId">Angol</a></li>     
         <li><a href="#" class="headerLink">${username}</a></li>
-        <li><a href="<c:url value="/logout" />" class="headerLink"><spring:message code="mainMenu.logout" /></a></li>
+        <li><a href="<c:url value="/logout" />" class="headerLink">Kijelentkezés</a></li>
         <li class="headerLinkIcon"><a href="#" class="headerLink" id="trigger-overlay"><i class="fa fa-question fa-fw fa-2x"></i></a></li>
       </ul>
       

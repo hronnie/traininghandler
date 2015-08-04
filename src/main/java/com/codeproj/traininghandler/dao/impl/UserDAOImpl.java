@@ -3,6 +3,7 @@ package com.codeproj.traininghandler.dao.impl;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,12 +28,13 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	@Transactional
-	public Long getUserIdByEmail(String email) {
+	public Long getUserIdByEmailAndName(String email, String name) {
 		Session session = null;
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(User.class);
-			criteria.add(Restrictions.eq("email", email));
+			Criterion andRest = Restrictions.and(Restrictions.eq("email", email), Restrictions.eq("name", name));
+			criteria.add(andRest);
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			User user = (User)criteria.uniqueResult();
 			if (user == null) {

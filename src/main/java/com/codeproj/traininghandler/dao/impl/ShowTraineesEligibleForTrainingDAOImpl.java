@@ -34,7 +34,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<TrainingPrerequisite> getPrerequisitesByTrainingId(
+	public List<TrainingPrerequisite> getPrerequisitesByTrainingTypeId(
 			Long trainingTypeId) {
 		Session session = null;
 		try {
