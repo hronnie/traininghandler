@@ -42,6 +42,9 @@ public class CompletedTrainingService {
 	@RequestMapping(value="/createOne", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException  {
 		BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
+		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
+			return null;
+		}
 		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue() || !isUserEligibleToAddTraining(complatedUserTrainingDto)) {
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE + complatedUserTrainingDto.toString());
 		}
