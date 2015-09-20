@@ -1,0 +1,1 @@
+INSERT INTO UserRole VALUES (1, 1, 1); # ROLE_ADMIN
