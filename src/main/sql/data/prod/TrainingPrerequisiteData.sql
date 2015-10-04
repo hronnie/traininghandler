@@ -1,7 +1,7 @@
 INSERT INTO TrainingPrerequisite (trainingPrerequisiteId, dependentTrainingTypeId, prerequisiteTrainingTypeId, betweenMonth)
 VALUES 
-(1, 2, 1, 3),
-(2, 3, 2, 6),
+(1, 2, 1, 2),
+(2, 3, 2, 4),
 (3, 4, 3, 3),
 (4, 5, 3, 6),
 (5, 6, 5, 6),
