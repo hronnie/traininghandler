@@ -7,5 +7,5 @@ CREATE TABLE TrainingType (
     description VARCHAR(300) NULL,
 
     PRIMARY KEY (trainingTypeId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

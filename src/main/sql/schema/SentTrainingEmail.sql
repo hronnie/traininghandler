@@ -13,4 +13,4 @@ CREATE TABLE SentTrainingEmail (
     FOREIGN KEY FK_SentTrainingEmail_EmailTemplate (emailTemplateId) REFERENCES EmailTemplate(emailTemplateId),
     FOREIGN KEY FK_SentTrainingEmail_Training (trainingId) REFERENCES Training(trainingId),
     FOREIGN KEY FK_SentTrainingEmail_User (userId) REFERENCES User(userId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -9,5 +9,5 @@ CREATE TABLE UserLevel (
     PRIMARY KEY (userLevelId),
     FOREIGN KEY FK_UserLevel_User (userId) REFERENCES User(userId),
     FOREIGN KEY FK_UserLevel_TrainingType (trainingTypeId) REFERENCES TrainingType(trainingTypeId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

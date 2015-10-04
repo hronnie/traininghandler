@@ -18,4 +18,4 @@ CREATE TABLE User (
     PRIMARY KEY (userId),
     FOREIGN KEY FK_User_Address (addressId) REFERENCES Address(addressId),
     FOREIGN KEY FK_User_UserType (userTypeId) REFERENCES UserType(userTypeId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

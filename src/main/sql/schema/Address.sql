@@ -12,5 +12,5 @@ CREATE TABLE Address (
     isAppointmentPlace BIT(1) NOT NULL DEFAULT b'0',
 
     PRIMARY KEY (addressId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

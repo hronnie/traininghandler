@@ -14,4 +14,4 @@ CREATE TABLE Appointment (
     FOREIGN KEY FK_Appointment_User_healer (healerId) REFERENCES User(userId),
     FOREIGN KEY FK_Appointment_User_patient (patientId) REFERENCES User(userId),
     FOREIGN KEY FK_Appointment_Address (addressId) REFERENCES Address(addressId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

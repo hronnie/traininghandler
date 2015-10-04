@@ -6,5 +6,5 @@ CREATE TABLE EmailTemplate (
     body text NOT NULL,
 
     PRIMARY KEY (emailTemplateId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

@@ -9,4 +9,4 @@ CREATE TABLE TrainingPrerequisite (
     PRIMARY KEY (trainingPrerequisiteId),
     FOREIGN KEY FK_TrainingPrerequisite_TrainingType_Dep (dependentTrainingTypeId) REFERENCES TrainingType(trainingTypeId),
     FOREIGN KEY FK_TrainingPrerequisite_TrainingType_Pre (prerequisiteTrainingTypeId) REFERENCES TrainingType(trainingTypeId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
