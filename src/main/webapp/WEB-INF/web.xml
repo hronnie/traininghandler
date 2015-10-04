@@ -38,7 +38,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/pages/errors/error.jsp</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/pages/errors/404.jsp</location>
@@ -68,6 +68,21 @@
 
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>encoding-filter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding-filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
