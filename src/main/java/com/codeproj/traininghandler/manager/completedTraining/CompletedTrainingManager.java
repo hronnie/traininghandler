@@ -55,7 +55,7 @@ public class CompletedTrainingManager {
 		allUserList.addAll(eligibleTrainees.getHasEmailUsers());
 		allUserList.addAll(eligibleTrainees.getOnlyPhoneUsers());
 		for (UserDto item : allUserList) {
-			if (item.getUserId() == complatedUserTrainingDto.getUserId()) {
+			if (item.getUserId().equals(complatedUserTrainingDto.getUserId())) {
 				return true;
 			}
 		}

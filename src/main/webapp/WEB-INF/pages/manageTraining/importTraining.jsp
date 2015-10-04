@@ -25,6 +25,7 @@
 					<div class="alert alert-success">
 						<a href="#" class="close" data-dismiss="alert">&times;</a>
 						<spring:message code="importTraining.success.message" />
+						<c:out value="${excelFileName}" />
 					</div>
 				</c:when>
 			</c:choose>
@@ -32,7 +33,8 @@
 				<c:when test="${not empty validationMsg}">
 					<div class="alert alert-danger alert-error">
 						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<c:out value="${validationMsg}" />
+						<c:out value="${validationMsg}" /><br>
+						<c:out value="${excelFileName}" />
 					</div>
 				</c:when>
 			</c:choose>

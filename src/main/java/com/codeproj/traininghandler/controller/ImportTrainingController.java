@@ -70,7 +70,6 @@ public class ImportTrainingController {
 		ModelAndView mav = new ModelAndView("manageTraining/importTraining");
 		
 		String paramValidMsg = TrainingExcelValidator.validateImportExcelInputParams(trainingTypeId, year, month, day, importFile);
-		Long trainingTypeIdLong = new Long(trainingTypeId);
 		
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));
@@ -80,8 +79,10 @@ public class ImportTrainingController {
 			mav.addObject("validationMsg", paramValidMsg);
 			return mav;
 		}
+		Long trainingTypeIdLong = new Long(trainingTypeId);
 		
-		File file = new File(importFile.getOriginalFilename());
+		String excelFileName = importFile.getOriginalFilename();
+		File file = new File(excelFileName);
 		importFile.transferTo(file);
 		
 		String excelFileContentCorrectMsg = null;
@@ -101,7 +102,7 @@ public class ImportTrainingController {
 		try {
 			TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
 		} catch (ValidationException ve) {
-			mav.addObject("validationMsg", Constants.VALIDATION_EXCEL_IMPORT_IVALID_CONTENT);
+			mav.addObject("validationMsg", Constants.VALIDATION_EXCEL_IMPORT_IVALID_CONTENT); //TODO: wrong error message
 			return mav;
 		}
 		
@@ -132,6 +133,7 @@ public class ImportTrainingController {
 		
 		logger.debug("Processing POST request for importTraining page..");
 		mav.addObject("isImportSuccess", new Boolean(true));
+		mav.addObject("excelFileName", excelFileName);
 		return mav;
 	}
 

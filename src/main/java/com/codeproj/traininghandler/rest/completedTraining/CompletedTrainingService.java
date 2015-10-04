@@ -45,7 +45,7 @@ public class CompletedTrainingService {
 		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
 			return null;
 		}
-		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue() || !isUserEligibleToAddTraining(complatedUserTrainingDto)) {
+		if (!isUserEligibleToAddTraining(complatedUserTrainingDto)) {
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE + complatedUserTrainingDto.toString());
 		}
 		Long result = completedTrainingManager.create(complatedUserTrainingDto);
