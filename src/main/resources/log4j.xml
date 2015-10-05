@@ -21,7 +21,7 @@
 	</appender>
 
 	<appender name="TRAININGHANDLER_ROLLING_FILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/var/log/traininghandler/traininghandler.log" />
+		<param name="File" value="/var/log/vacikezelo/vacikezelo.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="30MB" />
 		<param name="MaxBackupIndex" value="5" />
@@ -31,7 +31,7 @@
 	</appender>
 	
 		<appender name="SQLROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/var/log/traininghandler/sql.log" />
+		<param name="File" value="/var/log/vacikezelo/sql.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%d{ISO8601}] %-5p %m%n" />
 		</layout>

@@ -7,6 +7,7 @@ MySQL 5.x
  - change connection parameters for DB in setup.sql, settings.xml (see also in Maven section), database.properties
  - Run setup.sql file for setting up local DB (you can change the DB name here)
  - Remove every test users and create admin users (UserData.sql) and generate encrypted password with PasswordEncoderGenerator class
+ - Add admin creditentials for the created admin users in UserRole table
  - in /traininghandler/src/main/webapp/WEB-INF/traininghandler-security.xml set DB creditentials for spring security
  - Set the correct character handling for the DB. Edit /etc/mysql/my.cnf: 
  add the following snippet after [mysqld] line: 
@@ -23,7 +24,7 @@ Add profile in ~/.m2/settings.xml:
 
     <profiles>
         <profile>
-            <id>mysql_th</id>
+            <id>[your profile name]</id>
             <properties>
                 <th.db.mysql.server.name>localhost</th.db.mysql.server.name>
                 <th.db.mysql.server.port>3306</th.db.mysql.server.port>
@@ -31,12 +32,12 @@ Add profile in ~/.m2/settings.xml:
                 <th.db.mysql.dummydb.name>db_bootstrap</th.db.mysql.dummydb.name>
                 <th.db.mysql.username>training</th.db.mysql.username>
                 <th.db.mysql.password>rootpass</th.db.mysql.password>
-            </properties>
+            </properties>./src/main/sql/setup.sql
         </profile>
     </profiles>
 
     <activeProfiles>
-        <activeProfile>mysql_th</activeProfile>
+        <activeProfile>[your profile name]</activeProfile>
     </activeProfiles>
 
     <servers>
@@ -49,12 +50,13 @@ Add profile in ~/.m2/settings.xml:
 </settings>
 
 ########### Server settings #############
- - Change name of the servlet
+ - Change name of the servlet in applicationContext.xml
  - Change BASE_WS_URL in thGlobalConstants.js for the servlet name
  - Change file name in log4j.xml
- - Change every catalog="traininghandler" with the name of DB
+ - Change every catalog="traininghandler" with the name of DB in traininghandler.hbm.xml
  - Change arcifactId and name in pom.xml
  - Change the name of traininghandler-servlet.xml for [servlet name]-.... .xml
+ - Change the relevant names in web.xml contextConfigLocation section
  - Forward port 8080 to 80 with iptables: execute and put to /etc/rc.local the following command: 
  iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to 8080
  
