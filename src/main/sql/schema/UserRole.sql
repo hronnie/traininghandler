@@ -8,5 +8,5 @@ CREATE TABLE UserRole (
     PRIMARY KEY (userRoleId),
     FOREIGN KEY FK_UserRole_User (userId) REFERENCES User(userId),
     FOREIGN KEY FK_UserRole_Role (roleId) REFERENCES Role(roleId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

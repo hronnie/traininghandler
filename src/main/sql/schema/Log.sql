@@ -9,4 +9,4 @@ CREATE TABLE Log (
 
     PRIMARY KEY (logId),
     FOREIGN KEY FK_Log_User (who) REFERENCES User(userId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

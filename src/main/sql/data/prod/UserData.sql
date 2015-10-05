@@ -1,0 +1,1 @@
+INSERT INTO User (userId,displayName,password,userTypeId,name,userName,dob,email,mobileNo,isEnabled,addressId,locale,created) VALUES (1,'Aron','$2a$10$HSM94gT1/BqMFw8putfQueGW6YT5HgHALhMggFWE3PFriamQrxK1S',1,'Harsfalvi Aron','hronnie','1982-09-05 09:37:00','aron.harsfalvi@gmail.com','07743792382',1,1,'hu_HU','2014-01-11 12:00:00');

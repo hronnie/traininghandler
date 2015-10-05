@@ -4,6 +4,7 @@ package com.codeproj.traininghandler.rest.trainingtype;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 @RestController
 @RequestMapping("/trainingtype")
 public class TrainingTypeService {
+	
+	private static final Logger logger = Logger.getLogger(TrainingTypeService.class);
 
 	@Autowired
 	TrainingTypeManager trainingTypeManager;
@@ -42,6 +45,7 @@ public class TrainingTypeService {
 			throws ValidationException {
 		
 		if (trainingType == null) {
+			logger.debug(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 
@@ -51,6 +55,7 @@ public class TrainingTypeService {
 
 		TrainingTypeServiceValidator.create(name, levelNo, description);
 		Long result = trainingTypeManager.create(name, levelNo, description);
+		logger.debug("Molecule object stored successfully with the following data: " + trainingType.toString() );
 		return new GeneralIdResponse(result);
 	}
 

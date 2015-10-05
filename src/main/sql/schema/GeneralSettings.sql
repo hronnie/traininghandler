@@ -5,4 +5,4 @@ CREATE TABLE GeneralSettings (
     name VARCHAR(255) NOT NULL,
     value  VARCHAR(255) NOT NULL,
     PRIMARY KEY (generalSettingsId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -143,14 +143,14 @@ public class CompletedTrainingServiceTest {
 	
 	// createOne
 	
-	@Test(expected = ValidationException.class)
+	@Test
 	public void testCreateOneAlreadyExist() throws ValidationException {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_EXIST, TRAINING_TYPE_ID_EXIST, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
 		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
 
-		service.createOne(complatedUserTrainingDto);
+		assertTrue("If completed training already exist then it should return null", service.createOne(complatedUserTrainingDto) == null);
 	}
 	
 	@Test(expected = ValidationException.class)

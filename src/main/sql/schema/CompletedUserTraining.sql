@@ -8,4 +8,4 @@ CREATE TABLE CompletedUserTraining (
     
     PRIMARY KEY (completedUserTrainingId),
     FOREIGN KEY FK_CompletedUserTraining_TrainingType (trainingTypeId) REFERENCES TrainingType(trainingTypeId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

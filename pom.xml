@@ -381,11 +381,11 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<url>http://localhost:1234/manager/text</url>
+					<url>http://localhost:8080/manager/text</url>
 					<username>tomcat</username>
 					<password>s3cret</password>
 					<path>/${project.build.finalName}</path>
-					<port>1234</port>
+					<port>8080</port>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -526,15 +526,15 @@
 									<autocommit>true</autocommit>
 									<srcFiles>
 										<!-- DATA -->
-										<srcFile>src/main/sql/data/AddressProdData.sql</srcFile>
-										<srcFile>src/main/sql/data/UserTypeData.sql</srcFile>
-										<srcFile>src/main/sql/data/UserData.sql</srcFile>
-										<srcFile>src/main/sql/data/RoleData.sql</srcFile>
-										<srcFile>src/main/sql/data/UserRoleData.sql</srcFile>
-										<srcFile>src/main/sql/data/EmailTemplateData.sql</srcFile>
-										<srcFile>src/main/sql/data/GeneralSettingsData.sql</srcFile>
-										<srcFile>src/main/sql/data/TrainingTypeData.sql</srcFile>
-										<srcFile>src/main/sql/data/TrainingPrerequisiteData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/AddressData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/UserTypeData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/UserData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/RoleData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/UserRoleData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/EmailTemplateData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/GeneralSettingsData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/TrainingTypeData.sql</srcFile>
+										<srcFile>src/main/sql/data/prod/TrainingPrerequisiteData.sql</srcFile>
 
 									</srcFiles>
 								</configuration>

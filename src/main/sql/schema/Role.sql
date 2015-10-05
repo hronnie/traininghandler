@@ -5,4 +5,4 @@ CREATE TABLE Role (
     roleName VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (roleId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

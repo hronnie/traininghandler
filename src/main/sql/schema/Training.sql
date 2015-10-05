@@ -12,4 +12,4 @@ CREATE TABLE Training (
     PRIMARY KEY (trainingId),
     FOREIGN KEY FK_Training_TrainingType (trainingTypeId) REFERENCES TrainingType(trainingTypeId),
     FOREIGN KEY FK_Training_Address (addressId) REFERENCES Address(addressId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
