@@ -68,4 +68,12 @@ public class UserDAOImpl implements UserDAO {
 		sessionFactory.getCurrentSession().update(user);
 		return true;	
 	}
+
+	@Override
+	@Transactional
+	public boolean delete(Long userId) {
+		String hql = "delete from User where userId= :userId";
+		sessionFactory.getCurrentSession().createQuery(hql).setLong("userId", userId).executeUpdate();
+		return true;
+	}
 }

@@ -16,4 +16,6 @@ public interface CompletedTrainingDAO {
 
 	public List<CompletedUserTraining> getCompletedListByTrainingTypeId(
 			Long trainingTypeId);
+	
+	public boolean deleteByUserId(Long userId);
 }

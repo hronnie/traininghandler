@@ -68,4 +68,12 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 			session.close();
 		}
 	}
+
+	@Override
+	@Transactional
+	public boolean deleteByUserId(Long userId) {
+		String hql = "delete from CompletedUserTraining where userId= :userId";
+		sessionFactory.getCurrentSession().createQuery(hql).setLong("userId", userId).executeUpdate();
+		return true;
+	}
 }

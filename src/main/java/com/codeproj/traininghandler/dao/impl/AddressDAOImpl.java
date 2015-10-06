@@ -50,4 +50,12 @@ public class AddressDAOImpl implements AddressDAO {
 			session.close();
 		}
 	}
+
+	@Override
+	@Transactional
+	public boolean deleteByUserId(Long addressId) {
+		String hql = "delete from Address where addressId= :addressId";
+		sessionFactory.getCurrentSession().createQuery(hql).setLong("addressId", addressId).executeUpdate();
+		return true;
+	}
 }

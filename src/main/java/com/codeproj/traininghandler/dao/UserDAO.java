@@ -15,4 +15,6 @@ public interface UserDAO {
 	public User getUserByUserId(Long testUserId);
 
 	public boolean edit(User testUserModel);
+	
+	public boolean delete(Long userId);
 }
