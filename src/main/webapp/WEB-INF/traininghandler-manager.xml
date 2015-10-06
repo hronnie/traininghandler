@@ -49,9 +49,9 @@
 		<property name="showTraineesEligibleForTrainingManager" ref="showTraineesEligibleForTrainingManager" />
 	</bean>
 	
-	<bean id="listAndEditTraineesService"
-		class="com.codeproj.traininghandler.rest.listAndEditTrainees.ListAndEditTraineesService">
-		<property name="listAndEditTraineesManager" ref="listAndEditTraineesManager" />
+	<bean id="traineeService"
+		class="com.codeproj.traininghandler.rest.trainee.TraineeService">
+		<property name="traineeManager" ref="traineeManager" />
 		<property name="addressManager" ref="addressManager" />
 		<property name="userManager" ref="userManager" />
 
@@ -72,6 +72,9 @@
 	<bean id="userManager"
 		class="com.codeproj.traininghandler.manager.user.UserManager">
 		<property name="userDAO" ref="userDAO" />
+		<property name="addressDAO" ref="addressDAO" />
+		<property name="completedTrainingDAO" ref="completedTrainingDAO" />
+		<property name="userRoleDAO" ref="userRoleDAO" />
 	</bean>
 
 	<bean id="completedTrainingManager"
@@ -86,8 +89,8 @@
 		<property name="showTraineesEligibleForTrainingDAO" ref="showTraineesEligibleForTrainingDAO" />
 	</bean>
 
-	<bean id="listAndEditTraineesManager"
-		class="com.codeproj.traininghandler.manager.listAndEditTrainees.ListAndEditTraineesManager">
-		<property name="listAndEditTraineesDAO" ref="listAndEditTraineesDAO" />
+	<bean id="traineeManager"
+		class="com.codeproj.traininghandler.manager.trainee.TraineeManager">
+		<property name="traineeDAO" ref="traineeDAO" />
 	</bean>
 </beans>

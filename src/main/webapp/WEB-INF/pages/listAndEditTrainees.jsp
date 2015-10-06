@@ -42,7 +42,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainee in filteredTrainees | filter:search:strict" class="gridRow">
+								<tr ng-repeat="trainee in filteredTrainees | filter:search:strict| orderBy:'name'" class="gridRow">
 									<td>
 										<span
 										class="gridCell" editable-text="trainee.name"
@@ -115,7 +115,7 @@
 													<i class="fa fa-pencil-square-o fa-2x"></i>
 											</button>
 											<button class="btn btn-danger rowButton rowButtonDelete"
-													ng-click="removeTrainee($index, trainee)" 
+													ng-click="removeTrainee($index, trainee.userId, trainee.addressId)" 
 													title="<spring:message code="grid.general.button.delete" />">
 													<i class="fa fa-times fa-2x"></i>
 											</button>

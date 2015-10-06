@@ -38,7 +38,6 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	
 	
 	$scope.saveTrainee = function(trainee, userId, addressId) {
-		debugger;
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/edit');
 		var listAndEditTraineesPostObj = {
 				userId: userId,
@@ -55,10 +54,15 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		$scope.isEditSuccess = true;
 	};
 
-	$scope.removeTrainee = function(userId) {
-		var removeResource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/');
-		var listAndEditTraineesPostObj = {};
-		saveResource.customPOST();
+	$scope.removeTrainee = function(index, userId, addressId) {
+		var removeMsg = 'Biztos törölni szeretnéd ezt a tanítványt? Ez véglegesen törli a hozzá tartozó minden adatot, beleértve az elvégzett tanfolyamokra vonatkozó adatokat is.';
+		var deleteTrainee = window.confirm(removeMsg);
+		if (!deleteTrainee) {
+			return;
+		}
+		var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete');
+		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete').one("userId", userId).one("addressId", addressId).remove();
+		$scope.filteredTrainees.splice(index, 1);
 		$scope.isRemoveSuccess = true;
 	};
 	
