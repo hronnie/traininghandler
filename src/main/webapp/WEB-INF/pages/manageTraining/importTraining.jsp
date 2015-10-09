@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
-<title><spring:message code="importTraining.main.title" /></title>
+<title>Tanfolyam importálása</title>
 <script
 	src="<c:url value="/resources/js/application/module/importTraining/thImportTrainingModule.js" />"></script>
 <script
@@ -18,13 +17,13 @@
 			method="post" enctype="multipart/form-data" autocomplete="off"
 			name="importForm" class="form-horizontal">
 			<h4 class="mainPageTitle">
-				<spring:message code="importTraining.main.title" />
+				Tanfolyam importálása
 			</h4>
 			<c:choose>
 				<c:when test="${isImportSuccess == 'true'}">
 					<div class="alert alert-success">
 						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<spring:message code="importTraining.success.message" />
+						Az importálás sikeres volt a következő excel fájlból:
 						<c:out value="${excelFileName}" />
 					</div>
 				</c:when>
@@ -40,14 +39,14 @@
 			</c:choose>
 
 			<div class="control-group">
-				<label class="col-sm-2 control-label"><spring:message code="importTraining.training.label" /></label>
+				<label class="col-sm-2 control-label">Tanfolyam:</label>
 				<div class="controls">
 					<div class="form-inline">
 						<select ng-model="selectedTrainingType"
 							ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id"
 							name="trainingTypeId" class="form-control selectwidthauto">
 							<option value="">--
-								<spring:message code="importTraining.trainingType.choose" /> --
+								Kérlek válassz --
 							</option>
 						</select> <br>
 					</div>
@@ -61,31 +60,30 @@
 						<input type="text" ng-model="trainingDateYear" tabindex="1"
 							maxlength="4" name="year" class="form-control w-2"
 							ng-keyup="jumpToNextFromYear()"
-							placeholder="<spring:message code="importTraining.dateinput.year" />">
+							placeholder="Év">
 
 						<input type="text" ng-model="trainingDateMonth" tabindex="2"
 							maxlength="2" name="month" class="form-control w-2"
 							ng-keyup="jumpToNextFromMonth()"
-							placeholder="<spring:message code="importTraining.dateinput.month" />">
+							placeholder="Hónap">
 
 						<input type="text" ng-model="trainingDateDay" tabindex="3"
 							maxlength="2" name="day" class="form-control w-2"
-							placeholder="<spring:message code="importTraining.dateinput.day" />">
+							placeholder="Nap">
 					</div>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="col-sm-2 control-label"><spring:message
-						code="importTraining.fileChoose.title" /></label>
+				<label class="col-sm-2 control-label">Excel fájl feltöltése</label>
 				<div class="controls">
 					<input type="file" name="importFile"><br />
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary btn-lg active">
-				<spring:message code="importTraining.button.import" />
+				Importálás
 			</button>
 			<div class="control-group excelLink">
-			    <a href="<c:url value="/resources/tanfolyam.xlsx" />"> <i class="fa fa-file-excel-o"></i> <spring:message code="importTraining.download.sample.xls" /></a>
+			    <a href="<c:url value="/resources/tanfolyam.xlsx" />"> <i class="fa fa-file-excel-o">Minta excel file letöltése</i> </a>
 			</div>
 		</form>
 	</div>

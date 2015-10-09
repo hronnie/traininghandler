@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
-<title><spring:message code="showEligibleUsers.title" /></title>
+<title>Meghívók küldése</title>
 <script
 	src="<c:url value="/resources/js/application/module/showEligibleTrainees/thShowEligibleTraineesModule.js" />"></script>
 <script
@@ -14,35 +13,33 @@
 	ng-controller="thShowEligibleTraineesController as eligibleCtrl">
 	<div class="container" id="containerId">
 		<h4 class="mainPageTitle">
-			<spring:message code="showEligibleUsers.title" />
+			Meghívók küldése
 		</h4>
 		<select ng-model="selectedTrainingType"
 			ng-options="trainingTypeWrapper.name for trainingTypeWrapper in trainingTypeWrapperArray track by trainingTypeWrapper.id"
 			name="trainingTypeId" class="form-control selectwidthauto">
-			<option value="">--
-				<spring:message code="importTraining.trainingType.choose" /> --
+			<option value="">-- Válassz egyet --
 			</option>
 		</select> <br>
 		<nav class="cl-effect-7">
-			<a ng-click="getEligibleTrainees(selectedTrainingType)"><spring:message
-					code="showEligibleUsers.get.users.link" /></a>
+			<a ng-click="getEligibleTrainees(selectedTrainingType)">Mutasd kik jöhetnek</a>
 		</nav>
 		<br>
 		<div class="span12">
 			<div ng-show="isResultEmpty">
 				<h3>
-					<spring:message code="showEligibleUsers.emptyResult" />
+					Erre a tanfolyamra nem találtam megfelelő embereket
 				</h3>
 			</div>
 			<div ng-show="emailList.length">
 				<h3>
-					<spring:message code="showEligibleUsers.has.email.table.title" />
+					Email címmel rendelkezők listája
 				</h3>
 				<table class="table table-bordered table-striped">
 					<tr>
-						<th title="Név"><spring:message code="showEligibleUsers.grid.name" /></th>
-						<th title="Email"><spring:message code="showEligibleUsers.grid.email" /></th>
-						<th title="phoneNo"><spring:message code="showEligibleUsers.grid.phoneNo" /></th>
+						<th title="Név">Név</th>
+						<th title="Email">Email</th>
+						<th title="phoneNo">Telefonszám</th>
 					</tr>
 					<tr ng-repeat="user in hasEmailUsers">
 						<td title="Név">{{user.name}}</td>
@@ -57,12 +54,12 @@
 
 			<div ng-show="onlyPhoneUsers.length">
 				<h3>
-					<spring:message code="showEligibleUsers.only.phoneno.table.title" />
+					Csak telefonszámmal rendelkezők listája
 				</h3>
 				<table class="table table-bordered table-striped">
 					<tr>
-						<th title="Név"><spring:message code="showEligibleUsers.grid.name" /></th>
-						<th title="phoneNo"><spring:message code="showEligibleUsers.grid.phoneNo" /></th>
+						<th title="Név">Név</th>
+						<th title="phoneNo">Telefonszám</th>
 					</tr>
 					<tr ng-repeat="user in onlyPhoneUsers">
 						<td title="Név">{{user.name}}</td>

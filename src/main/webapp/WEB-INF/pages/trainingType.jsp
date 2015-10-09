@@ -1,40 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="/WEB-INF/pages/layout/header.jsp" />
 <div class="container" id="containerId">
 
 
-	<title><spring:message code="trainingtype.grid.main.title" /></title>
+	<title>Tanfolyam típusok kezelése</title>
 	<script	src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeModule.js" />"></script>
 	<script	src="<c:url value="/resources/js/application/module/trainingType/thTrainingTypeGridController.js" />"></script>
 
 
 	</head>
 	<body ng-app="trainingTypeModule">
-		<h4 class="gridMainTitle"><spring:message code="trainingtype.grid.main.title" /></h4>
+		<h4 class="gridMainTitle">Név</h4>
 		<div ng-controller="thTrainingTypeController as ttCtrl">
 		<div ng-show="isEditSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<spring:message code="trainingType.edit.success.message" />
+			A szerkesztés sikeres volt
 		</div>
 		<div ng-show="isAddSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<spring:message code="trainingType.add.success.message" />
+			A hozzáadás sikeres volt
 		</div>
 		
 			<div class="table-responsive">
 				<div class="outerDIV">
 					<div class="innerDIV">
-						<input class="searchInput" ng-model="search.name" placeholder='<spring:message code="grid.general.search.input.placeholder" />'> <br>
+						<input class="searchInput" ng-model="search.name" placeholder='Keresés...'> <br>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr style="font-weight: bold">
-									<th class="gridTitle" style="width: 30%"><spring:message code="trainingtype.grid.header.name" /></th>
-									<th class="gridTitle" style="width: 10%"><spring:message code="trainingtype.grid.header.levelNo" /></th>
-									<th class="gridTitle" style="width: 40%"><spring:message code="trainingtype.grid.header.description" /></th>
-									<th class="gridTitle" style="width: 20%"><spring:message code="grid.general.header.edit" /></th>
+									<th class="gridTitle" style="width: 30%">Név</th>
+									<th class="gridTitle" style="width: 10%">Fokozat</th>
+									<th class="gridTitle" style="width: 40%">Leírás</th>
+									<th class="gridTitle" style="width: 20%">Szerkesztés</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -44,14 +43,14 @@
 										class="gridCell" editable-text="trainingType.name"
 										e-name="name" e-form="rowform" onbeforesave="validateName($data)"
 										onaftersave="saveTrainingType(trainingType)"
-										e-placeholder="<spring:message code="trainingtype.grid.header.name" />"
+										e-placeholder="Név"
 										 > {{ trainingType.name }} </span>
 									</td>
 									<td>
 										<!-- editable levelNo (select-local) --> <span
 										class="gridCell" editable-text="trainingType.levelNo"
 										e-name="levelNo" e-form="rowform" onbeforesave="validateLevelNo($data)" 
-										e-placeholder="<spring:message code="trainingtype.grid.header.levelNo" />"
+										e-placeholder="Fokozat"
 										>
 										 {{trainingType.levelNo }} </span>
 									</td>
@@ -59,7 +58,7 @@
 										<!-- editable description (select-remote) --> <span
 										class="gridCell" editable-textarea="trainingType.description"
 										e-name="description" e-form="rowform" onbeforesave="validateDescription($data)" 
-										e-cols="40" e-rows="3" e-placeholder="<spring:message code="trainingtype.grid.header.description" />"
+										e-cols="40" e-rows="3" e-placeholder="Leírás"
 										> {{
 											trainingType.description }} </span>
 									</td>
@@ -74,28 +73,23 @@
 											<button type="submit" 
 													ng-disabled="rowform.$waiting"
 													class="btn btn-primary rowButton rowButtonSave"
-													title="<spring:message code="grid.general.button.save" />">
+													title="Mentés">
 													<i class="fa fa-floppy-o fa-2x"></i>
 											</button>
 											<button type="button" 
 													ng-disabled="rowform.$waiting"
 													ng-click="rowform.$cancel()"
 													class="btn btn-default rowButton rowButtonCancel"
-													title="<spring:message code="grid.general.button.cancel" />">
+													title="Mégse">
 													<i class="fa fa-angle-double-left fa-2x"></i>
 											</button>
 										</form>
 										<div class="buttons" ng-show="!rowform.$visible">
 											<button class="btn btn-primary rowButton rowButtonEdit"
 													ng-click="rowform.$show()"
-													title="<spring:message code="grid.general.button.edit" />">
+													title="Szerkesztés">
 													<i class="fa fa-pencil-square-o fa-2x"></i>
 											</button>
-<!-- 											<button class="btn btn-danger rowButton rowButtonDelete" -->
-<!-- 													ng-click="removeTrainingType($index, trainingType.trainingTypeId)"  -->
-<%-- 													title="<spring:message code="grid.general.button.delete" />"> --%>
-<!-- 													<i class="fa fa-times fa-2x"></i> -->
-<!-- 											</button> -->
 											<!-- $index -->
 										</div>
 									</td>
@@ -108,15 +102,15 @@
 			</div>
 
 			<button class="btn btn-primary addRowButton"
-				ng-click="addTrainingType()"><spring:message code="grid.general.button.add.row" /></button>
+				ng-click="addTrainingType()">Új tanfolyam típus</button>
 		
 		<div ng-show="isEditSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<spring:message code="trainingType.edit.success.message" />
+			A szerkesztés sikeres volt
 		</div>
 		<div ng-show="isAddSuccess" class="alert alert-success">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<spring:message code="trainingType.add.success.message" />
+			A hozzáadás sikeres volt
 		</div>
 		</div>
 

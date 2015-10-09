@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page session="false"%>
 
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
 
 
-<%-- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> --%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
