@@ -28,7 +28,9 @@
 		<div class="span12">
 			<div ng-show="isResultEmpty">
 				<h3>
-					Erre a tanfolyamra nem találtam megfelelő embereket
+					<div class="alert alert-info">
+						Erre a tanfolyamra nem találtam megfelelő embereket
+					</div>
 				</h3>
 			</div>
 			<div ng-show="emailList.length">

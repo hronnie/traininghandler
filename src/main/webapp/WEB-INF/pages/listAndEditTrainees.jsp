@@ -14,17 +14,19 @@
 	<body ng-app="listAndEditTraineesModule">
 		<h4 class="gridMainTitle">Tanítványok listázása és szerkesztése</h4>
 		<div ng-controller="listAndEditTraineesController as laetCtrl">
-		<div ng-show="isEditSuccess" class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			A tanítvány szerkesztése sikeres volt!
-		</div>
-		<div ng-show="isRemoveSuccess" class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			A tanítvány törlése sikeres volt!
-		</div>
+			<div class="alert alert-info" data-ng-show="!currentPageTraineeList.length">
+				Jelenleg nincs tanítvány az adatbázisban, amit szerkeszteni tudnál!			
+			</div>
 		
-		
-			<div class="table-responsive">
+			<div class="table-responsive" data-ng-show="currentPageTraineeList.length">
+				<div ng-show="isEditSuccess" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert">&times;</a>
+					A tanítvány szerkesztése sikeres volt!
+				</div>
+				<div ng-show="isRemoveSuccess" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert">&times;</a>
+					A tanítvány törlése sikeres volt!
+				</div>
 				<div class="outerDIV">
 					<div class="innerDIV">
 						<input class="searchInput" ng-model="search.name" placeholder='Keresés...'> <br>
@@ -41,7 +43,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainee in filteredTrainees | filter:search:strict| orderBy:'name'" class="gridRow">
+								<tr ng-repeat="trainee in (filteredTraineeList = (currentPageTraineeList | filter:search:strict | orderBy:'name'))" class="gridRow">
 									<td>
 										<span
 										class="gridCell" editable-text="trainee.name"
@@ -114,7 +116,7 @@
 													<i class="fa fa-pencil-square-o fa-2x"></i>
 											</button>
 											<button class="btn btn-danger rowButton rowButtonDelete"
-													ng-click="removeTrainee($index, trainee.userId, trainee.addressId)" 
+													ng-click="removeTrainee(trainee)" 
 													title="Törlés">
 													<i class="fa fa-times fa-2x"></i>
 											</button>
@@ -127,34 +129,30 @@
 
 					</div>
 				</div>
+					<div align = "center">
+						<pagination 
+				  			ng-model="currentPage"
+							  total-items="traineeList.length"
+							  max-size="maxSize"  
+							  data-num-pages="noOfPages"
+							  boundary-links="true"
+							  class="pagination-sm nomargin" 
+							  previous-text="Előző" 
+							  next-text="Következő" 
+							  first-text="Első" 
+							  last-text="Utolsó">
+						</pagination>
+					</div>	
+					<div ng-show="isEditSuccess" class="alert alert-success">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						A tanítvány szerkesztése sikeres volt!
+					</div>
+					<div ng-show="isRemoveSuccess" class="alert alert-success">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						A tanítvány törlése sikeres volt!
+					</div>
 			</div>
-		<div align = "center">
-			<pagination 
-	  			ng-model="currentPage"
-				  total-items="traineeList.length"
-				  max-size="maxSize"  
-				  data-num-pages="noOfPages"
-				  boundary-links="true"
-				  class="pagination-sm nomargin" 
-				  previous-text="Előző" 
-				  next-text="Következő" 
-				  first-text="Első" 
-				  last-text="Utolsó">
-			</pagination>
-		</div>	
-		<div ng-show="isEditSuccess" class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			A tanítvány szerkesztése sikeres volt!
 		</div>
-		<div ng-show="isRemoveSuccess" class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			A tanítvány törlése sikeres volt!
-		</div>
-		</div>
-<!--   		<pagination boundary-links="true" num-pages="noOfPages" total-items="totalItems" ng-model="currentPage" items-per-page="4" class="pagination-sm nomargin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> -->
-
-<%-- 		<script src="<c:url value="/resources/js/application/common/stickyHeader.js" />"></script> --%>
-<%-- 		<script src="<c:url value="/resources/js/application/lib/jquery.ba-throttle-debounce.min.js" />"></script> --%>
 	</body>
 	</html>
 </div>

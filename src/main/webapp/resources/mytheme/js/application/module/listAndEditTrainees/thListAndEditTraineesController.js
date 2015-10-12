@@ -4,7 +4,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.isEditSuccess = false;
 	$scope.isRemoveSuccess = false;
 	
-	$scope.filteredTrainees = [];
+	$scope.currentPageTraineeList = [];
     $scope.currentPage = 1;
     $scope.numPerPage = 10;
     $scope.maxSize = 5;
@@ -12,7 +12,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
   
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/getAll');
 	resource.get().then(function(tranees) {
-		$scope.traineeList = tranees.trainees;
+		$scope.traineeList = $filter('orderBy')(tranees.trainees, 'name', false);
 		$scope.reinitPagination();
 	});
 
@@ -54,23 +54,36 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		$scope.isEditSuccess = true;
 	};
 
-	$scope.removeTrainee = function(index, userId, addressId) {
+	$scope.removeTrainee = function(trainee) {
 		var removeMsg = 'Biztos törölni szeretnéd ezt a tanítványt? Ez véglegesen törli a hozzá tartozó minden adatot, beleértve az elvégzett tanfolyamokra vonatkozó adatokat is.';
 		var deleteTrainee = window.confirm(removeMsg);
 		if (!deleteTrainee) {
 			return;
 		}
 		var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete');
-		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete').one("userId", userId).one("addressId", addressId).remove();
-		$scope.filteredTrainees.splice(index, 1);
+		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete').one("userId", trainee.userId).one("addressId", trainee.addressId).remove();
+	      
+		var indexFilt = $scope.filteredTraineeList.indexOf(trainee);
+		var indexCur = $scope.currentPageTraineeList.indexOf(trainee);
+		var indexOrig = $scope.traineeList.indexOf(trainee);
+        if (indexFilt != -1) {
+        	$scope.filteredTraineeList.splice(indexFilt, 1);
+        }
+        if (indexCur != -1) {
+        	$scope.currentPageTraineeList.splice(indexCur, 1);
+        }
+        if (indexOrig != -1) {
+        	$scope.traineeList.splice(indexOrig, 1);
+        }
+		$scope.reinitPagination();
 		$scope.isRemoveSuccess = true;
 	};
 	
 	$scope.reinitPagination = function() {
-		  var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-		  , end = begin + $scope.numPerPage;
-		    
-		  $scope.filteredTrainees = $scope.traineeList.slice(begin, end);
+	  var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+	  , end = begin + $scope.numPerPage;
+	    
+	  $scope.currentPageTraineeList = $scope.traineeList.slice(begin, end);
 	}
 	
 	$scope.$watch('currentPage + numPerPage', function() {
