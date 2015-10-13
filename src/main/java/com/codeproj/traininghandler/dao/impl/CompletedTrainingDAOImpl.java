@@ -54,6 +54,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CompletedUserTraining> getCompletedListByTrainingTypeId(
 			Long trainingTypeId) {
@@ -66,5 +67,13 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	@Transactional
+	public boolean deleteByUserId(Long userId) {
+		String hql = "delete from CompletedUserTraining where userId= :userId";
+		sessionFactory.getCurrentSession().createQuery(hql).setLong("userId", userId).executeUpdate();
+		return true;
 	}
 }

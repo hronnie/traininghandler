@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/trainingType")
 public class TrainingTypeController {
-	private static final Logger logger = Logger.getLogger(IndexController.class);
+	private static final Logger logger = Logger.getLogger(TrainingTypeController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,

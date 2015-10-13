@@ -17,10 +17,7 @@ public class Address implements Serializable {
 	private String oneLineAddress;
 	private Boolean isTrainingPlace = new Boolean(false);
 	private Boolean isAppointmentPlace = new Boolean(false);
-	private Set<TrainingType> trainingTypes = new HashSet<>(0);
 	private Set<User> users = new HashSet<>(0);
-	private Set<Training> trainings = new HashSet<>(0);
-	private Set<Appointment> appointments = new HashSet<>(0);
 
 	public Address() {
 		// empty constructor
@@ -32,9 +29,7 @@ public class Address implements Serializable {
 
 	public Address(Long addressId, String postalCode, String city,
 			String street, String houseNo, String country, String oneLineAddress,
-			Boolean isTrainingPlace, Boolean isAppointmentPlace,
-			Set<TrainingType> trainingTypes, Set<User> users,
-			Set<Training> trainings, Set<Appointment> appointments) {
+			Boolean isTrainingPlace, Boolean isAppointmentPlace, Set<User> users) {
 		this.addressId = addressId;
 		this.postalCode = postalCode;
 		this.city = city;
@@ -44,10 +39,7 @@ public class Address implements Serializable {
 		this.oneLineAddress = oneLineAddress;
 		this.isTrainingPlace = isTrainingPlace;
 		this.isAppointmentPlace = isAppointmentPlace;
-		this.trainingTypes = trainingTypes;
 		this.users = users;
-		this.trainings = trainings;
-		this.appointments = appointments;
 	}
 	
 	public Address(String city, String country, String houseNo, String postalCode,
@@ -141,14 +133,6 @@ public class Address implements Serializable {
 		this.isAppointmentPlace = isAppointmentPlace;
 	}
 
-	public Set<TrainingType> getTrainingTypes() {
-		return trainingTypes;
-	}
-
-	public void setTrainingTypes(Set<TrainingType> trainingTypes) {
-		this.trainingTypes = trainingTypes;
-	}
-
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -157,30 +141,12 @@ public class Address implements Serializable {
 		this.users = users;
 	}
 
-	public Set<Training> getTrainings() {
-		return trainings;
-	}
-
-	public void setTrainings(Set<Training> trainings) {
-		this.trainings = trainings;
-	}
-
-	public Set<Appointment> getAppointments() {
-		return appointments;
-	}
-
-	public void setAppointments(Set<Appointment> appointments) {
-		this.appointments = appointments;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
 				+ ((addressId == null) ? 0 : addressId.hashCode());
-		result = prime * result
-				+ ((appointments == null) ? 0 : appointments.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((houseNo == null) ? 0 : houseNo.hashCode());
@@ -195,11 +161,6 @@ public class Address implements Serializable {
 		result = prime * result
 				+ ((oneLineAddress == null) ? 0 : oneLineAddress.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result
-				+ ((trainingTypes == null) ? 0 : trainingTypes.hashCode());
-		result = prime * result
-				+ ((trainings == null) ? 0 : trainings.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
 
@@ -220,13 +181,6 @@ public class Address implements Serializable {
 				return false;
 			}
 		} else if (!addressId.equals(other.addressId)) {
-			return false;
-		}
-		if (appointments == null) {
-			if (other.appointments != null) {
-				return false;
-			}
-		} else if (!appointments.equals(other.appointments)) {
 			return false;
 		}
 		if (city == null) {
@@ -283,20 +237,6 @@ public class Address implements Serializable {
 				return false;
 			}
 		} else if (!street.equals(other.street)) {
-			return false;
-		}
-		if (trainingTypes == null) {
-			if (other.trainingTypes != null) {
-				return false;
-			}
-		} else if (!trainingTypes.equals(other.trainingTypes)) {
-			return false;
-		}
-		if (trainings == null) {
-			if (other.trainings != null) {
-				return false;
-			}
-		} else if (!trainings.equals(other.trainings)) {
 			return false;
 		}
 		if (users == null) {

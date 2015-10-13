@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -80,6 +79,12 @@ $(document).ready(function() {
             <li><a href='<c:url value="/manageTraining/addOneUserToTraining" />'>Egyenként hozzáadás</a></li>
             <li class="divider"></li>
             <li><a href='<c:url value="/manageTraining/showEligibleTrainees" />'>Meghívók</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false">Tanítványok <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href='<c:url value="/listAndEditTrainees" />'>Szerkesztés</a></li>
           </ul>
         </li>
         

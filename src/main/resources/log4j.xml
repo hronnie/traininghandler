@@ -30,7 +30,7 @@
 		</layout>
 	</appender>
 	
-		<appender name="SQLROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
+	<appender name="SQLROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
 		<param name="File" value="/var/log/traininghandler/sql.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%d{ISO8601}] %-5p %m%n" />
@@ -42,5 +42,6 @@
 		<level value="trace" />
 		<appender-ref ref="STDERR" />
 		<appender-ref ref="TRAININGHANDLER_ROLLING_FILE" />
+		<appender-ref ref="SQLROLLINGFILE" />
 	</root>
 </log4j:configuration>

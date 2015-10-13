@@ -16,6 +16,7 @@ import com.codeproj.traininghandler.dao.ShowTraineesEligibleForTrainingDAO;
 import com.codeproj.traininghandler.domain.TrainingTypePrerequisite;
 import com.codeproj.traininghandler.model.TrainingPrerequisite;
 import com.codeproj.traininghandler.model.User;
+import com.codeproj.traininghandler.util.Constants;
 
 public class ShowTraineesEligibleForTrainingDAOImpl implements
 		ShowTraineesEligibleForTrainingDAO {
@@ -30,6 +31,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		// empty constructor
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<TrainingPrerequisite> getPrerequisitesByTrainingTypeId(
@@ -46,6 +48,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<User> getEligibleTrainees(
@@ -102,7 +105,8 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		sb.append("  CompletedUserTraining cu ");
 		sb.append(" INNER JOIN User u ON (u.userId = cu.userId) ");
 		sb.append(" WHERE ");
-		sb.append(" u.userTypeId = 4 ");
+		sb.append(" u.userTypeId =  ");
+		sb.append(Constants.DB_USER_USER_TYPE_ID_TRAINEE);
 		sb.append(" AND ");
 		for (int i = 0; i < size; i++) {
 			sb.append(" (cu.trainingTypeId = ? AND cu.completedDate <= ?) ");
@@ -120,7 +124,8 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		sb.append(" FROM ");
 		sb.append("  User u ");
 		sb.append(" WHERE ");
-		sb.append(" u.userTypeId = 4 ");
+		sb.append(" u.userTypeId = ");
+		sb.append(Constants.DB_USER_USER_TYPE_ID_TRAINEE);
 		return sb.toString();
 	}
 }

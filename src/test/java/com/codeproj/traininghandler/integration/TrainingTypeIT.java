@@ -53,6 +53,7 @@ public class TrainingTypeIT extends GenericAPITest {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + trainingType.toString());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");

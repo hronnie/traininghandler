@@ -45,6 +45,17 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE_INFO = "\nAz előtte lévő tanítványokat sikeresen hozzáadtam. (Nem kell kitörölni azokat az ismételt próbálkozásnál, mert nem fogja a rendszer kétszer hozzáadni)";
 	
 	public static final String VALIDATION_EXCEL_EMPTY_LIST = "Ures lista";
+	public static final String VALIDATION_EXCEL_IMPORT_NAME_EMPTY = "A nev nem lehet ures";
+	public static final String VALIDATION_EXCEL_IMPORT_NAME_TOO_LONG = "Tul hosszu a nev. Maximum 100 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_POST_CODE_EMPTY = "Az iranyitoszam nem lehet ures";
+	public static final String VALIDATION_EXCEL_IMPORT_POST_CODE_TOO_LONG = "Tul hosszu az iranyitoszam. Maximum 15 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_ADDRESS_EMPTY = "A cim nem lehet ures";
+	public static final String VALIDATION_EXCEL_IMPORT_ADDRESS_TOO_LONG = "Tul hosszu a cim. Maximum 100 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_PHONE_NO_EMPTY = "A telefonszam nem lehet ures";
+	public static final String VALIDATION_EXCEL_IMPORT_PHONE_NO_TOO_LONG = "Tul hosszu a telefonszam. Maximum 50 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_EMPTY = "Az email nem lehet ures";
+	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG = "Tul hosszu az email. Maximum 80 karakter lehet";
+	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_INVALID = "Az email cim formatuma nem jo";
 	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";
@@ -70,4 +81,6 @@ public class Constants {
 	public static final String VALIDATION_ERR_MSG_TRAINING_COMPLETED_DATE_INVALID = "A megadott dátum érvénytelen";
 	
 	public static final DateTimeFormatter HUNGARIAN_DATE_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
+
+	public static final int DB_USER_USER_TYPE_ID_TRAINEE = 4;
 }

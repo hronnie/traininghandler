@@ -9,4 +9,10 @@ import com.codeproj.traininghandler.model.Address;
 @Transactional
 public interface AddressDAO {
 	public Long create(Address address);
+
+	public boolean edit(Address address);
+
+	public Address getAddressByAddressId(Long addressId);
+	
+	public boolean deleteByUserId(Long userId);
 }
