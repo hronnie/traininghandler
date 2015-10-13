@@ -33,20 +33,27 @@
 					</div>
 				</h3>
 			</div>
-			<div ng-show="emailList.length">
+			<div ng-show="hasEmailUsers.length">
 				<h3>
 					Email címmel rendelkezők listája
 				</h3>
+				<h4 class="gridExplanation">A előző tanfolyamot régebben végzők vannak a lista elején.</h4>
 				<table class="table table-bordered table-striped">
 					<tr>
 						<th title="Név">Név</th>
 						<th title="Email">Email</th>
 						<th title="phoneNo">Telefonszám</th>
+						<th title="phoneNo">Felhasznál (<a ng-click="initEmailUsers()">összes</a>/<a ng-click="noEmailUsersToggle()">egyik sem</a>)</th>
 					</tr>
 					<tr ng-repeat="user in hasEmailUsers">
 						<td title="Név">{{user.name}}</td>
 						<td title="Email">{{user.email}}</td>
 						<td title="phoneNo">{{user.phoneNo}}</td>
+						<td><input type="checkbox" 
+									name="selectedTrainees" 
+									value="{{user}}" 
+									ng-checked="traineeSelection.indexOf(user) > -1"
+									ng-click="toggleSelection(user)"></td>
 					</tr>
 				</table>
 				<textarea class="form-control custom-textbox" rows="3"

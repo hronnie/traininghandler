@@ -31,7 +31,6 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		// empty constructor
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<TrainingPrerequisite> getPrerequisitesByTrainingTypeId(
@@ -48,7 +47,6 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<User> getEligibleTrainees(
@@ -114,6 +112,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 				sb.append(" OR ");
 			}
 		}
+		sb.append(" ORDER BY cu.completedDate ");
 		return sb.toString();
 	}
 	
