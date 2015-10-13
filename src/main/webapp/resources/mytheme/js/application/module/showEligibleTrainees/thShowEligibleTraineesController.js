@@ -17,6 +17,7 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 	
 	$scope.emailList = "";
 	$scope.isResultEmpty = false;
+	$scope.traineeSelection = [];
 	
 	//trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	$scope.getEligibleTrainees = function(trainingType) {
@@ -38,12 +39,44 @@ thShowEligibleTraineesModule.controller('thShowEligibleTraineesController',
 			if (!$scope.hasEmailUsers || $scope.hasEmailUsers.length < 1) {
 				return;
 			}
-            _($scope.hasEmailUsers).forEach(function(user) {
-            	$scope.emailList += user.email;
-            	$scope.emailList += ", ";
-            });
+			$scope.initEmailUsers()
             $scope.emailList = $scope.emailList.substring(0, $scope.emailList.length - 2);
 		});
+	}
+	
+	$scope.initEmailUsers = function() {
+		$scope.emailList = "";
+		$scope.traineeSelection = [];
+        _($scope.hasEmailUsers).forEach(function(user) {
+        	$scope.emailList += user.email;
+        	$scope.emailList += ", ";
+        	$scope.traineeSelection.push(user);
+        });
+	}
+	
+	$scope.toggleSelection = function(user) {
+	    var idx = $scope.traineeSelection.indexOf(user);
+
+	    if (idx > -1) {
+	      $scope.traineeSelection.splice(idx, 1);
+	      updateEmailList();
+	    } else {
+	      $scope.traineeSelection.push(user);
+	      updateEmailList();
+	    }
+	};
+	
+	$scope.noEmailUsersToggle = function() {
+		$scope.emailList = "";
+		$scope.traineeSelection = [];
+	};
+	
+	function updateEmailList() {
+		$scope.emailList = "";
+        _($scope.traineeSelection).forEach(function(user) {
+        	$scope.emailList += user.email;
+        	$scope.emailList += ", ";
+        });
 	}
 	
 	
