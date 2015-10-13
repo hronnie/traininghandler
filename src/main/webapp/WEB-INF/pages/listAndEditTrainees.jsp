@@ -34,16 +34,17 @@
 							<thead>
 								<tr style="font-weight: bold">
 									<th class="gridTitle" style="width: 20%">Név</th>
-									<th class="gridTitle" style="width: 10%">Irányítószám</th>
+									<th class="gridTitle" style="width: 5%">Irányító - szám</th>
 									<th class="gridTitle" style="width: 30%">Cím</th>
-									<th class="gridTitle" style="width: 15%">Telefonszám</th>
+									<th class="gridTitle" style="width: 11%">Telefon - szám</th>
 									<th class="gridTitle" style="width: 15%">Email</th>
-									<th class="gridTitle" style="width: 10%">Elvégzett tanfolyamok</th>
+									<th class="gridTitle" style="width: 19%">Elvégzett tanfolyamok</th>
 									<th class="gridTitle" style="width: 20%">Szerkesztés</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="trainee in (filteredTraineeList = (currentPageTraineeList | filter:search:strict | orderBy:'name'))" class="gridRow">
+								<tr ng-repeat="trainee in (filteredTraineeList = (currentPageTraineeList | filter:search:strict | orderBy:'name'))" 
+								ng-bind-html-unsafe="trainee.completedTrainings" class="gridRow">
 									<td>
 										<span
 										class="gridCell" editable-text="trainee.name"
@@ -85,7 +86,7 @@
 										 > {{ trainee.email }} </span>
 									</td>
 									<td>
-										 <span class="gridCell"> {{ trainee.completedTrainings ?  trainee.completedTrainings : '- Nincs -'}} </span>
+										 <span ng-bind-html="trainee.completedTrainings | to_trusted" class="gridCell" escape=false> {{ trainee.completedTrainings ?  trainee.completedTrainings : '- Nincs -'}} </span>
 									</td>
 									<td style="white-space: nowrap">
 										<!-- form -->

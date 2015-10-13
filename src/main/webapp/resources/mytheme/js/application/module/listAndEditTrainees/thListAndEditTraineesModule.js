@@ -7,3 +7,9 @@ listAndEditTraineesModule.config(function(RestangularProvider){
 listAndEditTraineesModule.run(function(editableOptions) {
 	editableOptions.theme = 'bs3';
 });
+
+listAndEditTraineesModule.filter('to_trusted', ['$sce', function($sce){
+    return function(text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);

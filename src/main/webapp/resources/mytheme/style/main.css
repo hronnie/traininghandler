@@ -180,7 +180,7 @@ div[ng-app] {
 }
 
 .table {
-	width: 100%
+	width: 1200px;
 }
 
 form[editable-form]>div {

@@ -75,7 +75,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		sb.append(" LEFT JOIN ");
 		sb.append(" ( ");
 		sb.append("  SELECT ");
-		sb.append("   cut.userId AS complUserId, group_concat(tt.name ORDER BY tt.trainingTypeId ASC SEPARATOR ', ') AS complTrNames ");
+		sb.append("   cut.userId AS complUserId, group_concat(CONCAT_WS(' - ', tt.levelNo, DATE_FORMAT(cut.completedDate,'%Y %b %d')) ORDER BY tt.trainingTypeId ASC SEPARATOR '<br> ') AS complTrNames ");
 		sb.append("  FROM ");
 		sb.append("   CompletedUserTraining cut ");
 		sb.append("  LEFT JOIN TrainingType tt on (tt.trainingTypeId = cut.trainingTypeId) ");
