@@ -1,7 +1,30 @@
 package com.codeproj.traininghandler.rest.user;
 
+import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL;
+import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULD_BE_SUCCESSFUL;
+import static com.codeproj.traininghandler.common.MessageConstants.WRONG_VALIDATION_MESSAGE;
+import static com.codeproj.traininghandler.util.Constants.MIN_AGE_YEAR;
 import static com.codeproj.traininghandler.util.Constants.PARAMETER_STRING_SIZE_MORE_THEN_100;
+import static com.codeproj.traininghandler.util.Constants.TABLE_FIELD_SIZE_DISPLAY_NAME;
+import static com.codeproj.traininghandler.util.Constants.TABLE_FIELD_SIZE_EMAIL;
+import static com.codeproj.traininghandler.util.Constants.TABLE_FIELD_SIZE_FIRST_NAME;
+import static com.codeproj.traininghandler.util.Constants.TABLE_FIELD_SIZE_LAST_NAME;
+import static com.codeproj.traininghandler.util.Constants.TABLE_FIELD_SIZE_PHONE;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_DATE_NOT_VALID_1;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_DATE_NOT_VALID_2;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_EMAIL_INVALID;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_MANDATORY_PARAMETER;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_PARAMETER_TOO_LONG;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_DISPLAY_NAME;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_EMAIL;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_FIRST_NAME;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_LAST_NAME;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_NAME;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_PHONE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.Date;
@@ -16,10 +39,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dto.AddressDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.dto.UserDto;
-import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.rest.address.AddressService;
-import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -59,7 +80,7 @@ public class UserServiceTest {
 	}
 	
 	@Before
-	public void setUp() throws ValidationException {
+	public void setUp() {
 		service = new UserService();
 		service.setUserManager(userManager);
 		service.setAddressService(addressService);
@@ -71,105 +92,140 @@ public class UserServiceTest {
 		when(addressService.createFromForm(new AddressDto(VALID_POSTCODE, VALID_ADDRESS))).thenReturn(new GeneralIdResponse(1L));
 	}
 
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithEmptyDto() throws ValidationException {
-		service.create(null);
+	@Test
+	public void testCreateUserWithEmptyDto() {
+		GeneralIdResponse result = service.create(null);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
 	@Test
-	public void testCreateUserWithValidData() throws ValidationException {
+	public void testCreateUserWithValidData() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
 	}
 	
 	// null check
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullLastName() throws ValidationException {
+	@Test
+	public void testCreateUserWithNullLastName() {
 		UserDto user = new UserDto(null, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_LAST_NAME, result.getMessage());
 	}
 
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullFirstName() throws ValidationException {
+	@Test
+	public void testCreateUserWithNullFirstName() {
 		UserDto user = new UserDto(VALID_LAST_NAME, null, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_FIRST_NAME, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithNullAddressId() throws ValidationException {
+	@Test
+	public void testCreateUserWithNullAddressId() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, null);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
 	// empty check
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithEmptyLastName() throws ValidationException {
+	@Test
+	public void testCreateUserWithEmptyLastName() {
 		UserDto user = new UserDto("", VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_LAST_NAME, result.getMessage());
 	}
 	
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithEmptyFirstName() throws ValidationException {
+	@Test
+	public void testCreateUserWithEmptyFirstName() {
 		UserDto user = new UserDto(VALID_LAST_NAME, "", VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_FIRST_NAME, result.getMessage());
 	}
 	
 	// too long check
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithTooLongLastName() throws ValidationException {
+	@Test
+	public void testCreateUserWithTooLongLastName() {
 		UserDto user = new UserDto(PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_PARAMETER_LAST_NAME + VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + TABLE_FIELD_SIZE_LAST_NAME;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithTooLongFirstName() throws ValidationException {
+	@Test
+	public void testCreateUserWithTooLongFirstName() {
 		UserDto user = new UserDto(VALID_LAST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_PARAMETER_FIRST_NAME + VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + TABLE_FIELD_SIZE_FIRST_NAME;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithTooLongDisplayName() throws ValidationException {
+	@Test
+	public void testCreateUserWithTooLongDisplayName() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_PARAMETER_DISPLAY_NAME + VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + TABLE_FIELD_SIZE_DISPLAY_NAME;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithTooLongPhoneNumber() throws ValidationException {
+	@Test
+	public void testCreateUserWithTooLongPhoneNumber() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_PARAMETER_PHONE + VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + TABLE_FIELD_SIZE_PHONE;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithTooLongEmail() throws ValidationException {
+	@Test
+	public void testCreateUserWithTooLongEmail() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, PARAMETER_STRING_SIZE_MORE_THEN_100, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_PARAMETER_EMAIL + VALIDATION_ERR_MSG_PARAMETER_TOO_LONG + TABLE_FIELD_SIZE_EMAIL;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
 	// dob and email additional checks
 	
-	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithDobYoungerThen6Years() throws ValidationException {
+	@Test
+	public void testGatherTraineeInfoWithDobYoungerThen6Years() {
 		DateTime dobDt = new DateTime(2014, 3, 26, 12, 0, 0, 0);
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, dobDt.toDate(), VALID_TELEPHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = VALIDATION_DATE_NOT_VALID_1 + dobDt.toDate() + VALIDATION_DATE_NOT_VALID_2 + MIN_AGE_YEAR;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testGatherTraineeInfoWithInvalidEmail() throws ValidationException {
+	@Test
+	public void testGatherTraineeInfoWithInvalidEmail() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, INVALID_EMAIL, VALID_ADDRESS_ID);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_EMAIL_INVALID, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithInvalidAddressId() throws ValidationException {
+	@Test
+	public void testCreateUserWithInvalidAddressId() {
 		UserDto user = new UserDto(VALID_LAST_NAME, VALID_FIRST_NAME, VALID_DISPLAY_NAME, VALID_DOB, VALID_TELEPHONE_NUMBER, VALID_EMAIL, -5L);
-		service.create(user);
+		GeneralIdResponse result = service.create(user);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
 	// get user by email and name
@@ -177,6 +233,7 @@ public class UserServiceTest {
 	@Test
 	public void testGetUserIdByEmail() {
 		GeneralIdResponse serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_EXISTS);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, serviceResult.getSuccess());
 		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
 		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_DOESNT_EXIST);
 		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
@@ -189,40 +246,49 @@ public class UserServiceTest {
 	// createUserWithAddress
 	
 	@Test
-	public void testCreateUserWithAddress() throws ValidationException {
+	public void testCreateUserWithAddress() {
 		when(userManager.create(VALID_NAME, null, null, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST, 1L)).thenReturn(5L);
 		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, VALID_NAME)).thenReturn(-1L);
-		Long result = service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
-		assertEquals("user id should be 5 ", new Long(5L), result);
-	}
-	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressWithNullDto() throws ValidationException {
-		service.createUserWithAddress(null);
+		GeneralIdResponse result = service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals("user id should be 5 ", new GeneralIdResponse(5L), result);
 	}
 	
 	@Test
-	public void testCreateUserWithAddressExistingUser() throws ValidationException {
+	public void testCreateUserWithAddressWithNullDto() {
+		GeneralIdResponse result = service.createUserWithAddress(null);
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+	}
+	
+	@Test
+	public void testCreateUserWithAddressExistingUser() {
 		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, VALID_NAME)).thenReturn(1L);
-		Long result = service.createUserWithAddress(VALID_TRAINING_EXCEL_ITEM);
-		assertEquals("user id should be 1 for existing user", new Long(1L), result);
+		GeneralIdResponse result = service.createUserWithAddress(VALID_TRAINING_EXCEL_ITEM);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals("user id should be 1 for existing user", new GeneralIdResponse(1L), result);
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressEmptyName() throws ValidationException {
+	@Test
+	public void testCreateUserWithAddressEmptyName() {
 		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, "")).thenReturn(-1L);
-		service.createUserWithAddress(new TrainingExcelDto("", VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
+		GeneralIdResponse result = service.createUserWithAddress(new TrainingExcelDto("", VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_NAME, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressNullName() throws ValidationException {
+	@Test
+	public void testCreateUserWithAddressNullName() {
 		when(userManager.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, null)).thenReturn(-1L);
-		service.createUserWithAddress(new TrainingExcelDto(null, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
+		GeneralIdResponse result = service.createUserWithAddress(new TrainingExcelDto(null, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, EMAIL_WHICH_DOESNT_EXIST));
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_NAME, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateUserWithAddressInvalidEmail() throws ValidationException {
+	@Test
+	public void testCreateUserWithAddressInvalidEmail() {
 		when(userManager.getUserIdByEmailAndName(INVALID_EMAIL, VALID_NAME)).thenReturn(-1L);
-		service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, INVALID_EMAIL));
+		GeneralIdResponse result = service.createUserWithAddress(new TrainingExcelDto(VALID_NAME, VALID_POSTCODE, VALID_ADDRESS, VALID_PHONE_NO, INVALID_EMAIL));
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_EMAIL_INVALID, result.getMessage());
 	}
 }

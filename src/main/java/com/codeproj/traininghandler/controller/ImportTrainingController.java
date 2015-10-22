@@ -122,10 +122,9 @@ public class ImportTrainingController {
 				}
 			}
 			
-			Long userId = userService.createUserWithAddress(item);
-			try {
-				completedTrainingService.createOne(new CompletedUserTrainingDto(userId, trainingTypeIdLong, complDate));
-			} catch (ValidationException ve) {
+			GeneralIdResponse userId = userService.createUserWithAddress(item);
+			GeneralIdResponse createOneResult = completedTrainingService.createOne(new CompletedUserTrainingDto(userId.getValue(), trainingTypeIdLong, complDate));
+			if (!createOneResult.getSuccess()) {
 				addFailedUserDataToView(mav, item);
 				return mav;
 			}

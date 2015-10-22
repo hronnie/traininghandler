@@ -1,5 +1,7 @@
 package com.codeproj.traininghandler.rest.completedTraining;
 
+import static com.codeproj.traininghandler.util.Constants.*;
+
 import java.util.List;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
@@ -17,15 +19,20 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 		}
 		
 		for (CompletedUserTrainingDto compUsrTr : complatedUserTrainingDtoList) {
-			mandatoryParameter("userId", compUsrTr.getUserId());
-			mandatoryParameter("traingTypeId", compUsrTr.getTrainingTypeId());
-			mandatoryParameter("completedDate", compUsrTr.getCompletedDate());
-			
-			entityIdValidator(compUsrTr.getUserId());
-			entityIdValidator(compUsrTr.getTrainingTypeId());
-			
-			isDateInTheFuture(compUsrTr.getCompletedDate());
+			createOne(compUsrTr);
 		}
+	}
+
+	public static void createOne(CompletedUserTrainingDto compUsrTr)
+			throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, compUsrTr.getUserId());
+		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, compUsrTr.getTrainingTypeId());
+		mandatoryParameter(VALIDATION_PARAMETER_COMPLETED_DATE, compUsrTr.getCompletedDate());
+		
+		entityIdValidator(compUsrTr.getUserId());
+		entityIdValidator(compUsrTr.getTrainingTypeId());
+		
+		isDateInTheFuture(compUsrTr.getCompletedDate());
 	}
 
 }

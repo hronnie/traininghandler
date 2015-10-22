@@ -21,11 +21,17 @@ public class AddressService {
 	AddressManager addressManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse create(@RequestBody AddressDto addressDto) throws ValidationException {
-		return createAddress(addressDto, true);
+	public GeneralIdResponse create(@RequestBody AddressDto addressDto) {
+		Long newAddressId = null;
+		try {
+			newAddressId = createAddress(addressDto, true);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage()); 
+		}
+		return new GeneralIdResponse(newAddressId);
 	}
 
-	private GeneralIdResponse createAddress(AddressDto addressDto, boolean isNeedValidation)
+	private Long createAddress(AddressDto addressDto, boolean isNeedValidation)
 			throws ValidationException {
 		if (addressDto == null) {
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
@@ -39,12 +45,17 @@ public class AddressService {
 		String postCode = ValidatorBaseUtility.stripXSS(addressDto.getPostCode());
 		String street = ValidatorBaseUtility.stripXSS(addressDto.getStreet());
 		String fullAddress = ValidatorBaseUtility.stripXSS(addressDto.getAddress());
-		Long result = addressManager.create(city, country, houseNo, postCode, street, fullAddress);
-		return new GeneralIdResponse(result);
+		return addressManager.create(city, country, houseNo, postCode, street, fullAddress);
 	}
 	
-	public GeneralIdResponse createFromForm(AddressDto addressDto) throws ValidationException {
-		return createAddress(addressDto, false);
+	public GeneralIdResponse createFromForm(AddressDto addressDto) {
+		Long newAddressId = null;
+		try {
+			newAddressId = createAddress(addressDto, false);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage()); 
+		}
+		return new GeneralIdResponse(newAddressId);
 	}
 
 	public void setAddressManager(AddressManager addressManager) {

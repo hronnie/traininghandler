@@ -53,7 +53,7 @@ public class GatherTraineeInfoValidator extends ValidatorBaseUtility {
 		validateStringLength("email", traineeInfoDto.getUser().getEmail(), 80);
 		
 		emailValidator(traineeInfoDto.getUser().getEmail());
-		isDateLater(traineeInfoDto.getUser().getDob(), 6);
+		isDateLater(traineeInfoDto.getUser().getDob(), Constants.MIN_AGE_YEAR);
 		
 		completedUserTrainingValidator(traineeInfoDto.getCompletedUserTrainingList());
 	}

@@ -29,27 +29,36 @@ public class CompletedTrainingService {
 	public CompletedTrainingManager completedTrainingManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdListResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) throws ValidationException {
-		CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
-		List<Long> resultValue = new ArrayList<>();
-		for (CompletedUserTrainingDto item : complatedUserTrainingDtoList) {
-			GeneralIdResponse itemResult = createOne(item);
-			resultValue.add(itemResult.getValue());
+	public GeneralIdListResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) {
+		try {
+			CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
+			List<Long> resultValue = new ArrayList<>();
+			for (CompletedUserTrainingDto item : complatedUserTrainingDtoList) {
+				GeneralIdResponse itemResult = createOne(item);
+				resultValue.add(itemResult.getValue());
+			}
+			return new GeneralIdListResponse(resultValue);
+		} catch (ValidationException ve) {
+			return new GeneralIdListResponse(ve.getMessage());
 		}
-		return new GeneralIdListResponse(resultValue);
 	}
 	
 	@RequestMapping(value="/createOne", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException  {
-		BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
-		if (completedUserTrainingCheckResult.getPrimitiveBooleanValue()) {
-			return null;
+	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) {
+		try {
+			CompletedTrainingServiceValidator.createOne(complatedUserTrainingDto);
+			BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
+			if (completedUserTrainingCheckResult.getBooleanValue()) {
+				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS);
+			}
+			if (!isUserEligibleToAddTraining(complatedUserTrainingDto)) {
+				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE);
+			}
+			Long result = completedTrainingManager.create(complatedUserTrainingDto);
+			return new GeneralIdResponse(result);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage()); 
 		}
-		if (!isUserEligibleToAddTraining(complatedUserTrainingDto)) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE + complatedUserTrainingDto.toString());
-		}
-		Long result = completedTrainingManager.create(complatedUserTrainingDto);
-		return new GeneralIdResponse(result);
 	}
 
 	public BooleanResponse isCompletedTrainingExist(

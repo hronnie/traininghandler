@@ -29,23 +29,32 @@ public class UserService {
 	AddressService addressService;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse create(@RequestBody UserDto user) throws ValidationException {
-		return createUser(user, false);
+	public GeneralIdResponse create(@RequestBody UserDto user) {
+		try {
+			return createUser(user, false);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage());
+		}
 	}
 	
 	@RequestMapping(value="/createUserWithAddress", method = RequestMethod.POST,headers="Accept=application/json")
-	public Long createUserWithAddress(@RequestBody TrainingExcelDto item) throws ValidationException {
+	public GeneralIdResponse createUserWithAddress(@RequestBody TrainingExcelDto item) {
 		if (item == null) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
+			return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		Long userId = getUserIdIfExist(item);
 		if (userId != -1L) {
-			return userId;
+			return new GeneralIdResponse(userId);
 		}
 		
 		GeneralIdResponse addressIdResp = addressService.createFromForm(new AddressDto(item.getPostCode(), item.getAddress()));
-		GeneralIdResponse userIdResp = createUser(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()), true);
-		return userIdResp.getValue();
+		GeneralIdResponse userIdResp;
+		try {
+			userIdResp = createUser(new UserDto(item.getName(), item.getPhoneNo(), item.getEmail(), addressIdResp.getValue()), true);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage());
+		}
+		return new GeneralIdResponse(userIdResp.getValue());
 	}
 	
 	@RequestMapping(value="/getUserIdByEmailAndName/{email}/{name}", method = RequestMethod.GET,headers="Accept=application/json")

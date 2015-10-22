@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeproj.traininghandler.dto.TraineesEligibleForTrainingDto;
-import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
+import com.codeproj.traininghandler.dto.TrainingTypeDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
 import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
-import com.codeproj.traininghandler.util.Constants;
 
 @RestController
 @RequestMapping("/manageTraining")
@@ -25,16 +24,19 @@ public class ShowTraineesEligibleForTrainingService {
 	ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager;
 
 	@RequestMapping(value="/getEligibleTraineesByTrainingTypeId/{trainingTypeId}", method = RequestMethod.GET,headers="Accept=application/json")
-	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(@PathVariable("trainingTypeId") Long trainingTypeId) throws ValidationException {
-		
-		ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId);
-		
+	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(@PathVariable("trainingTypeId") Long trainingTypeId) {
 		try {
-			trainingTypeService.getTrainingTypeById(trainingTypeId);
-		} catch (DatabaseEntityNotFoundException | ValidationException ex) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
+			ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId);
+			
+			TrainingTypeDto trainingType = trainingTypeService.getTrainingTypeById(trainingTypeId);
+			if (!trainingType.getSuccess()) {
+				return new TraineesEligibleForTrainingDto(trainingType.getMessage());
+			}
+			TraineesEligibleForTrainingDto result = showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, new DateTime().withTimeAtStartOfDay()); 
+			return result;
+		} catch (ValidationException ve) {
+			return new TraineesEligibleForTrainingDto(ve.getMessage());
 		}
-		return showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, new DateTime().withTimeAtStartOfDay());
 	}
 
 	public void setTrainingTypeService(TrainingTypeService trainingTypeService) {

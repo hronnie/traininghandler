@@ -72,7 +72,7 @@ public class GatherTraineeInfoIT extends GenericAPITest {
         
         BooleanResponse response = restTemplate.postForObject(getResource("gatherTraineeInfo.create.url"), traineeInfoDto, BooleanResponse.class);
 
-        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Create wasn't successful");
+        Assert.assertTrue(response.getBooleanValue(), "Create wasn't successful");
         Logger.getLogger(GatherTraineeInfoIT.class.getName()).log(Level.INFO, "Finished testCreateTrainingType" + response.toString());
 	}
 

@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeproj.traininghandler.dto.TrainingTypeDto;
+import com.codeproj.traininghandler.dto.TrainingTypeDtos;
 import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.trainingtype.TrainingTypeManager;
 import com.codeproj.traininghandler.model.TrainingType;
-import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.BaseResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
 import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
@@ -41,22 +42,23 @@ public class TrainingTypeService {
 	 * @throws ValidationException
 	 */
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
-	public GeneralIdResponse create(@RequestBody TrainingTypeDto trainingType)
-			throws ValidationException {
-		
+	public GeneralIdResponse create(@RequestBody TrainingTypeDto trainingType) {
 		if (trainingType == null) {
 			logger.debug(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
+			return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
-
-		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
-		String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
-		String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
-
-		TrainingTypeServiceValidator.create(name, levelNo, description);
-		Long result = trainingTypeManager.create(name, levelNo, description);
-		logger.debug("Molecule object stored successfully with the following data: " + trainingType.toString() );
-		return new GeneralIdResponse(result);
+		try {
+			String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
+			String levelNo = ValidatorBaseUtility.stripXSS(trainingType.getLevelNo());
+			String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
+			
+			TrainingTypeServiceValidator.create(name, levelNo, description);
+			Long result = trainingTypeManager.create(name, levelNo, description);
+			logger.debug("Molecule object stored successfully with the following data: " + trainingType.toString() );
+			return new GeneralIdResponse(result);
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage());
+		}
 	}
 
 	/**
@@ -67,18 +69,26 @@ public class TrainingTypeService {
 	 * @throws ValidationException
 	 */
 	@RequestMapping(value="/get/{id}", method = RequestMethod.GET,headers="Accept=application/json")
-	public @ResponseBody TrainingTypeDto getTrainingTypeById(@PathVariable("id")
-				Long id) throws DatabaseEntityNotFoundException, ValidationException {
+	public @ResponseBody TrainingTypeDto getTrainingTypeById(@PathVariable("id") Long id) {
 		
-		if (id == null || id < 0) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_HAS_NOT_FOUND);
+		try {
+			TrainingTypeServiceValidator.getTrainingTypeById(id);
+		} catch (ValidationException ve) {
+			return new TrainingTypeDto(ve.getMessage());
 		}
-		TrainingType trainingType = trainingTypeManager.getTrainingTypeById(id);
+		TrainingType trainingType;
+		try {
+			trainingType = trainingTypeManager.getTrainingTypeById(id);
+		} catch (DatabaseEntityNotFoundException denfe) {
+			return new TrainingTypeDto(denfe.getMessage());
+		}
 		if (trainingType == null) {
-			throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_HAS_NOT_FOUND);
+			return new TrainingTypeDto(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
 		}
 		ModelMapper modelMapper = new ModelMapper();
 		TrainingTypeDto result = modelMapper.map(trainingType, TrainingTypeDto.class);
+		result.setSuccess(true);
+		result.setMessage("this is a test message");
 		return result;
 	}
 	
@@ -87,16 +97,20 @@ public class TrainingTypeService {
 	 * @return
 	 */
 	@RequestMapping(value="/getAll", method = RequestMethod.GET,headers="Accept=application/json")
-	public @ResponseBody List<TrainingTypeDto> getAllTrainingType() {
-		List<TrainingType> dbResult = trainingTypeManager.getAllTrainingType();
-		if (dbResult == null || dbResult.isEmpty()) {
-			return null;
+	public @ResponseBody TrainingTypeDtos getAllTrainingType() {
+		
+		List<TrainingType> dbResult;
+		try {
+			dbResult = trainingTypeManager.getAllTrainingType();
+		} catch (DatabaseEntityNotFoundException denfe) {
+			return new TrainingTypeDtos(denfe.getMessage());
 		}
+
 		ModelMapper modelMapper = new ModelMapper();
 		
 	    Type targetListType = new TypeToken<List<TrainingTypeDto>>() {}.getType();
 	    List<TrainingTypeDto> result = modelMapper.map(dbResult, targetListType);
-		return result;
+		return new TrainingTypeDtos(result);
 	}
 	
 	/**
@@ -107,10 +121,10 @@ public class TrainingTypeService {
 	 * @throws DatabaseEntityNotFoundException
 	 */
 	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse update(@RequestBody TrainingTypeDto trainingType) throws ValidationException, DatabaseEntityNotFoundException {
+	public BaseResponse update(@RequestBody TrainingTypeDto trainingType) {
 		
 		if (trainingType == null) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
+			return new BaseResponse(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		
 		String name = ValidatorBaseUtility.stripXSS(trainingType.getName());
@@ -118,9 +132,15 @@ public class TrainingTypeService {
 		String description = ValidatorBaseUtility.stripXSS(trainingType.getDescription());
 		Long trainingTypeId = trainingType.getTrainingTypeId();
 		
-		TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
-		trainingTypeManager.update(trainingTypeId, name, levelNo, description);
-		return new BooleanResponse(true);
+		try {
+			TrainingTypeServiceValidator.update(trainingTypeId, name, levelNo, description);
+			trainingTypeManager.update(trainingTypeId, name, levelNo, description);
+		} catch (ValidationException ve) {
+			return new BaseResponse(ve.getMessage());
+		} catch (DatabaseEntityNotFoundException denfe) {
+			return new BaseResponse(denfe.getMessage());
+		}
+		return new BaseResponse(true);
 	}
 
 	/**
@@ -131,14 +151,20 @@ public class TrainingTypeService {
 	 * @throws DatabaseEntityNotFoundException
 	 */
 	@RequestMapping(value="/delete", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse delete(@RequestBody TrainingTypeDto trainingType)  throws ValidationException, DatabaseEntityNotFoundException {
+	public BaseResponse delete(@RequestBody TrainingTypeDto trainingType) {
 		if (trainingType == null) {
-			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
+			return new BaseResponse(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
+		}
+		try {
+			TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());
+			trainingTypeManager.delete(trainingType.getTrainingTypeId());
+		} catch (ValidationException ve) {
+			return new BaseResponse(ve.getMessage());
+		} catch (DatabaseEntityNotFoundException denfe) {
+			return new BaseResponse(denfe.getMessage());
 		}
 		
-		TrainingTypeServiceValidator.delete(trainingType.getTrainingTypeId());
-		trainingTypeManager.delete(trainingType.getTrainingTypeId());
-		return new BooleanResponse(true);
+		return new BaseResponse(true);
 	}
 	
 	public void setTrainingTypeManager(TrainingTypeManager trainingTypeManager) {

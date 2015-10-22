@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="CompletedUserTraining")
-public class CompletedUserTrainingDto {
+public class CompletedUserTrainingDto extends BaseResponse {
 	private Long userId;
 	private Long trainingTypeId;
 	private Date completedDate;
@@ -18,6 +20,10 @@ public class CompletedUserTrainingDto {
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
 		this.completedDate = completedDate;
+	}
+	
+	public CompletedUserTrainingDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="userId")

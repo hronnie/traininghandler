@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="User")
-public class UserDto {
+public class UserDto extends BaseResponse {
 	private Long userId;
 	private String name;
 	private String lastName;
@@ -35,6 +37,10 @@ public class UserDto {
 		this.phoneNo = phoneNo;
 		this.email = email;
 		this.addressId = addressId;
+	}
+	
+	public UserDto(String message) {
+		super(false, message);
 	}
 	
 	@XmlElement(name="userId")

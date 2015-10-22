@@ -3,8 +3,10 @@ package com.codeproj.traininghandler.dto;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="Trainee")
-public class TraineeDto {
+public class TraineeDto extends BaseResponse {
 	private Long userId;
 	private Long addressId;
 	private String name;
@@ -29,6 +31,10 @@ public class TraineeDto {
 		this.userId = userId;
 		this.addressId = addressId;
 		this.completedTrainings = completedTrainings;
+	}
+	
+	public TraineeDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="name")

@@ -6,9 +6,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="TraineePersonalAndTrainingInfo")
 @XmlSeeAlso({AddressDto.class, UserDto.class, CompletedUserTrainingDto.class})
-public class TraineePersonalAndTrainingInfoDto {
+public class TraineePersonalAndTrainingInfoDto extends BaseResponse {
 	private AddressDto address;
 	private UserDto user;
 	private List<CompletedUserTrainingDto> completedUserTrainingList;
@@ -20,6 +22,10 @@ public class TraineePersonalAndTrainingInfoDto {
 		this.address = address;
 		this.user = user;
 		this.completedUserTrainingList = completedUserTrainingList;
+	}
+	
+	public TraineePersonalAndTrainingInfoDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="address")

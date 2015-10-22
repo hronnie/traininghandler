@@ -1,5 +1,9 @@
 package com.codeproj.traininghandler.rest.completedTraining;
 
+import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL;
+import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULD_BE_SUCCESSFUL;
+import static com.codeproj.traininghandler.common.MessageConstants.WRONG_VALIDATION_MESSAGE;
+import static com.codeproj.traininghandler.util.Constants.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +24,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.rest.common.BooleanResponse;
+import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
+import com.codeproj.traininghandler.util.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompletedTrainingServiceTest {
@@ -59,7 +66,7 @@ public class CompletedTrainingServiceTest {
 	}
 	
 	@Before
-	public void setUp() throws ValidationException {
+	public void setUp() {
 		service = new CompletedTrainingService();
 		service.setCompletedTrainingManager(manager);
 		List<Long> complServResult = new ArrayList<>();
@@ -73,93 +80,117 @@ public class CompletedTrainingServiceTest {
 	
 	@Test
 	public void testIsCompletedTrainingExist() {
-		assertTrue("The completed training object exist", service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING).getPrimitiveBooleanValue());
-		assertFalse("The completed training object exist", service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING_DONT_EXIST).getPrimitiveBooleanValue());
+		BooleanResponse result1 = service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING);
+		BooleanResponse result2 = service.isCompletedTrainingExist(VALID_COMPLETED_TRAINING_DONT_EXIST);
+		
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result1.getSuccess());
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result2.getSuccess());
+		
+		assertTrue("The completed training object exist", result1.getBooleanValue());
+		assertFalse("The completed training object exist", result2.getBooleanValue());
 	}
 	
 	// create
 
 	@Test
-	public void testCreateComplatedTrainingServiceWithValidObject() throws ValidationException {
+	public void testCreateComplatedTrainingServiceWithValidObject() {
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(5L);
 		when(manager.isCompletedTrainingExist(VALID_COMPLETED_TRAINING)).thenReturn(false);
 		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
 		service.create(VALID_COMPLETED_TRAINING_LIST);
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithEmptyList() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithEmptyList() {
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithNullUserId() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithNullUserId() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(null, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithNullTrainingTypeId() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithNullTrainingTypeId() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, null, VALID_COMPLETED_DATE);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_TRAINING_TYPE_ID, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithNullCompletedDate() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithNullCompletedDate() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, null);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_COMPLETED_DATE, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithInvalidUserId() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithInvalidUserId() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(INVALID_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithInvalidTrainingTypeId() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithInvalidTrainingTypeId() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, INVALID_ID, VALID_COMPLETED_DATE);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateComplatedTrainingServiceWithInvalidCompletedDate() throws ValidationException {
+	@Test
+	public void testCreateComplatedTrainingServiceWithInvalidCompletedDate() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, INVALID_FUTURE_COMPLETED_DATE);
 		List<CompletedUserTrainingDto> complatedUserTrainingDtoList = new ArrayList<>();
 		complatedUserTrainingDtoList.add(complatedUserTrainingDto);
-		service.create(complatedUserTrainingDtoList);
+		GeneralIdListResponse result = service.create(complatedUserTrainingDtoList);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		String expectedErrMsg = Constants.VALIDATION_DATE_IN_THE_FUTURE_1 + INVALID_FUTURE_COMPLETED_DATE + Constants.VALIDATION_DATE_IN_THE_FUTURE_2;
+		assertEquals(WRONG_VALIDATION_MESSAGE, expectedErrMsg, result.getMessage());
 	}
 	
 	// createOne
 	
 	@Test
-	public void testCreateOneAlreadyExist() throws ValidationException {
+	public void testCreateOneAlreadyExist() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_EXIST, TRAINING_TYPE_ID_EXIST, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
 		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
-
-		assertTrue("If completed training already exist then it should return null", service.createOne(complatedUserTrainingDto) == null);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertFalse("If completed training already exist then it should then it shouldn't be success", result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS, result.getMessage());
 	}
 	
-	@Test(expected = ValidationException.class)
-	public void testCreateOneUserNotEligible() throws ValidationException {
+	@Test
+	public void testCreateOneUserNotEligible() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(false);
 		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
 		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
-		service.createOne(complatedUserTrainingDto);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MISSING_PREREQUISITE, result.getMessage());
 	}
 
 }

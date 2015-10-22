@@ -53,7 +53,6 @@ public class TrainingTypeIT extends GenericAPITest {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Finished testGetTrainingType" + trainingType.toString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test(dependsOnMethods = { "testCreateTrainingType" })
 	public void testGetAllTrainingType() {
         Logger.getLogger(TrainingTypeIT.class.getName()).log(Level.INFO, "Started getting all Training type");
@@ -77,7 +76,7 @@ public class TrainingTypeIT extends GenericAPITest {
         
         BooleanResponse response = restTemplate.postForObject(getResource("trainingType.update.url"), trainingType, BooleanResponse.class);
 
-        Assert.assertTrue(response.getPrimitiveBooleanValue(), "Update wasn't successful");
+        Assert.assertTrue(response.getBooleanValue(), "Update wasn't successful");
 
         // get updated training type and assert
         

@@ -1,11 +1,9 @@
 package com.codeproj.traininghandler.address.manager;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +14,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.codeproj.traininghandler.dao.AddressDAO;
 import com.codeproj.traininghandler.manager.address.AddressManager;
 import com.codeproj.traininghandler.model.Address;
-import com.codeproj.traininghandler.model.Appointment;
-import com.codeproj.traininghandler.model.Training;
 import com.codeproj.traininghandler.model.TrainingType;
 import com.codeproj.traininghandler.model.User;
 

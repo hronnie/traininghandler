@@ -14,11 +14,11 @@ import com.codeproj.traininghandler.model.TrainingType;
 public interface TrainingTypeDAO {
 	public Long create(TrainingType trainingType);
 	
-	public TrainingType getTrainingTypeById(Long id);
+	public TrainingType getTrainingTypeById(Long id) throws DatabaseEntityNotFoundException;
 	
-	public List<TrainingType> getAll();
+	public List<TrainingType> getAll() throws DatabaseEntityNotFoundException;
 	
 	public boolean update(TrainingType trainingType) throws DatabaseEntityNotFoundException;
 	
-	public boolean delete(Long trainingTypeId);
+	public boolean delete(Long trainingTypeId) throws DatabaseEntityNotFoundException;
 }

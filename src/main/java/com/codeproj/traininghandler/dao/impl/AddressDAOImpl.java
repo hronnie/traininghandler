@@ -1,9 +1,5 @@
 package com.codeproj.traininghandler.dao.impl;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.AddressDAO;
 import com.codeproj.traininghandler.model.Address;
-import com.codeproj.traininghandler.model.User;
 
 public class AddressDAOImpl implements AddressDAO {
 	private SessionFactory sessionFactory;
