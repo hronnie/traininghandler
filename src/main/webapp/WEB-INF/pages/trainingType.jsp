@@ -22,6 +22,10 @@
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
 			A hozzáadás sikeres volt
 		</div>
+		<div ng-show="validationMsg" class="alert alert-danger alert-error">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			{{validationMsg}}
+		</div>			
 		
 			<div class="table-responsive">
 				<div class="outerDIV">

@@ -5,9 +5,9 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 	$scope.selectedTrainingType = "";
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
-	resource.getList().then(function(trainingTypes){
+	resource.get().then(function(trainingTypes){
 		$scope.trainingTypeWrapperArray = [];
-		$scope.trainingTypes = trainingTypes;
+		$scope.trainingTypes = trainingTypes.trainingTypeDtoList;
 		for (i = 0; i < $scope.trainingTypes.length; i++) {
 			var trainingTypeWrapper = {};
 			trainingTypeWrapper.id = $scope.trainingTypes[i].trainingTypeId;
@@ -29,15 +29,6 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 			document.importForm.elements[3].focus();
 		}
 	}
-	
-//	$scope.jumpToNext = function(element)	{
-//		if (content.length == element.maxLength) {
-//			next = element.tabIndex;
-//			if (next<document.maxform.elements.length) {
-//				document.maxform.elements[next].focus();
-//			}
-//		}
-//	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	

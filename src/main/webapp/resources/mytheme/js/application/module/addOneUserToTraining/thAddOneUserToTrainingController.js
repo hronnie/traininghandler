@@ -24,9 +24,9 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	$scope.resetFields();
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
-	resource.getList().then(function(trainingTypes){
+	resource.get().then(function(trainingTypes){
 		$scope.trainingTypeWrapperArray = [];
-		$scope.trainingTypes = trainingTypes;
+		$scope.trainingTypes = trainingTypes.trainingTypeDtoList;
 		for (i = 0; i < $scope.trainingTypes.length; i++) {
 			var trainingTypeWrapper = {};
 			trainingTypeWrapper.id = $scope.trainingTypes[i].trainingTypeId;
@@ -63,7 +63,7 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 		var saveUserResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/user/createUserWithAddress');
 		saveUserResource.customPOST($scope.trainingExcelDto).then(function(userIdResult) {
 			$scope.validationMsg = "";
-			$scope.userId = userIdResult;
+			$scope.userId = userIdResult.value;
 			$scope.complatedUserTrainingDto = {
 					userId: $scope.userId,
 					trainingTypeId: $scope.selectedTrainingType.id,
@@ -74,8 +74,8 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 				$scope.trainingExcelDto = {};
 				$scope.validationMsg = "";
 				$scope.validationNeeded = false;
-				if (complResult.value === -1) {
-					$scope.validationMsg = "A megadott tanítványt nem lehetett hozzáadni a tanfolyamhoz, mert még nem végezte el az előfeltételeket.";
+				if (!complResult.success) {
+					$scope.validationMsg = complResult.message;
 				} else {
 					$scope.isAddOneUserSuccess = true;
 				}

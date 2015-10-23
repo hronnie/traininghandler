@@ -3,10 +3,11 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	$scope.locale = document.getElementById("localeValue").value;
 	$scope.isEditSuccess = false;
 	$scope.isAddSuccess = false;
+	$scope.validationMsg = "";
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
-	resource.getList().then(function(trainingTypes){
-		$scope.trainingTypes = trainingTypes;
+	resource.get().then(function(trainingTypes){
+		$scope.trainingTypes = trainingTypes.trainingTypeDtoList;
 	});
 
 	$scope.validateName = function(data) {
@@ -38,7 +39,16 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 			return;
 		}
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/update');
-		saveResource.customPOST(traningTypePostObj);
+		saveResource.customPOST(traningTypePostObj).then(function(saveResult) {
+			$scope.validationMsg = "";
+			if (!saveResult.success) {
+				$scope.validationMsg = saveResult.message;
+			} else {
+				$scope.isEditSuccess = true;
+			}
+		}, function(err) {
+			$scope.validationMsg = "A megadott tanfolyam típust nem lehetett szerkeszteni, mert végrehajtás miatt valami hiba történt!";
+		});
 		$scope.isEditSuccess = true;
 	};
 
@@ -62,7 +72,7 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 //				levelNo: '',
 //				description: ''
 //		}
-//		// TODO: PROVIDE ERROR MESSAGE FOR CLIENT SIDE
+//		
 //		deleteResource.customPOST(traningTypePostObj);
 //	};
 
@@ -78,8 +88,16 @@ trainingTypeModule.controller('thTrainingTypeController', function($scope, $filt
 	
 	$scope.saveNewTrainingType = function(traningTypePostObj) {
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/create');
-		saveResource.customPOST(traningTypePostObj);
-		$scope.isAddSuccess = true;
+		saveResource.customPOST(traningTypePostObj).then(function(addResult) {
+			$scope.validationMsg = "";
+			if (!addResult.success) {
+				$scope.validationMsg = addResult.message;
+			} else {
+				$scope.isAddSuccess = true;
+			}
+		}, function(err) {
+			$scope.validationMsg = "A megadott tanfolyam típust nem lehetett hozzáadni, mert végrehajtás miatt valami hiba történt!";
+		});
 	};
 });
 
