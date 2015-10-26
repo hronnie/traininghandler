@@ -84,7 +84,7 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		} else if (!completedDate.equals(other.completedDate)) {
 			return false;
 		}
-		if (trainingTypeId != other.trainingTypeId) {
+		if (!trainingTypeId.equals(other.trainingTypeId)) {
 			return false;
 		}
 		if (userId == null) {

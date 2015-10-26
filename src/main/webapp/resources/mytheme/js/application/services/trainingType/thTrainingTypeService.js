@@ -4,7 +4,7 @@ thTrainingTypeService.factory('thTrainingTypeService', function(Restangular, thG
 		getAllTrainingType : function() {
 //			var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 			
-			return Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll').getList().then(function(trainingTypes){
+			return Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll').get().then(function(trainingTypes){
 				return trainingTypes;
 			});
 		}

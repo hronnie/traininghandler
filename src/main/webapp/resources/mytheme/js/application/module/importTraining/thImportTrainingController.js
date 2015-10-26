@@ -3,6 +3,7 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 	$scope.trainingDateMonth = "";
 	$scope.trainingDateDay = "";
 	$scope.selectedTrainingType = "";
+	$scope.showInfoFlag = false;
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
 	resource.get().then(function(trainingTypes){
@@ -27,6 +28,14 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 	$scope.jumpToNextFromMonth = function() {
 		if ($scope.trainingDateMonth.length >= 2) {
 			document.importForm.elements[3].focus();
+		}
+	}
+	
+	$scope.showInfo = function() {
+		if ($scope.showInfoFlag) {
+			$scope.showInfoFlag = false;
+		} else {
+			$scope.showInfoFlag = true;
 		}
 	}
 	

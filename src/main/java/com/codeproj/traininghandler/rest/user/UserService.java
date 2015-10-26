@@ -62,8 +62,12 @@ public class UserService {
 		if (StringUtils.isEmpty(email)) {
 			email = Constants.EXCEL_TRAINING_MISSING_EMAIL;
 		}
-		Long result = userManager.getUserIdByEmailAndName(email, name);
-		return new GeneralIdResponse(result);
+		Long serviceResult = userManager.getUserIdByEmailAndName(email, name);
+		GeneralIdResponse result = new GeneralIdResponse(serviceResult);
+		if (result != null && result.getValue().equals(-1L)) {
+			result.setSuccess(false);
+		} 
+		return result;
 	}
 
 	// private methods

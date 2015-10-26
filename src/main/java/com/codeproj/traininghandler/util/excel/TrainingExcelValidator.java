@@ -16,12 +16,13 @@ import com.codeproj.traininghandler.dto.TrainingExcelDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.rest.address.AddressServiceValidator;
 import com.codeproj.traininghandler.rest.user.UserServiceValidator;
+import com.codeproj.traininghandler.util.Constants;
 
 public class TrainingExcelValidator {
 
 	public static void validateTrainingExcelList(
 			List<TrainingExcelDto> trainingAttendendList) throws ValidationException {
-		
+
 		for (TrainingExcelDto item : trainingAttendendList) {
 			UserServiceValidator.createUserFromExcel(item);
 			AddressServiceValidator.createAddressFromExcel(item);

@@ -233,12 +233,15 @@ public class UserServiceTest {
 	@Test
 	public void testGetUserIdByEmail() {
 		GeneralIdResponse serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_EXISTS);
-		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, serviceResult.getSuccess());
-		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		assertFalse(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, serviceResult.getSuccess());
+		assertEquals("user id should be -1", new Long(-1L), serviceResult.getValue());
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, serviceResult.getSuccess());
 		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_DOESNT_EXIST, NAME_WHICH_DOESNT_EXIST);
-		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		assertEquals("user id should be -1 ", new Long(-1L), serviceResult.getValue());
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, serviceResult.getSuccess());
 		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_DOESNT_EXIST);
-		assertEquals("user id should be -1 where ", new Long(-1L), serviceResult.getValue());
+		assertEquals("user id should be -1 ", new Long(-1L), serviceResult.getValue());
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, serviceResult.getSuccess());
 		serviceResult = service.getUserIdByEmailAndName(EMAIL_WHICH_EXISTS, NAME_WHICH_EXISTS);
 		assertEquals("user id should be 1 for existing user", new Long(1L), serviceResult.getValue());
 	}

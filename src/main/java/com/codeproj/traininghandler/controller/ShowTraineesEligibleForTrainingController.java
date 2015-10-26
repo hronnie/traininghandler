@@ -20,7 +20,6 @@ public class ShowTraineesEligibleForTrainingController {
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mav = new ModelAndView("manageTraining/showEligibleTrainees");
 		
-		mav.addObject("backUrl", "/manageTraining");
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));
 		logger.debug("Going to showEligibleTrainees page..");

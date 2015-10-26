@@ -40,7 +40,7 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_MONTH = "Hibas honap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_DAY = "Hibas nap";
 	public static final String VALIDATION_EXCEL_IMPORT_INVALID_FILE = "Nem talalom az excel fajlt";
-	public static final String VALIDATION_EXCEL_IMPORT_IVALID_CONTENT = "A név kitöltése mindig kötelező";
+	public static final String VALIDATION_EXCEL_IMPORT_INVALID_CONTENT = "Az importálni kívánt excel fájl tartalma nem megfelelő. Kérlek töltsd le a minta excel fájlt és ne hagyj ki sorokat, valamint csak a megfelelő oszlopokba írjál!";
 	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE = "A következő tanítványnak nincs meg a megfelelő előfeltétele a tanfolyamhoz: ";
 	public static final String VALIDATION_EXCEL_IMPORT_USER_HAS_NO_PREREQUISITE_INFO = "\nAz előtte lévő tanítványokat sikeresen hozzáadtam. (Nem kell kitörölni azokat az ismételt próbálkozásnál, mert nem fogja a rendszer kétszer hozzáadni)";
 	
@@ -57,6 +57,7 @@ public class Constants {
 	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_TOO_LONG = "Túl hosszú az email. Maximum 80 karakter lehet";
 	public static final String VALIDATION_EXCEL_IMPORT_EMAIL_INVALID = "Az email cim formatuma nem jo";
 	public static final String VALIDATION_EXCEL_SEPARATOR = ", ";
+	public static final String VALIDATION_EXCEL_IMPORT_EMPTY_TR_ATT_LIST = "A megadott excel fájl üres, nem tartalmaz érvényes sorokat!";
 	
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_10 = "Lorem ipsum";
 	public static final String PARAMETER_STRING_SIZE_MORE_THEN_100 = "Lorem ipsum dolor sit amet, consectetur "
@@ -125,4 +126,9 @@ public class Constants {
 	public static final int TABLE_FIELD_SIZE_DOB = 100; 
 	
 	public static final int MIN_AGE_YEAR = 6; 
+	
+	public static final String IMPORT_EXCEL_REGEXP_PATTERN = "([0-9]{1,2}[\\w]{0,3}_[0-9]{4}-[0-9]{2}-[0-9]{2}.*)";
+	
+	public static final String MAV_PARAM_NAME_VALIDATION_MSG = "validationMsg";
+	public static final String MAV_PARAM_NAME_IMPORT_SUCCESS = "isImportSuccess";
 }

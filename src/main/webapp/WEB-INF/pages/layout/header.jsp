@@ -57,7 +57,6 @@ $(document).ready(function() {
 
 </script>
 <spring:url value="/" var="homeUrl" htmlEscape="true" />
-<spring:url value="${backUrl}" var="backUrlPath" htmlEscape="true" />
 
 </head>
 <body>
@@ -71,7 +70,7 @@ $(document).ready(function() {
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="headerLinkIcon"><a href="${homeUrl}" class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
+        <li class="headerLinkIcon"><a href='<c:url value="/" />' class="headerLink" id="homeLinkId"><i class="fa fa-home fa-fw fa-2x"></i></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle headerLink" data-toggle="dropdown" role="button" aria-expanded="false">Tanfolyamok <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

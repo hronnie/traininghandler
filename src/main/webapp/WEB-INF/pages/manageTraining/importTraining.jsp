@@ -19,6 +19,20 @@
 			<h4 class="mainPageTitle">
 				Tanfolyam importálása
 			</h4>
+			<h4 class="gridExplanation">
+			
+			<a ng-click="showInfo()"><i class="fa fa-info-circle"></i>Hasznos tipp</a>
+			<div ng-show="showInfoFlag">
+				A program az excel fájl nevéből is ki tudja találni a tanfolyamot, és a tanfolyam típusát, 
+				ami esetben üresen lehet hagyni ezeket a mezőket.
+				Ahhoz úgy kell elnevezni a fáljt, hogy az első karakterek a tanfolyam típusa legyen, amit meg tudsz 
+				nézni a Beállítások menü -> Tanfolyam típusok szerkesztése almenüben a Fokozat oszlopban.
+				Ezután követi egy '_' jel, majd az év (4 karakter hosszan), hónap (két karakter hosszan), és végül a nap
+				(szintén 2 karakter hosszan).
+				<br/> <i>Egy példa: 1_2013-03-26.xlsx - ez 1-es tanfolyam, ami 2013. március 26-án volt.</i>
+			</div>	 
+			</h4>
+			
 			<c:choose>
 				<c:when test="${isImportSuccess == 'true'}">
 					<div class="alert alert-success">
@@ -32,7 +46,7 @@
 				<c:when test="${not empty validationMsg}">
 					<div class="alert alert-danger alert-error">
 						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<c:out value="${validationMsg}" /><br>
+						<c:out value="${validationMsg}" escapeXml="false"/><br>
 						<c:out value="${excelFileName}" />
 					</div>
 				</c:when>
