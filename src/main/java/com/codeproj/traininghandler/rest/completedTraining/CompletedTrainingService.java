@@ -47,10 +47,16 @@ public class CompletedTrainingService {
 	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) {
 		try {
 			CompletedTrainingServiceValidator.createOne(complatedUserTrainingDto);
+			
 			BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
 			if (completedUserTrainingCheckResult.getBooleanValue()) {
 				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS);
 			}
+			
+			if (complatedUserTrainingDto.getSkipPrereqCheck()) {
+				return new GeneralIdResponse(completedTrainingManager.create(complatedUserTrainingDto));
+			}
+			
 			if (!isUserEligibleToAddTraining(complatedUserTrainingDto)) {
 				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE);
 			}

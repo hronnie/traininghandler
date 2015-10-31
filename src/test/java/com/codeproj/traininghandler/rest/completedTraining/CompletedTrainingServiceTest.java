@@ -192,5 +192,25 @@ public class CompletedTrainingServiceTest {
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MISSING_PREREQUISITE, result.getMessage());
 	}
+	
+	@Test
+	public void testCreateOneUserNotEligibleAndSkipPrereq() {
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE, true);
+		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(false);
+		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(5L);
+		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+	}
+	
+	@Test
+	public void testCreateOneUserNotEligibleAndSkipPrereqAlreadyExist() {
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE);
+		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
+		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
+		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS, result.getMessage());
+	}
 
 }

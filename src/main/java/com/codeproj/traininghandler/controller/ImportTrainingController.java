@@ -1,7 +1,6 @@
 package com.codeproj.traininghandler.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codeproj.traininghandler.domain.ImportTrainingInputs;
-import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.TrainingExcelDto;
-import com.codeproj.traininghandler.exceptions.ValidationException;
-import com.codeproj.traininghandler.manager.showEligibles.ShowTraineesEligibleForTrainingManager;
-import com.codeproj.traininghandler.model.TrainingPrerequisite;
-import com.codeproj.traininghandler.rest.address.AddressService;
-import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
-import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
-import com.codeproj.traininghandler.rest.user.UserService;
 import com.codeproj.traininghandler.service.importTraining.ImportTrainingService;
 import com.codeproj.traininghandler.util.Constants;
 import com.codeproj.traininghandler.util.excel.ExcelImportHelper;

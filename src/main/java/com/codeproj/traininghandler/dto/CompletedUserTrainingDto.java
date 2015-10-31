@@ -12,6 +12,7 @@ public class CompletedUserTrainingDto extends BaseResponse {
 	private Long userId;
 	private Long trainingTypeId;
 	private Date completedDate;
+	private Boolean skipPrereqCheck;
 	
 	public CompletedUserTrainingDto() { /* empty constructor */}
 	
@@ -20,6 +21,15 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
 		this.completedDate = completedDate;
+		this.skipPrereqCheck = false;
+	}
+	
+	public CompletedUserTrainingDto(Long userId, Long trainingTypeId,
+			Date completedDate, Boolean skipPrereqCheck) {
+		this.userId = userId;
+		this.trainingTypeId = trainingTypeId;
+		this.completedDate = completedDate;
+		this.skipPrereqCheck = skipPrereqCheck;
 	}
 	
 	public CompletedUserTrainingDto(String message) {
@@ -51,6 +61,14 @@ public class CompletedUserTrainingDto extends BaseResponse {
 
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
+	}
+	
+	public Boolean getSkipPrereqCheck() {
+		return skipPrereqCheck;
+	}
+
+	public void setSkipPrereqCheck(Boolean skipPrereqCheck) {
+		this.skipPrereqCheck = skipPrereqCheck;
 	}
 
 	@Override

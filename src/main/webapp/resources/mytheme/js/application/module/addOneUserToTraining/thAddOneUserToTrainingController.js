@@ -4,6 +4,7 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 	
 	$scope.userId = "";
 	$scope.complatedUserTrainingDto = {};
+	$scope.skipPrereq = false;
 	
 	$scope.resetFields = function () {
 		$scope.trainingDateYear = "";
@@ -67,8 +68,10 @@ thAddOneUserToTrainingModule.controller('thAddOneUserToTrainingController', func
 			$scope.complatedUserTrainingDto = {
 					userId: $scope.userId,
 					trainingTypeId: $scope.selectedTrainingType.id,
-					completedDate: moment({ year: $scope.trainingDateYear, month: $scope.trainingDateMonth, day: $scope.trainingDateDay}).format()
+					completedDate: moment({ year: $scope.trainingDateYear, month: $scope.trainingDateMonth, day: $scope.trainingDateDay}).format(),
+					skipPrereqCheck: $scope.skipPrereq
 			}
+			debugger;
 			var saveCompletedTrainingResource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/completedTraining/createOne');
 			saveCompletedTrainingResource.customPOST($scope.complatedUserTrainingDto).then(function(complResult) {
 				$scope.trainingExcelDto = {};
