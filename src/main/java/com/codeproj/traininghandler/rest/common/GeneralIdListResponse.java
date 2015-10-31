@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="idList")
-public class GeneralIdListResponse {
+public class GeneralIdListResponse extends BaseResponse {
 
 	private List<Long> values;
 	
@@ -16,6 +16,10 @@ public class GeneralIdListResponse {
 	
 	public GeneralIdListResponse() {
 		// empty constructor
+	}
+	
+	public GeneralIdListResponse(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="values")

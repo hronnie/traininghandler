@@ -9,8 +9,7 @@
 <!--     ***** CONTROLLERS ***** -->
 	<bean id="importTrainingController"
 		class="com.codeproj.traininghandler.controller.ImportTrainingController">
-		<property name="completedTrainingService" ref="completedTrainingService" />
-		<property name="userService" ref="userService" />
+		<property name="importTrainingService" ref="importTrainingService" />
 	</bean>
 
 <!--     ***** SERVICES ***** -->
@@ -55,6 +54,12 @@
 		<property name="addressManager" ref="addressManager" />
 		<property name="userManager" ref="userManager" />
 
+	</bean>
+	
+	<bean id="importTrainingService"
+		class="com.codeproj.traininghandler.service.importTraining.ImportTrainingService">
+		<property name="completedTrainingService" ref="completedTrainingService" />
+		<property name="userService" ref="userService" />
 	</bean>
 
 <!--     ***** MANAGERS ***** -->

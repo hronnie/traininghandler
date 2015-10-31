@@ -211,20 +211,6 @@ public class Address implements Serializable {
 		} else if (!oneLineAddress.equals(other.oneLineAddress)) {
 			return false;
 		}
-		if (isAppointmentPlace == null) {
-			if (other.isAppointmentPlace != null) {
-				return false;
-			}
-		} else if (!isAppointmentPlace.equals(other.isAppointmentPlace)) {
-			return false;
-		}
-		if (isTrainingPlace == null) {
-			if (other.isTrainingPlace != null) {
-				return false;
-			}
-		} else if (!isTrainingPlace.equals(other.isTrainingPlace)) {
-			return false;
-		}
 		if (postalCode == null) {
 			if (other.postalCode != null) {
 				return false;
@@ -237,13 +223,6 @@ public class Address implements Serializable {
 				return false;
 			}
 		} else if (!street.equals(other.street)) {
-			return false;
-		}
-		if (users == null) {
-			if (other.users != null) {
-				return false;
-			}
-		} else if (!users.equals(other.users)) {
 			return false;
 		}
 		return true;

@@ -27,6 +27,10 @@
 					<a href="#" class="close" data-dismiss="alert">&times;</a>
 					A tanítvány törlése sikeres volt!
 				</div>
+				<div ng-show="validationMsg" class="alert alert-danger alert-error">
+					<a href="#" class="close" data-dismiss="alert">&times;</a>
+					{{validationMsg}}
+				</div>				
 				<div class="outerDIV">
 					<div class="innerDIV">
 						<input class="searchInput" ng-model="search.name" placeholder='Keresés...'> <br>

@@ -1,5 +1,7 @@
 package com.codeproj.traininghandler.rest.showEligibles;
 
+import static com.codeproj.traininghandler.util.Constants.*;
+
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 
@@ -7,7 +9,7 @@ public class ShowTraineesEligibleForTrainingValidator extends ValidatorBaseUtili
 
 	public static void getEligibleTraineesByTrainingTypeIdAndComplDate(
 			Long trainingTypeId) throws ValidationException {
-		mandatoryParameter("trainingTypeId", trainingTypeId);
+		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, trainingTypeId);
 	}
 
 }

@@ -3,8 +3,10 @@ package com.codeproj.traininghandler.dto;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="Address")
-public class AddressDto {
+public class AddressDto extends BaseResponse {
 	private String address;
 	private String postCode;
 	private String city;
@@ -29,7 +31,11 @@ public class AddressDto {
 		this.houseNo = houseNo;
 		this.country = country;
 	}
-
+	
+	public AddressDto(String message) {
+		super(false, message);
+	}
+	
 	@XmlElement(name="postCode")
 	public String getPostCode() {
 		return postCode;

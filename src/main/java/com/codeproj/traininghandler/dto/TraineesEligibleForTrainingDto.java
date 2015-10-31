@@ -5,8 +5,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="User")
-public class TraineesEligibleForTrainingDto {
+public class TraineesEligibleForTrainingDto extends BaseResponse {
 	private List<UserDto> hasEmailUsers;
 	private List<UserDto> onlyPhoneUsers;
 	
@@ -16,8 +18,13 @@ public class TraineesEligibleForTrainingDto {
 
 	public TraineesEligibleForTrainingDto(List<UserDto> hasEmailUsers,
 			List<UserDto> onlyPhoneUsers) {
+		super(true);
 		this.hasEmailUsers = hasEmailUsers;
 		this.onlyPhoneUsers = onlyPhoneUsers;
+	}
+	
+	public TraineesEligibleForTrainingDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="hasEmailUsers")

@@ -17,11 +17,11 @@ public class TrainingTypeManager {
 		return trainingTypeDAO.create(newTrainingType);
 	}
 	
-	public TrainingType getTrainingTypeById(Long id) {
+	public TrainingType getTrainingTypeById(Long id) throws DatabaseEntityNotFoundException {
 		return trainingTypeDAO.getTrainingTypeById(id);
 	}
 	
-	public List<TrainingType> getAllTrainingType() {
+	public List<TrainingType> getAllTrainingType() throws DatabaseEntityNotFoundException {
 		return trainingTypeDAO.getAll();
 	}
 

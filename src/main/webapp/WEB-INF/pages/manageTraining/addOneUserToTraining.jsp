@@ -135,6 +135,15 @@
 					</div>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="col-sm-2 control-label">Az adott tanfolyam előfeltételeinek ellőnőrzésének kihagyása:</label>
+				<div class="controls">
+					<div class="form-inline">
+						<input type="checkbox" ng-model="skipPrereq" tabindex="9"
+							name="skipPrereq" class="form-control w-3">
+					</div>
+				</div>
+			</div>
 
 			<button type="button" class="btn btn-primary btn-lg active" ng-click="onSubmit()">
 				Hozzáadás

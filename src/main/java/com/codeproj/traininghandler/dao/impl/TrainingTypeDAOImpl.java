@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.codeproj.traininghandler.dao.TrainingTypeDAO;
 import com.codeproj.traininghandler.exceptions.DatabaseEntityNotFoundException;
 import com.codeproj.traininghandler.model.TrainingType;
+import com.codeproj.traininghandler.util.Constants;
 
 public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 	private SessionFactory sessionFactory;
@@ -37,42 +38,52 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 		try {
 			sessionFactory.getCurrentSession().update(trainingType);
 		} catch (HibernateException e) {
-			throw new DatabaseEntityNotFoundException();
+			throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
 		}
 		return true;
 	}
 
 	@Override
 	@Transactional
-	public TrainingType getTrainingTypeById(Long id) {
+	public TrainingType getTrainingTypeById(Long id) throws DatabaseEntityNotFoundException {
 		Session session = null;
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(TrainingType.class);
 			criteria.add(Restrictions.eq("trainingTypeId", id));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			return (TrainingType)criteria.uniqueResult();
+			TrainingType result = (TrainingType)criteria.uniqueResult();
+			if (result == null) {
+				throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND);
+			}
+			return result;
 		} finally {
 			session.close();
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<TrainingType> getAll() {
+	public List<TrainingType> getAll() throws DatabaseEntityNotFoundException {
 		List<TrainingType> trainingTypes = (List<TrainingType>) sessionFactory.getCurrentSession()
 		.createCriteria(TrainingType.class)
 		.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 		.list();
+		if (trainingTypes == null || trainingTypes.isEmpty()) {
+			throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND);
+		}
 		return trainingTypes;
 	}
 
 	@Override
 	@Transactional
-	public boolean delete(Long trainingTypeId) {
-		String hql = "delete from TrainingType where trainingTypeId= :trainingTypeId";
-		sessionFactory.getCurrentSession().createQuery(hql).setLong("trainingTypeId", trainingTypeId).executeUpdate();
-		return true;
+	public boolean delete(Long trainingTypeId) throws DatabaseEntityNotFoundException {
+		try {
+			String hql = "delete from TrainingType where trainingTypeId= :trainingTypeId";
+			sessionFactory.getCurrentSession().createQuery(hql).setLong("trainingTypeId", trainingTypeId).executeUpdate();
+			return true;
+		} catch (HibernateException e) {
+			throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_TRAINING_TYPE_DOESNT_EXIST);
+		}
 	}
 }

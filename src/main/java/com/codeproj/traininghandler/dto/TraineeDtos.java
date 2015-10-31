@@ -6,9 +6,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="Trainees")
 @XmlSeeAlso({TraineeDto.class})
-public class TraineeDtos {
+public class TraineeDtos extends BaseResponse {
 
 	private List<TraineeDto> trainees;
 	
@@ -18,6 +20,10 @@ public class TraineeDtos {
 
 	public TraineeDtos(List<TraineeDto> trainees) {
 		this.trainees = trainees;
+	}
+	
+	public TraineeDtos(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="traineeList")

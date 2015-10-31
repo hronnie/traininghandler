@@ -3,8 +3,10 @@ package com.codeproj.traininghandler.dto;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="TrainingType")
-public class TrainingTypeDto {
+public class TrainingTypeDto extends BaseResponse {
 	
 	private Long trainingTypeId;
 	private String name;
@@ -13,6 +15,10 @@ public class TrainingTypeDto {
 	
 	public TrainingTypeDto() {
 		//empty constructor
+	}
+	
+	public TrainingTypeDto(String message) {
+		super(false, message);
 	}
 	
 	public void setTrainingTypeId(Long trainingTypeId) {

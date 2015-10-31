@@ -21,7 +21,6 @@ public class AddOneUserToTrainingController {
 		ModelAndView mav = new ModelAndView("manageTraining/addOneUserToTraining");
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));
-		mav.addObject("backUrl", "/manageTraining");
 		logger.debug("Going to trainingType page..");
 		return mav;
 	}

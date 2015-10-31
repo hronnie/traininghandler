@@ -10,7 +10,7 @@
 
 			<footer class="footer--page text-align-center">
 			          <p class="footer__meta">
-					  	Készítette: Hársfalvi Áron<br><small>Copyright ©Aron Harsfalvi 2014 | Minden jog fenntartva</small>
+					  	Készítette: Hársfalvi Áron<br><small>Copyright ©Aron Harsfalvi 2015 | Minden jog fenntartva</small>
 					  </p>
 			</footer>
 

@@ -9,6 +9,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
     $scope.numPerPage = 10;
     $scope.maxSize = 5;
     $scope.traineeList = [];
+	$scope.validationMsg = "";
   
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/getAll');
 	resource.get().then(function(tranees) {
@@ -38,6 +39,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	
 	
 	$scope.saveTrainee = function(trainee, userId, addressId) {
+		$scope.validationMsg = "";
 		var saveResource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/edit');
 		var listAndEditTraineesPostObj = {
 				userId: userId,
@@ -50,18 +52,39 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 				completedTrainings: ''
 				
 		};
-		saveResource.customPOST(listAndEditTraineesPostObj);
-		$scope.isEditSuccess = true;
+		saveResource.customPOST(listAndEditTraineesPostObj).then(function(editResult) {
+			$scope.validationMsg = "";
+			if (!editResult.success) {
+				$scope.validationMsg = editResult.message;
+			} else {
+				$scope.isEditSuccess = true;
+			}
+		}, function(err) {
+			$scope.validationMsg = "A megadott tanítványt nem lehetett szerkeszteni, mert végrehajtás miatt valami hiba történt!";
+		});
 	};
 
 	$scope.removeTrainee = function(trainee) {
+		$scope.validationMsg = "";
 		var removeMsg = 'Biztos törölni szeretnéd ezt a tanítványt? Ez véglegesen törli a hozzá tartozó minden adatot, beleértve az elvégzett tanfolyamokra vonatkozó adatokat is.';
 		var deleteTrainee = window.confirm(removeMsg);
 		if (!deleteTrainee) {
 			return;
 		}
+		
 		var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete');
-		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete').one("userId", trainee.userId).one("addressId", trainee.addressId).remove();
+		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete')
+			.one("userId", trainee.userId).one("addressId", trainee.addressId).remove().then(function(delResult) {
+				$scope.validationMsg = "";
+				if (!delResult.success) {
+					
+					$scope.validationMsg = delResult.message;
+				} else {
+					$scope.isRemoveSuccess = true;
+				}
+			}, function(err) {
+				$scope.validationMsg = "A megadott tanítványt nem lehetett hozzáadni a tanfolyamhoz, mert még nem végezte el az előfeltételeket!";
+			});
 	      
 		var indexFilt = $scope.filteredTraineeList.indexOf(trainee);
 		var indexCur = $scope.currentPageTraineeList.indexOf(trainee);
@@ -76,7 +99,6 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
         	$scope.traineeList.splice(indexOrig, 1);
         }
 		$scope.reinitPagination();
-		$scope.isRemoveSuccess = true;
 	};
 	
 	$scope.reinitPagination = function() {

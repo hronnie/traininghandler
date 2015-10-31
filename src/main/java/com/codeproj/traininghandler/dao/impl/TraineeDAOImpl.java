@@ -24,7 +24,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public TraineeDAOImpl() { /* empty constructor */ }
 
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<TraineeDto> getAllTrainees() {

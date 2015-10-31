@@ -5,8 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="trainingExcelDto")
-public class TrainingExcelDto {
+public class TrainingExcelDto extends BaseResponse {
 	private String name;
 	private String postCode;
 	private String address;
@@ -24,6 +26,10 @@ public class TrainingExcelDto {
 		this.address = address;
 		this.phoneNo = phoneNo;
 		this.email = email;
+	}
+	
+	public TrainingExcelDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="name")

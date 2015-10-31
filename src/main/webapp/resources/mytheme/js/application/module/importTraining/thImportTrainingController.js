@@ -3,11 +3,12 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 	$scope.trainingDateMonth = "";
 	$scope.trainingDateDay = "";
 	$scope.selectedTrainingType = "";
+	$scope.showInfoFlag = false;
 	
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + '/trainingtype/getAll');
-	resource.getList().then(function(trainingTypes){
+	resource.get().then(function(trainingTypes){
 		$scope.trainingTypeWrapperArray = [];
-		$scope.trainingTypes = trainingTypes;
+		$scope.trainingTypes = trainingTypes.trainingTypeDtoList;
 		for (i = 0; i < $scope.trainingTypes.length; i++) {
 			var trainingTypeWrapper = {};
 			trainingTypeWrapper.id = $scope.trainingTypes[i].trainingTypeId;
@@ -30,14 +31,13 @@ thImportTrainingModule.controller('thImportTrainingController', function($scope,
 		}
 	}
 	
-//	$scope.jumpToNext = function(element)	{
-//		if (content.length == element.maxLength) {
-//			next = element.tabIndex;
-//			if (next<document.maxform.elements.length) {
-//				document.maxform.elements[next].focus();
-//			}
-//		}
-//	}
+	$scope.showInfo = function() {
+		if ($scope.showInfoFlag) {
+			$scope.showInfoFlag = false;
+		} else {
+			$scope.showInfoFlag = true;
+		}
+	}
 	
 	trainingTypeArray = thTrainingTypeService.getAllTrainingType();
 	

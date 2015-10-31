@@ -48,7 +48,7 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 	// getById
 	
 	@Test 
-	public void getTrainingTypeById() {
+	public void getTrainingTypeById() throws DatabaseEntityNotFoundException {
 		TrainingType result = manager.getTrainingTypeById(1l);
 		assertNotNull("TrainingType result is null", result);
 		assertEquals("TrainingType doesn't match", refTrainingType, result);
@@ -57,13 +57,13 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 	// getAll
 	
 	@Test
-	public void getAllTrainingTypeWithEmptyResult() {
+	public void getAllTrainingTypeWithEmptyResult() throws DatabaseEntityNotFoundException {
 		when(trainingTypeDAO.getAll()).thenReturn(null);
 		assertNull("Result should be null", manager.getAllTrainingType());
 	}
 	
 	@Test
-	public void getAllTrainingTypeWithOneResult() {
+	public void getAllTrainingTypeWithOneResult() throws DatabaseEntityNotFoundException {
 		when(trainingTypeDAO.getAll()).thenReturn(oneTraingType);
 		List<TrainingType> resultFromManager = manager.getAllTrainingType();
 		assertNotNull("The result list size should be 1, but it's null", resultFromManager);
@@ -72,7 +72,7 @@ public class TrainingTypeManagerTest extends TrainingTypeTestBase {
 	}
 	
 	@Test
-	public void getAllTrainingTypeWithThreeResult() {
+	public void getAllTrainingTypeWithThreeResult() throws DatabaseEntityNotFoundException {
 		when(trainingTypeDAO.getAll()).thenReturn(threeTraingType);
 		List<TrainingType> resultFromManager = manager.getAllTrainingType();
 

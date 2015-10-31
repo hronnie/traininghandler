@@ -2,7 +2,6 @@ package com.codeproj.traininghandler.util;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
-import com.codeproj.traininghandler.rest.completedTraining.CompletedTrainingService;
 
 import java.util.Date;
 import java.util.List;

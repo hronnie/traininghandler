@@ -22,7 +22,6 @@ public class ManageTrainingsController {
 		ModelAndView mav = new ModelAndView("manageTraining");
 		mav.addObject("isNotMainPage", new Boolean(true));
 		mav.addObject("isPublicPage", new Boolean(false));
-		mav.addObject("backUrl", "/");
 		logger.debug("Going to manageTraining page..");
 		return mav;
 	}

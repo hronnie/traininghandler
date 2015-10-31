@@ -5,11 +5,14 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.codeproj.traininghandler.rest.common.BaseResponse;
+
 @XmlRootElement(name="CompletedUserTraining")
-public class CompletedUserTrainingDto {
+public class CompletedUserTrainingDto extends BaseResponse {
 	private Long userId;
 	private Long trainingTypeId;
 	private Date completedDate;
+	private Boolean skipPrereqCheck;
 	
 	public CompletedUserTrainingDto() { /* empty constructor */}
 	
@@ -18,6 +21,19 @@ public class CompletedUserTrainingDto {
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
 		this.completedDate = completedDate;
+		this.skipPrereqCheck = false;
+	}
+	
+	public CompletedUserTrainingDto(Long userId, Long trainingTypeId,
+			Date completedDate, Boolean skipPrereqCheck) {
+		this.userId = userId;
+		this.trainingTypeId = trainingTypeId;
+		this.completedDate = completedDate;
+		this.skipPrereqCheck = skipPrereqCheck;
+	}
+	
+	public CompletedUserTrainingDto(String message) {
+		super(false, message);
 	}
 
 	@XmlElement(name="userId")
@@ -45,6 +61,14 @@ public class CompletedUserTrainingDto {
 
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
+	}
+	
+	public Boolean getSkipPrereqCheck() {
+		return skipPrereqCheck;
+	}
+
+	public void setSkipPrereqCheck(Boolean skipPrereqCheck) {
+		this.skipPrereqCheck = skipPrereqCheck;
 	}
 
 	@Override
@@ -78,7 +102,7 @@ public class CompletedUserTrainingDto {
 		} else if (!completedDate.equals(other.completedDate)) {
 			return false;
 		}
-		if (trainingTypeId != other.trainingTypeId) {
+		if (!trainingTypeId.equals(other.trainingTypeId)) {
 			return false;
 		}
 		if (userId == null) {
