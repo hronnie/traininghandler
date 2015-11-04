@@ -62,4 +62,9 @@ public class UserRole implements HibernatePersistable, Serializable {
 		this.role = role;
 	}
 
+	@Override
+	public String toString() {
+		return "UserRole [userRoleId=" + userRoleId + ", user=" + user
+				+ ", role=" + role + ", authority=" + authority + "]";
+	}
 }

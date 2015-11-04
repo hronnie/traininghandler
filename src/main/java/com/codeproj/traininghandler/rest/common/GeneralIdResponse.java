@@ -60,6 +60,4 @@ public class GeneralIdResponse extends BaseResponse {
 		}
 		return true;
 	}
-	
-	
 }

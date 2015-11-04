@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.rest.address;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,14 @@ import com.codeproj.traininghandler.util.ValidatorBaseUtility;
 @RequestMapping("/address")
 public class AddressService {
 	
+	private static final Logger logger = Logger.getLogger(AddressService.class);
+	
 	@Autowired
 	AddressManager addressManager;
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse create(@RequestBody AddressDto addressDto) {
+		logger.debug("create with >>" + addressDto);
 		Long newAddressId = null;
 		try {
 			newAddressId = createAddress(addressDto, true);
@@ -33,7 +37,9 @@ public class AddressService {
 
 	private Long createAddress(AddressDto addressDto, boolean isNeedValidation)
 			throws ValidationException {
+		logger.debug("createAddress with >>" + addressDto + ", isNeedValidation>> " + isNeedValidation);
 		if (addressDto == null) {
+			logger.error("createAddress, addressDto is null");
 			throw new ValidationException(Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 		}
 		if (isNeedValidation) {
@@ -49,6 +55,7 @@ public class AddressService {
 	}
 	
 	public GeneralIdResponse createFromForm(AddressDto addressDto) {
+		logger.debug("createFromForm with >> " + addressDto);
 		Long newAddressId = null;
 		try {
 			newAddressId = createAddress(addressDto, false);

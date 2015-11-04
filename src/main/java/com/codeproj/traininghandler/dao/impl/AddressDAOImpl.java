@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.dao.impl;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,9 @@ import com.codeproj.traininghandler.dao.AddressDAO;
 import com.codeproj.traininghandler.model.Address;
 
 public class AddressDAOImpl implements AddressDAO {
+	
+	private static final Logger logger = Logger.getLogger(AddressDAOImpl.class);
+	
 	private SessionFactory sessionFactory;
 
 	public AddressDAOImpl(SessionFactory sessionFactory) {
@@ -28,6 +32,7 @@ public class AddressDAOImpl implements AddressDAO {
 	@Override
 	@Transactional
 	public boolean edit(Address address) {
+		logger.debug("Editing the following address" + address);
 		sessionFactory.getCurrentSession().update(address);
 		return true;
 	}
@@ -40,7 +45,9 @@ public class AddressDAOImpl implements AddressDAO {
 			Criteria criteria = session.createCriteria(Address.class);
 			criteria.add(Restrictions.eq("addressId", addressId));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			return (Address)criteria.uniqueResult();
+			Address result = (Address)criteria.uniqueResult();
+			logger.debug("getAddressByAddressId result with addressId> " + addressId + " is> " + result);
+			return result;
 		} finally {
 			session.close();
 		}
@@ -49,6 +56,7 @@ public class AddressDAOImpl implements AddressDAO {
 	@Override
 	@Transactional
 	public boolean deleteByUserId(Long addressId) {
+		logger.debug("Deleting address object with the following addressId> " + addressId);
 		String hql = "delete from Address where addressId= :addressId";
 		sessionFactory.getCurrentSession().createQuery(hql).setLong("addressId", addressId).executeUpdate();
 		return true;

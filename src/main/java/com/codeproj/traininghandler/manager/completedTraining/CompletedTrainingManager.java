@@ -3,6 +3,7 @@ package com.codeproj.traininghandler.manager.completedTraining;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ import com.codeproj.traininghandler.model.User;
 
 @Component
 public class CompletedTrainingManager {
+	
+	private static final Logger logger = Logger.getLogger(CompletedTrainingManager.class);
 	
 	@Autowired
 	CompletedTrainingDAO completedTrainingDAO;
@@ -39,26 +42,33 @@ public class CompletedTrainingManager {
 		List<Long> result = new ArrayList<>();
 		List<CompletedUserTraining> alreadyCompletedList = completedTrainingDAO.getCompletedListByTrainingTypeId(trainingTypeId);
 		if (alreadyCompletedList == null || alreadyCompletedList.isEmpty()) {
+			logger.debug("getUsersWhoCompletedTrainingType list is empty");
 			return result;
 		}
 		for (CompletedUserTraining item : alreadyCompletedList) {
 			result.add(item.getUser().getUserId());
 		}
+		logger.debug("getUsersWhoCompletedTrainingType result>> " + result);
 		return result;
 	}
 
 	public boolean isUserEligibleToAddTraining(CompletedUserTrainingDto complatedUserTrainingDto) {
+		logger.debug("isUserEligibleToAddTraining with>> " + complatedUserTrainingDto);
+
 		TraineesEligibleForTrainingDto eligibleTrainees = 
 				showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(
 						complatedUserTrainingDto.getTrainingTypeId(), new DateTime(complatedUserTrainingDto.getCompletedDate()));
+		logger.debug("eligibleTrainees>> " + eligibleTrainees);
 		List<UserDto> allUserList = new ArrayList<>();
 		allUserList.addAll(eligibleTrainees.getHasEmailUsers());
 		allUserList.addAll(eligibleTrainees.getOnlyPhoneUsers());
 		for (UserDto item : allUserList) {
 			if (item.getUserId().equals(complatedUserTrainingDto.getUserId())) {
+				logger.debug("userId has been found in the following user>> " + item);
 				return true;
 			}
 		}
+		logger.debug("userId hasn't been found in any user");
 		return false;
 	}
 	

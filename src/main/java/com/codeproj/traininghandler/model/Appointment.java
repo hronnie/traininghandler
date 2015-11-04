@@ -213,4 +213,14 @@ public class Appointment implements HibernatePersistable, Serializable {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Appointment [appointmentId=" + appointmentId
+				+ ", userByHealerId=" + userByHealerId + ", userByPatientId="
+				+ userByPatientId + ", address=" + address + ", fromDateTime="
+				+ fromDateTime + ", toDateTime=" + toDateTime
+				+ ", description=" + description + ", isEmailConfirmation="
+				+ isEmailConfirmation + "]";
+	}
 }

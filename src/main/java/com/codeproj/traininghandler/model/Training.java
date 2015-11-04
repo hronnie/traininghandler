@@ -139,4 +139,15 @@ public class Training implements HibernatePersistable, Serializable {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Training [trainingId=" + trainingId + ", trainingType="
+				+ trainingType + ", address=" + address + ", nameOfMaster="
+				+ nameOfMaster + ", dateTime=" + dateTime + ", description="
+				+ description + ", autoInvite=" + autoInvite
+				+ ", trainingPrerequisites=" + trainingPrerequisites
+				+ ", sentTrainingEmails=" + sentTrainingEmails + ", users="
+				+ users + "]";
+	}
 }

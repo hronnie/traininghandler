@@ -146,6 +146,12 @@ public class TrainingType implements  Serializable {
 		}
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "TrainingType [trainingTypeId=" + trainingTypeId + ", name="
+				+ name + ", levelNo=" + levelNo + ", description="
+				+ description + ", trainingPrerequisites="
+				+ trainingPrerequisites + "]";
+	}
 }

@@ -22,7 +22,6 @@ import com.codeproj.traininghandler.util.Constants;
 @RequestMapping("/completedTraining")
 public class CompletedTrainingService {
 
-	//TODO: add more logs to the code
 	private static final Logger logger = Logger.getLogger(CompletedTrainingService.class);
 
 	@Autowired
@@ -30,6 +29,7 @@ public class CompletedTrainingService {
 
 	@RequestMapping(value="/create", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdListResponse create(@RequestBody List<CompletedUserTrainingDto> complatedUserTrainingDtoList) {
+		logger.debug("create with>> " + complatedUserTrainingDtoList);
 		try {
 			CompletedTrainingServiceValidator.create(complatedUserTrainingDtoList);
 			List<Long> resultValue = new ArrayList<>();
@@ -37,7 +37,9 @@ public class CompletedTrainingService {
 				GeneralIdResponse itemResult = createOne(item);
 				resultValue.add(itemResult.getValue());
 			}
-			return new GeneralIdListResponse(resultValue);
+			GeneralIdListResponse result = new GeneralIdListResponse(resultValue);
+			logger.debug("result >> " + result);
+			return result;
 		} catch (ValidationException ve) {
 			return new GeneralIdListResponse(ve.getMessage());
 		}
@@ -46,18 +48,22 @@ public class CompletedTrainingService {
 	@RequestMapping(value="/createOne", method = RequestMethod.POST,headers="Accept=application/json")
 	public GeneralIdResponse createOne(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) {
 		try {
+			logger.debug("createOne with>> " + complatedUserTrainingDto);
 			CompletedTrainingServiceValidator.createOne(complatedUserTrainingDto);
 			
 			BooleanResponse completedUserTrainingCheckResult = isCompletedTrainingExist(complatedUserTrainingDto);
 			if (completedUserTrainingCheckResult.getBooleanValue()) {
+				logger.info(Constants.VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS);
 				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS);
 			}
 			
 			if (complatedUserTrainingDto.getSkipPrereqCheck()) {
+				logger.debug("Prereqs were skipped");
 				return new GeneralIdResponse(completedTrainingManager.create(complatedUserTrainingDto));
 			}
 			
 			if (!isUserEligibleToAddTraining(complatedUserTrainingDto)) {
+				logger.info(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE);
 				return new GeneralIdResponse(Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE);
 			}
 			Long result = completedTrainingManager.create(complatedUserTrainingDto);
@@ -69,6 +75,8 @@ public class CompletedTrainingService {
 
 	public BooleanResponse isCompletedTrainingExist(
 			CompletedUserTrainingDto newComplTraining) {
+		logger.debug("isCompletedTrainingExist with>> " + newComplTraining);
+		
 		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
 	}
 	

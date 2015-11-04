@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,9 @@ import com.codeproj.traininghandler.dto.TraineeDto;
 import com.codeproj.traininghandler.util.Constants;
 
 public class TraineeDAOImpl implements TraineeDAO {
+	
+	private static final Logger logger = Logger.getLogger(TraineeDAOImpl.class);
+	
 	private SessionFactory sessionFactory;
 
 	public TraineeDAOImpl(SessionFactory sessionFactory) {
@@ -51,6 +55,7 @@ public class TraineeDAOImpl implements TraineeDAO {
                 trainee.setCompletedTrainings((String)row[7]);
                 result.add(trainee);
             }
+            logger.debug("getAllTrainees>> " + result);
             return result;
         } finally {
             session.close();

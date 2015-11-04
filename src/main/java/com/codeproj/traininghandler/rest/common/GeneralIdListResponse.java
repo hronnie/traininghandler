@@ -31,4 +31,5 @@ public class GeneralIdListResponse extends BaseResponse {
 	public String toString() {
 		return "GeneralIdListResponse [values=" + values + "]";
 	}
+	
 }
