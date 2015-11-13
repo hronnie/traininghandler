@@ -4,6 +4,7 @@ import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_ERR
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,13 +22,14 @@ import com.codeproj.traininghandler.manager.user.UserManager;
 import com.codeproj.traininghandler.model.Address;
 import com.codeproj.traininghandler.model.User;
 import com.codeproj.traininghandler.rest.common.BaseResponse;
-import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.util.Constants;
 
 @RestController
 @RequestMapping("/trainee")
 public class TraineeService {
 	
+	private static final Logger logger = Logger.getLogger(TraineeService.class);
+
 	@Autowired
 	private TraineeManager traineeManager;
 	
@@ -47,7 +49,9 @@ public class TraineeService {
 	@RequestMapping(value="/edit", method = RequestMethod.POST,headers="Accept=application/json")
 	public BaseResponse editTrainee(@RequestBody TraineeDto traineeDto) {
 		try {
+			logger.debug("editTrainee with traineeDto >> " +  traineeDto);
 			if (traineeDto == null) {
+				logger.debug("traineeDto was null");
 				throw new ValidationException(VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST);
 			}
 			TraineeServiceValidator.edit(traineeDto);
@@ -66,9 +70,17 @@ public class TraineeService {
 			boolean result = addressEditResult && userEditResult;
 			String errMsg = null;
 			if (!result) {
+				if (!addressEditResult && !userEditResult) {
+					logger.debug("address and user edit failed at the same time");
+				} else if (!addressEditResult) {
+					logger.debug("address edit failed ");
+				} else if (!userEditResult) {
+					logger.debug("user edit failed");
+				}
 				errMsg = Constants.VALIDATION_ERR_MSG_GENERAL_ERROR;
 			}
 			
+			logger.debug("edit trainee was successful");
 			return new BaseResponse(result, errMsg);
 			
 		} catch (ValidationException ve) {
@@ -79,13 +91,14 @@ public class TraineeService {
 	@RequestMapping(value="/delete/userId/{userId}/addressId/{addressId}", method = RequestMethod.DELETE,headers="Accept=application/json")
 	public BaseResponse deleteTrainee(@PathVariable Long userId, @PathVariable Long addressId) {
 		try {
+			logger.debug("deleteTrainee with userId and  addressId>> " +  userId + ", " + addressId);
 			TraineeServiceValidator.delete(userId, addressId);
 			return new BaseResponse(userManager.deleteTrainee(userId, addressId));
 		} catch (ValidationException ve) {
+			logger.debug("delete process has been failed: " + ve.getMessage());
 			return new BaseResponse(ve.getMessage()); 
 		}
 	}
-
 	
 	public void setTraineeManager(
 			TraineeManager traineeManager) {

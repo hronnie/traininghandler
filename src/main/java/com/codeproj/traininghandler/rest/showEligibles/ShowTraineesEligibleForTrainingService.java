@@ -1,5 +1,6 @@
 package com.codeproj.traininghandler.rest.showEligibles;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import com.codeproj.traininghandler.rest.trainingtype.TrainingTypeService;
 @RequestMapping("/manageTraining")
 public class ShowTraineesEligibleForTrainingService {
 	
+	private static final Logger logger = Logger.getLogger(ShowTraineesEligibleForTrainingService.class);
+	
 	@Autowired
 	TrainingTypeService trainingTypeService;
 	
@@ -26,13 +29,16 @@ public class ShowTraineesEligibleForTrainingService {
 	@RequestMapping(value="/getEligibleTraineesByTrainingTypeId/{trainingTypeId}", method = RequestMethod.GET,headers="Accept=application/json")
 	public TraineesEligibleForTrainingDto getEligibleTraineesByTrainingTypeId(@PathVariable("trainingTypeId") Long trainingTypeId) {
 		try {
+			logger.debug("getEligibleTraineesByTrainingTypeId with trainingTypeId >> " +  trainingTypeId);
 			ShowTraineesEligibleForTrainingValidator.getEligibleTraineesByTrainingTypeIdAndComplDate(trainingTypeId);
 			
 			TrainingTypeDto trainingType = trainingTypeService.getTrainingTypeById(trainingTypeId);
 			if (!trainingType.getSuccess()) {
+				logger.debug("getEligibleTraineesByTrainingTypeId failed >> " +  trainingType.getMessage());
 				return new TraineesEligibleForTrainingDto(trainingType.getMessage());
 			}
 			TraineesEligibleForTrainingDto result = showTraineesEligibleForTrainingManager.getEligibleTraineesByTrainingTypeIdAndTrainingComplDate(trainingTypeId, new DateTime().withTimeAtStartOfDay()); 
+			logger.debug("getEligibleTraineesByTrainingTypeId succeed >> " +  result);
 			return result;
 		} catch (ValidationException ve) {
 			return new TraineesEligibleForTrainingDto(ve.getMessage());
