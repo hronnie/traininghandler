@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,7 +21,9 @@ import com.codeproj.traininghandler.util.Constants;
 
 public class ShowTraineesEligibleForTrainingDAOImpl implements
 		ShowTraineesEligibleForTrainingDAO {
-
+	
+	private static final Logger logger = Logger.getLogger(ShowTraineesEligibleForTrainingDAOImpl.class);
+	
 	private SessionFactory sessionFactory;
 	
 	public ShowTraineesEligibleForTrainingDAOImpl(SessionFactory sessionFactory) {
@@ -41,7 +44,9 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 			Criteria criteria = session.createCriteria(TrainingPrerequisite.class);
 			criteria.add(Restrictions.eq("dependentTrainingTypeId", trainingTypeId));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			return (List<TrainingPrerequisite>)criteria.list();
+			List<TrainingPrerequisite> result = (List<TrainingPrerequisite>)criteria.list();
+			logger.debug("getPrerequisitesByTrainingTypeId result> " + result);
+			return result;
 		} finally {
 			session.close();
 		}
@@ -52,6 +57,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
 	public List<User> getEligibleTrainees(
 			List<TrainingTypePrerequisite> trainingPrerequisites) {
 		
+		logger.debug("getEligibleTrainees with the following trainingPrerequisites> " + trainingPrerequisites);
         Session session = sessionFactory.openSession();
         try {
         	if (trainingPrerequisites == null) {
@@ -81,6 +87,7 @@ public class ShowTraineesEligibleForTrainingDAOImpl implements
                 
                 result.add(user);
             }
+            logger.debug("result users>> " + result);
             return result;
         } finally {
             session.close();

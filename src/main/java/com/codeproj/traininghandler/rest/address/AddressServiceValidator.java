@@ -18,7 +18,6 @@ public class AddressServiceValidator extends ValidatorBaseUtility {
 		mandatoryParameter(VALIDATION_PARAMETER_HOUSE_NO, addressDto.getHouseNo());
 		mandatoryParameter(VALIDATION_PARAMETER_COUNTRY, addressDto.getCountry());
 		
-		//TODO: move attr length number to constants
 		validateStringLength(VALIDATION_PARAMETER_POSTCODE, addressDto.getPostCode(), TABLE_FIELD_SIZE_POSTCODE);
 		validateStringLength(VALIDATION_PARAMETER_CITY, addressDto.getCity(), TABLE_FIELD_SIZE_CITY);
 		validateStringLength(VALIDATION_PARAMETER_STREET, addressDto.getStreet(), TABLE_FIELD_SIZE_STREET);

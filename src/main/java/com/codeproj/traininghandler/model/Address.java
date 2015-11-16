@@ -227,4 +227,14 @@ public class Address implements Serializable {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", postalCode=" + postalCode
+				+ ", city=" + city + ", street=" + street + ", houseNo="
+				+ houseNo + ", country=" + country + ", oneLineAddress="
+				+ oneLineAddress + ", isTrainingPlace=" + isTrainingPlace
+				+ ", isAppointmentPlace=" + isAppointmentPlace + ", users="
+				+ users + "]";
+	}
 }

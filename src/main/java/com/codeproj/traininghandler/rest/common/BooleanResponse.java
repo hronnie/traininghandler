@@ -24,4 +24,9 @@ public class BooleanResponse extends BaseResponse {
     public Boolean getBooleanValue() {
         return booleanValue;
     }
+
+	@Override
+	public String toString() {
+		return "BooleanResponse [booleanValue=" + booleanValue + "]";
+	}
 }

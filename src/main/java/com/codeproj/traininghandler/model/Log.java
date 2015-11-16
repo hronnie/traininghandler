@@ -81,4 +81,10 @@ public class Log implements HibernatePersistable, Serializable {
 	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Log [logId=" + logId + ", user=" + user + ", action=" + action
+				+ ", message=" + message + ", dateTime=" + dateTime + "]";
+	}
 }

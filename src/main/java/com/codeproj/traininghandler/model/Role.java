@@ -43,4 +43,9 @@ public class Role implements HibernatePersistable, Serializable {
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + "]";
+	}
 }

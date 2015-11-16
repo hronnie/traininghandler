@@ -212,5 +212,47 @@ public class CompletedTrainingServiceTest {
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS, result.getMessage());
 	}
+	
+	// update
+	
+	@Test
+	public void testUpdateWithInvalidInputs() {
+		// null userId 
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(null, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		GeneralIdResponse result = service.update(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
+		// null tt id
+		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, null, VALID_COMPLETED_DATE);
+		result = service.update(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_TRAINING_TYPE_ID, result.getMessage());
+		// null compl date
+		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, null);
+		result = service.update(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_COMPLETED_DATE, result.getMessage());
+
+		// invalid userId 
+		complatedUserTrainingDto = new CompletedUserTrainingDto(-1L, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		result = service.update(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+		// invalid tt id
+		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, -1L, VALID_COMPLETED_DATE);
+		result = service.update(complatedUserTrainingDto);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+	}
+	
+	@Test
+	public void testUpdateWithValidInputs() {
+		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		when(manager.update(complatedUserTrainingDto)).thenReturn(5L);
+		GeneralIdResponse result = service.update(complatedUserTrainingDto);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+		
+	}
+	
 
 }

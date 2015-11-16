@@ -78,4 +78,12 @@ public class TrainingTypePrerequisite {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "TrainingTypePrerequisite [prerequisiteTrainingTypeId="
+				+ prerequisiteTrainingTypeId + ", minCompletedDate="
+				+ minCompletedDate + "]";
+	}
+	
 }

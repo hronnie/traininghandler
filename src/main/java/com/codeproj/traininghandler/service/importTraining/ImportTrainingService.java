@@ -37,7 +37,7 @@ public class ImportTrainingService {
 	
 	public ModelAndView importTrainingsFromAttendentList(List<TrainingExcelDto> trainingAttendendList, 
 			ModelAndView mav, ImportTrainingInputs inputParams) {
-		
+		logger.debug("importTrainingsFromAttendentList with trainingAttendendList >> " + trainingAttendendList);
 		StringBuilder processValidationMessage = initValidationMessage(inputParams);
 		StringBuilder successUserList = new StringBuilder("A következő tanítványokat sikeresen hozzáadtam: <br>");
 		
@@ -46,6 +46,7 @@ public class ImportTrainingService {
 		try {
 			TrainingExcelValidator.validateTrainingExcelList(trainingAttendendList);
 		} catch (ValidationException ve) {
+			logger.debug("the list of attendend validation wasn't successful. the validation message was: " + ve.getMessage());
 			mav.addObject(Constants.MAV_PARAM_NAME_VALIDATION_MSG, Constants.VALIDATION_EXCEL_IMPORT_INVALID_CONTENT + ve.getMessage()); 
 			mav.addObject(Constants.MAV_PARAM_NAME_IMPORT_SUCCESS, new Boolean(false));
 			return mav;
@@ -76,11 +77,14 @@ public class ImportTrainingService {
 			}
 		}
 		
+		
 		if (isThereFailedUser) {
+			logger.debug("There is at least one failed user. Validation message: " + processValidationMessage.toString());
 			processValidationMessage.append(successUserList);
 			mav.addObject(Constants.MAV_PARAM_NAME_VALIDATION_MSG, processValidationMessage.toString());
 			mav.addObject(Constants.MAV_PARAM_NAME_IMPORT_SUCCESS, new Boolean(false));
 		} else {
+			logger.debug("Import was succesful");
 			mav.addObject(Constants.MAV_PARAM_NAME_IMPORT_SUCCESS, new Boolean(true));
 		}
 		return mav;
