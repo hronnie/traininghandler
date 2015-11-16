@@ -82,4 +82,9 @@ public class CompletedTrainingManager {
 			ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager) {
 		this.showTraineesEligibleForTrainingManager = showTraineesEligibleForTrainingManager;
 	}
+
+	public Long update(CompletedUserTrainingDto complatedUserTrainingDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

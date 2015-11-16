@@ -80,6 +80,19 @@ public class CompletedTrainingService {
 		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
 	}
 	
+	public GeneralIdResponse update(CompletedUserTrainingDto complatedUserTrainingDto) {
+		try {
+			logger.debug("update with>> " + complatedUserTrainingDto);
+			CompletedTrainingServiceValidator.update(complatedUserTrainingDto);
+			Long resultId = completedTrainingManager.update(complatedUserTrainingDto);
+			GeneralIdResponse result = new GeneralIdResponse(resultId);
+			logger.debug("update was successful >> " + result);
+			return result;
+		} catch (ValidationException ve) {
+			return new GeneralIdResponse(ve.getMessage()); 
+		}
+	}
+	
 	private boolean isUserEligibleToAddTraining(
 			CompletedUserTrainingDto complatedUserTrainingDto) {
 		return completedTrainingManager.isUserEligibleToAddTraining(complatedUserTrainingDto);

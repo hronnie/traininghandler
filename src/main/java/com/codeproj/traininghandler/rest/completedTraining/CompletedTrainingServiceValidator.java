@@ -35,4 +35,13 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 		isDateInTheFuture(compUsrTr.getCompletedDate());
 	}
 
+	public static void update(CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, complatedUserTrainingDto.getUserId());
+		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, complatedUserTrainingDto.getTrainingTypeId());
+		mandatoryParameter(VALIDATION_PARAMETER_COMPLETED_DATE, complatedUserTrainingDto.getCompletedDate());
+		
+		entityIdValidator(complatedUserTrainingDto.getUserId());
+		entityIdValidator(complatedUserTrainingDto.getTrainingTypeId());
+	}
+
 }
