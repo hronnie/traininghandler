@@ -16,8 +16,8 @@ public class BooleanResponse extends BaseResponse {
         this.booleanValue = booleanValue;
     }
     
-    public BooleanResponse(String boolStr) {
-        this.booleanValue = Boolean.parseBoolean(boolStr);
+    public BooleanResponse(String validationMsg) {
+    	super(validationMsg);
     }
 
     @XmlElement(name="value")

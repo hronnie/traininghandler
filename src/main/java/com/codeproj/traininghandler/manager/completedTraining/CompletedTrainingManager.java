@@ -72,6 +72,13 @@ public class CompletedTrainingManager {
 		return false;
 	}
 	
+	public boolean update(CompletedUserTrainingDto complatedUserTrainingDto) {
+		logger.debug("update with>> " + complatedUserTrainingDto);
+		boolean result = completedTrainingDAO.update(complatedUserTrainingDto);
+		logger.debug("Resulted >> " + result);
+		return result;
+	}
+	
 	// getters/setters
 	
 	public void setCompletedTrainingDAO(CompletedTrainingDAO completedTrainingDAO) {
@@ -81,10 +88,5 @@ public class CompletedTrainingManager {
 	public void setShowTraineesEligibleForTrainingManager(
 			ShowTraineesEligibleForTrainingManager showTraineesEligibleForTrainingManager) {
 		this.showTraineesEligibleForTrainingManager = showTraineesEligibleForTrainingManager;
-	}
-
-	public Long update(CompletedUserTrainingDto complatedUserTrainingDto) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

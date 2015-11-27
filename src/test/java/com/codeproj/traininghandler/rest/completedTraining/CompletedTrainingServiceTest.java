@@ -3,10 +3,16 @@ package com.codeproj.traininghandler.rest.completedTraining;
 import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL;
 import static com.codeproj.traininghandler.common.MessageConstants.SERVICE_CALL_SHOULD_BE_SUCCESSFUL;
 import static com.codeproj.traininghandler.common.MessageConstants.WRONG_VALIDATION_MESSAGE;
-import static com.codeproj.traininghandler.util.Constants.*;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_MANDATORY_PARAMETER;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_MISSING_PREREQUISITE;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_USER_TRAINING_COMPL_ALREADY_EXISTS;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_COMPLETED_DATE;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_TRAINING_TYPE_ID;
+import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_USER_ID;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -22,7 +28,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
-import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
@@ -216,10 +221,10 @@ public class CompletedTrainingServiceTest {
 	// update
 	
 	@Test
-	public void testUpdateWithInvalidInputs() {
+	public void testUpdate() {
 		// null userId 
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(null, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
-		GeneralIdResponse result = service.update(complatedUserTrainingDto);
+		BooleanResponse result = service.update(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
 		// null tt id
@@ -238,21 +243,17 @@ public class CompletedTrainingServiceTest {
 		result = service.update(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+		
 		// invalid tt id
 		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, -1L, VALID_COMPLETED_DATE);
 		result = service.update(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
-	}
-	
-	@Test
-	public void testUpdateWithValidInputs() {
-		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
-		when(manager.update(complatedUserTrainingDto)).thenReturn(5L);
-		GeneralIdResponse result = service.update(complatedUserTrainingDto);
-		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
-		
-	}
-	
 
+		// with valid data
+		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		when(manager.update(complatedUserTrainingDto)).thenReturn(true);
+		result = service.update(complatedUserTrainingDto);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+	}
 }

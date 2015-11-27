@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codeproj.traininghandler.dao.CompletedTrainingDAO;
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
 
 public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
@@ -85,5 +86,33 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		String hql = "delete from CompletedUserTraining where userId= :userId";
 		sessionFactory.getCurrentSession().createQuery(hql).setLong("userId", userId).executeUpdate();
 		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean update(CompletedUserTrainingDto completedUserTraining) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Query query = session.createQuery(
+					"update CompletedUserTraining cut set cut.completedDate = :completedDate WHERE cut.user.userId=:userId AND cut.trainingType.trainingTypeId=:trainingTypeId");
+			
+			query.setParameter("userId", completedUserTraining.getUserId());
+			query.setParameter("trainingTypeId", completedUserTraining.getTrainingTypeId());
+			query.setParameter("completedDate", completedUserTraining.getCompletedDate());
+			
+			CompletedUserTraining result = (CompletedUserTraining)query.uniqueResult();
+			if (result != null && result.getCompletedUserTrainingId() != null && result.getCompletedUserTrainingId() > 0L) {
+				logger.debug("The CompletedUserTraining does exist: " + completedUserTraining);
+				return true;
+			}
+			
+			logger.debug("The CompletedUserTraining does NOT exist: " + completedUserTraining);
+			return false;
+			
+		} finally {
+			session.close();
+			logger.debug("Updating CompletedUserTraining with userId> " + completedUserTraining.getUserId() + ", trainingTypeId> " + completedUserTraining.getTrainingTypeId() + ", completed date> " + completedUserTraining.getCompletedDate());
+		}
 	}
 }

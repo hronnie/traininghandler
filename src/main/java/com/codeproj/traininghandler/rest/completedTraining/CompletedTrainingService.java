@@ -80,16 +80,16 @@ public class CompletedTrainingService {
 		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
 	}
 	
-	public GeneralIdResponse update(CompletedUserTrainingDto complatedUserTrainingDto) {
+	public BooleanResponse update(CompletedUserTrainingDto complatedUserTrainingDto) {
 		try {
 			logger.debug("update with>> " + complatedUserTrainingDto);
 			CompletedTrainingServiceValidator.update(complatedUserTrainingDto);
-			Long resultId = completedTrainingManager.update(complatedUserTrainingDto);
-			GeneralIdResponse result = new GeneralIdResponse(resultId);
+			boolean resultBool = completedTrainingManager.update(complatedUserTrainingDto);
+			BooleanResponse result = new BooleanResponse(resultBool);
 			logger.debug("update was successful >> " + result);
 			return result;
 		} catch (ValidationException ve) {
-			return new GeneralIdResponse(ve.getMessage()); 
+			return new BooleanResponse(ve.getMessage()); 
 		}
 	}
 	

@@ -43,6 +43,9 @@ public class CompletedTrainingManagerTest {
 	public static final Long USER_NOT_ELIGIBLE = 15L;
 	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
+	public static final Long VALID_USER_ID_EXIST = 1L;
+	public static final Long VALID_TRAINING_TYPE_ID_EXIST = 2L;
+	
 	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
 
 	
@@ -111,5 +114,12 @@ public class CompletedTrainingManagerTest {
 				.thenReturn(new TraineesEligibleForTrainingDto(new ArrayList<UserDto>(), new ArrayList<UserDto>()));
 		result = manager.isUserEligibleToAddTraining(new CompletedUserTrainingDto(USER_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, TRAINING_COMPL_DATE.toDate()));
 		assertFalse("User souldn't be eligible", result);
+	}
+	
+	@Test
+	public void testUpdateCompletedTraining() {
+		when(completedTrainingDAO.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE))).thenReturn(true);
+		boolean result = manager.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE));
+		assertTrue("Wrong completed training id result ", result);
 	}
 }

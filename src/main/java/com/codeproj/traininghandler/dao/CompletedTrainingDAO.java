@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
 
 @Service
@@ -18,4 +19,6 @@ public interface CompletedTrainingDAO {
 			Long trainingTypeId);
 	
 	public boolean deleteByUserId(Long userId);
+	
+	public boolean update(CompletedUserTrainingDto completedUserTraining);
 }
