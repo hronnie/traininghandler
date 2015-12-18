@@ -21,4 +21,8 @@ public interface CompletedTrainingDAO {
 	public boolean deleteByUserId(Long userId);
 	
 	public boolean update(CompletedUserTrainingDto completedUserTraining);
+
+	public boolean delete(Long userId, Long trainingTypeId);
+
+	public List<CompletedUserTraining> listByUserId(Long validUserIdExist);
 }

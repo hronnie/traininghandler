@@ -115,4 +115,47 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 			logger.debug("Updating CompletedUserTraining with userId> " + completedUserTraining.getUserId() + ", trainingTypeId> " + completedUserTraining.getTrainingTypeId() + ", completed date> " + completedUserTraining.getCompletedDate());
 		}
 	}
+
+	@Override
+	@Transactional
+	public boolean delete(Long userId, Long trainingTypeId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Query query = session.createQuery(
+					"delete CompletedUserTraining cut WHERE cut.user.userId=:userId AND cut.trainingType.trainingTypeId=:trainingTypeId");
+			
+			query.setParameter("userId", userId);
+			query.setParameter("trainingTypeId", trainingTypeId);
+			
+			CompletedUserTraining result = (CompletedUserTraining)query.uniqueResult();
+			if (result != null && result.getCompletedUserTrainingId() != null && result.getCompletedUserTrainingId() > 0L) {
+				logger.debug("The CompletedUserTraining does exist");
+				return true;
+			}
+			
+			logger.debug("The CompletedUserTraining does NOT exist");
+			return false;
+			
+		} finally {
+			session.close();
+			logger.debug("Deleting CompletedUserTraining with userId> " + userId + ", trainingTypeId> " + trainingTypeId);
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<CompletedUserTraining> listByUserId(Long userId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Query query = session.createQuery("from CompletedUserTraining where userId = :userId ");
+			query.setParameter("userId", userId);
+			List<CompletedUserTraining> result = (List<CompletedUserTraining>)query.list();
+			logger.debug("The result of listByUserId is " + result);
+			return result;
+		} finally {
+			session.close();
+		}
+	}
 }

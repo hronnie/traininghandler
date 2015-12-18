@@ -79,6 +79,20 @@ public class CompletedTrainingManager {
 		return result;
 	}
 	
+	public boolean delete(Long userId, Long trainingTypeId) {
+		logger.debug("delete with>> userId: " + userId + ", trainingTypeId: " + trainingTypeId);
+		boolean result = completedTrainingDAO.delete(userId, trainingTypeId);
+		logger.debug("Resulted >> " + result);
+		return result;
+	}
+	
+	public List<CompletedUserTraining> listByUserId(Long userId) {
+		logger.debug("listByUserId with>> userId: " + userId);
+		List<CompletedUserTraining> result = completedTrainingDAO.listByUserId(userId);
+		logger.debug("Resulted >> " + result);
+		return result;
+	}
+	
 	// getters/setters
 	
 	public void setCompletedTrainingDAO(CompletedTrainingDAO completedTrainingDAO) {

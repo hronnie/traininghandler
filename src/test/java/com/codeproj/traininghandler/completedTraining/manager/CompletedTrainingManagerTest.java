@@ -1,8 +1,6 @@
 package com.codeproj.traininghandler.completedTraining.manager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -120,6 +118,28 @@ public class CompletedTrainingManagerTest {
 	public void testUpdateCompletedTraining() {
 		when(completedTrainingDAO.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE))).thenReturn(true);
 		boolean result = manager.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE));
-		assertTrue("Wrong completed training id result ", result);
+		assertTrue("Update should be successful ", result);
+	}
+	
+	@Test
+	public void testDeleteCompletedTraining() {
+		when(completedTrainingDAO.delete(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST)).thenReturn(true);
+		boolean result = manager.delete(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST);
+		assertTrue("Delete should be successful", result);
+	}
+	
+	@Test
+	public void testListByUserId() {
+		List<CompletedUserTraining> mockComplTrList = new ArrayList<>();
+		mockComplTrList.add(new CompletedUserTraining(1L, new TrainingType(VALID_TRAINING_TYPE_ID_EXIST), VALID_DATE, new User(VALID_USER_ID_EXIST)));
+		when(completedTrainingDAO.listByUserId(VALID_USER_ID_EXIST)).thenReturn(mockComplTrList);
+		
+		List<CompletedUserTraining> result = manager.listByUserId(VALID_USER_ID_EXIST);
+		assertNotNull("compl user training list shouldn't be null", result);
+		assertTrue("compl user training list shouldn't be empty", result.size() > 0);
+		CompletedUserTraining resultComplTr = result.get(0);
+		assertEquals("User is not as expected", VALID_USER_ID_EXIST, resultComplTr.getUser().getUserId());
+		assertEquals("TrainingType is not as expected", VALID_TRAINING_TYPE_ID_EXIST, resultComplTr.getTrainingType().getTrainingTypeId());
+		assertEquals("User is not as expected", VALID_DATE, resultComplTr.getCompletedDate());
 	}
 }

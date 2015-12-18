@@ -11,8 +11,8 @@ public class BooleanResponse extends BaseResponse {
     public BooleanResponse() {
     }
 
-    public BooleanResponse(Boolean booleanValue) {
-    	super(true);
+    public BooleanResponse(Boolean booleanValue, Boolean success) {
+    	super(success);
         this.booleanValue = booleanValue;
     }
     

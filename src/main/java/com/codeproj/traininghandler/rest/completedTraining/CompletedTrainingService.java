@@ -1,9 +1,12 @@
 package com.codeproj.traininghandler.rest.completedTraining;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDtos;
+import com.codeproj.traininghandler.dto.TrainingTypeDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.model.CompletedUserTraining;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
@@ -77,7 +83,7 @@ public class CompletedTrainingService {
 			CompletedUserTrainingDto newComplTraining) {
 		logger.debug("isCompletedTrainingExist with>> " + newComplTraining);
 		
-		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining));
+		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining), true);
 	}
 	
 	public BooleanResponse update(CompletedUserTrainingDto complatedUserTrainingDto) {
@@ -85,13 +91,45 @@ public class CompletedTrainingService {
 			logger.debug("update with>> " + complatedUserTrainingDto);
 			CompletedTrainingServiceValidator.update(complatedUserTrainingDto);
 			boolean resultBool = completedTrainingManager.update(complatedUserTrainingDto);
-			BooleanResponse result = new BooleanResponse(resultBool);
+			BooleanResponse result = new BooleanResponse(resultBool, true);
 			logger.debug("update was successful >> " + result);
 			return result;
 		} catch (ValidationException ve) {
 			return new BooleanResponse(ve.getMessage()); 
 		}
 	}
+	
+	public BooleanResponse delete(Long userId, Long trainingTypeId) {
+		try {
+			logger.debug("delete with>> userId> " + userId + ", trainingTypeId> " + trainingTypeId);
+			CompletedTrainingServiceValidator.delete(userId, trainingTypeId);
+			boolean resultBool = completedTrainingManager.delete(userId, trainingTypeId);
+			BooleanResponse result = new BooleanResponse(resultBool, true);
+			result.setSuccess(resultBool);
+			logger.debug("delete was successful >> " + result);
+			return result;
+		} catch (ValidationException ve) {
+			return new BooleanResponse(ve.getMessage()); 
+		}
+	}
+	
+	public CompletedUserTrainingDtos listByUserId(Long userId) {
+		try {
+			logger.debug("listByUserId with>> userId> " + userId );
+			CompletedTrainingServiceValidator.listByUserId(userId);
+			List<CompletedUserTraining> mgrResult = completedTrainingManager.listByUserId(userId);
+			ModelMapper modelMapper = new ModelMapper();
+		    Type targetListType = new TypeToken<List<CompletedUserTrainingDto>>() {}.getType();
+		    List<CompletedUserTrainingDto> resultList = modelMapper.map(mgrResult, targetListType);
+		    CompletedUserTrainingDtos result = new CompletedUserTrainingDtos(resultList);
+			logger.debug("listByUserId was successful >> " + result);
+			return result;
+		} catch (ValidationException ve) {
+			return new CompletedUserTrainingDtos(ve.getMessage()); 
+		}
+	}
+	
+	// getters and setters
 	
 	private boolean isUserEligibleToAddTraining(
 			CompletedUserTrainingDto complatedUserTrainingDto) {

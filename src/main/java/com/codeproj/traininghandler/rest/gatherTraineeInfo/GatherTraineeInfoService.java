@@ -62,7 +62,7 @@ public class GatherTraineeInfoService {
 		List<CompletedUserTrainingDto> enrichedComplUsrTrList = enrichCompletedUserTrainingListWithUserId(traineeInfoDto.getCompletedUserTrainingList(), userCreateResult.getValue());
 		completedTrainingService.create(enrichedComplUsrTrList);
 		
-		return new BooleanResponse(true);
+		return new BooleanResponse(true, true);
 	}
 
 	private List<CompletedUserTrainingDto> enrichCompletedUserTrainingListWithUserId(

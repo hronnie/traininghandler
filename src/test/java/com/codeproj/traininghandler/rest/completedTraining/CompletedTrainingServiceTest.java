@@ -10,9 +10,7 @@ import static com.codeproj.traininghandler.util.Constants.VALIDATION_ERR_MSG_USE
 import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_COMPLETED_DATE;
 import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_TRAINING_TYPE_ID;
 import static com.codeproj.traininghandler.util.Constants.VALIDATION_PARAMETER_USER_ID;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -28,7 +26,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
+import com.codeproj.traininghandler.dto.CompletedUserTrainingDtos;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
+import com.codeproj.traininghandler.model.CompletedUserTraining;
+import com.codeproj.traininghandler.model.TrainingType;
+import com.codeproj.traininghandler.model.User;
 import com.codeproj.traininghandler.rest.common.BooleanResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdListResponse;
 import com.codeproj.traininghandler.rest.common.GeneralIdResponse;
@@ -40,7 +42,7 @@ public class CompletedTrainingServiceTest {
 	@InjectMocks
 	public CompletedTrainingService service;
 	public static final Long VALID_USER_ID = 5L;
-	public static final Long VALID_TRAINING_TYPE_ID = 5L;
+	public static final Long VALID_TRAINING_TYPE_ID = 6L;
 	public static final Date VALID_COMPLETED_DATE;
 	public static final Date INVALID_FUTURE_COMPLETED_DATE;
 	public static final Long INVALID_ID = -34L;
@@ -53,6 +55,7 @@ public class CompletedTrainingServiceTest {
 	
 	public static final Long USER_ID_NOT_ELIGIBLE = 15L;
 	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
+	public static final Long INVALID_LONG_ID = -1L;
 	
 	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
 	
@@ -180,7 +183,7 @@ public class CompletedTrainingServiceTest {
 	public void testCreateOneAlreadyExist() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_EXIST, TRAINING_TYPE_ID_EXIST, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(true);
-		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
+		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(INVALID_LONG_ID);
 		when(manager.isUserEligibleToAddTraining(VALID_COMPLETED_TRAINING)).thenReturn(true);
 		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
 		assertFalse("If completed training already exist then it should then it shouldn't be success", result.getSuccess());
@@ -191,7 +194,7 @@ public class CompletedTrainingServiceTest {
 	public void testCreateOneUserNotEligible() {
 		CompletedUserTrainingDto complatedUserTrainingDto = new CompletedUserTrainingDto(USER_ID_NOT_ELIGIBLE, TRAINING_TYPE_ID_NOT_ELIGIBLE, VALID_COMPLETED_DATE);
 		when(manager.isCompletedTrainingExist(complatedUserTrainingDto)).thenReturn(false);
-		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(-1L);
+		when(manager.create(VALID_COMPLETED_TRAINING)).thenReturn(INVALID_LONG_ID);
 		when(manager.isUserEligibleToAddTraining(complatedUserTrainingDto)).thenReturn(false);
 		GeneralIdResponse result = service.createOne(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
@@ -239,13 +242,13 @@ public class CompletedTrainingServiceTest {
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_COMPLETED_DATE, result.getMessage());
 
 		// invalid userId 
-		complatedUserTrainingDto = new CompletedUserTrainingDto(-1L, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
+		complatedUserTrainingDto = new CompletedUserTrainingDto(INVALID_LONG_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE);
 		result = service.update(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 		
 		// invalid tt id
-		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, -1L, VALID_COMPLETED_DATE);
+		complatedUserTrainingDto = new CompletedUserTrainingDto(VALID_USER_ID, INVALID_LONG_ID, VALID_COMPLETED_DATE);
 		result = service.update(complatedUserTrainingDto);
 		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
@@ -255,5 +258,64 @@ public class CompletedTrainingServiceTest {
 		when(manager.update(complatedUserTrainingDto)).thenReturn(true);
 		result = service.update(complatedUserTrainingDto);
 		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+	}
+	
+	// delete
+	
+	@Test
+	public void testDelete() {
+		// null userId 
+		BooleanResponse result = service.delete(null, VALID_TRAINING_TYPE_ID);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
+		
+		// null tt Id 
+		result = service.delete(VALID_USER_ID, null);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_TRAINING_TYPE_ID, result.getMessage());
+		
+		// invalid userId 
+		result = service.delete(INVALID_LONG_ID, VALID_TRAINING_TYPE_ID);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+		
+		// invalid tt id
+		result = service.delete(VALID_USER_ID, INVALID_LONG_ID);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+
+		// valid input
+		
+		when(manager.delete(VALID_USER_ID, VALID_TRAINING_TYPE_ID)).thenReturn(true);
+		result = service.delete(VALID_USER_ID, VALID_TRAINING_TYPE_ID);
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+	}
+	
+	// listByUserId
+	
+	@Test 
+	public void testListByUserId() {
+		// null userId
+		CompletedUserTrainingDtos result = service.listByUserId(null);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
+		// invalid userId 
+		result = service.listByUserId(INVALID_LONG_ID);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+		// valid input
+		List<CompletedUserTraining> mockComplTrList = new ArrayList<>();
+		mockComplTrList.add(new CompletedUserTraining(1L, new TrainingType(VALID_TRAINING_TYPE_ID), VALID_COMPLETED_DATE, new User(VALID_USER_ID)));
+		when(manager.listByUserId(VALID_USER_ID)).thenReturn(mockComplTrList);
+		
+		
+		result = service.listByUserId(VALID_USER_ID);
+		assertNotNull("list shouldn't be null", result.getCompletedUserTrainingDtoList());
+		assertEquals("list doesn't contains 1 item", 1, result.getCompletedUserTrainingDtoList().size());
+		CompletedUserTrainingDto resultDto = result.getCompletedUserTrainingDtoList().get(0);
+		assertEquals("user id is not correct ", VALID_USER_ID, resultDto.getUserId());
+		assertEquals("training type id is not correct ", VALID_TRAINING_TYPE_ID, resultDto.getTrainingTypeId());
+		
+		assertTrue(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
 	}
 }

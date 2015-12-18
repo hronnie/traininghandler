@@ -44,4 +44,18 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 		entityIdValidator(complatedUserTrainingDto.getTrainingTypeId());
 	}
 
+	public static void delete(Long userId, Long trainingTypeId) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, userId);
+		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, trainingTypeId);
+		
+		entityIdValidator(userId);
+		entityIdValidator(trainingTypeId);
+	}
+
+	public static void listByUserId(Long userId) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, userId);
+		
+		entityIdValidator(userId);
+	}
+
 }
