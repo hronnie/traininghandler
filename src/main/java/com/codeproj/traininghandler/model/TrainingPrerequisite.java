@@ -108,13 +108,4 @@ public class TrainingPrerequisite implements Serializable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "TrainingPrerequisite [trainingPrerequisiteId="
-				+ trainingPrerequisiteId + ", dependentTrainingTypeId="
-				+ dependentTrainingTypeId + ", prerequisiteTrainingTypeId="
-				+ prerequisiteTrainingTypeId + ", betweenMonth=" + betweenMonth
-				+ "]";
-	}
 }
