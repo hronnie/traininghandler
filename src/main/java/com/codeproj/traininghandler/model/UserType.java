@@ -83,10 +83,4 @@ public class UserType implements HibernatePersistable, Serializable {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "UserType [userTypeId=" + userTypeId + ", userTypeName="
-				+ userTypeName + "]";
-	}
 }

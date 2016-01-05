@@ -71,11 +71,4 @@ public class EmailTemplate implements HibernatePersistable, Serializable {
 	public void setSentTrainingEmails(Set<SentTrainingEmail> sentTrainingEmails) {
 		this.sentTrainingEmails = sentTrainingEmails;
 	}
-
-	@Override
-	public String toString() {
-		return "EmailTemplate [emailTemplateId=" + emailTemplateId
-				+ ", subject=" + subject + ", body=" + body
-				+ ", sentTrainingEmails=" + sentTrainingEmails + "]";
-	}
 }

@@ -182,13 +182,4 @@ public class SentTrainingEmail implements HibernatePersistable, Serializable {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "SentTrainingEmail [sentTrainingEmailId=" + sentTrainingEmailId
-				+ ", training=" + training + ", user=" + user
-				+ ", emailTemplate=" + emailTemplate + ", traineeEmailToken="
-				+ traineeEmailToken + ", isConfirmed=" + isConfirmed
-				+ ", isAttend=" + isAttend + "]";
-	}
 }
