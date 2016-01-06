@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.codeproj.traininghandler.model.Address" table="Address"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="addressId" name="addressId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -41,7 +41,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.Appointment"
-		table="Appointment" catalog="traininghandler">
+		table="Appointment" catalog="seboattiladb">
 		<id access="field" column="appointmentId" name="appointmentId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -73,7 +73,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.CompletedUserTraining"
-		table="CompletedUserTraining" catalog="traininghandler">
+		table="CompletedUserTraining" catalog="seboattiladb">
 		<id access="field" column="completedUserTrainingId" name="completedUserTrainingId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -92,7 +92,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.UserRole" table="UserRole"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="userRoleId" name="userRoleId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -108,7 +108,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.Role" table="Role"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="roleId" name="roleId" unsaved-value="0">
 			<generator class="increment" />
 		</id>
@@ -119,7 +119,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.EmailTemplate"
-		table="EmailTemplate" catalog="traininghandler">
+		table="EmailTemplate" catalog="seboattiladb">
 		<id access="field" column="emailTemplateId" name="emailTemplateId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -141,7 +141,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.GeneralSettings"
-		table="GeneralSettings" catalog="traininghandler">
+		table="GeneralSettings" catalog="seboattiladb">
 		<id access="field" column="generalSettingsId" name="generalSettingsId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -156,7 +156,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.Log" table="Log"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="logId" name="logId" unsaved-value="0">
 			<generator class="increment" />
 		</id>
@@ -177,7 +177,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.SentTrainingEmail"
-		table="SentTrainingEmail" catalog="traininghandler">
+		table="SentTrainingEmail" catalog="seboattiladb">
 		<id access="field" column="sentTrainingEmailId" name="sentTrainingEmailId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -207,7 +207,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.Training" table="Training"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="trainingId" name="trainingId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -252,7 +252,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.TrainingPrerequisite"
-		table="TrainingPrerequisite" catalog="traininghandler">
+		table="TrainingPrerequisite" catalog="seboattiladb">
 		<id access="field" column="trainingPrerequisiteId" name="trainingPrerequisiteId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -270,7 +270,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.TrainingType"
-		table="TrainingType" catalog="traininghandler">
+		table="TrainingType" catalog="seboattiladb">
 		<id access="field" column="trainingTypeId" name="trainingTypeId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -289,7 +289,7 @@
 
 
 	<class name="com.codeproj.traininghandler.model.User" table="User"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="userId" name="userId" unsaved-value="0">
 			<generator class="increment" />
 		</id>
@@ -366,7 +366,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.UserLevel" table="UserLevel"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="userLevelId" name="userLevelId"
 			unsaved-value="0">
 			<generator class="increment" />
@@ -385,7 +385,7 @@
 	</class>
 
 	<class name="com.codeproj.traininghandler.model.UserType" table="UserType"
-		catalog="traininghandler">
+		catalog="seboattiladb">
 		<id access="field" column="userTypeId" name="userTypeId"
 			unsaved-value="0">
 			<generator class="increment" />

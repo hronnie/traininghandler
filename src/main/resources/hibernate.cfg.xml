@@ -5,8 +5,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
-		<property name="hibernate.connection.password">rootpass</property>
-		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/traininghandler?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/seboattila?useUnicode=true&amp;characterEncoding=UTF-8</property>
 		<property name="hibernate.connection.username">training</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
 
