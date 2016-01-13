@@ -127,11 +127,4 @@ public class UserLevel implements HibernatePersistable, Serializable {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "UserLevel [userLevelId=" + userLevelId + ", trainingType="
-				+ trainingType + ", user=" + user + ", completedDate="
-				+ completedDate + "]";
-	}
 }

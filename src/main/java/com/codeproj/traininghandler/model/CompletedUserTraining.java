@@ -116,12 +116,4 @@ public class CompletedUserTraining implements Serializable {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "CompletedUserTraining [completedUserTrainingId="
-				+ completedUserTrainingId + ", user=" + user
-				+ ", trainingType=" + trainingType + ", completedDate="
-				+ completedDate + "]";
-	}
 }

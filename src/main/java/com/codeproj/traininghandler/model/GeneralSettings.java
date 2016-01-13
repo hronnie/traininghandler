@@ -52,11 +52,5 @@ public class GeneralSettings implements HibernatePersistable, Serializable {
 	public void setValue(String value) {
 		this.value = value;
 	}
-
-	@Override
-	public String toString() {
-		return "GeneralSettings [generalSettingsId=" + generalSettingsId
-				+ ", name=" + name + ", value=" + value + "]";
-	}
 	
 }

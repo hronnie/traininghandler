@@ -531,8 +531,6 @@
 										<srcFile>src/main/sql/data/prod/UserData.sql</srcFile>
 										<srcFile>src/main/sql/data/prod/RoleData.sql</srcFile>
 										<srcFile>src/main/sql/data/prod/UserRoleData.sql</srcFile>
-										<srcFile>src/main/sql/data/prod/EmailTemplateData.sql</srcFile>
-										<srcFile>src/main/sql/data/prod/GeneralSettingsData.sql</srcFile>
 										<srcFile>src/main/sql/data/prod/TrainingTypeData.sql</srcFile>
 										<srcFile>src/main/sql/data/prod/TrainingPrerequisiteData.sql</srcFile>
 

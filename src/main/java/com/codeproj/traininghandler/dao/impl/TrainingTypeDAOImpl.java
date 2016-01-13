@@ -1,10 +1,12 @@
 package com.codeproj.traininghandler.dao.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -51,19 +53,24 @@ public class TrainingTypeDAOImpl implements TrainingTypeDAO {
 
 	@Override
 	@Transactional
-	public TrainingType getTrainingTypeById(Long id) throws DatabaseEntityNotFoundException {
+	public TrainingType getTrainingTypeById(Long trainingTypeId) throws DatabaseEntityNotFoundException {
 		Session session = null;
 		try {
 			session = sessionFactory.openSession();
-			Criteria criteria = session.createCriteria(TrainingType.class);
-			criteria.add(Restrictions.eq("trainingTypeId", id));
-			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			TrainingType result = (TrainingType)criteria.uniqueResult();
-			if (result == null) {
-				logger.warn("getTrainingTypeById with>> " + id + " and TrainingType hasn't found!");
-				throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND);
-			}
-			logger.debug("getTrainingTypeById with>> " + id + " and the result is >> " + result);
+            Query query = session.createSQLQuery("select * from TrainingType where trainingTypeId= :trainingTypeId");
+            query.setParameter("trainingTypeId", trainingTypeId);
+            Object[] resultSet = (Object[])query.uniqueResult();
+            if (resultSet == null || resultSet.length < 1) {
+            	logger.warn("getTrainingTypeById with>> " + trainingTypeId + " and TrainingType hasn't found!");
+            	throw new DatabaseEntityNotFoundException(Constants.VALIDATION_ERR_MSG_REQUESTED_OBJECT_CANNOT_BE_FOUND);
+            }
+            TrainingType result = new TrainingType();
+            BigInteger idBint = (BigInteger)resultSet[0];
+            result.setTrainingTypeId(idBint.longValue());
+            result.setName((String)resultSet[1]);
+            result.setLevelNo((String)resultSet[2]);
+            result.setDescription((String)resultSet[3]);
+			logger.debug("getTrainingTypeById with>> " + trainingTypeId + " and the result is >> " + result);
 			return result;
 		} finally {
 			session.close();
