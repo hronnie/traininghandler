@@ -10,6 +10,8 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
     $scope.maxSize = 5;
     $scope.traineeList = [];
 	$scope.validationMsg = "";
+	$scope.isComplEdit = false;
+	$scope.completedTrList = [];
   
 	var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/getAll');
 	resource.get().then(function(tranees) {
@@ -112,7 +114,17 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		$scope.reinitPagination();
 	});
 	
+	$scope.editComplTrainings = function(userId) {
+		$scope.toogleEditView();
+		var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/getAll');
+		resource.get().then(function(tranees) {
+			$scope.traineeList = $filter('orderBy')(tranees.trainees, 'name', false);
+			$scope.reinitPagination();
+		});
+	}
 	
-	
+	$scope.toogleEditView = function() {
+		$scope.isComplEdit = !$scope.isComplEdit;
+	}
 });
 
