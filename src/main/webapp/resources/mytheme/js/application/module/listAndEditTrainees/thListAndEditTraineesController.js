@@ -117,9 +117,8 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.editComplTrainings = function(userId) {
 		$scope.toogleEditView();
 		var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/getAll');
-		resource.get().then(function(tranees) {
-			$scope.traineeList = $filter('orderBy')(tranees.trainees, 'name', false);
-			$scope.reinitPagination();
+		resource.get().then(function(complTrainings) {
+			$scope.completedTrList = complTrainings;
 		});
 	}
 	

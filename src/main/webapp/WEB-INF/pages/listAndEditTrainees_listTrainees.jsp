@@ -32,8 +32,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr
-						ng-repeat="trainee in (filteredTraineeList = (currentPageTraineeList | filter:search:strict | orderBy:'name'))"
+					<tr ng-repeat="trainee in (filteredTraineeList = (currentPageTraineeList | filter:search:strict | orderBy:'name'))"
 						ng-bind-html-unsafe="trainee.completedTrainings" class="gridRow">
 						<td><span class="gridCell" editable-text="trainee.name"
 							e-name="name" e-form="rowform" onbeforesave="validateName($data)"
