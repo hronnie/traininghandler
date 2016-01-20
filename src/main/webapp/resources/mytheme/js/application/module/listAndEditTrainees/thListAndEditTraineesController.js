@@ -116,9 +116,18 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	
 	$scope.editComplTrainings = function(userId) {
 		$scope.toogleEditView();
-		var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/getAll');
+		$scope.completedTrList = [];
+		var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/getAllVieawable/' + userId);
 		resource.get().then(function(complTrainings) {
-			$scope.completedTrList = complTrainings;
+			for (i = 0; i < complTrainings.completedUserTrainingDtoList.length; i++) {
+				var completedUserTrainingDto = {};
+				completedUserTrainingDto.userId = complTrainings.completedUserTrainingDtoList[i].userId;
+				completedUserTrainingDto.trainingTypeId = complTrainings.completedUserTrainingDtoList[i].trainingTypeId;
+				completedUserTrainingDto.completedDate = complTrainings.completedUserTrainingDtoList[i].completedDate;
+				completedUserTrainingDto.trainingTypeName = complTrainings.completedUserTrainingDtoList[i].trainingTypeName;
+				
+				$scope.completedTrList.push(completedUserTrainingDto);
+			}
 		});
 	}
 	

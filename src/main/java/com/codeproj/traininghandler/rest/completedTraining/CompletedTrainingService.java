@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,7 +87,8 @@ public class CompletedTrainingService {
 		return new BooleanResponse(completedTrainingManager.isCompletedTrainingExist(newComplTraining), true);
 	}
 	
-	public BooleanResponse update(CompletedUserTrainingDto complatedUserTrainingDto) {
+	@RequestMapping(value="/update", method = RequestMethod.POST,headers="Accept=application/json")
+	public BooleanResponse update(@RequestBody CompletedUserTrainingDto complatedUserTrainingDto) {
 		try {
 			logger.debug("update with>> " + complatedUserTrainingDto);
 			CompletedTrainingServiceValidator.update(complatedUserTrainingDto);
@@ -99,7 +101,8 @@ public class CompletedTrainingService {
 		}
 	}
 	
-	public BooleanResponse delete(Long userId, Long trainingTypeId) {
+	@RequestMapping(value="/delete/{userId}/{trainingTypeId}", method = RequestMethod.POST,headers="Accept=application/json")
+	public BooleanResponse delete(@PathVariable("userId") Long userId, @PathVariable("trainingTypeId") Long trainingTypeId) {
 		try {
 			logger.debug("delete with>> userId> " + userId + ", trainingTypeId> " + trainingTypeId);
 			CompletedTrainingServiceValidator.delete(userId, trainingTypeId);
@@ -123,6 +126,23 @@ public class CompletedTrainingService {
 		    List<CompletedUserTrainingDto> resultList = modelMapper.map(mgrResult, targetListType);
 		    CompletedUserTrainingDtos result = new CompletedUserTrainingDtos(resultList);
 			logger.debug("listByUserId was successful >> " + result);
+			return result;
+		} catch (ValidationException ve) {
+			return new CompletedUserTrainingDtos(ve.getMessage()); 
+		}
+	}
+	
+	@RequestMapping(value="/getAllVieawable/{userId}", method = RequestMethod.GET,headers="Accept=application/json")
+	public CompletedUserTrainingDtos listViewableByUserId(@PathVariable("userId") Long userId) {
+		try {
+			logger.debug("listViewableByUserId with>> userId> " + userId );
+			CompletedTrainingServiceValidator.listViewableByUserId(userId);
+			List<CompletedUserTrainingDto> mgrResult = completedTrainingManager.listViewableByUserId(userId);
+			ModelMapper modelMapper = new ModelMapper();
+			Type targetListType = new TypeToken<List<CompletedUserTrainingDto>>() {}.getType();
+			List<CompletedUserTrainingDto> resultList = modelMapper.map(mgrResult, targetListType);
+			CompletedUserTrainingDtos result = new CompletedUserTrainingDtos(resultList);
+			logger.debug("listViewableByUserId was successful >> " + result);
 			return result;
 		} catch (ValidationException ve) {
 			return new CompletedUserTrainingDtos(ve.getMessage()); 

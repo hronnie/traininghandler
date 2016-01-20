@@ -13,6 +13,7 @@ public class CompletedUserTrainingDto extends BaseResponse {
 	private Long trainingTypeId;
 	private Date completedDate;
 	private Boolean skipPrereqCheck;
+	private String trainingTypeName;
 	
 	public CompletedUserTrainingDto() { /* empty constructor */}
 	
@@ -24,6 +25,14 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		this.skipPrereqCheck = false;
 	}
 	
+	public CompletedUserTrainingDto(Long userId, Long trainingTypeId, 
+			Date completedDate, String trainingTypeName) {
+		this.userId = userId;
+		this.trainingTypeId = trainingTypeId;
+		this.completedDate = completedDate;
+		this.trainingTypeName = trainingTypeName;
+	}
+
 	public CompletedUserTrainingDto(Long userId, Long trainingTypeId,
 			Date completedDate, Boolean skipPrereqCheck) {
 		this.userId = userId;
@@ -50,6 +59,15 @@ public class CompletedUserTrainingDto extends BaseResponse {
 	public Date getCompletedDate() {
 		return completedDate;
 	}
+	
+	@XmlElement(name="trainingTypeName")
+	public String getTrainingTypeName() {
+		return trainingTypeName;
+	}
+
+	public void setTrainingTypeName(String trainingTypeName) {
+		this.trainingTypeName = trainingTypeName;
+	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -75,50 +93,55 @@ public class CompletedUserTrainingDto extends BaseResponse {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((completedDate == null) ? 0 : completedDate.hashCode());
-		result = prime * result
-				+ (int) (trainingTypeId ^ (trainingTypeId >>> 32));
+		result = prime * result + ((completedDate == null) ? 0 : completedDate.hashCode());
+		result = prime * result + ((skipPrereqCheck == null) ? 0 : skipPrereqCheck.hashCode());
+		result = prime * result + ((trainingTypeId == null) ? 0 : trainingTypeId.hashCode());
+		result = prime * result + ((trainingTypeName == null) ? 0 : trainingTypeName.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof CompletedUserTrainingDto)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		CompletedUserTrainingDto other = (CompletedUserTrainingDto) obj;
 		if (completedDate == null) {
-			if (other.completedDate != null) {
+			if (other.completedDate != null)
 				return false;
-			}
-		} else if (!completedDate.equals(other.completedDate)) {
+		} else if (!completedDate.equals(other.completedDate))
 			return false;
-		}
-		if (!trainingTypeId.equals(other.trainingTypeId)) {
+		if (skipPrereqCheck == null) {
+			if (other.skipPrereqCheck != null)
+				return false;
+		} else if (!skipPrereqCheck.equals(other.skipPrereqCheck))
 			return false;
-		}
+		if (trainingTypeId == null) {
+			if (other.trainingTypeId != null)
+				return false;
+		} else if (!trainingTypeId.equals(other.trainingTypeId))
+			return false;
+		if (trainingTypeName == null) {
+			if (other.trainingTypeName != null)
+				return false;
+		} else if (!trainingTypeName.equals(other.trainingTypeName))
+			return false;
 		if (userId == null) {
-			if (other.userId != null) {
+			if (other.userId != null)
 				return false;
-			}
-		} else if (!userId.equals(other.userId)) {
+		} else if (!userId.equals(other.userId))
 			return false;
-		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CompletedUserTrainingDto [userId=" + userId
-				+ ", trainingTypeId=" + trainingTypeId + ", completedDate="
-				+ completedDate + "]";
+		return "CompletedUserTrainingDto [userId=" + userId + ", trainingTypeId=" + trainingTypeId + ", completedDate="
+				+ completedDate + ", skipPrereqCheck=" + skipPrereqCheck + ", trainingTypeName=" + trainingTypeName
+				+ "]";
 	}
 }

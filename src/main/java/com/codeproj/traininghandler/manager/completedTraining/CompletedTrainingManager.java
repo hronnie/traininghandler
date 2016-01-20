@@ -93,6 +93,13 @@ public class CompletedTrainingManager {
 		return result;
 	}
 	
+	public List<CompletedUserTrainingDto> listViewableByUserId(Long userId) {
+		logger.debug("listViewableByUserId with>> userId: " + userId);
+		List<CompletedUserTrainingDto> result = completedTrainingDAO.listViewableByUserId(userId);
+		logger.debug("Resulted >> " + result);
+		return result;
+	}
+	
 	// getters/setters
 	
 	public void setCompletedTrainingDAO(CompletedTrainingDAO completedTrainingDAO) {

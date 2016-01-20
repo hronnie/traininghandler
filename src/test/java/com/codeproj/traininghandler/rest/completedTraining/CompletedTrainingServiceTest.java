@@ -43,6 +43,7 @@ public class CompletedTrainingServiceTest {
 	public CompletedTrainingService service;
 	public static final Long VALID_USER_ID = 5L;
 	public static final Long VALID_TRAINING_TYPE_ID = 6L;
+	public static final String VALID_TRAINING_TYPE_NAME = "1-es tanfolyam";
 	public static final Date VALID_COMPLETED_DATE;
 	public static final Date INVALID_FUTURE_COMPLETED_DATE;
 	public static final Long INVALID_ID = -34L;
@@ -316,6 +317,35 @@ public class CompletedTrainingServiceTest {
 		assertEquals("user id is not correct ", VALID_USER_ID, resultDto.getUserId());
 		assertEquals("training type id is not correct ", VALID_TRAINING_TYPE_ID, resultDto.getTrainingTypeId());
 		
-		assertTrue(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
+	}
+	
+	@Test 
+	public void testListViewableByUserId() {
+		// null userId
+		CompletedUserTrainingDtos result = service.listViewableByUserId(null);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_MANDATORY_PARAMETER + VALIDATION_PARAMETER_USER_ID, result.getMessage());
+		// invalid userId 
+		result = service.listViewableByUserId(INVALID_LONG_ID);
+		assertFalse(SERVICE_CALL_SHOULDNT_BE_SUCCESSFUL, result.getSuccess());
+		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
+		// valid input
+		List<CompletedUserTrainingDto> mockComplTrList = new ArrayList<>();
+		mockComplTrList.add(new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE, VALID_TRAINING_TYPE_NAME));
+		when(manager.listViewableByUserId(VALID_USER_ID)).thenReturn(mockComplTrList);
+		
+		
+		result = service.listViewableByUserId(VALID_USER_ID);
+		assertNotNull("list shouldn't be null", result.getCompletedUserTrainingDtoList());
+		assertEquals("list doesn't contains 1 item", 1, result.getCompletedUserTrainingDtoList().size());
+		CompletedUserTrainingDto resultDto = result.getCompletedUserTrainingDtoList().get(0);
+		assertEquals("user id is not correct ", VALID_USER_ID, resultDto.getUserId());
+		assertEquals("training type id is not correct ", VALID_TRAINING_TYPE_ID, resultDto.getTrainingTypeId());
+		assertEquals("Completed date is not correct ", VALID_COMPLETED_DATE, resultDto.getCompletedDate());
+		assertEquals("Training type name is not correct ", VALID_TRAINING_TYPE_NAME, resultDto.getTrainingTypeName());
+		
+		
+		assertTrue(SERVICE_CALL_SHOULD_BE_SUCCESSFUL, result.getSuccess());
 	}
 }

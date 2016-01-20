@@ -57,5 +57,11 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 		
 		entityIdValidator(userId);
 	}
+	
+	public static void listViewableByUserId(Long userId) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, userId);
+		
+		entityIdValidator(userId);
+	}
 
 }

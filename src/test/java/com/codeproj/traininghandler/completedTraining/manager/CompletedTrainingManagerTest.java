@@ -43,6 +43,7 @@ public class CompletedTrainingManagerTest {
 	
 	public static final Long VALID_USER_ID_EXIST = 1L;
 	public static final Long VALID_TRAINING_TYPE_ID_EXIST = 2L;
+	public static final String VALID_TRAINING_TYPE_NAME = "1-es tanfolyam";
 	
 	public DateTime TRAINING_COMPL_DATE = new DateTime(2015, 1, 1, 0, 0);
 
@@ -141,5 +142,21 @@ public class CompletedTrainingManagerTest {
 		assertEquals("User is not as expected", VALID_USER_ID_EXIST, resultComplTr.getUser().getUserId());
 		assertEquals("TrainingType is not as expected", VALID_TRAINING_TYPE_ID_EXIST, resultComplTr.getTrainingType().getTrainingTypeId());
 		assertEquals("User is not as expected", VALID_DATE, resultComplTr.getCompletedDate());
+	}
+
+	@Test
+	public void testListViewableByUserId() {
+		List<CompletedUserTrainingDto> mockComplTrList = new ArrayList<>();
+		mockComplTrList.add(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE, VALID_TRAINING_TYPE_NAME));
+		when(completedTrainingDAO.listViewableByUserId(VALID_USER_ID_EXIST)).thenReturn(mockComplTrList);
+		
+		List<CompletedUserTrainingDto> result = manager.listViewableByUserId(VALID_USER_ID_EXIST);
+		assertNotNull("compl user training list shouldn't be null", result);
+		assertTrue("compl user training list shouldn't be empty", result.size() > 0);
+		CompletedUserTrainingDto resultComplTr = result.get(0);
+		assertEquals("User is not as expected", VALID_USER_ID_EXIST, resultComplTr.getUserId());
+		assertEquals("TrainingType is not as expected", VALID_TRAINING_TYPE_ID_EXIST, resultComplTr.getTrainingTypeId());
+		assertEquals("User is not as expected", VALID_DATE, resultComplTr.getCompletedDate());
+		assertEquals("training type name is not as expected", VALID_TRAINING_TYPE_NAME, resultComplTr.getTrainingTypeName());
 	}
 }
