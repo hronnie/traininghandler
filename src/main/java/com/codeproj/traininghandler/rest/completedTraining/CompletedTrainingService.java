@@ -101,12 +101,12 @@ public class CompletedTrainingService {
 		}
 	}
 	
-	@RequestMapping(value="/delete/{userId}/{trainingTypeId}", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse delete(@PathVariable("userId") Long userId, @PathVariable("trainingTypeId") Long trainingTypeId) {
+	@RequestMapping(value="/delete/{completedUserTrainingId}", method = RequestMethod.POST,headers="Accept=application/json")
+	public BooleanResponse delete(@PathVariable("completedUserTrainingId") Long completedUserTrainingId) {
 		try {
-			logger.debug("delete with>> userId> " + userId + ", trainingTypeId> " + trainingTypeId);
-			CompletedTrainingServiceValidator.delete(userId, trainingTypeId);
-			boolean resultBool = completedTrainingManager.delete(userId, trainingTypeId);
+			logger.debug("delete with>> completedUserTrainingId> " + completedUserTrainingId);
+			CompletedTrainingServiceValidator.delete(completedUserTrainingId);
+			boolean resultBool = completedTrainingManager.delete(completedUserTrainingId);
 			BooleanResponse result = new BooleanResponse(resultBool, true);
 			result.setSuccess(resultBool);
 			logger.debug("delete was successful >> " + result);

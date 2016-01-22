@@ -88,6 +88,7 @@ public class Constants {
 	public static final String VALIDATION_PARAMETER_HOUSE_NO = "házszám";
 	public static final String VALIDATION_PARAMETER_COUNTRY = "ország";
 	public static final String VALIDATION_PARAMETER_ADDRESS = "cím";
+	public static final String VALIDATION_PARAMETER_COMPLETED_TRAINING_ID = "Elvégzett tanfolyam azonosító";
 	public static final String VALIDATION_PARAMETER_USER_ID = "Felhasználó azonosító";
 	public static final String VALIDATION_PARAMETER_TRAINING_TYPE_ID = "Tanfolyam típus azonosító";
 	public static final String VALIDATION_PARAMETER_COMPLETED_DATE = "Tanfolyam elvégzési ideje";

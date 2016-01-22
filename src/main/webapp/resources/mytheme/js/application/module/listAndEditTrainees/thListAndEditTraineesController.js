@@ -134,5 +134,13 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.toogleEditView = function() {
 		$scope.isComplEdit = !$scope.isComplEdit;
 	}
+	
+	$scope.removeCompletedTraining = function(userId, trainingTypeId) {
+		
+	}
+	
+	$scope.editCompletedTraining = function(userId, trainingTypeId) {
+		
+	}
 });
 

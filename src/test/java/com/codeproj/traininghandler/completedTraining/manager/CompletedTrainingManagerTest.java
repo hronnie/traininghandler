@@ -41,6 +41,7 @@ public class CompletedTrainingManagerTest {
 	public static final Long USER_NOT_ELIGIBLE = 15L;
 	public static final Long TRAINING_TYPE_ID_NOT_ELIGIBLE = 15L;
 	
+	public static final Long VALID_COMPLETED_USER_TRAINING_ID_EXIST = 7L;
 	public static final Long VALID_USER_ID_EXIST = 1L;
 	public static final Long VALID_TRAINING_TYPE_ID_EXIST = 2L;
 	public static final String VALID_TRAINING_TYPE_NAME = "1-es tanfolyam";
@@ -117,15 +118,15 @@ public class CompletedTrainingManagerTest {
 	
 	@Test
 	public void testUpdateCompletedTraining() {
-		when(completedTrainingDAO.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE))).thenReturn(true);
-		boolean result = manager.update(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE));
+		when(completedTrainingDAO.update(new CompletedUserTrainingDto(VALID_COMPLETED_USER_TRAINING_ID_EXIST, VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE))).thenReturn(true);
+		boolean result = manager.update(new CompletedUserTrainingDto(VALID_COMPLETED_USER_TRAINING_ID_EXIST, VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE));
 		assertTrue("Update should be successful ", result);
 	}
 	
 	@Test
 	public void testDeleteCompletedTraining() {
-		when(completedTrainingDAO.delete(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST)).thenReturn(true);
-		boolean result = manager.delete(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST);
+		when(completedTrainingDAO.delete(VALID_COMPLETED_USER_TRAINING_ID_EXIST)).thenReturn(true);
+		boolean result = manager.delete(VALID_COMPLETED_USER_TRAINING_ID_EXIST);
 		assertTrue("Delete should be successful", result);
 	}
 	

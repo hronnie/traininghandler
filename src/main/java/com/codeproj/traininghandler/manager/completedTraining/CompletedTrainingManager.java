@@ -79,9 +79,9 @@ public class CompletedTrainingManager {
 		return result;
 	}
 	
-	public boolean delete(Long userId, Long trainingTypeId) {
-		logger.debug("delete with>> userId: " + userId + ", trainingTypeId: " + trainingTypeId);
-		boolean result = completedTrainingDAO.delete(userId, trainingTypeId);
+	public boolean delete(Long completedUserTrainingId) {
+		logger.debug("delete with>> completedUserTrainingId: " + completedUserTrainingId);
+		boolean result = completedTrainingDAO.delete(completedUserTrainingId);
 		logger.debug("Resulted >> " + result);
 		return result;
 	}

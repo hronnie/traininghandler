@@ -22,7 +22,7 @@ public interface CompletedTrainingDAO {
 	
 	public boolean update(CompletedUserTrainingDto completedUserTraining);
 
-	public boolean delete(Long userId, Long trainingTypeId);
+	public boolean delete(Long completedUserTrainingId);
 
 	public List<CompletedUserTraining> listByUserId(Long validUserIdExist);
 	

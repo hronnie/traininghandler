@@ -69,6 +69,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 	}
 
 	@Override
+	@Transactional
 	public List<CompletedUserTraining> getCompletedListByTrainingTypeId(
 			Long trainingTypeId) {
 		Session session = null;
@@ -100,7 +101,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 		try {
 			session = sessionFactory.openSession();
 			Query query = session.createQuery(
-					"update CompletedUserTraining cut set cut.completedDate = :completedDate WHERE cut.user.userId=:userId AND cut.trainingType.trainingTypeId=:trainingTypeId");
+					"update CompletedUserTraining cut set cut.completedDate = :completedDate WHERE cut.completedUserTrainingId=:completedUserTrainingId");
 			
 			query.setParameter("userId", completedUserTraining.getUserId());
 			query.setParameter("trainingTypeId", completedUserTraining.getTrainingTypeId());
@@ -123,29 +124,10 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 
 	@Override
 	@Transactional
-	public boolean delete(Long userId, Long trainingTypeId) {
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			Query query = session.createQuery(
-					"delete CompletedUserTraining cut WHERE cut.user.userId=:userId AND cut.trainingType.trainingTypeId=:trainingTypeId");
-			
-			query.setParameter("userId", userId);
-			query.setParameter("trainingTypeId", trainingTypeId);
-			
-			CompletedUserTraining result = (CompletedUserTraining)query.uniqueResult();
-			if (result != null && result.getCompletedUserTrainingId() != null && result.getCompletedUserTrainingId() > 0L) {
-				logger.debug("The CompletedUserTraining does exist");
-				return true;
-			}
-			
-			logger.debug("The CompletedUserTraining does NOT exist");
-			return false;
-			
-		} finally {
-			session.close();
-			logger.debug("Deleting CompletedUserTraining with userId> " + userId + ", trainingTypeId> " + trainingTypeId);
-		}
+	public boolean delete(Long completedUserTrainingId) {
+			String hql = "delete from CompletedUserTraining where completedUserTrainingId= :completedUserTrainingId";
+			sessionFactory.getCurrentSession().createQuery(hql).setLong("completedUserTrainingId", completedUserTrainingId).executeUpdate();
+			return true;
 	}
 
 	@Override

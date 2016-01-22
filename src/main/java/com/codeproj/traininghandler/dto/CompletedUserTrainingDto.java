@@ -9,6 +9,7 @@ import com.codeproj.traininghandler.rest.common.BaseResponse;
 
 @XmlRootElement(name="CompletedUserTraining")
 public class CompletedUserTrainingDto extends BaseResponse {
+	private Long completedUserTrainingId;
 	private Long userId;
 	private Long trainingTypeId;
 	private Date completedDate;
@@ -19,6 +20,15 @@ public class CompletedUserTrainingDto extends BaseResponse {
 	
 	public CompletedUserTrainingDto(Long userId, Long trainingTypeId,
 			Date completedDate) {
+		this.userId = userId;
+		this.trainingTypeId = trainingTypeId;
+		this.completedDate = completedDate;
+		this.skipPrereqCheck = false;
+	}
+	
+	public CompletedUserTrainingDto(Long completedUserTrainingId, Long userId, Long trainingTypeId,
+			Date completedDate) {
+		this.completedUserTrainingId = completedUserTrainingId;
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
 		this.completedDate = completedDate;
@@ -60,6 +70,15 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		return completedDate;
 	}
 	
+	@XmlElement(name="completedUserTrainingId")
+	public Long getCompletedUserTrainingId() {
+		return completedUserTrainingId;
+	}
+
+	public void setCompletedUserTrainingId(Long completedUserTrainingId) {
+		this.completedUserTrainingId = completedUserTrainingId;
+	}
+
 	@XmlElement(name="trainingTypeName")
 	public String getTrainingTypeName() {
 		return trainingTypeName;
@@ -94,6 +113,7 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((completedDate == null) ? 0 : completedDate.hashCode());
+		result = prime * result + ((completedUserTrainingId == null) ? 0 : completedUserTrainingId.hashCode());
 		result = prime * result + ((skipPrereqCheck == null) ? 0 : skipPrereqCheck.hashCode());
 		result = prime * result + ((trainingTypeId == null) ? 0 : trainingTypeId.hashCode());
 		result = prime * result + ((trainingTypeName == null) ? 0 : trainingTypeName.hashCode());
@@ -114,6 +134,11 @@ public class CompletedUserTrainingDto extends BaseResponse {
 			if (other.completedDate != null)
 				return false;
 		} else if (!completedDate.equals(other.completedDate))
+			return false;
+		if (completedUserTrainingId == null) {
+			if (other.completedUserTrainingId != null)
+				return false;
+		} else if (!completedUserTrainingId.equals(other.completedUserTrainingId))
 			return false;
 		if (skipPrereqCheck == null) {
 			if (other.skipPrereqCheck != null)
@@ -140,8 +165,8 @@ public class CompletedUserTrainingDto extends BaseResponse {
 
 	@Override
 	public String toString() {
-		return "CompletedUserTrainingDto [userId=" + userId + ", trainingTypeId=" + trainingTypeId + ", completedDate="
-				+ completedDate + ", skipPrereqCheck=" + skipPrereqCheck + ", trainingTypeName=" + trainingTypeName
-				+ "]";
+		return "CompletedUserTrainingDto [completedUserTrainingId=" + completedUserTrainingId + ", userId=" + userId
+				+ ", trainingTypeId=" + trainingTypeId + ", completedDate=" + completedDate + ", skipPrereqCheck="
+				+ skipPrereqCheck + ", trainingTypeName=" + trainingTypeName + "]";
 	}
 }

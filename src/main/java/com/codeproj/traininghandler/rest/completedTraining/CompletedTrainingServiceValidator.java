@@ -36,20 +36,20 @@ public class CompletedTrainingServiceValidator extends ValidatorBaseUtility {
 	}
 
 	public static void update(CompletedUserTrainingDto complatedUserTrainingDto) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_COMPLETED_TRAINING_ID, complatedUserTrainingDto.getCompletedUserTrainingId());
 		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, complatedUserTrainingDto.getUserId());
 		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, complatedUserTrainingDto.getTrainingTypeId());
 		mandatoryParameter(VALIDATION_PARAMETER_COMPLETED_DATE, complatedUserTrainingDto.getCompletedDate());
 		
+		entityIdValidator(complatedUserTrainingDto.getCompletedUserTrainingId());
 		entityIdValidator(complatedUserTrainingDto.getUserId());
 		entityIdValidator(complatedUserTrainingDto.getTrainingTypeId());
 	}
 
-	public static void delete(Long userId, Long trainingTypeId) throws ValidationException {
-		mandatoryParameter(VALIDATION_PARAMETER_USER_ID, userId);
-		mandatoryParameter(VALIDATION_PARAMETER_TRAINING_TYPE_ID, trainingTypeId);
+	public static void delete(Long completedUserTrainingId) throws ValidationException {
+		mandatoryParameter(VALIDATION_PARAMETER_COMPLETED_TRAINING_ID, completedUserTrainingId);
 		
-		entityIdValidator(userId);
-		entityIdValidator(trainingTypeId);
+		entityIdValidator(completedUserTrainingId);
 	}
 
 	public static void listByUserId(Long userId) throws ValidationException {
