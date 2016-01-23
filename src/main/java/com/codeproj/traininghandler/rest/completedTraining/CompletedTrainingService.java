@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDto;
 import com.codeproj.traininghandler.dto.CompletedUserTrainingDtos;
-import com.codeproj.traininghandler.dto.TrainingTypeDto;
 import com.codeproj.traininghandler.exceptions.ValidationException;
 import com.codeproj.traininghandler.manager.completedTraining.CompletedTrainingManager;
 import com.codeproj.traininghandler.model.CompletedUserTraining;
@@ -100,9 +99,9 @@ public class CompletedTrainingService {
 			return new BooleanResponse(ve.getMessage()); 
 		}
 	}
-	
-	@RequestMapping(value="/delete/{completedUserTrainingId}", method = RequestMethod.POST,headers="Accept=application/json")
-	public BooleanResponse delete(@PathVariable("completedUserTrainingId") Long completedUserTrainingId) {
+
+	@RequestMapping(value="/delete/completedUserTrainingId/{completedUserTrainingId}", method = RequestMethod.DELETE, headers="Accept=application/json")
+	public BooleanResponse delete(@PathVariable Long completedUserTrainingId) {
 		try {
 			logger.debug("delete with>> completedUserTrainingId> " + completedUserTrainingId);
 			CompletedTrainingServiceValidator.delete(completedUserTrainingId);

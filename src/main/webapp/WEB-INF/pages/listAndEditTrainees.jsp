@@ -14,15 +14,14 @@
 	<body ng-app="listAndEditTraineesModule">
 		<h4 class="gridMainTitle">Tanítványok listázása és szerkesztése</h4>
 		<div ng-controller="listAndEditTraineesController as laetCtrl">
-			<div class="alert alert-info" data-ng-show="!currentPageTraineeList.length">
-				Jelenleg nincs tanítvány az adatbázisban, amit szerkeszteni tudnál!			
-			</div>
+
 			<div ng-show="!isComplEdit">
 		      <jsp:include page="/WEB-INF/pages/listAndEditTrainees_listTrainees.jsp" />
 		    </div>
 			<div ng-show="isComplEdit">
 		      <jsp:include page="/WEB-INF/pages/listAndEditTrainees_editComplTr.jsp" />
 		    </div>
+		    
 		</div>
 	</body>
 	</html>

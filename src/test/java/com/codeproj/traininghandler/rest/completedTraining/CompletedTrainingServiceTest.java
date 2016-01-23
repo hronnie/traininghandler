@@ -335,7 +335,7 @@ public class CompletedTrainingServiceTest {
 		assertEquals(WRONG_VALIDATION_MESSAGE, VALIDATION_ERR_MSG_ERROR_DURING_SENDING_REQUEST, result.getMessage());
 		// valid input
 		List<CompletedUserTrainingDto> mockComplTrList = new ArrayList<>();
-		mockComplTrList.add(new CompletedUserTrainingDto(VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE, VALID_TRAINING_TYPE_NAME));
+		mockComplTrList.add(new CompletedUserTrainingDto(VALID_COMPLETED_TRAINING_ID, VALID_USER_ID, VALID_TRAINING_TYPE_ID, VALID_COMPLETED_DATE, VALID_TRAINING_TYPE_NAME));
 		when(manager.listViewableByUserId(VALID_USER_ID)).thenReturn(mockComplTrList);
 		
 		
@@ -343,6 +343,7 @@ public class CompletedTrainingServiceTest {
 		assertNotNull("list shouldn't be null", result.getCompletedUserTrainingDtoList());
 		assertEquals("list doesn't contains 1 item", 1, result.getCompletedUserTrainingDtoList().size());
 		CompletedUserTrainingDto resultDto = result.getCompletedUserTrainingDtoList().get(0);
+		assertEquals("Completed user training id is not correct", VALID_COMPLETED_TRAINING_ID, resultDto.getCompletedUserTrainingId());
 		assertEquals("user id is not correct ", VALID_USER_ID, resultDto.getUserId());
 		assertEquals("training type id is not correct ", VALID_TRAINING_TYPE_ID, resultDto.getTrainingTypeId());
 		assertEquals("Completed date is not correct ", VALID_COMPLETED_DATE, resultDto.getCompletedDate());

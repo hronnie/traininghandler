@@ -148,7 +148,7 @@ public class CompletedTrainingManagerTest {
 	@Test
 	public void testListViewableByUserId() {
 		List<CompletedUserTrainingDto> mockComplTrList = new ArrayList<>();
-		mockComplTrList.add(new CompletedUserTrainingDto(VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE, VALID_TRAINING_TYPE_NAME));
+		mockComplTrList.add(new CompletedUserTrainingDto(VALID_COMPLETED_USER_TRAINING_ID_EXIST, VALID_USER_ID_EXIST, VALID_TRAINING_TYPE_ID_EXIST, VALID_DATE, VALID_TRAINING_TYPE_NAME));
 		when(completedTrainingDAO.listViewableByUserId(VALID_USER_ID_EXIST)).thenReturn(mockComplTrList);
 		
 		List<CompletedUserTrainingDto> result = manager.listViewableByUserId(VALID_USER_ID_EXIST);

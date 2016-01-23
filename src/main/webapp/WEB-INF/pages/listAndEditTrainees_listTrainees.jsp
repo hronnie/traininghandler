@@ -15,6 +15,10 @@
 		<a href="#" class="close" data-dismiss="alert">&times;</a>
 		{{validationMsg}}
 	</div>
+	<div class="alert alert-info" data-ng-show="!currentPageTraineeList.length">
+		Jelenleg nincs tanítvány az adatbázisban, amit szerkeszteni tudnál!			
+	</div>
+	
 	<div class="outerDIV">
 		<div class="innerDIV">
 			<input class="searchInput" ng-model="search.name"
@@ -61,8 +65,8 @@
 						<td><span
 							ng-bind-html="trainee.completedTrainings | to_trusted"
 							class="gridCell" escape=false> {{
-								trainee.completedTrainings ? trainee.completedTrainings : '-
-								Nincs -'}} </span> <a ng-click="editComplTrainings(trainee.userId)">Szerkesztés</a></td>
+							trainee.completedTrainings ? trainee.completedTrainings : '-
+							Nincs -'}} </span> <a ng-click="editComplTrainings(trainee)">Szerkesztés</a></td>
 						<td style="white-space: nowrap">
 							<!-- form -->
 							<form editable-form name="rowform"

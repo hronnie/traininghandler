@@ -35,8 +35,9 @@ public class CompletedUserTrainingDto extends BaseResponse {
 		this.skipPrereqCheck = false;
 	}
 	
-	public CompletedUserTrainingDto(Long userId, Long trainingTypeId, 
+	public CompletedUserTrainingDto(Long completedUserTrainingId, Long userId, Long trainingTypeId, 
 			Date completedDate, String trainingTypeName) {
+		this.completedUserTrainingId = completedUserTrainingId;
 		this.userId = userId;
 		this.trainingTypeId = trainingTypeId;
 		this.completedDate = completedDate;

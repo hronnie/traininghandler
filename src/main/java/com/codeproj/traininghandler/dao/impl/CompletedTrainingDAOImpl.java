@@ -162,12 +162,14 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
             while (rowIt.hasNext()) {
                 Object[] row = rowIt.next();
                 CompletedUserTrainingDto compUsrTr = new CompletedUserTrainingDto();
-                BigInteger userIdRs = (BigInteger)row[0];
-                BigInteger ttId = (BigInteger)row[1];
+                BigInteger complUsTrRs = (BigInteger)row[0];
+                BigInteger userIdRs = (BigInteger)row[1];
+                BigInteger ttId = (BigInteger)row[2];
+                compUsrTr.setCompletedUserTrainingId(complUsTrRs.longValue());
                 compUsrTr.setUserId(userIdRs.longValue());
                 compUsrTr.setTrainingTypeId(ttId.longValue());
-                compUsrTr.setCompletedDate((Date)row[2]);
-                compUsrTr.setTrainingTypeName((String)row[3]);
+                compUsrTr.setCompletedDate((Date)row[3]);
+                compUsrTr.setTrainingTypeName((String)row[4]);
                 result.add(compUsrTr);
             }
             logger.debug("result CompletedUserTrainingDtos>> " + result);
@@ -180,7 +182,7 @@ public class CompletedTrainingDAOImpl implements CompletedTrainingDAO {
 	private String buildListViewableByUserIdQuery() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT ");
-		sb.append("  cut.userId, cut.trainingTypeId, cut.completedDate, tt.name ");
+		sb.append("  cut.completedUserTrainingId, cut.userId, cut.trainingTypeId, cut.completedDate, tt.name ");
 		sb.append(" FROM ");
 		sb.append("  CompletedUserTraining  cut ");
 		sb.append(" INNER JOIN TrainingType tt ON (cut.trainingTypeId = tt.trainingTypeId) ");

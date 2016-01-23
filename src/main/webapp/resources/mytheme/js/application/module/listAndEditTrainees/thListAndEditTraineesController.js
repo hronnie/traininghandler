@@ -3,6 +3,9 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	$scope.locale = document.getElementById("localeValue").value;
 	$scope.isEditSuccess = false;
 	$scope.isRemoveSuccess = false;
+	$scope.isEditComplTrSuccess = false;
+	$scope.isRemoveComplTrSuccess = false;
+	$scope.complTrValidationMsg = "";
 	
 	$scope.currentPageTraineeList = [];
     $scope.currentPage = 1;
@@ -74,7 +77,7 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 			return;
 		}
 		
-		var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete');
+		//var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete');
 		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.TRAINEE_URL + '/delete')
 			.one("userId", trainee.userId).one("addressId", trainee.addressId).remove().then(function(delResult) {
 				$scope.validationMsg = "";
@@ -114,13 +117,14 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		$scope.reinitPagination();
 	});
 	
-	$scope.editComplTrainings = function(userId) {
+	$scope.showEditComplTrainingsPage = function(userId) {
 		$scope.toogleEditView();
 		$scope.completedTrList = [];
 		var resource = Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/getAllVieawable/' + userId);
 		resource.get().then(function(complTrainings) {
 			for (i = 0; i < complTrainings.completedUserTrainingDtoList.length; i++) {
 				var completedUserTrainingDto = {};
+				completedUserTrainingDto.completedUserTrainingId = complTrainings.completedUserTrainingDtoList[i].completedUserTrainingId;
 				completedUserTrainingDto.userId = complTrainings.completedUserTrainingDtoList[i].userId;
 				completedUserTrainingDto.trainingTypeId = complTrainings.completedUserTrainingDtoList[i].trainingTypeId;
 				completedUserTrainingDto.completedDate = complTrainings.completedUserTrainingDtoList[i].completedDate;
@@ -133,10 +137,38 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 	
 	$scope.toogleEditView = function() {
 		$scope.isComplEdit = !$scope.isComplEdit;
+		$scope.validationMsg = '';
+		$scope.isEditComplTrSuccess = false;
+		$scope.isRemoveComplTrSuccess = false;
+		$scope.complTrValidationMsg = '';
 	}
 	
-	$scope.removeCompletedTraining = function(userId, trainingTypeId) {
+	$scope.removeCompletedTraining = function(complTr) {
+		$scope.complTrValidationMsg = "";
+		var removeMsg = 'Biztos törölni szeretnéd ezt az elvégzett tanfolyamot?';
+		var deleteCompletedTraining = window.confirm(removeMsg);
+		if (!deleteCompletedTraining) {
+			return;
+		}
+		//var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/delete');
+		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/delete')
+			.one("completedUserTrainingId", complTr.completedUserTrainingId).remove().then(function(delResult) {
+				$scope.complTrValidationMsg = "";
+				if (!delResult.success) {
+					$scope.complTrValidationMsg = delResult.message;
+				} else {
+					$scope.isRemoveComplTrSuccess = true;
+				}
+			}, function(err) {
+				$scope.complTrValidationMsg = "A megadott elvégzett tanfolyamot nem lehetett törölni ismeretlen hiba miat! Kérlek írj a karbantartónak!";
+			});
 		
+		var index = $scope.completedTrList.indexOf(complTr);
+        if (index != -1) {
+        	$scope.completedTrList.splice(index, 1);
+        }
+	      
+		$scope.reinitPagination();
 	}
 	
 	$scope.editCompletedTraining = function(userId, trainingTypeId) {
