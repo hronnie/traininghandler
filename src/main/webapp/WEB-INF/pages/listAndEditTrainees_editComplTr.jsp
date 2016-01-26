@@ -3,7 +3,7 @@
 
 	<div class="outerDIV">
 		<div class="innerDIV">
-		<a ng-click="toogleEditView()">Vissza a tanítványokhoz</a>
+		<a ng-click="goBackFromComplTrainingPage()">Vissza a tanítványokhoz</a>
 <!-- 	MESSAGES -->
 	<div ng-show="isEditComplTrSuccess" class="alert alert-success">
 		<a href="#" class="close" data-dismiss="alert">&times;</a>

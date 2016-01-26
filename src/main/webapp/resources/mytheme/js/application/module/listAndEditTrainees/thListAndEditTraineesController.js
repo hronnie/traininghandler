@@ -1,4 +1,4 @@
-listAndEditTraineesModule.controller('listAndEditTraineesController', function($scope, $filter, Restangular, thValidationService, thGlobalConstants) {
+listAndEditTraineesModule.controller('listAndEditTraineesController', function($scope, $filter, $window, Restangular, thValidationService, thGlobalConstants) {
 	
 	$scope.locale = document.getElementById("localeValue").value;
 	$scope.isEditSuccess = false;
@@ -117,6 +117,11 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		$scope.reinitPagination();
 	});
 	
+	$scope.goBackFromComplTrainingPage = function() {
+		$scope.toogleEditView();
+		$window.location.reload();
+	}
+	
 	$scope.showEditComplTrainingsPage = function(userId) {
 		$scope.toogleEditView();
 		$scope.completedTrList = [];
@@ -135,6 +140,10 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		});
 	}
 	
+	angular.isUndefinedOrNull = function(val) {
+	    return angular.isUndefined(val) || val === null 
+	}
+	
 	$scope.toogleEditView = function() {
 		$scope.isComplEdit = !$scope.isComplEdit;
 		$scope.validationMsg = '';
@@ -150,7 +159,6 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
 		if (!deleteCompletedTraining) {
 			return;
 		}
-		//var deleteResource = Restangular.all(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/delete');
 		Restangular.one(thGlobalConstants.BASE_WS_URL + thGlobalConstants.COMPL_USER_TRAINING_SERVICE_URL + '/delete')
 			.one("completedUserTrainingId", complTr.completedUserTrainingId).remove().then(function(delResult) {
 				$scope.complTrValidationMsg = "";
@@ -167,8 +175,6 @@ listAndEditTraineesModule.controller('listAndEditTraineesController', function($
         if (index != -1) {
         	$scope.completedTrList.splice(index, 1);
         }
-	      
-		$scope.reinitPagination();
 	}
 	
 	$scope.editCompletedTraining = function(userId, trainingTypeId) {

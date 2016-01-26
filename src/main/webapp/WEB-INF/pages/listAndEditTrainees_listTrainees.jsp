@@ -66,7 +66,15 @@
 							ng-bind-html="trainee.completedTrainings | to_trusted"
 							class="gridCell" escape=false> {{
 							trainee.completedTrainings ? trainee.completedTrainings : '-
-							Nincs -'}} </span> <a ng-click="editComplTrainings(trainee)">Szerkesztés</a></td>
+							Nincs -'}} </span> 
+							<div ng-hide="trainee.completedTrainings == null">
+							     <a ng-click="showEditComplTrainingsPage(trainee.userId)">Szerkesztés</a>
+							</div>
+							<div ng-show="trainee.completedTrainings == null">
+							     ---
+							</div>
+						</td>
+							
 						<td style="white-space: nowrap">
 							<!-- form -->
 							<form editable-form name="rowform"
